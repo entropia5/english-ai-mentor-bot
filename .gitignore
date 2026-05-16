@@ -1,16 +1,16 @@
-# Сборка
+# Build artifacts
 build/
 *.o
 english_mentor
 
-# Конфиги с секретами
+# config files and secrets
 .env
 
-# Логи
+# Logs
 *.log
 bot.log
 
-# Данные (если есть локальные)
+# data
 data/
 *.db
 
@@ -18,7 +18,7 @@ data/
 .vscode/
 *.swp
 
-# Временные файлы
+# files created by editors
 *~
 *.tmp
 
