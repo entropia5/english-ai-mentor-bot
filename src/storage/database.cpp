@@ -115,6 +115,7 @@ bool Database::init_tables() {
 
         txn.exec("CREATE INDEX IF NOT EXISTS idx_words_user_learned ON words(user_id, is_learned)");
         txn.exec("CREATE INDEX IF NOT EXISTS idx_words_next_review ON words(next_review)");
+        txn.exec("CREATE INDEX IF NOT EXISTS idx_words_user_english_lower ON words(user_id, lower(english))");
         txn.exec("CREATE INDEX IF NOT EXISTS idx_conversations_user_time ON conversations(user_id, timestamp)");
 
         txn.commit();
@@ -260,7 +261,8 @@ std::vector<std::pair<std::string, std::string>> Database::get_conversation_hist
 
 
 bool Database::add_word(long long user_id, const std::string& english, const std::string& translation,
-                        const std::string& pronunciation, const std::string& topic) {
+                        const std::string& pronunciation, const std::string& transcription,
+                        const std::string& topic) {
     if (!connected) return false;
 
     try {
@@ -272,11 +274,20 @@ bool Database::add_word(long long user_id, const std::string& english, const std
             user_id
         );
 
+        pqxx::result existing = txn.exec_params(
+            "SELECT 1 FROM words WHERE user_id = $1 AND lower(english) = lower($2) LIMIT 1",
+            user_id, english
+        );
+        if (!existing.empty()) {
+            txn.commit();
+            LOG("Word skipped as duplicate: " + english + " for user " + std::to_string(user_id));
+            return false;
+        }
 
         txn.exec_params(
-            "INSERT INTO words (user_id, english, translation_ru, pronunciation_ru, topic, added_date) "
-            "VALUES ($1, $2, $3, $4, $5, EXTRACT(EPOCH FROM NOW()))",
-            user_id, english, translation, pronunciation, topic
+            "INSERT INTO words (user_id, english, translation_ru, pronunciation_ru, transcription, topic, added_date) "
+            "VALUES ($1, $2, $3, $4, $5, $6, EXTRACT(EPOCH FROM NOW()))",
+            user_id, english, translation, pronunciation, transcription, topic
         );
         txn.commit();
         LOG("Word added: " + english + " for user " + std::to_string(user_id));
@@ -327,7 +338,7 @@ bool Database::mark_word_learned(long long user_id, const std::string& english) 
 
         txn.exec_params(
             "UPDATE words SET is_learned = true, last_repetition = EXTRACT(EPOCH FROM NOW()) "
-            "WHERE user_id = $1 AND english = $2",
+            "WHERE user_id = $1 AND lower(english) = lower($2)",
             user_id, english
         );
         txn.commit();
@@ -353,7 +364,7 @@ bool Database::word_exists(long long user_id, const std::string& english) {
 
         pqxx::work txn2(*conn);
         pqxx::result res = txn2.exec_params(
-            "SELECT 1 FROM words WHERE user_id = $1 AND english = $2 LIMIT 1",
+            "SELECT 1 FROM words WHERE user_id = $1 AND lower(english) = lower($2) LIMIT 1",
             user_id, english
         );
         txn2.commit();

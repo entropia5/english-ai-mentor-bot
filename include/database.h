@@ -39,7 +39,8 @@ public:
 
     //work with words
     bool add_word(long long user_id, const std::string& english, const std::string& translation,
-                  const std::string& pronunciation = "", const std::string& topic = "general");
+                  const std::string& pronunciation = "", const std::string& transcription = "",
+                  const std::string& topic = "general");
 
     std::vector<std::tuple<std::string, std::string, bool>> get_user_words(long long user_id, bool only_not_learned = false);
 
