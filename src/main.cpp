@@ -15,6 +15,7 @@
 #include <mutex>
 #include <fstream>
 #include <cstdlib>
+#include <set>
 #include <filesystem>
 #include <nlohmann/json.hpp>
 #include <unistd.h>
@@ -246,6 +247,7 @@ std::mutex g_screen_mutex;
 std::map<long long, int> g_active_screen_message;
 std::map<long long, bool> g_reply_keyboard_removed;
 std::map<long long, int> g_last_ai_user_message;
+std::map<long long, int> g_broadcast_hint_message;
 
 int get_active_screen_message(long long chat_id) {
     std::lock_guard<std::mutex> lock(g_screen_mutex);
@@ -264,6 +266,21 @@ void clear_active_screen_message(long long chat_id) {
     g_active_screen_message.erase(chat_id);
 }
 
+void delete_active_screen_message(long long chat_id, TelegramClient& bot) {
+    int message_id = 0;
+    {
+        std::lock_guard<std::mutex> lock(g_screen_mutex);
+        auto it = g_active_screen_message.find(chat_id);
+        if (it == g_active_screen_message.end()) {
+            return;
+        }
+        message_id = it->second;
+        g_active_screen_message.erase(it);
+    }
+
+    bot.delete_message(chat_id, message_id);
+}
+
 void delete_tracked_ai_input(long long chat_id, TelegramClient& bot, int except_message_id = 0) {
     int message_id = 0;
     {
@@ -279,10 +296,31 @@ void delete_tracked_ai_input(long long chat_id, TelegramClient& bot, int except_
     bot.delete_message(chat_id, message_id);
 }
 
+void delete_tracked_broadcast_hint(long long chat_id, TelegramClient& bot) {
+    int message_id = 0;
+    {
+        std::lock_guard<std::mutex> lock(g_screen_mutex);
+        auto it = g_broadcast_hint_message.find(chat_id);
+        if (it == g_broadcast_hint_message.end()) {
+            return;
+        }
+        message_id = it->second;
+        g_broadcast_hint_message.erase(it);
+    }
+
+    bot.delete_message(chat_id, message_id);
+}
+
 void remember_ai_input(long long chat_id, int message_id) {
     if (message_id <= 0) return;
     std::lock_guard<std::mutex> lock(g_screen_mutex);
     g_last_ai_user_message[chat_id] = message_id;
+}
+
+void remember_broadcast_hint(long long chat_id, int message_id) {
+    if (message_id <= 0) return;
+    std::lock_guard<std::mutex> lock(g_screen_mutex);
+    g_broadcast_hint_message[chat_id] = message_id;
 }
 
 void delete_messages_after_delay(TelegramClient& bot, long long chat_id,
@@ -295,6 +333,38 @@ void delete_messages_after_delay(TelegramClient& bot, long long chat_id,
             }
         }
     }).detach();
+}
+
+void delete_broadcast_hint_after_delay(TelegramClient& bot, long long chat_id,
+                                       int message_id, int delay_seconds) {
+    std::thread([&bot, chat_id, message_id, delay_seconds]() {
+        std::this_thread::sleep_for(std::chrono::seconds(delay_seconds));
+
+        bool should_delete = false;
+        {
+            std::lock_guard<std::mutex> lock(g_screen_mutex);
+            auto it = g_broadcast_hint_message.find(chat_id);
+            if (it != g_broadcast_hint_message.end() && it->second == message_id) {
+                g_broadcast_hint_message.erase(it);
+                should_delete = true;
+            }
+        }
+
+        if (should_delete) {
+            bot.delete_message(chat_id, message_id);
+        }
+    }).detach();
+}
+
+void send_temporary_broadcast_hint(long long chat_id, TelegramClient& bot,
+                                   const std::string& text) {
+    delete_tracked_broadcast_hint(chat_id, bot);
+
+    int message_id = 0;
+    if (bot.send_message(chat_id, text, "Markdown", &message_id)) {
+        remember_broadcast_hint(chat_id, message_id);
+        delete_broadcast_hint_after_delay(bot, chat_id, message_id, 15 * 60);
+    }
 }
 
 void ensure_reply_keyboard_removed(long long chat_id, TelegramClient& bot) {
@@ -489,6 +559,64 @@ bool write_text_file(const std::string& path, const std::string& text) {
     return true;
 }
 
+void remove_render_artifact_set(const fs::path& base_path) {
+    for (const std::string& ext : {".png", ".html", ".hash"}) {
+        std::error_code ec;
+        fs::remove(base_path.string() + ext, ec);
+    }
+}
+
+void cleanup_stale_page_artifacts(const fs::path& render_dir, int total_pages) {
+    if (total_pages < 1 || !fs::exists(render_dir)) {
+        return;
+    }
+
+    std::set<int> stale_pages;
+    std::error_code ec;
+    for (const auto& entry : fs::directory_iterator(render_dir, ec)) {
+        if (ec || !entry.is_regular_file()) {
+            continue;
+        }
+
+        std::string stem = entry.path().stem().string();
+        const std::string prefix = "page_";
+        if (stem.rfind(prefix, 0) != 0) {
+            continue;
+        }
+
+        try {
+            int page_number = std::stoi(stem.substr(prefix.size()));
+            if (page_number > total_pages) {
+                stale_pages.insert(page_number);
+            }
+        } catch (const std::exception&) {
+        }
+    }
+
+    for (int page_number : stale_pages) {
+        remove_render_artifact_set(render_dir / ("page_" + std::to_string(page_number)));
+    }
+}
+
+void cleanup_legacy_stats_artifacts(const fs::path& stats_dir) {
+    if (!fs::exists(stats_dir)) {
+        return;
+    }
+
+    std::error_code ec;
+    for (const auto& entry : fs::directory_iterator(stats_dir, ec)) {
+        if (ec || !entry.is_regular_file()) {
+            continue;
+        }
+
+        std::string stem = entry.path().stem().string();
+        if (stem.rfind("stats_", 0) == 0) {
+            std::error_code remove_ec;
+            fs::remove(entry.path(), remove_ec);
+        }
+    }
+}
+
 std::string render_html_image(const fs::path& base, const std::string& hash_value,
                               const std::string& html_content, const std::string& log_name) {
     std::error_code ec;
@@ -573,7 +701,7 @@ std::string render_main_menu_image(const std::string& user_level) {
     std::string html_path = base.string() + ".html";
     std::string png_path = base.string() + ".png";
     std::string hash_path = base.string() + ".hash";
-    std::string menu_hash = "main-menu-graphite-v5-title-underline-" + user_level;
+    std::string menu_hash = "main-menu-graphite-v6-title-underline-" + user_level;
 
     if (fs::exists(png_path) && read_text_file(hash_path) == menu_hash) {
         LOG("Reusing main menu image: " + png_path);
@@ -700,7 +828,7 @@ body {
         <div class="title">Главное<br>меню</div>
         <div class="line"></div>
       </div>
-      <div class="subtitle">Выбери действие кнопками под этой карточкой.</div>
+      <div class="subtitle">Выбери действие кнопками ниже.</div>
     </div>
     <div class="level-card">
       <div class="level-label">Текущий уровень</div>
@@ -733,7 +861,7 @@ body {
 
 std::string render_ai_prompt_image() {
     fs::path base = fs::path(project_data_dir()) / "rendered" / "ai" / "prompt";
-    std::string hash = "ai-prompt-graphite-v3-title-underline";
+    std::string hash = "ai-prompt-graphite-v4-title-underline";
     std::stringstream html;
 
     html << R"(<!doctype html>
@@ -823,7 +951,7 @@ body {
       </div>
       <div class="text">Задай любой вопрос по английскому языку.</div>
     </div>
-    <div class="hint">Я отвечу на активном экране бота. Для возврата используй кнопку под карточкой.</div>
+    <div class="hint">Я отвечу на активном экране бота. Для возврата используй кнопку ниже.</div>
   </div>
 </div>
 </body>
@@ -835,7 +963,7 @@ body {
 
 std::string render_topic_menu_image() {
     fs::path base = fs::path(project_data_dir()) / "rendered" / "topics" / "topic_menu";
-    std::string hash = "topic-menu-graphite-v3-clean-title-underline";
+    std::string hash = "topic-menu-graphite-v4-clean-title-underline";
     std::stringstream html;
 
     html << R"(<!doctype html>
@@ -914,7 +1042,7 @@ body {
         <div class="title">Новые<br>слова</div>
         <div class="line"></div>
       </div>
-      <div class="text">Выбери тему кнопками под карточкой. AI добавит 10 практичных слов с переводом, IPA-транскрипцией и русским произношением.</div>
+      <div class="text">Выбери тему кнопками ниже. AI добавит 10 практичных слов с переводом, IPA-транскрипцией и русским произношением.</div>
     </div>
   </div>
 </div>
@@ -925,12 +1053,13 @@ body {
     return render_html_image(base, hash, html.str(), "topic menu");
 }
 
-std::string render_stats_image(int total, int learned, const std::string& level,
+std::string render_stats_image(long long chat_id, int total, int learned, const std::string& level,
                                const std::string& next_name, int next_level,
                                int percent) {
-    fs::path base = fs::path(project_data_dir()) / "rendered" / "stats" /
-                    ("stats_" + level + "_" + std::to_string(total) + "_" +
-                     std::to_string(learned) + "_" + std::to_string(percent));
+    fs::path stats_dir = fs::path(project_data_dir()) / "rendered" / "stats";
+    cleanup_legacy_stats_artifacts(stats_dir);
+
+    fs::path base = stats_dir / std::to_string(chat_id) / "stats";
     std::string hash = "stats-graphite-v3-title-underline-" + std::to_string(total) + "-" +
                        std::to_string(learned) + "-" + level + "-" +
                        std::to_string(next_level) + "-" + std::to_string(percent);
@@ -1092,6 +1221,7 @@ std::string render_words_card_image(
         LOG_ERROR("Failed to create render directory: " + render_dir.string() + "; " + ec.message());
         return "";
     }
+    cleanup_stale_page_artifacts(render_dir, total);
 
     fs::path page_base = render_dir / ("page_" + std::to_string(page + 1));
     std::string html_path = (page_base.string() + ".html");
@@ -1583,7 +1713,7 @@ void show_stats(long long chat_id, TelegramClient& bot, Database& db, int messag
     InlineKeyboard buttons = column_keyboard({
         {"Главное меню", "menu_main"}
     });
-    std::string image_path = render_stats_image(total, learned, level, next_name, next_level, percent);
+    std::string image_path = render_stats_image(chat_id, total, learned, level, next_name, next_level, percent);
     if (!image_path.empty()) {
         upsert_photo_screen(chat_id, bot, image_path, buttons, message_id);
         return;
@@ -1848,6 +1978,11 @@ std::vector<long long> configured_broadcast_users() {
 void send_daily_review(long long chat_id, TelegramClient& bot, Database& db) {
     auto words = get_learned_words_for_review(chat_id, db);
     show_daily_review_page(chat_id, bot, words, 0);
+    send_temporary_broadcast_hint(
+        chat_id,
+        bot,
+        "Утреннее повторение выученных слов."
+    );
 }
 
 void send_evening_new_words(long long chat_id, TelegramClient& bot, Database& db) {
@@ -1866,6 +2001,11 @@ void send_evening_new_words(long long chat_id, TelegramClient& bot, Database& db
 
     auto words = db.get_user_words_full(chat_id, true);
     show_evening_words_page(chat_id, bot, words, 0);
+    send_temporary_broadcast_hint(
+        chat_id,
+        bot,
+        "Вот вам вечерняя подборка новых слов для изучения...\n\n Когда выучили новое слово - введите его здесь и оно появится в вашем словаре выученных слов."
+    );
 }
 
 long long configured_user_id(const std::string& key) {
@@ -2031,6 +2171,7 @@ int main(int argc, char* argv[]) {
                     std::string data = callback["data"];
                     bot.answer_callback_query(callback_id);
                     remember_active_screen_message(chat_id, message_id);
+                    delete_tracked_broadcast_hint(chat_id, bot);
                     delete_tracked_ai_input(chat_id, bot);
 
                     if (data == "menu_main") {
@@ -2134,6 +2275,7 @@ int main(int argc, char* argv[]) {
                 std::string normalized_text = to_lower_ascii(trim(text));
 
                 if (text == "/start" || text == "start") {
+                    delete_active_screen_message(chat_id, bot);
                     send_main_menu(chat_id, bot, db);
                     delete_incoming_after_handled = true;
                 }
