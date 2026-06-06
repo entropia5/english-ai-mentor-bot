@@ -119,11 +119,108 @@ bool Database::init_tables() {
         txn.exec("CREATE INDEX IF NOT EXISTS idx_conversations_user_time ON conversations(user_id, timestamp)");
 
         txn.commit();
+        cleanup_duplicate_words();
         LOG("Database tables initialized successfully");
         return true;
 
     } catch (const std::exception& e) {
         LOG_ERROR("Failed to init tables: " + std::string(e.what()));
+        return false;
+    }
+}
+
+bool Database::cleanup_duplicate_words() {
+    if (!connected) {
+        LOG_ERROR("Cannot cleanup duplicates: not connected");
+        return false;
+    }
+
+    try {
+        pqxx::work txn(*conn);
+
+        pqxx::result removed = txn.exec(R"(
+            WITH ranked AS (
+                SELECT
+                    id,
+                    ROW_NUMBER() OVER (
+                        PARTITION BY user_id, lower(trim(english))
+                        ORDER BY is_learned DESC, added_date ASC, id ASC
+                    ) AS rn
+                FROM words
+            )
+            DELETE FROM words w
+            USING ranked r
+            WHERE w.id = r.id AND r.rn > 1
+            RETURNING w.id
+        )");
+
+        txn.exec(R"(
+            CREATE UNIQUE INDEX IF NOT EXISTS idx_words_user_english_unique
+            ON words(user_id, lower(trim(english)))
+        )");
+
+        txn.commit();
+        LOG("Duplicate word cleanup complete, removed " + std::to_string(removed.size()) + " rows");
+        return true;
+    } catch (const std::exception& e) {
+        LOG_ERROR("cleanup_duplicate_words failed: " + std::string(e.what()));
+        return false;
+    }
+}
+
+std::vector<std::tuple<int, std::string, std::string>> Database::get_words_missing_pronunciation(int limit) {
+    std::vector<std::tuple<int, std::string, std::string>> words;
+    if (!connected) return words;
+
+    try {
+        pqxx::work txn(*conn);
+        pqxx::result res = txn.exec_params(R"(
+            SELECT id, english, COALESCE(translation_ru, '')
+            FROM words
+            WHERE NULLIF(trim(COALESCE(transcription, '')), '') IS NULL
+               OR NULLIF(trim(COALESCE(pronunciation_ru, '')), '') IS NULL
+            ORDER BY added_date ASC, id ASC
+            LIMIT $1
+        )", limit);
+        txn.commit();
+
+        for (const auto& row : res) {
+            words.push_back(std::make_tuple(
+                row[0].as<int>(),
+                row[1].as<std::string>(),
+                row[2].as<std::string>()
+            ));
+        }
+    } catch (const std::exception& e) {
+        LOG_ERROR("get_words_missing_pronunciation failed: " + std::string(e.what()));
+    }
+
+    return words;
+}
+
+bool Database::update_word_pronunciation(int word_id, const std::string& transcription,
+                                         const std::string& pronunciation_ru) {
+    if (!connected) return false;
+    if (transcription.empty() && pronunciation_ru.empty()) return false;
+
+    try {
+        pqxx::work txn(*conn);
+        txn.exec_params(R"(
+            UPDATE words
+            SET transcription = CASE
+                    WHEN $2 <> '' THEN $2
+                    ELSE transcription
+                END,
+                pronunciation_ru = CASE
+                    WHEN $3 <> '' THEN $3
+                    ELSE pronunciation_ru
+                END
+            WHERE id = $1
+        )", word_id, transcription, pronunciation_ru);
+        txn.commit();
+        return true;
+    } catch (const std::exception& e) {
+        LOG_ERROR("update_word_pronunciation failed: " + std::string(e.what()));
         return false;
     }
 }
@@ -275,7 +372,7 @@ bool Database::add_word(long long user_id, const std::string& english, const std
         );
 
         pqxx::result existing = txn.exec_params(
-            "SELECT 1 FROM words WHERE user_id = $1 AND lower(english) = lower($2) LIMIT 1",
+            "SELECT 1 FROM words WHERE user_id = $1 AND lower(trim(english)) = lower(trim($2)) LIMIT 1",
             user_id, english
         );
         if (!existing.empty()) {
@@ -338,7 +435,7 @@ bool Database::mark_word_learned(long long user_id, const std::string& english) 
 
         txn.exec_params(
             "UPDATE words SET is_learned = true, last_repetition = EXTRACT(EPOCH FROM NOW()) "
-            "WHERE user_id = $1 AND lower(english) = lower($2)",
+            "WHERE user_id = $1 AND lower(trim(english)) = lower(trim($2))",
             user_id, english
         );
         txn.commit();
@@ -364,7 +461,7 @@ bool Database::word_exists(long long user_id, const std::string& english) {
 
         pqxx::work txn2(*conn);
         pqxx::result res = txn2.exec_params(
-            "SELECT 1 FROM words WHERE user_id = $1 AND lower(english) = lower($2) LIMIT 1",
+            "SELECT 1 FROM words WHERE user_id = $1 AND lower(trim(english)) = lower(trim($2)) LIMIT 1",
             user_id, english
         );
         txn2.commit();

@@ -3,7 +3,6 @@
 
 #include <string>
 #include <vector>
-#include <map>
 
 class TelegramClient {
 private:
@@ -15,12 +14,8 @@ public:
 
     // send simple message
     bool send_message(long long chat_id, const std::string& text,
-                      const std::string& parse_mode = "Markdown");
-
-    // send message with custom keyboard
-    bool send_message_with_keyboard(long long chat_id, const std::string& text,
-                                    const std::vector<std::vector<std::string>>& keyboard,
-                                    bool resize = true, bool one_time = false);
+                      const std::string& parse_mode = "Markdown",
+                      int* message_id = nullptr);
 
     // get updates (messages, button clicks)
     std::string get_updates(int offset = 0, int timeout = 30);
@@ -31,15 +26,33 @@ public:
     // get bot info
     std::string get_me();
 
+    // disable webhook and optionally clear queued updates before polling
+    bool delete_webhook(bool drop_pending_updates = false);
 
-        bool send_inline_keyboard(long long chat_id, const std::string& text,
-                              const std::vector<std::vector<std::pair<std::string, std::string>>>& buttons);
+    bool send_inline_keyboard(long long chat_id, const std::string& text,
+                              const std::vector<std::vector<std::pair<std::string, std::string>>>& buttons,
+                              int* message_id = nullptr);
 
+    bool send_photo(long long chat_id, const std::string& photo_path,
+                    const std::vector<std::vector<std::pair<std::string, std::string>>>& buttons,
+                    const std::string& caption = "",
+                    int* message_id = nullptr);
+
+    bool edit_message_photo(long long chat_id, int message_id, const std::string& photo_path,
+                            const std::vector<std::vector<std::pair<std::string, std::string>>>& buttons,
+                            const std::string& caption = "");
 
     // edit message with inline keyboard
     bool edit_message(long long chat_id, int message_id, const std::string& text,
                       const std::vector<std::vector<std::pair<std::string, std::string>>>& buttons = {});
 
+    // stop Telegram callback loading spinner
+    bool answer_callback_query(const std::string& callback_query_id);
+
+    // remove old reply keyboard from Telegram input panel
+    bool remove_reply_keyboard(long long chat_id);
+
+    // delete bot message
+    bool delete_message(long long chat_id, int message_id);
 
 };
-

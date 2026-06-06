@@ -25,6 +25,15 @@ public:
     // init tables
     bool init_tables();
 
+    // remove existing duplicate words and enforce uniqueness
+    bool cleanup_duplicate_words();
+
+    // find old words without IPA transcription or Russian pronunciation
+    std::vector<std::tuple<int, std::string, std::string>> get_words_missing_pronunciation(int limit = 50);
+
+    bool update_word_pronunciation(int word_id, const std::string& transcription,
+                                   const std::string& pronunciation_ru);
+
     // work with users
     bool user_exists(long long user_id);
     bool add_user(long long user_id, const std::string& name);
