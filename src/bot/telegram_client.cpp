@@ -3,6 +3,8 @@
 #include "logger.h"
 #include <curl/curl.h>
 #include <nlohmann/json.hpp>
+#include <algorithm>
+#include <cctype>
 #include <sstream>
 
 using json = nlohmann::json;
@@ -16,24 +18,93 @@ static size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::stri
 TelegramClient::TelegramClient(const std::string& bot_token)
     : token(bot_token), api_url("https://api.telegram.org/bot" + token) {}
 
-static bool telegram_ok(const std::string& response, const std::string& action, int* message_id = nullptr) {
+static bool is_edit_action(const std::string& action) {
+    return action.find("editMessage") != std::string::npos ||
+           action.find("edit message") != std::string::npos;
+}
+
+static TelegramFailureKind classify_telegram_failure(long http_status, int error_code,
+                                                     const std::string& description,
+                                                     const std::string& action) {
+    std::string lower = description;
+    std::transform(lower.begin(), lower.end(), lower.begin(), [](unsigned char c) {
+        return std::tolower(c);
+    });
+
+    if (http_status >= 500 || http_status == 429 || error_code == 429 ||
+        lower.find("too many requests") != std::string::npos ||
+        lower.find("timeout") != std::string::npos ||
+        lower.find("temporarily") != std::string::npos) {
+        return TelegramFailureKind::Temporary;
+    }
+
+    if (is_edit_action(action) &&
+        (lower.find("message to edit not found") != std::string::npos ||
+         lower.find("message not found") != std::string::npos ||
+         lower.find("message can't be edited") != std::string::npos ||
+         lower.find("message cannot be edited") != std::string::npos ||
+         lower.find("there is no text in the message to edit") != std::string::npos ||
+         lower.find("there is no photo in the message to edit") != std::string::npos ||
+         lower.find("wrong file identifier/http url specified") != std::string::npos ||
+         lower.find("message is not a photo") != std::string::npos)) {
+        return TelegramFailureKind::Permanent;
+    }
+
+    return TelegramFailureKind::Temporary;
+}
+
+static bool telegram_ok(const std::string& response, const std::string& action,
+                        int* message_id = nullptr, long http_status = 0,
+                        TelegramRequestResult* result = nullptr) {
+    if (result != nullptr) {
+        result->ok = false;
+        result->failure_kind = TelegramFailureKind::None;
+        result->http_status = http_status;
+        result->api_error_code = 0;
+        result->description.clear();
+        result->response = response;
+    }
+
     try {
         auto resp = json::parse(response);
         if (resp.value("ok", false)) {
             if (message_id != nullptr && resp.contains("result") && resp["result"].contains("message_id")) {
                 *message_id = resp["result"]["message_id"].get<int>();
             }
+            if (result != nullptr) {
+                result->ok = true;
+            }
             return true;
         }
 
         std::string description = resp.value("description", "unknown Telegram API error");
+        int error_code = resp.value("error_code", 0);
         if (description.find("message is not modified") != std::string::npos) {
+            if (result != nullptr) {
+                result->ok = true;
+            }
             return true;
         }
 
-        LOG_ERROR(action + " failed: " + description);
+        TelegramFailureKind failure_kind =
+            classify_telegram_failure(http_status, error_code, description, action);
+        if (result != nullptr) {
+            result->failure_kind = failure_kind;
+            result->api_error_code = error_code;
+            result->description = description;
+        }
+
+        LOG_ERROR(action + " failed: HTTP " + std::to_string(http_status) +
+                  ", Telegram error_code " + std::to_string(error_code) +
+                  ", description: " + description +
+                  ", response: " + response);
     } catch (const std::exception& e) {
-        LOG_ERROR(action + " response parse failed: " + std::string(e.what()) + "; response: " + response);
+        if (result != nullptr) {
+            result->failure_kind = TelegramFailureKind::Temporary;
+            result->description = e.what();
+        }
+        LOG_ERROR(action + " response parse failed: HTTP " + std::to_string(http_status) +
+                  ", error: " + std::string(e.what()) + "; response: " + response);
     }
     return false;
 }
@@ -84,17 +155,20 @@ bool TelegramClient::send_message(long long chat_id, const std::string& text, co
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 
     CURLcode res = curl_easy_perform(curl);
+    long http_status = 0;
+    curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_status);
     curl_slist_free_all(headers);
     curl_easy_cleanup(curl);
 
     if (res == CURLE_OK) {
-        bool ok = telegram_ok(response, "sendMessage", message_id);
+        bool ok = telegram_ok(response, "sendMessage", message_id, http_status);
         if (ok) {
             LOG("Message sent to " + std::to_string(chat_id));
         }
         return ok;
     }
-    LOG_ERROR("sendMessage CURL failed: " + std::string(curl_easy_strerror(res)));
+    LOG_ERROR("sendMessage CURL failed: HTTP " + std::to_string(http_status) +
+              ", error: " + std::string(curl_easy_strerror(res)));
     return false;
 }
 
@@ -125,12 +199,14 @@ bool TelegramClient::remove_reply_keyboard(long long chat_id) {
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 
     CURLcode res = curl_easy_perform(curl);
+    long http_status = 0;
+    curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_status);
     curl_slist_free_all(headers);
     curl_easy_cleanup(curl);
 
     if (res == CURLE_OK) {
         int message_id = 0;
-        bool ok = telegram_ok(response, "remove reply keyboard", &message_id);
+        bool ok = telegram_ok(response, "remove reply keyboard", &message_id, http_status);
         if (ok) {
             LOG("Reply keyboard removed for " + std::to_string(chat_id));
             if (message_id > 0) {
@@ -140,7 +216,8 @@ bool TelegramClient::remove_reply_keyboard(long long chat_id) {
         return ok;
     }
 
-    LOG_ERROR("Failed to remove reply keyboard: " + std::string(curl_easy_strerror(res)));
+    LOG_ERROR("Failed to remove reply keyboard: HTTP " + std::to_string(http_status) +
+              ", error: " + std::string(curl_easy_strerror(res)));
     return false;
 }
 
@@ -235,11 +312,13 @@ bool TelegramClient::delete_webhook(bool drop_pending_updates) {
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 
     CURLcode res = curl_easy_perform(curl);
+    long http_status = 0;
+    curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_status);
     curl_slist_free_all(headers);
     curl_easy_cleanup(curl);
 
     if (res == CURLE_OK) {
-        bool ok = telegram_ok(response, "deleteWebhook");
+        bool ok = telegram_ok(response, "deleteWebhook", nullptr, http_status);
         if (ok) {
             LOG(std::string("Webhook disabled") +
                 (drop_pending_updates ? " and pending updates dropped" : ""));
@@ -247,7 +326,8 @@ bool TelegramClient::delete_webhook(bool drop_pending_updates) {
         return ok;
     }
 
-    LOG_ERROR("deleteWebhook CURL failed: " + std::string(curl_easy_strerror(res)));
+    LOG_ERROR("deleteWebhook CURL failed: HTTP " + std::to_string(http_status) +
+              ", error: " + std::string(curl_easy_strerror(res)));
     return false;
 }
 
@@ -279,18 +359,21 @@ bool TelegramClient::send_inline_keyboard(long long chat_id, const std::string& 
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 
     CURLcode res = curl_easy_perform(curl);
+    long http_status = 0;
+    curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_status);
     curl_slist_free_all(headers);
     curl_easy_cleanup(curl);
 
     if (res == CURLE_OK) {
-        bool ok = telegram_ok(response, "sendMessage inline", message_id);
+        bool ok = telegram_ok(response, "sendMessage inline", message_id, http_status);
         if (ok) {
             LOG("Inline keyboard sent to " + std::to_string(chat_id));
         }
         return ok;
     }
 
-    LOG_ERROR("Failed to send inline keyboard: " + std::string(curl_easy_strerror(res)));
+    LOG_ERROR("Failed to send inline keyboard: HTTP " + std::to_string(http_status) +
+              ", error: " + std::string(curl_easy_strerror(res)));
     return false;
 }
 
@@ -332,27 +415,36 @@ bool TelegramClient::send_photo(long long chat_id, const std::string& photo_path
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
 
     CURLcode res = curl_easy_perform(curl);
+    long http_status = 0;
+    curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_status);
     curl_mime_free(mime);
     curl_easy_cleanup(curl);
 
     if (res == CURLE_OK) {
-        bool ok = telegram_ok(response, "sendPhoto", message_id);
+        bool ok = telegram_ok(response, "sendPhoto", message_id, http_status);
         if (ok) {
             LOG("Photo sent to " + std::to_string(chat_id));
         }
         return ok;
     }
 
-    LOG_ERROR("Failed to send photo: " + std::string(curl_easy_strerror(res)));
+    LOG_ERROR("Failed to send photo: HTTP " + std::to_string(http_status) +
+              ", error: " + std::string(curl_easy_strerror(res)));
     return false;
 }
 
 bool TelegramClient::edit_message_photo(long long chat_id, int message_id, const std::string& photo_path,
                                         const std::vector<std::vector<std::pair<std::string, std::string>>>& buttons,
-                                        const std::string& caption) {
+                                        const std::string& caption,
+                                        TelegramRequestResult* result) {
     CURL* curl = curl_easy_init();
     if (!curl) {
         LOG_ERROR("Failed to init CURL");
+        if (result != nullptr) {
+            result->ok = false;
+            result->failure_kind = TelegramFailureKind::Temporary;
+            result->description = "Failed to init CURL";
+        }
         return false;
     }
 
@@ -396,26 +488,43 @@ bool TelegramClient::edit_message_photo(long long chat_id, int message_id, const
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
 
     CURLcode res = curl_easy_perform(curl);
+    long http_status = 0;
+    curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_status);
     curl_mime_free(mime);
     curl_easy_cleanup(curl);
 
     if (res == CURLE_OK) {
-        bool ok = telegram_ok(response, "editMessageMedia");
+        bool ok = telegram_ok(response, "editMessageMedia", nullptr, http_status, result);
         if (ok) {
             LOG("Photo message edited for " + std::to_string(chat_id));
         }
         return ok;
     }
 
-    LOG_ERROR("Failed to edit photo message: " + std::string(curl_easy_strerror(res)));
+    if (result != nullptr) {
+        result->ok = false;
+        result->failure_kind = TelegramFailureKind::Temporary;
+        result->http_status = http_status;
+        result->description = curl_easy_strerror(res);
+        result->response = response;
+    }
+    LOG_ERROR("Failed to edit photo message: HTTP " + std::to_string(http_status) +
+              ", error: " + std::string(curl_easy_strerror(res)) +
+              ", response: " + response);
     return false;
 }
 
 bool TelegramClient::edit_message(long long chat_id, int message_id, const std::string& text,
-                                  const std::vector<std::vector<std::pair<std::string, std::string>>>& buttons) {
+                                  const std::vector<std::vector<std::pair<std::string, std::string>>>& buttons,
+                                  TelegramRequestResult* result) {
     CURL* curl = curl_easy_init();
     if (!curl) {
         LOG_ERROR("Failed to init CURL");
+        if (result != nullptr) {
+            result->ok = false;
+            result->failure_kind = TelegramFailureKind::Temporary;
+            result->description = "Failed to init CURL";
+        }
         return false;
     }
 
@@ -442,18 +551,29 @@ bool TelegramClient::edit_message(long long chat_id, int message_id, const std::
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 
     CURLcode res = curl_easy_perform(curl);
+    long http_status = 0;
+    curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_status);
     curl_slist_free_all(headers);
     curl_easy_cleanup(curl);
 
     if (res == CURLE_OK) {
-        bool ok = telegram_ok(response, "editMessageText");
+        bool ok = telegram_ok(response, "editMessageText", nullptr, http_status, result);
         if (ok) {
             LOG("Message edited for " + std::to_string(chat_id));
         }
         return ok;
     }
 
-    LOG_ERROR("Failed to edit message: " + std::string(curl_easy_strerror(res)));
+    if (result != nullptr) {
+        result->ok = false;
+        result->failure_kind = TelegramFailureKind::Temporary;
+        result->http_status = http_status;
+        result->description = curl_easy_strerror(res);
+        result->response = response;
+    }
+    LOG_ERROR("Failed to edit message: HTTP " + std::to_string(http_status) +
+              ", error: " + std::string(curl_easy_strerror(res)) +
+              ", response: " + response);
     return false;
 }
 

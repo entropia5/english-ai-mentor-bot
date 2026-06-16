@@ -4,6 +4,21 @@
 #include <string>
 #include <vector>
 
+enum class TelegramFailureKind {
+    None,
+    Permanent,
+    Temporary
+};
+
+struct TelegramRequestResult {
+    bool ok = false;
+    TelegramFailureKind failure_kind = TelegramFailureKind::None;
+    long http_status = 0;
+    int api_error_code = 0;
+    std::string description;
+    std::string response;
+};
+
 class TelegramClient {
 private:
     std::string token;
@@ -40,11 +55,13 @@ public:
 
     bool edit_message_photo(long long chat_id, int message_id, const std::string& photo_path,
                             const std::vector<std::vector<std::pair<std::string, std::string>>>& buttons,
-                            const std::string& caption = "");
+                            const std::string& caption = "",
+                            TelegramRequestResult* result = nullptr);
 
     // edit message with inline keyboard
     bool edit_message(long long chat_id, int message_id, const std::string& text,
-                      const std::vector<std::vector<std::pair<std::string, std::string>>>& buttons = {});
+                      const std::vector<std::vector<std::pair<std::string, std::string>>>& buttons = {},
+                      TelegramRequestResult* result = nullptr);
 
     // stop Telegram callback loading spinner
     bool answer_callback_query(const std::string& callback_query_id);

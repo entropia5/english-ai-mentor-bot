@@ -25,6 +25,10 @@ namespace fs = std::filesystem;
 using InlineKeyboard = std::vector<std::vector<std::pair<std::string, std::string>>>;
 
 std::string trim(const std::string& text);
+fs::path bot_state_dir();
+void load_bot_state();
+void save_bot_state_locked();
+void save_bot_state();
 
 // empty string if markdown is invalid (to avoid Telegram errors)
 std::string clean_markdown(const std::string& text) {
@@ -248,6 +252,7 @@ std::map<long long, int> g_active_screen_message;
 std::map<long long, bool> g_reply_keyboard_removed;
 std::map<long long, int> g_last_ai_user_message;
 std::map<long long, int> g_broadcast_hint_message;
+std::map<long long, std::string> g_chat_language;
 
 int get_active_screen_message(long long chat_id) {
     std::lock_guard<std::mutex> lock(g_screen_mutex);
@@ -259,11 +264,13 @@ void remember_active_screen_message(long long chat_id, int message_id) {
     if (message_id <= 0) return;
     std::lock_guard<std::mutex> lock(g_screen_mutex);
     g_active_screen_message[chat_id] = message_id;
+    save_bot_state_locked();
 }
 
 void clear_active_screen_message(long long chat_id) {
     std::lock_guard<std::mutex> lock(g_screen_mutex);
     g_active_screen_message.erase(chat_id);
+    save_bot_state_locked();
 }
 
 void delete_active_screen_message(long long chat_id, TelegramClient& bot) {
@@ -276,6 +283,7 @@ void delete_active_screen_message(long long chat_id, TelegramClient& bot) {
         }
         message_id = it->second;
         g_active_screen_message.erase(it);
+        save_bot_state_locked();
     }
 
     bot.delete_message(chat_id, message_id);
@@ -306,6 +314,7 @@ void delete_tracked_broadcast_hint(long long chat_id, TelegramClient& bot) {
         }
         message_id = it->second;
         g_broadcast_hint_message.erase(it);
+        save_bot_state_locked();
     }
 
     bot.delete_message(chat_id, message_id);
@@ -321,6 +330,7 @@ void remember_broadcast_hint(long long chat_id, int message_id) {
     if (message_id <= 0) return;
     std::lock_guard<std::mutex> lock(g_screen_mutex);
     g_broadcast_hint_message[chat_id] = message_id;
+    save_bot_state_locked();
 }
 
 void delete_messages_after_delay(TelegramClient& bot, long long chat_id,
@@ -330,6 +340,12 @@ void delete_messages_after_delay(TelegramClient& bot, long long chat_id,
         for (int message_id : message_ids) {
             if (message_id > 0) {
                 bot.delete_message(chat_id, message_id);
+                std::lock_guard<std::mutex> lock(g_screen_mutex);
+                auto it = g_broadcast_hint_message.find(chat_id);
+                if (it != g_broadcast_hint_message.end() && it->second == message_id) {
+                    g_broadcast_hint_message.erase(it);
+                    save_bot_state_locked();
+                }
             }
         }
     }).detach();
@@ -346,6 +362,7 @@ void delete_broadcast_hint_after_delay(TelegramClient& bot, long long chat_id,
             auto it = g_broadcast_hint_message.find(chat_id);
             if (it != g_broadcast_hint_message.end() && it->second == message_id) {
                 g_broadcast_hint_message.erase(it);
+                save_bot_state_locked();
                 should_delete = true;
             }
         }
@@ -413,10 +430,21 @@ bool upsert_screen(long long chat_id, TelegramClient& bot, const std::string& te
                    const InlineKeyboard& buttons, int preferred_message_id = 0) {
     int message_id = preferred_message_id > 0 ? preferred_message_id : get_active_screen_message(chat_id);
     if (message_id > 0) {
-        if (bot.edit_message(chat_id, message_id, text, buttons)) {
+        TelegramRequestResult edit_result;
+        if (bot.edit_message(chat_id, message_id, text, buttons, &edit_result)) {
             remember_active_screen_message(chat_id, message_id);
             return true;
         }
+
+        if (edit_result.failure_kind != TelegramFailureKind::Permanent) {
+            LOG_WARNING("Keeping live dashboard message " + std::to_string(message_id) +
+                        " after temporary editMessageText failure for chat " +
+                        std::to_string(chat_id));
+            return false;
+        }
+
+        LOG_WARNING("Resetting stale live dashboard message " + std::to_string(message_id) +
+                    " for chat " + std::to_string(chat_id));
         bot.delete_message(chat_id, message_id);
         clear_active_screen_message(chat_id);
     }
@@ -434,10 +462,21 @@ bool upsert_photo_screen(long long chat_id, TelegramClient& bot, const std::stri
                          const InlineKeyboard& buttons, int preferred_message_id = 0) {
     int message_id = preferred_message_id > 0 ? preferred_message_id : get_active_screen_message(chat_id);
     if (message_id > 0) {
-        if (bot.edit_message_photo(chat_id, message_id, photo_path, buttons)) {
+        TelegramRequestResult edit_result;
+        if (bot.edit_message_photo(chat_id, message_id, photo_path, buttons, "", &edit_result)) {
             remember_active_screen_message(chat_id, message_id);
             return true;
         }
+
+        if (edit_result.failure_kind != TelegramFailureKind::Permanent) {
+            LOG_WARNING("Keeping live dashboard message " + std::to_string(message_id) +
+                        " after temporary editMessageMedia failure for chat " +
+                        std::to_string(chat_id));
+            return false;
+        }
+
+        LOG_WARNING("Resetting stale live dashboard message " + std::to_string(message_id) +
+                    " for chat " + std::to_string(chat_id));
         bot.delete_message(chat_id, message_id);
         clear_active_screen_message(chat_id);
     }
@@ -685,6 +724,145 @@ void save_update_offset(int update_id) {
     fs::path offset_path = bot_state_dir() / "telegram_update_offset.txt";
     if (!write_text_file(offset_path.string(), std::to_string(update_id))) {
         LOG_ERROR("Failed to save update offset: " + offset_path.string());
+    }
+}
+
+fs::path bot_live_state_path() {
+    return bot_state_dir() / "bot_state.json";
+}
+
+bool write_text_file_atomic(const fs::path& path, const std::string& text) {
+    std::error_code ec;
+    fs::create_directories(path.parent_path(), ec);
+    if (ec) {
+        LOG_ERROR("Failed to create state directory for " + path.string() + ": " + ec.message());
+        return false;
+    }
+
+    fs::path tmp_path = path;
+    tmp_path += ".tmp." + std::to_string(getpid());
+
+    {
+        std::ofstream file(tmp_path);
+        if (!file) {
+            LOG_ERROR("Failed to open temp state file: " + tmp_path.string());
+            return false;
+        }
+        file << text;
+        if (!file) {
+            LOG_ERROR("Failed to write temp state file: " + tmp_path.string());
+            return false;
+        }
+    }
+
+    fs::rename(tmp_path, path, ec);
+    if (ec) {
+        std::error_code remove_ec;
+        fs::remove(path, remove_ec);
+        ec.clear();
+        fs::rename(tmp_path, path, ec);
+    }
+
+    if (ec) {
+        LOG_ERROR("Failed to replace bot state file " + path.string() + ": " + ec.message());
+        std::error_code cleanup_ec;
+        fs::remove(tmp_path, cleanup_ec);
+        return false;
+    }
+
+    return true;
+}
+
+void save_bot_state_locked() {
+    json state;
+    state["chats"] = json::object();
+
+    std::set<long long> chat_ids;
+    for (const auto& [chat_id, _] : g_active_screen_message) chat_ids.insert(chat_id);
+    for (const auto& [chat_id, _] : g_broadcast_hint_message) chat_ids.insert(chat_id);
+    for (const auto& [chat_id, _] : g_chat_language) chat_ids.insert(chat_id);
+
+    for (long long chat_id : chat_ids) {
+        json chat_state;
+
+        auto live_it = g_active_screen_message.find(chat_id);
+        if (live_it != g_active_screen_message.end() && live_it->second > 0) {
+            chat_state["live_dashboard_message_id"] = live_it->second;
+        }
+
+        auto alert_it = g_broadcast_hint_message.find(chat_id);
+        if (alert_it != g_broadcast_hint_message.end() && alert_it->second > 0) {
+            chat_state["last_alert_text_message_id"] = alert_it->second;
+        }
+
+        auto language_it = g_chat_language.find(chat_id);
+        if (language_it != g_chat_language.end() && !language_it->second.empty()) {
+            chat_state["language"] = language_it->second;
+        }
+
+        state["chats"][std::to_string(chat_id)] = chat_state;
+    }
+
+    fs::path state_path = bot_live_state_path();
+    if (!write_text_file_atomic(state_path, state.dump(2))) {
+        LOG_ERROR("Failed to save bot state: " + state_path.string());
+    }
+}
+
+void save_bot_state() {
+    std::lock_guard<std::mutex> lock(g_screen_mutex);
+    save_bot_state_locked();
+}
+
+void load_bot_state() {
+    fs::path state_path = bot_live_state_path();
+    std::string state_text = read_text_file(state_path.string());
+    if (state_text.empty()) {
+        LOG("Bot state file not found or empty: " + state_path.string());
+        return;
+    }
+
+    try {
+        json state = json::parse(state_text);
+        std::lock_guard<std::mutex> lock(g_screen_mutex);
+        g_active_screen_message.clear();
+        g_broadcast_hint_message.clear();
+        g_chat_language.clear();
+
+        if (!state.contains("chats") || !state["chats"].is_object()) {
+            LOG_WARNING("Bot state has no chats object: " + state_path.string());
+            return;
+        }
+
+        for (auto it = state["chats"].begin(); it != state["chats"].end(); ++it) {
+            long long chat_id = 0;
+            try {
+                chat_id = std::stoll(it.key());
+            } catch (const std::exception& e) {
+                LOG_WARNING("Skipping invalid bot state chat id '" + it.key() + "': " + e.what());
+                continue;
+            }
+
+            const json& chat_state = it.value();
+            int live_message_id = chat_state.value("live_dashboard_message_id", 0);
+            int alert_message_id = chat_state.value("last_alert_text_message_id", 0);
+            std::string language = chat_state.value("language", "");
+
+            if (live_message_id > 0) {
+                g_active_screen_message[chat_id] = live_message_id;
+            }
+            if (alert_message_id > 0) {
+                g_broadcast_hint_message[chat_id] = alert_message_id;
+            }
+            if (!language.empty()) {
+                g_chat_language[chat_id] = language;
+            }
+        }
+
+        LOG("Loaded bot state for " + std::to_string(g_active_screen_message.size()) +
+            " live dashboard chats from " + state_path.string());
+    } catch (const std::exception& e) {
+        LOG_ERROR("Failed to load bot state " + state_path.string() + ": " + e.what());
     }
 }
 
@@ -1563,11 +1741,7 @@ void show_dictionary_page(long long chat_id, TelegramClient& bot,
     if (is_new) {
         upsert_screen(chat_id, bot, msg, buttons);
     } else {
-        if (bot.edit_message(chat_id, message_id, msg, buttons)) {
-            remember_active_screen_message(chat_id, message_id);
-        } else {
-            upsert_screen(chat_id, bot, msg, buttons);
-        }
+        upsert_screen(chat_id, bot, msg, buttons, message_id);
     }
 }
 
@@ -1604,11 +1778,7 @@ void show_learned_page(long long chat_id, TelegramClient& bot,
     } else if (is_new) {
         upsert_photo_screen(chat_id, bot, image_path, buttons);
     } else {
-        if (bot.edit_message_photo(chat_id, message_id, image_path, buttons)) {
-            remember_active_screen_message(chat_id, message_id);
-        } else {
-            upsert_photo_screen(chat_id, bot, image_path, buttons);
-        }
+        upsert_photo_screen(chat_id, bot, image_path, buttons, message_id);
     }
 }
 
@@ -1645,11 +1815,7 @@ void show_daily_review_page(long long chat_id, TelegramClient& bot,
     } else if (is_new) {
         upsert_photo_screen(chat_id, bot, image_path, buttons);
     } else {
-        if (bot.edit_message_photo(chat_id, message_id, image_path, buttons)) {
-            remember_active_screen_message(chat_id, message_id);
-        } else {
-            upsert_photo_screen(chat_id, bot, image_path, buttons);
-        }
+        upsert_photo_screen(chat_id, bot, image_path, buttons, message_id);
     }
 }
 
@@ -1685,11 +1851,7 @@ void show_evening_words_page(long long chat_id, TelegramClient& bot,
     } else if (is_new) {
         upsert_photo_screen(chat_id, bot, image_path, buttons);
     } else {
-        if (bot.edit_message_photo(chat_id, message_id, image_path, buttons)) {
-            remember_active_screen_message(chat_id, message_id);
-        } else {
-            upsert_photo_screen(chat_id, bot, image_path, buttons);
-        }
+        upsert_photo_screen(chat_id, bot, image_path, buttons, message_id);
     }
 }
 
@@ -2132,6 +2294,8 @@ int main(int argc, char* argv[]) {
     db.connect();
     db.init_tables();
 
+    load_bot_state();
+
     GroqClient ai;
     LOG("Bot started!");
 
@@ -2268,6 +2432,7 @@ int main(int argc, char* argv[]) {
                 db.save_conversation(chat_id, "user", text);
                 ensure_reply_keyboard_removed(chat_id, bot);
                 delete_tracked_ai_input(chat_id, bot, incoming_message_id);
+                delete_tracked_broadcast_hint(chat_id, bot);
 
                 // command handling
 
@@ -2363,6 +2528,7 @@ int main(int argc, char* argv[]) {
                                          "Отлично, слово теперь в Вашем словаре выученных слов.",
                                          "",
                                          &confirmation_message_id);
+                        remember_broadcast_hint(chat_id, confirmation_message_id);
                         delete_messages_after_delay(bot, chat_id,
                                                     {incoming_message_id, confirmation_message_id},
                                                     10);
