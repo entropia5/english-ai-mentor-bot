@@ -381,6 +381,10 @@ void send_temporary_broadcast_hint(long long chat_id, TelegramClient& bot,
     if (bot.send_message(chat_id, text, "Markdown", &message_id)) {
         remember_broadcast_hint(chat_id, message_id);
         delete_broadcast_hint_after_delay(bot, chat_id, message_id, 15 * 60);
+        LOG("Temporary broadcast hint sent to " + std::to_string(chat_id) +
+            ", message_id " + std::to_string(message_id));
+    } else {
+        LOG_ERROR("Failed to send temporary broadcast hint to " + std::to_string(chat_id));
     }
 }
 
@@ -2143,7 +2147,8 @@ void send_daily_review(long long chat_id, TelegramClient& bot, Database& db) {
     send_temporary_broadcast_hint(
         chat_id,
         bot,
-        "Утреннее повторение выученных слов."
+        "Вот вам утреннее повторение выученных слов.\n\n"
+        "Когда повторили слово - введите его здесь, и бот обновит ваш прогресс."
     );
 }
 
