@@ -4,6 +4,7 @@
 #include "database.h"
 #include "telegram_client.h"
 #include "groq_client.h"
+#include "render_utils.h"
 #include <iostream>
 #include <thread>
 #include <chrono>
@@ -13,12 +14,11 @@
 #include <sstream>
 #include <cctype>
 #include <mutex>
-#include <fstream>
-#include <cstdlib>
 #include <set>
 #include <filesystem>
+#include <iomanip>
+#include <ctime>
 #include <nlohmann/json.hpp>
-#include <unistd.h>
 
 using json = nlohmann::json;
 namespace fs = std::filesystem;
@@ -239,6 +239,21 @@ std::string build_existing_words_hint(const std::vector<std::tuple<std::string, 
     return hint;
 }
 
+std::string build_seen_generated_words_hint(const std::set<std::string>& words) {
+    if (words.empty()) return "";
+
+    std::string hint = "\nAlso avoid these already proposed candidates: ";
+    int count = 0;
+    for (const std::string& word : words) {
+        if (count > 0) hint += ", ";
+        hint += word;
+        count++;
+        if (count >= 80) break;
+    }
+    hint += ".";
+    return hint;
+}
+
 std::string english_level_from_learned(int learned) {
     if (learned < 300) return "A1";
     if (learned < 600) return "A2";
@@ -248,7 +263,18 @@ std::string english_level_from_learned(int learned) {
 }
 
 std::mutex g_screen_mutex;
-std::map<long long, int> g_active_screen_message;
+enum class ScreenMessageType {
+    Unknown,
+    Text,
+    Photo
+};
+
+struct ScreenMessageState {
+    int message_id = 0;
+    ScreenMessageType type = ScreenMessageType::Unknown;
+};
+
+std::map<long long, ScreenMessageState> g_active_screen_message;
 std::map<long long, bool> g_reply_keyboard_removed;
 std::map<long long, int> g_last_ai_user_message;
 std::map<long long, int> g_broadcast_hint_message;
@@ -257,13 +283,49 @@ std::map<long long, std::string> g_chat_language;
 int get_active_screen_message(long long chat_id) {
     std::lock_guard<std::mutex> lock(g_screen_mutex);
     auto it = g_active_screen_message.find(chat_id);
-    return it == g_active_screen_message.end() ? 0 : it->second;
+    return it == g_active_screen_message.end() ? 0 : it->second.message_id;
 }
 
-void remember_active_screen_message(long long chat_id, int message_id) {
+ScreenMessageType get_active_screen_message_type(long long chat_id) {
+    std::lock_guard<std::mutex> lock(g_screen_mutex);
+    auto it = g_active_screen_message.find(chat_id);
+    return it == g_active_screen_message.end() ? ScreenMessageType::Unknown : it->second.type;
+}
+
+std::string screen_message_type_to_string(ScreenMessageType type) {
+    switch (type) {
+        case ScreenMessageType::Text: return "text";
+        case ScreenMessageType::Photo: return "photo";
+        case ScreenMessageType::Unknown:
+        default: return "unknown";
+    }
+}
+
+ScreenMessageType screen_message_type_from_string(const std::string& type) {
+    if (type == "text") return ScreenMessageType::Text;
+    if (type == "photo") return ScreenMessageType::Photo;
+    return ScreenMessageType::Unknown;
+}
+
+ScreenMessageType screen_message_type_from_callback(const json& message) {
+    if (message.contains("photo")) {
+        return ScreenMessageType::Photo;
+    }
+    if (message.contains("text")) {
+        return ScreenMessageType::Text;
+    }
+    return ScreenMessageType::Unknown;
+}
+
+void remember_active_screen_message(long long chat_id, int message_id,
+                                    ScreenMessageType type = ScreenMessageType::Unknown) {
     if (message_id <= 0) return;
     std::lock_guard<std::mutex> lock(g_screen_mutex);
-    g_active_screen_message[chat_id] = message_id;
+    ScreenMessageState& state = g_active_screen_message[chat_id];
+    state.message_id = message_id;
+    if (type != ScreenMessageType::Unknown) {
+        state.type = type;
+    }
     save_bot_state_locked();
 }
 
@@ -281,7 +343,7 @@ void delete_active_screen_message(long long chat_id, TelegramClient& bot) {
         if (it == g_active_screen_message.end()) {
             return;
         }
-        message_id = it->second;
+        message_id = it->second.message_id;
         g_active_screen_message.erase(it);
         save_bot_state_locked();
     }
@@ -373,7 +435,7 @@ void delete_broadcast_hint_after_delay(TelegramClient& bot, long long chat_id,
     }).detach();
 }
 
-void send_temporary_broadcast_hint(long long chat_id, TelegramClient& bot,
+bool send_temporary_broadcast_hint(long long chat_id, TelegramClient& bot,
                                    const std::string& text) {
     delete_tracked_broadcast_hint(chat_id, bot);
 
@@ -383,8 +445,10 @@ void send_temporary_broadcast_hint(long long chat_id, TelegramClient& bot,
         delete_broadcast_hint_after_delay(bot, chat_id, message_id, 15 * 60);
         LOG("Temporary broadcast hint sent to " + std::to_string(chat_id) +
             ", message_id " + std::to_string(message_id));
+        return true;
     } else {
         LOG_ERROR("Failed to send temporary broadcast hint to " + std::to_string(chat_id));
+        return false;
     }
 }
 
@@ -434,17 +498,23 @@ bool upsert_screen(long long chat_id, TelegramClient& bot, const std::string& te
                    const InlineKeyboard& buttons, int preferred_message_id = 0) {
     int message_id = preferred_message_id > 0 ? preferred_message_id : get_active_screen_message(chat_id);
     if (message_id > 0) {
-        TelegramRequestResult edit_result;
-        if (bot.edit_message(chat_id, message_id, text, buttons, &edit_result)) {
-            remember_active_screen_message(chat_id, message_id);
-            return true;
-        }
+        ScreenMessageType current_type = get_active_screen_message_type(chat_id);
+        if (current_type == ScreenMessageType::Text || current_type == ScreenMessageType::Unknown) {
+            TelegramRequestResult edit_result;
+            if (bot.edit_message(chat_id, message_id, text, buttons, &edit_result)) {
+                remember_active_screen_message(chat_id, message_id, ScreenMessageType::Text);
+                return true;
+            }
 
-        if (edit_result.failure_kind != TelegramFailureKind::Permanent) {
-            LOG_WARNING("Keeping live dashboard message " + std::to_string(message_id) +
-                        " after temporary editMessageText failure for chat " +
-                        std::to_string(chat_id));
-            return false;
+            if (edit_result.failure_kind != TelegramFailureKind::Permanent) {
+                LOG_WARNING("Keeping live dashboard message " + std::to_string(message_id) +
+                            " after temporary editMessageText failure for chat " +
+                            std::to_string(chat_id));
+                return false;
+            }
+        } else {
+            LOG("Replacing photo live dashboard message " + std::to_string(message_id) +
+                " with text screen for chat " + std::to_string(chat_id));
         }
 
         LOG_WARNING("Resetting stale live dashboard message " + std::to_string(message_id) +
@@ -455,7 +525,7 @@ bool upsert_screen(long long chat_id, TelegramClient& bot, const std::string& te
 
     int sent_message_id = 0;
     if (bot.send_inline_keyboard(chat_id, text, buttons, &sent_message_id)) {
-        remember_active_screen_message(chat_id, sent_message_id);
+        remember_active_screen_message(chat_id, sent_message_id, ScreenMessageType::Text);
         return true;
     }
 
@@ -466,17 +536,23 @@ bool upsert_photo_screen(long long chat_id, TelegramClient& bot, const std::stri
                          const InlineKeyboard& buttons, int preferred_message_id = 0) {
     int message_id = preferred_message_id > 0 ? preferred_message_id : get_active_screen_message(chat_id);
     if (message_id > 0) {
-        TelegramRequestResult edit_result;
-        if (bot.edit_message_photo(chat_id, message_id, photo_path, buttons, "", &edit_result)) {
-            remember_active_screen_message(chat_id, message_id);
-            return true;
-        }
+        ScreenMessageType current_type = get_active_screen_message_type(chat_id);
+        if (current_type == ScreenMessageType::Photo || current_type == ScreenMessageType::Unknown) {
+            TelegramRequestResult edit_result;
+            if (bot.edit_message_photo(chat_id, message_id, photo_path, buttons, "", &edit_result)) {
+                remember_active_screen_message(chat_id, message_id, ScreenMessageType::Photo);
+                return true;
+            }
 
-        if (edit_result.failure_kind != TelegramFailureKind::Permanent) {
-            LOG_WARNING("Keeping live dashboard message " + std::to_string(message_id) +
-                        " after temporary editMessageMedia failure for chat " +
-                        std::to_string(chat_id));
-            return false;
+            if (edit_result.failure_kind != TelegramFailureKind::Permanent) {
+                LOG_WARNING("Keeping live dashboard message " + std::to_string(message_id) +
+                            " after temporary editMessageMedia failure for chat " +
+                            std::to_string(chat_id));
+                return false;
+            }
+        } else {
+            LOG("Replacing text live dashboard message " + std::to_string(message_id) +
+                " with photo screen for chat " + std::to_string(chat_id));
         }
 
         LOG_WARNING("Resetting stale live dashboard message " + std::to_string(message_id) +
@@ -487,7 +563,7 @@ bool upsert_photo_screen(long long chat_id, TelegramClient& bot, const std::stri
 
     int sent_message_id = 0;
     if (bot.send_photo(chat_id, photo_path, buttons, "", &sent_message_id)) {
-        remember_active_screen_message(chat_id, sent_message_id);
+        remember_active_screen_message(chat_id, sent_message_id, ScreenMessageType::Photo);
         return true;
     }
 
@@ -527,29 +603,6 @@ std::string html_escape(const std::string& text) {
     return result;
 }
 
-std::string shell_quote(const std::string& text) {
-    std::string result = "'";
-    for (char c : text) {
-        if (c == '\'') {
-            result += "'\\''";
-        } else {
-            result += c;
-        }
-    }
-    result += "'";
-    return result;
-}
-
-std::string project_data_dir() {
-    if (fs::exists("CMakeLists.txt")) {
-        return "data";
-    }
-    if (fs::exists("../CMakeLists.txt")) {
-        return "../data";
-    }
-    return "data";
-}
-
 uint64_t fnv1a_update(uint64_t hash, const std::string& text) {
     constexpr uint64_t prime = 1099511628211ULL;
     for (unsigned char c : text) {
@@ -585,21 +638,6 @@ std::string learned_page_hash(
     std::stringstream ss;
     ss << std::hex << hash;
     return ss.str();
-}
-
-std::string read_text_file(const std::string& path) {
-    std::ifstream file(path);
-    if (!file) return "";
-    std::stringstream buffer;
-    buffer << file.rdbuf();
-    return trim(buffer.str());
-}
-
-bool write_text_file(const std::string& path, const std::string& text) {
-    std::ofstream file(path);
-    if (!file) return false;
-    file << text;
-    return true;
 }
 
 void remove_render_artifact_set(const fs::path& base_path) {
@@ -660,43 +698,47 @@ void cleanup_legacy_stats_artifacts(const fs::path& stats_dir) {
     }
 }
 
-std::string render_html_image(const fs::path& base, const std::string& hash_value,
-                              const std::string& html_content, const std::string& log_name) {
+bool cleanup_render_cache() {
+    fs::path rendered_dir = fs::path(project_data_dir()) / "rendered";
+    if (!fs::exists(rendered_dir)) {
+        LOG("Render cache directory does not exist: " + rendered_dir.string());
+        return true;
+    }
+
+    int removed = 0;
     std::error_code ec;
-    fs::create_directories(base.parent_path(), ec);
-    if (ec) {
-        LOG_ERROR("Failed to create render directory for " + log_name + ": " +
-                  base.parent_path().string() + "; " + ec.message());
-        return "";
+    for (const auto& entry : fs::recursive_directory_iterator(rendered_dir, ec)) {
+        if (ec || !entry.is_regular_file()) {
+            continue;
+        }
+
+        const fs::path path = entry.path();
+        const std::string filename = path.filename().string();
+        const std::string stem = path.stem().string();
+        bool should_remove = filename.find(".tmp.") != std::string::npos;
+
+        if (!should_remove && stem.rfind("stats_", 0) == 0) {
+            should_remove = true;
+        }
+
+        if (!should_remove && path.parent_path().filename() == "menu" && stem == "main_menu") {
+            should_remove = true;
+        }
+
+        if (should_remove) {
+            std::error_code remove_ec;
+            fs::remove(path, remove_ec);
+            if (!remove_ec) {
+                removed++;
+            } else {
+                LOG_WARNING("Failed to remove render cache artifact " + path.string() +
+                            ": " + remove_ec.message());
+            }
+        }
     }
 
-    std::string html_path = base.string() + ".html";
-    std::string png_path = base.string() + ".png";
-    std::string hash_path = base.string() + ".hash";
-
-    if (fs::exists(png_path) && read_text_file(hash_path) == hash_value) {
-        LOG("Reusing " + log_name + " image: " + png_path);
-        return png_path;
-    }
-
-    if (!write_text_file(html_path, html_content)) {
-        LOG_ERROR("Failed to write " + log_name + " HTML: " + html_path);
-        return "";
-    }
-
-    std::string command = "wkhtmltoimage --quiet --width 1080 --disable-smart-width " +
-                          shell_quote(html_path) + " " + shell_quote(png_path);
-    int rc = std::system(command.c_str());
-    if (rc != 0) {
-        LOG_ERROR("wkhtmltoimage " + log_name + " failed with code " + std::to_string(rc));
-        return "";
-    }
-
-    if (!write_text_file(hash_path, hash_value)) {
-        LOG_ERROR("Failed to write " + log_name + " image hash: " + hash_path);
-    }
-
-    return png_path;
+    LOG("Render cache cleanup complete, removed " + std::to_string(removed) + " files");
+    return !ec;
 }
 
 fs::path bot_state_dir() {
@@ -735,46 +777,8 @@ fs::path bot_live_state_path() {
     return bot_state_dir() / "bot_state.json";
 }
 
-bool write_text_file_atomic(const fs::path& path, const std::string& text) {
-    std::error_code ec;
-    fs::create_directories(path.parent_path(), ec);
-    if (ec) {
-        LOG_ERROR("Failed to create state directory for " + path.string() + ": " + ec.message());
-        return false;
-    }
-
-    fs::path tmp_path = path;
-    tmp_path += ".tmp." + std::to_string(getpid());
-
-    {
-        std::ofstream file(tmp_path);
-        if (!file) {
-            LOG_ERROR("Failed to open temp state file: " + tmp_path.string());
-            return false;
-        }
-        file << text;
-        if (!file) {
-            LOG_ERROR("Failed to write temp state file: " + tmp_path.string());
-            return false;
-        }
-    }
-
-    fs::rename(tmp_path, path, ec);
-    if (ec) {
-        std::error_code remove_ec;
-        fs::remove(path, remove_ec);
-        ec.clear();
-        fs::rename(tmp_path, path, ec);
-    }
-
-    if (ec) {
-        LOG_ERROR("Failed to replace bot state file " + path.string() + ": " + ec.message());
-        std::error_code cleanup_ec;
-        fs::remove(tmp_path, cleanup_ec);
-        return false;
-    }
-
-    return true;
+fs::path broadcast_runs_state_path() {
+    return bot_state_dir() / "broadcast_runs.json";
 }
 
 void save_bot_state_locked() {
@@ -790,8 +794,9 @@ void save_bot_state_locked() {
         json chat_state;
 
         auto live_it = g_active_screen_message.find(chat_id);
-        if (live_it != g_active_screen_message.end() && live_it->second > 0) {
-            chat_state["live_dashboard_message_id"] = live_it->second;
+        if (live_it != g_active_screen_message.end() && live_it->second.message_id > 0) {
+            chat_state["live_dashboard_message_id"] = live_it->second.message_id;
+            chat_state["live_dashboard_message_type"] = screen_message_type_to_string(live_it->second.type);
         }
 
         auto alert_it = g_broadcast_hint_message.find(chat_id);
@@ -849,11 +854,15 @@ void load_bot_state() {
 
             const json& chat_state = it.value();
             int live_message_id = chat_state.value("live_dashboard_message_id", 0);
+            std::string live_message_type = chat_state.value("live_dashboard_message_type", "photo");
             int alert_message_id = chat_state.value("last_alert_text_message_id", 0);
             std::string language = chat_state.value("language", "");
 
             if (live_message_id > 0) {
-                g_active_screen_message[chat_id] = live_message_id;
+                g_active_screen_message[chat_id] = {
+                    live_message_id,
+                    screen_message_type_from_string(live_message_type)
+                };
             }
             if (alert_message_id > 0) {
                 g_broadcast_hint_message[chat_id] = alert_message_id;
@@ -870,31 +879,58 @@ void load_bot_state() {
     }
 }
 
+std::string local_date_key(const std::tm& tm) {
+    std::stringstream ss;
+    ss << std::put_time(&tm, "%Y-%m-%d");
+    return ss.str();
+}
+
+json load_broadcast_runs_state() {
+    fs::path state_path = broadcast_runs_state_path();
+    std::string state_text = read_text_file(state_path.string());
+    if (state_text.empty()) {
+        return json{{"runs", json::object()}};
+    }
+
+    try {
+        json state = json::parse(state_text);
+        if (!state.contains("runs") || !state["runs"].is_object()) {
+            state["runs"] = json::object();
+        }
+        return state;
+    } catch (const std::exception& e) {
+        LOG_ERROR("Failed to parse broadcast runs state " + state_path.string() + ": " + e.what());
+        return json{{"runs", json::object()}};
+    }
+}
+
+bool broadcast_was_sent(const std::string& date_key, const std::string& kind, long long user_id) {
+    json state = load_broadcast_runs_state();
+    std::string user_key = std::to_string(user_id);
+    return state["runs"].contains(date_key) &&
+           state["runs"][date_key].contains(kind) &&
+           state["runs"][date_key][kind].contains(user_key) &&
+           state["runs"][date_key][kind][user_key].value("sent", false);
+}
+
+void remember_broadcast_sent(const std::string& date_key, const std::string& kind, long long user_id) {
+    json state = load_broadcast_runs_state();
+    std::string user_key = std::to_string(user_id);
+    state["runs"][date_key][kind][user_key] = {
+        {"sent", true},
+        {"updated_at", std::time(nullptr)}
+    };
+
+    if (!write_text_file_atomic(broadcast_runs_state_path(), state.dump(2))) {
+        LOG_ERROR("Failed to save broadcast runs state");
+    }
+}
+
 std::string render_main_menu_image(const std::string& user_level) {
     fs::path render_dir = fs::path(project_data_dir()) / "rendered" / "menu";
-    std::error_code ec;
-    fs::create_directories(render_dir, ec);
-    if (ec) {
-        LOG_ERROR("Failed to create main menu render directory: " + render_dir.string() + "; " + ec.message());
-        return "";
-    }
-
     fs::path base = render_dir / ("main_menu_" + user_level);
-    std::string html_path = base.string() + ".html";
-    std::string png_path = base.string() + ".png";
-    std::string hash_path = base.string() + ".hash";
     std::string menu_hash = "main-menu-graphite-v6-title-underline-" + user_level;
-
-    if (fs::exists(png_path) && read_text_file(hash_path) == menu_hash) {
-        LOG("Reusing main menu image: " + png_path);
-        return png_path;
-    }
-
-    std::ofstream html(html_path);
-    if (!html) {
-        LOG_ERROR("Failed to create main menu HTML: " + html_path);
-        return "";
-    }
+    std::stringstream html;
 
     html << R"(<!doctype html>
 <html>
@@ -1024,21 +1060,7 @@ body {
 </body>
 </html>
 )";
-    html.close();
-
-    std::string command = "wkhtmltoimage --quiet --width 1080 --disable-smart-width " +
-                          shell_quote(html_path) + " " + shell_quote(png_path);
-    int rc = std::system(command.c_str());
-    if (rc != 0) {
-        LOG_ERROR("wkhtmltoimage main menu failed with code " + std::to_string(rc));
-        return "";
-    }
-
-    if (!write_text_file(hash_path, menu_hash)) {
-        LOG_ERROR("Failed to write main menu image hash: " + hash_path);
-    }
-
-    return png_path;
+    return render_html_image(base, menu_hash, html.str(), "main menu", 1080);
 }
 
 std::string render_ai_prompt_image() {
@@ -1235,6 +1257,138 @@ body {
     return render_html_image(base, hash, html.str(), "topic menu");
 }
 
+std::string safe_render_key(std::string text) {
+    text = to_lower_ascii(text);
+    std::string result;
+    for (char c : text) {
+        if ((c >= 'a' && c <= 'z') || (c >= '0' && c <= '9')) {
+            result += c;
+        } else if (c == '_' || c == '-' || c == ' ') {
+            result += '_';
+        }
+    }
+    if (result.empty()) {
+        result = "status";
+    }
+    return result;
+}
+
+std::string render_status_image(const std::string& key, const std::string& title,
+                                const std::string& subtitle, const std::string& note) {
+    fs::path base = fs::path(project_data_dir()) / "rendered" / "status" / safe_render_key(key);
+    std::string hash = "status-graphite-v1-" + title + "|" + subtitle + "|" + note;
+    std::stringstream html;
+
+    html << R"(<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  width: 1080px;
+  height: 760px;
+  background: #0b0d10;
+  color: #f5f7f8;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.canvas {
+  width: 1080px;
+  height: 760px;
+  padding: 38px;
+  background:
+    radial-gradient(circle at 82% 12%, rgba(52, 211, 153, .16), transparent 34%),
+    radial-gradient(circle at 4% 92%, rgba(96, 165, 250, .13), transparent 36%),
+    linear-gradient(145deg, #171b20 0%, #101317 62%, #090b0e 100%);
+}
+.panel {
+  height: 100%;
+  border-radius: 34px;
+  border: 1px solid #303841;
+  background: #191e24;
+  box-shadow: 0 32px 90px rgba(0,0,0,.48);
+  padding: 58px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.label {
+  color: #91a0ae;
+  font-size: 30px;
+  font-weight: 800;
+}
+.title {
+  margin-top: 66px;
+  font-size: 82px;
+  line-height: 1.04;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+.line {
+  width: 230px;
+  height: 8px;
+  border-radius: 99px;
+  margin-top: 20px;
+  background: linear-gradient(90deg, #34d399, #60a5fa);
+}
+.subtitle {
+  margin-top: 38px;
+  color: #d5dde4;
+  font-size: 38px;
+  line-height: 1.24;
+  font-weight: 800;
+}
+.note {
+  padding: 26px 30px;
+  border-radius: 24px;
+  background: #242b33;
+  border: 1px solid #3b444d;
+  color: #c7d0d8;
+  font-size: 30px;
+  line-height: 1.28;
+  font-weight: 700;
+}
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="panel">
+    <div>
+      <div class="label">English AI Mentor</div>
+      <div class="title">)";
+    html << html_escape(title);
+    html << R"(</div>
+      <div class="line"></div>
+      <div class="subtitle">)";
+    html << html_escape(subtitle);
+    html << R"(</div>
+    </div>
+    <div class="note">)";
+    html << html_escape(note);
+    html << R"(</div>
+  </div>
+</div>
+</body>
+</html>
+)";
+
+    return render_html_image(base, hash, html.str(), "status " + key, 1080);
+}
+
+bool show_status_screen(long long chat_id, TelegramClient& bot, const std::string& key,
+                        const std::string& title, const std::string& subtitle,
+                        const std::string& note, const InlineKeyboard& buttons,
+                        int message_id = 0) {
+    std::string image_path = render_status_image(key, title, subtitle, note);
+    if (!image_path.empty()) {
+        return upsert_photo_screen(chat_id, bot, image_path, buttons, message_id);
+    }
+
+    return upsert_screen(chat_id, bot, "*" + title + "*\n\n" + subtitle + "\n\n" + note, buttons, message_id);
+}
+
 std::string render_stats_image(long long chat_id, int total, int learned, const std::string& level,
                                const std::string& next_name, int next_level,
                                int percent) {
@@ -1406,21 +1560,8 @@ std::string render_words_card_image(
     cleanup_stale_page_artifacts(render_dir, total);
 
     fs::path page_base = render_dir / ("page_" + std::to_string(page + 1));
-    std::string html_path = (page_base.string() + ".html");
-    std::string png_path = (page_base.string() + ".png");
-    std::string hash_path = (page_base.string() + ".hash");
     std::string page_hash = folder + "-graphite-mobile-v7-wide-checkword-" + learned_page_hash(words, page, total, start, end);
-
-    if (fs::exists(png_path) && read_text_file(hash_path) == page_hash) {
-        LOG("Reusing words card image: " + png_path);
-        return png_path;
-    }
-
-    std::ofstream html(html_path);
-    if (!html) {
-        LOG_ERROR("Failed to create words card HTML: " + html_path);
-        return "";
-    }
+    std::stringstream html;
 
     html << R"(<!doctype html>
 <html>
@@ -1594,21 +1735,7 @@ body {
 </body>
 </html>
 )";
-    html.close();
-
-    std::string command = "wkhtmltoimage --quiet --width 1440 --disable-smart-width " +
-                          shell_quote(html_path) + " " + shell_quote(png_path);
-    int rc = std::system(command.c_str());
-    if (rc != 0) {
-        LOG_ERROR("wkhtmltoimage failed with code " + std::to_string(rc));
-        return "";
-    }
-
-    if (!write_text_file(hash_path, page_hash)) {
-        LOG_ERROR("Failed to write learned words image hash: " + hash_path);
-    }
-
-    return png_path;
+    return render_html_image(page_base, page_hash, html.str(), folder + " words", 1440);
 }
 
 std::string render_learned_words_image(
@@ -1787,7 +1914,7 @@ void show_learned_page(long long chat_id, TelegramClient& bot,
 }
 
 // show daily review page with INLINE buttons for pagination
-void show_daily_review_page(long long chat_id, TelegramClient& bot,
+bool show_daily_review_page(long long chat_id, TelegramClient& bot,
                             const std::vector<std::tuple<std::string, std::string, bool, std::string, std::string>>& words,
                             int page, int message_id = 0, bool is_new = true, std::string* last_action = nullptr) {
     int per_page = 7;
@@ -1800,12 +1927,19 @@ void show_daily_review_page(long long chat_id, TelegramClient& bot,
     }
 
     if (words.empty()) {
-        std::string msg = "*Доброе утро!*\n\nПока нет выученных слов для повторения.";
-        upsert_screen(chat_id, bot, msg, column_keyboard({
-            {"Выученные", "menu_learned"},
-            {"Главное меню", "menu_main"}
-        }), is_new ? 0 : message_id);
-        return;
+        return show_status_screen(
+            chat_id,
+            bot,
+            "daily_empty",
+            "Доброе утро",
+            "Пока нет выученных слов для повторения.",
+            "Отметь несколько слов как выученные, и завтра утренний экран покажет их для практики.",
+            column_keyboard({
+                {"Выученные", "menu_learned"},
+                {"Главное меню", "menu_main"}
+            }),
+            is_new ? 0 : message_id
+        );
     }
 
     int start = page * per_page;
@@ -1815,15 +1949,15 @@ void show_daily_review_page(long long chat_id, TelegramClient& bot,
 
     if (image_path.empty()) {
         std::string msg = "*Доброе утро*\n\nНе удалось собрать картинку повторения. Попробуй открыть раздел еще раз.";
-        upsert_screen(chat_id, bot, msg, buttons, is_new ? 0 : message_id);
+        return upsert_screen(chat_id, bot, msg, buttons, is_new ? 0 : message_id);
     } else if (is_new) {
-        upsert_photo_screen(chat_id, bot, image_path, buttons);
+        return upsert_photo_screen(chat_id, bot, image_path, buttons);
     } else {
-        upsert_photo_screen(chat_id, bot, image_path, buttons, message_id);
+        return upsert_photo_screen(chat_id, bot, image_path, buttons, message_id);
     }
 }
 
-void show_evening_words_page(long long chat_id, TelegramClient& bot,
+bool show_evening_words_page(long long chat_id, TelegramClient& bot,
                              const std::vector<std::tuple<std::string, std::string, bool, std::string, std::string>>& words,
                              int page, int message_id = 0, bool is_new = true, std::string* last_action = nullptr) {
     int per_page = 7;
@@ -1836,12 +1970,19 @@ void show_evening_words_page(long long chat_id, TelegramClient& bot,
     }
 
     if (words.empty()) {
-        std::string msg = "*Новые слова*\n\nПока нет слов для изучения.";
-        upsert_screen(chat_id, bot, msg, column_keyboard({
-            {"Новые слова", "menu_new_words"},
-            {"Главное меню", "menu_main"}
-        }), is_new ? 0 : message_id);
-        return;
+        return show_status_screen(
+            chat_id,
+            bot,
+            "evening_empty",
+            "Новые слова",
+            "Сейчас нет слов для изучения.",
+            "Выбери тему вручную, чтобы добавить новую подборку.",
+            column_keyboard({
+                {"Новые слова", "menu_new_words"},
+                {"Главное меню", "menu_main"}
+            }),
+            is_new ? 0 : message_id
+        );
     }
 
     int start = page * per_page;
@@ -1851,11 +1992,11 @@ void show_evening_words_page(long long chat_id, TelegramClient& bot,
 
     if (image_path.empty()) {
         std::string msg = "*Новые слова*\n\nНе удалось собрать картинку. Попробуй открыть раздел еще раз.";
-        upsert_screen(chat_id, bot, msg, buttons, is_new ? 0 : message_id);
+        return upsert_screen(chat_id, bot, msg, buttons, is_new ? 0 : message_id);
     } else if (is_new) {
-        upsert_photo_screen(chat_id, bot, image_path, buttons);
+        return upsert_photo_screen(chat_id, bot, image_path, buttons);
     } else {
-        upsert_photo_screen(chat_id, bot, image_path, buttons, message_id);
+        return upsert_photo_screen(chat_id, bot, image_path, buttons, message_id);
     }
 }
 
@@ -1905,8 +2046,9 @@ bool try_mark_words_from_input(long long chat_id, const std::string& text, Datab
 
     for (const auto& word : requested_words) {
         if (db.word_exists(chat_id, word)) {
-            db.mark_word_learned(chat_id, word);
-            marked_words.push_back(word);
+            if (db.mark_word_learned(chat_id, word)) {
+                marked_words.push_back(word);
+            }
         } else if (requested_words.size() > 1) {
             not_found_words.push_back(word);
         }
@@ -2003,24 +2145,162 @@ bool backfill_missing_pronunciations(Database& db, GroqClient& ai) {
 struct WordGenerationResult {
     int added = 0;
     int duplicates = 0;
+    int duplicate_in_response = 0;
+    int rejected_quality = 0;
+    int fallback_added = 0;
     int parsed_total = 0;
     int failed = 0;
 };
 
+std::string generation_attempt_hint(int attempt) {
+    if (attempt == 1) {
+        return "Use practical everyday verbs and concrete nouns that fit A2/B1 learners.";
+    }
+    if (attempt == 2) {
+        return "Use a different lexical angle: errands, services, planning, tools, documents, places, and real-life actions.";
+    }
+    if (attempt == 3) {
+        return "Use home, work, travel, food, communication, and city-life vocabulary that is useful but not too basic.";
+    }
+    if (attempt == 4) {
+        return "Use common collocation-friendly nouns and verbs from everyday adult life.";
+    }
+    if (attempt == 5) {
+        return "Use B1/B2 practical vocabulary from services, paperwork, repairs, schedules, and decisions.";
+    }
+    return "Use another fresh semantic field. Avoid generic words, rare jargon, brands, apps, and any previous candidate.";
+}
+
+bool is_ascii_english_word(const std::string& word) {
+    if (word.size() < 3 || word.size() > 18) {
+        return false;
+    }
+    return std::all_of(word.begin(), word.end(), [](unsigned char c) {
+        return c >= 'a' && c <= 'z';
+    });
+}
+
+const std::set<std::string>& blocked_generated_words() {
+    static const std::set<std::string> blocked_words = {
+        "swype", "microwaver", "googling", "instagram", "whatsapp", "facebook",
+        "youtube", "tiktok", "uber", "airbnb", "outpatient",
+        "html", "css", "api", "sql", "url", "usb",
+        "hacker", "virus", "malware", "robot", "mouse"
+    };
+
+    return blocked_words;
+}
+
+bool is_suspicious_generated_word(const std::string& normalized_word) {
+    static const std::vector<std::string> blocked_suffixes = {
+        "warez"
+    };
+
+    if (!is_ascii_english_word(normalized_word)) {
+        return true;
+    }
+    if (blocked_generated_words().count(normalized_word) > 0) {
+        return true;
+    }
+    for (const std::string& suffix : blocked_suffixes) {
+        if (normalized_word.size() > suffix.size() &&
+            normalized_word.compare(normalized_word.size() - suffix.size(), suffix.size(), suffix) == 0) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+std::vector<GeneratedWord> fallback_practical_words() {
+    return {
+        {"receipt", "/rɪˈsiːt/", "рисит", "чек"},
+        {"refund", "/ˈriːfʌnd/", "рифанд", "возврат денег"},
+        {"warranty", "/ˈwɒrənti/", "уорэнти", "гарантия"},
+        {"invoice", "/ˈɪnvɔɪs/", "инвойс", "счет"},
+        {"estimate", "/ˈestɪmət/", "эстимэт", "оценка стоимости"},
+        {"deadline", "/ˈdedlaɪn/", "дедлайн", "крайний срок"},
+        {"appointment", "/əˈpɔɪntmənt/", "эпойнтмэнт", "встреча, запись"},
+        {"schedule", "/ˈʃedjuːl/", "шеджул", "расписание"},
+        {"reminder", "/rɪˈmaɪndər/", "римайндер", "напоминание"},
+        {"checklist", "/ˈtʃeklɪst/", "чеклист", "контрольный список"},
+        {"paperwork", "/ˈpeɪpərwɜːrk/", "пэйпэруорк", "документы"},
+        {"timesheet", "/ˈtaɪmʃiːt/", "таймшит", "табель учета времени"},
+        {"courier", "/ˈkʊriər/", "куриэр", "курьер"},
+        {"parcel", "/ˈpɑːrsl/", "парсл", "посылка"},
+        {"delivery", "/dɪˈlɪvəri/", "диливэри", "доставка"},
+        {"package", "/ˈpækɪdʒ/", "пэкидж", "упаковка, посылка"},
+        {"storage", "/ˈstɔːrɪdʒ/", "сторидж", "хранение"},
+        {"shelf", "/ʃelf/", "шелф", "полка"},
+        {"drawer", "/drɔːr/", "дроэр", "ящик"},
+        {"outlet", "/ˈaʊtlet/", "аутлет", "розетка"},
+        {"adapter", "/əˈdæptər/", "эдэптэр", "адаптер"},
+        {"blanket", "/ˈblæŋkɪt/", "блэнкит", "одеяло"},
+        {"kettle", "/ˈketl/", "кетл", "чайник"},
+        {"faucet", "/ˈfɔːsɪt/", "фосит", "кран"},
+        {"laundry", "/ˈlɔːndri/", "лондри", "стирка"},
+        {"detergent", "/dɪˈtɜːrdʒənt/", "дитёрджэнт", "моющее средство"},
+        {"commute", "/kəˈmjuːt/", "комьют", "поездка на работу"},
+        {"shortcut", "/ˈʃɔːrtkʌt/", "шорткат", "короткий путь"},
+        {"suburb", "/ˈsʌbɜːrb/", "сабёрб", "пригород"},
+        {"traffic", "/ˈtræfɪk/", "трэфик", "дорожное движение"},
+        {"luggage", "/ˈlʌɡɪdʒ/", "лагидж", "багаж"},
+        {"boarding", "/ˈbɔːrdɪŋ/", "бординг", "посадка"},
+        {"arrival", "/əˈraɪvəl/", "эрайвэл", "прибытие"},
+        {"departure", "/dɪˈpɑːrtʃər/", "дипарчер", "отправление"},
+        {"platform", "/ˈplætfɔːrm/", "плэтформ", "платформа"},
+        {"aisle", "/aɪl/", "айл", "проход"},
+        {"receipt", "/rɪˈsiːt/", "рисит", "чек"},
+        {"ingredient", "/ɪnˈɡriːdiənt/", "ингридиэнт", "ингредиент"},
+        {"leftover", "/ˈleftoʊvər/", "лэфтоувэр", "остаток еды"},
+        {"portion", "/ˈpɔːrʃn/", "поршн", "порция"},
+        {"utensil", "/juːˈtensl/", "ютенсл", "столовый прибор"},
+        {"grocery", "/ˈɡroʊsəri/", "гроусэри", "продукты"},
+        {"pantry", "/ˈpæntri/", "пэнтри", "кладовая"},
+        {"receipt", "/rɪˈsiːt/", "рисит", "чек"},
+        {"summary", "/ˈsʌməri/", "самэри", "краткое описание"},
+        {"request", "/rɪˈkwest/", "риквест", "запрос"},
+        {"approval", "/əˈpruːvəl/", "эпрувэл", "одобрение"},
+        {"feedback", "/ˈfiːdbæk/", "фидбэк", "обратная связь"},
+        {"meeting", "/ˈmiːtɪŋ/", "митинг", "встреча"},
+        {"agenda", "/əˈdʒendə/", "эдженда", "повестка"},
+        {"priority", "/praɪˈɔːrəti/", "прайорити", "приоритет"},
+        {"progress", "/ˈprɑːɡres/", "прогрэс", "прогресс"},
+        {"issue", "/ˈɪʃuː/", "ишью", "проблема"},
+        {"solution", "/səˈluːʃn/", "солюшн", "решение"},
+        {"backup", "/ˈbækʌp/", "бэкап", "резервная копия"},
+        {"folder", "/ˈfoʊldər/", "фоулдэр", "папка"},
+        {"attachment", "/əˈtætʃmənt/", "этэчмэнт", "вложение"},
+        {"browser", "/ˈbraʊzər/", "браузэр", "браузер"},
+        {"password", "/ˈpæswɜːrd/", "пэсуорд", "пароль"},
+        {"privacy", "/ˈpraɪvəsi/", "прайвэси", "конфиденциальность"}
+    };
+}
+
 WordGenerationResult add_generated_words_to_db(long long chat_id, Database& db, GroqClient& ai,
                                                const std::string& topic_keyword, int target_count = 10) {
     WordGenerationResult result;
+    std::set<std::string> seen_generated_words;
+    constexpr int max_attempts = 8;
 
-    for (int attempt = 1; attempt <= 3 && result.added < target_count; attempt++) {
+    for (int attempt = 1; attempt <= max_attempts && result.added < target_count; attempt++) {
         auto existing_words = db.get_user_words_full(chat_id, false);
         int need = target_count - result.added;
+        int requested_candidates = std::min(30, std::max(need * 4, 16));
 
-        std::string prompt = "Generate exactly " + std::to_string(need) +
-            " NEW English words on topic: " + topic_keyword +
-            ". Use practical words for language learners. Do not repeat words from the avoid list. "
+        std::string prompt = "Generate " + std::to_string(requested_candidates) +
+            " candidate English words. I will accept only " + std::to_string(need) +
+            " of them. Topic: " + topic_keyword +
+            ". Use practical dictionary headwords for language learners. Do not repeat words from the avoid list. "
+            "Do not repeat words inside your own answer. "
+            "Return only real common English dictionary words, lowercase, 3-18 letters, one word only. "
+            "Do not invent words. Do not use acronyms, brand names, app names, typos, slang spellings, medical terms, "
+            "security scare words, hardware objects, or obscure jargon. " +
+            generation_attempt_hint(attempt) + " "
             "For every word, TRANS must be the original English IPA transcription with slashes, "
             "and PRON must be a Russian Cyrillic pronunciation hint." +
             build_existing_words_hint(existing_words) +
+            build_seen_generated_words_hint(seen_generated_words) +
             "\nReturn ONLY blocks in this exact format, no numbering and no extra text:\n"
             "WORD: word\n"
             "TRANS: /IPA transcription/\n"
@@ -2044,16 +2324,72 @@ WordGenerationResult add_generated_words_to_db(long long chat_id, Database& db, 
         for (const auto& word : generated_words) {
             if (result.added >= target_count) break;
 
-            if (db.word_exists(chat_id, word.english)) {
+            std::string normalized_word = to_lower_ascii(trim(word.english));
+            if (normalized_word.empty()) {
+                result.failed++;
+                continue;
+            }
+            std::string translation = trim(word.translation);
+            std::string pronunciation = trim(word.pronunciation);
+            std::string transcription = trim(word.transcription);
+            if (translation.empty() || pronunciation.empty() || transcription.empty()) {
+                result.rejected_quality++;
+                LOG("Generated incomplete word rejected: " + word.english);
+                continue;
+            }
+            if (is_suspicious_generated_word(normalized_word)) {
+                result.rejected_quality++;
+                LOG("Generated low-quality word rejected: " + word.english);
+                continue;
+            }
+            if (seen_generated_words.count(normalized_word) > 0) {
+                result.duplicate_in_response++;
+                LOG("Generated duplicate inside response skipped: " + word.english);
+                continue;
+            }
+            seen_generated_words.insert(normalized_word);
+
+            if (db.word_exists(chat_id, normalized_word)) {
                 result.duplicates++;
                 LOG("Generated duplicate skipped before insert: " + word.english);
                 continue;
             }
 
-            LOG("Adding word: " + word.english + " -> " + word.translation);
-            if (db.add_word(chat_id, word.english, word.translation, word.pronunciation,
-                            word.transcription, topic_keyword)) {
+            LOG("Adding word: " + normalized_word + " -> " + translation);
+            if (db.add_word(chat_id, normalized_word, translation, pronunciation,
+                            transcription, topic_keyword)) {
                 result.added++;
+            } else {
+                result.failed++;
+            }
+        }
+    }
+
+    if (result.added < target_count) {
+        for (const GeneratedWord& word : fallback_practical_words()) {
+            if (result.added >= target_count) break;
+
+            std::string normalized_word = to_lower_ascii(trim(word.english));
+            std::string translation = trim(word.translation);
+            std::string pronunciation = trim(word.pronunciation);
+            std::string transcription = trim(word.transcription);
+            if (normalized_word.empty() || seen_generated_words.count(normalized_word) > 0 ||
+                translation.empty() || pronunciation.empty() || transcription.empty() ||
+                is_suspicious_generated_word(normalized_word)) {
+                continue;
+            }
+            seen_generated_words.insert(normalized_word);
+
+            if (db.word_exists(chat_id, normalized_word)) {
+                result.duplicates++;
+                continue;
+            }
+
+            LOG("Adding fallback word: " + normalized_word + " -> " + translation);
+            if (db.add_word(chat_id, normalized_word, translation, pronunciation,
+                            transcription, topic_keyword)) {
+                result.added++;
+                result.fallback_added++;
             } else {
                 result.failed++;
             }
@@ -2067,33 +2403,52 @@ WordGenerationResult add_generated_words_to_db(long long chat_id, Database& db, 
 void generate_words(long long chat_id, TelegramClient& bot, Database& db, GroqClient& ai,
                     const std::string& topic_keyword, const std::string& topic_name,
                     int message_id = 0) {
-    upsert_screen(chat_id, bot, "*Генерирую слова на тему: " + topic_name + "*\n\nПодожди...",
-                  column_keyboard({{"Главное меню", "menu_main"}}), message_id);
+    show_status_screen(
+        chat_id,
+        bot,
+        "generate_" + topic_keyword,
+        "Генерирую слова",
+        "Тема: " + topic_name,
+        "AI подбирает реальные словарные слова, проверяет дубли и готовит произношение.",
+        column_keyboard({{"Главное меню", "menu_main"}}),
+        message_id
+    );
 
     WordGenerationResult generation = add_generated_words_to_db(chat_id, db, ai, topic_keyword, 10);
 
     if (generation.added > 0) {
-        std::string msg = "✅ *Добавлено " + std::to_string(generation.added) + " новых слов!*\n📚 Смотри в разделе «Словарь»";
+        std::string note = "Добавлено: " + std::to_string(generation.added) + ".";
+        if (generation.fallback_added > 0) {
+            note += " Добрано из резервного словаря: " + std::to_string(generation.fallback_added) + ".";
+        }
         if (generation.added < 10) {
-            msg += "\n\n▫️ Меньше 10, потому что часть слов уже была в словаре";
+            note += " Не хватило уникальных слов даже после дополнительных попыток и резервного словаря.";
             if (generation.duplicates > 0) {
-                msg += " (" + std::to_string(generation.duplicates) + " дубл.)";
+                note += " Дубли: " + std::to_string(generation.duplicates) + ".";
+            }
+            if (generation.rejected_quality > 0) {
+                note += " Отсеяно: " + std::to_string(generation.rejected_quality) + ".";
             }
         }
-        upsert_screen(chat_id, bot, msg, column_keyboard({
+        show_status_screen(chat_id, bot, "generate_done_" + topic_keyword,
+                           "Слова добавлены", "Новая подборка готова.", note,
+                           column_keyboard({
             {"Словарь", "menu_dictionary"},
             {"Новые слова", "menu_new_words"},
             {"Главное меню", "menu_main"}
         }));
     } else {
-        std::string msg = "❌ *Не удалось добавить новые слова*";
+        std::string note = "Попробуй другую тему.";
         if (generation.duplicates > 0) {
-            msg += "\n\nAI предложил только слова, которые уже есть в словаре.";
+            note = "AI предложил только слова, которые уже есть в словаре. " + note;
         } else if (generation.parsed_total == 0) {
-            msg += "\n\nAI вернул ответ в неожиданном формате.";
+            note = "AI вернул ответ в неожиданном формате. " + note;
+        } else if (generation.rejected_quality > 0) {
+            note = "Все новые варианты не прошли фильтр качества. " + note;
         }
-        msg += "\nПопробуй другую тему";
-        upsert_screen(chat_id, bot, msg, column_keyboard({
+        show_status_screen(chat_id, bot, "generate_failed_" + topic_keyword,
+                           "Не удалось добавить", "Новых слов сейчас нет.", note,
+                           column_keyboard({
             {"Новые слова", "menu_new_words"},
             {"Главное меню", "menu_main"}
         }));
@@ -2140,19 +2495,49 @@ std::vector<long long> configured_broadcast_users() {
     return users;
 }
 
+enum class BroadcastResult {
+    Delivered,
+    NoContent,
+    Failed
+};
+
 // send daily review with learned words to repeat
-void send_daily_review(long long chat_id, TelegramClient& bot, Database& db) {
+BroadcastResult send_daily_review(long long chat_id, TelegramClient& bot, Database& db) {
     auto words = get_learned_words_for_review(chat_id, db);
-    show_daily_review_page(chat_id, bot, words, 0);
-    send_temporary_broadcast_hint(
+    bool screen_ok = show_daily_review_page(chat_id, bot, words, 0);
+    if (!screen_ok) {
+        LOG_ERROR("Morning review screen delivery failed for " + std::to_string(chat_id));
+        return BroadcastResult::Failed;
+    }
+
+    if (words.empty()) {
+        LOG("Morning review skipped for " + std::to_string(chat_id) + ": no learned words");
+        return BroadcastResult::NoContent;
+    }
+
+    bool hint_ok = send_temporary_broadcast_hint(
         chat_id,
         bot,
-        "Вот вам утреннее повторение выученных слов.\n\n"
-        "Когда повторили слово - введите его здесь, и бот обновит ваш прогресс."
+        "Утреннее повторение выученных слов.\n\n"
+        "Прочитай слова на экране и проговори их вслух. Навигация и возврат в меню доступны кнопками ниже."
     );
+    return hint_ok ? BroadcastResult::Delivered : BroadcastResult::Failed;
 }
 
-void send_evening_new_words(long long chat_id, TelegramClient& bot, Database& db) {
+BroadcastResult send_evening_new_words(long long chat_id, TelegramClient& bot, Database& db) {
+    bool status_ok = show_status_screen(
+        chat_id,
+        bot,
+        "evening_generation",
+        "Вечерняя подборка",
+        "Генерирую новые слова для изучения.",
+        "AI проверяет дубли, отсеивает слабые варианты и готовит произношение.",
+        column_keyboard({{"Главное меню", "menu_main"}})
+    );
+    if (!status_ok) {
+        LOG_WARNING("Evening generation status screen delivery failed for " + std::to_string(chat_id));
+    }
+
     GroqClient ai;
     WordGenerationResult generation = add_generated_words_to_db(
         chat_id,
@@ -2164,15 +2549,141 @@ void send_evening_new_words(long long chat_id, TelegramClient& bot, Database& db
 
     LOG("Evening words generated for " + std::to_string(chat_id) +
         ": added " + std::to_string(generation.added) +
-        ", duplicates " + std::to_string(generation.duplicates));
+        ", duplicates " + std::to_string(generation.duplicates) +
+        ", response duplicates " + std::to_string(generation.duplicate_in_response) +
+        ", rejected quality " + std::to_string(generation.rejected_quality) +
+        ", fallback added " + std::to_string(generation.fallback_added));
 
     auto words = db.get_user_words_full(chat_id, true);
-    show_evening_words_page(chat_id, bot, words, 0);
-    send_temporary_broadcast_hint(
-        chat_id,
-        bot,
-        "Вот вам вечерняя подборка новых слов для изучения...\n\n Когда выучили новое слово - введите его здесь и оно появится в вашем словаре выученных слов."
+    bool screen_ok = show_evening_words_page(chat_id, bot, words, 0);
+    if (!screen_ok) {
+        LOG_ERROR("Evening words screen delivery failed for " + std::to_string(chat_id));
+        return BroadcastResult::Failed;
+    }
+
+    if (words.empty()) {
+        LOG("Evening words skipped for " + std::to_string(chat_id) + ": no words to show");
+        return BroadcastResult::NoContent;
+    }
+
+    if (generation.added > 0) {
+        bool hint_ok = send_temporary_broadcast_hint(
+            chat_id,
+            bot,
+            "Вечерняя подборка новых слов готова.\n\n"
+            "Когда выучил слово, отправь его текстом сюда. Бот обновит прогресс и оставит навигацию на экране."
+        );
+        return hint_ok ? BroadcastResult::Delivered : BroadcastResult::Failed;
+    } else {
+        bool hint_ok = send_temporary_broadcast_hint(
+            chat_id,
+            bot,
+            "Сегодня AI не добавил новых слов: все варианты оказались дублями или пришли в неверном формате.\n\n"
+            "Показываю текущий список слов для изучения. Можно выбрать тему вручную кнопкой «Новые слова»."
+        );
+        return hint_ok ? BroadcastResult::NoContent : BroadcastResult::Failed;
+    }
+}
+
+std::vector<std::string> suspicious_words_for_cleanup() {
+    return std::vector<std::string>(
+        blocked_generated_words().begin(),
+        blocked_generated_words().end()
     );
+}
+
+bool audit_bad_words(Database& db, bool remove_words) {
+    auto rows = db.find_words_by_normalized_english(suspicious_words_for_cleanup());
+    if (rows.empty()) {
+        std::cout << "Suspicious words: 0" << std::endl;
+        LOG("Suspicious word audit complete: 0 rows");
+        return true;
+    }
+
+    std::cout << "Suspicious words: " << rows.size() << std::endl;
+    std::vector<int> ids;
+    ids.reserve(rows.size());
+    for (const auto& row : rows) {
+        ids.push_back(row.id);
+        std::cout << "id=" << row.id
+                  << " user=" << row.user_id
+                  << " word=" << row.english
+                  << " learned=" << (row.is_learned ? "true" : "false")
+                  << " translation=" << row.translation
+                  << std::endl;
+    }
+
+    if (!remove_words) {
+        LOG("Suspicious word audit complete: " + std::to_string(rows.size()) + " rows");
+        return true;
+    }
+
+    int removed = db.delete_words_by_ids(ids);
+    std::cout << "Removed suspicious words: " << removed << std::endl;
+    return removed >= 0;
+}
+
+bool run_self_tests() {
+    int failed = 0;
+    auto expect = [&](bool condition, const std::string& name) {
+        if (condition) {
+            std::cout << "[OK] " << name << std::endl;
+        } else {
+            std::cout << "[FAIL] " << name << std::endl;
+            failed++;
+        }
+    };
+
+    std::string generated =
+        "WORD: receipt\n"
+        "TRANS: /rɪˈsiːt/\n"
+        "PRON: рисит\n"
+        "MEAN: чек\n"
+        "---\n"
+        "WORD: refund\n"
+        "TRANS: /ˈriːfʌnd/\n"
+        "PRON: рифанд\n"
+        "MEAN: возврат денег\n";
+    auto words = parse_generated_words(generated);
+    expect(words.size() == 2 && words[0].english == "receipt" &&
+           words[1].translation == "возврат денег",
+           "parse_generated_words parses machine-readable AI output");
+
+    expect(is_suspicious_generated_word("html"), "filter blocks acronym-like weak word");
+    expect(is_suspicious_generated_word("hacker"), "filter blocks weak security word");
+    expect(!is_suspicious_generated_word("receipt"), "filter accepts practical word");
+
+    auto split = split_words_input(" house, meeting , refund ");
+    expect(split.size() == 3 && split[0] == "house" && split[2] == "refund",
+           "split_words_input trims comma-separated words");
+
+    expect(format_ai_response_box("`int x = 1;`").find('`') != std::string::npos &&
+           format_ai_response_box("`int x = 1;`").find("'''") == std::string::npos,
+           "format_ai_response_box wraps answer in code block");
+
+    fs::path config_path = fs::temp_directory_path() /
+                           ("english_mentor_self_test_" + std::to_string(std::time(nullptr)) + ".env");
+    bool config_file_written = write_text_file(config_path.string(),
+        "EMPTY=\n"
+        "QUOTED=\"hello world\"\n"
+        "NUMBER=42\n"
+    );
+    Config cfg;
+    bool config_loaded = config_file_written && cfg.load(config_path.string());
+    expect(config_loaded && cfg.get("EMPTY", "fallback").empty() &&
+           cfg.get("QUOTED") == "hello world" &&
+           cfg.get_int("NUMBER", 0) == 42,
+           "Config::load handles empty and quoted values");
+    std::error_code ec;
+    fs::remove(config_path, ec);
+
+    if (failed == 0) {
+        std::cout << "Self-tests passed" << std::endl;
+        return true;
+    }
+
+    std::cout << "Self-tests failed: " << failed << std::endl;
+    return false;
 }
 
 long long configured_user_id(const std::string& key) {
@@ -2195,51 +2706,68 @@ bool is_user_1(long long chat_id, long long sender_user_id) {
 }
 
 // scheduler thread for morning review and evening new-word delivery
-void scheduler_thread(TelegramClient& bot, Database& db) {
+void scheduler_thread(TelegramClient& bot) {
     LOG("Scheduler thread started");
-    bool morning_sent_today = false;
-    bool evening_sent_today = false;
-    int morning_day = -1;
-    int evening_day = -1;
+    Database scheduler_db;
+
+    auto ensure_scheduler_db = [&]() {
+        if (scheduler_db.is_connected()) {
+            return true;
+        }
+        if (!scheduler_db.connect()) {
+            LOG_ERROR("Scheduler database connection failed");
+            return false;
+        }
+        if (!scheduler_db.init_tables()) {
+            LOG_ERROR("Scheduler database initialization failed");
+            scheduler_db.disconnect();
+            return false;
+        }
+        return true;
+    };
 
     while (true) {
         auto now = std::chrono::system_clock::now();
         std::time_t now_time = std::chrono::system_clock::to_time_t(now);
         std::tm* now_tm = std::localtime(&now_time);
+        if (now_tm == nullptr) {
+            LOG_ERROR("Scheduler failed to read local time");
+            std::this_thread::sleep_for(std::chrono::seconds(60));
+            continue;
+        }
+        std::string date_key = local_date_key(*now_tm);
 
         if (now_tm->tm_hour == 9 && now_tm->tm_min < 5) {
-            if (morning_day != now_tm->tm_yday) {
-                morning_sent_today = false;
-                morning_day = now_tm->tm_yday;
-            }
-
-            if (!morning_sent_today) {
-                LOG("Sending learned words review at 09:" + std::to_string(now_tm->tm_min));
+            if (ensure_scheduler_db()) {
+                LOG("Checking learned words review at 09:" + std::to_string(now_tm->tm_min));
                 auto users = configured_broadcast_users();
                 for (long long user_id : users) {
-                    send_daily_review(user_id, bot, db);
+                    if (broadcast_was_sent(date_key, "morning", user_id)) {
+                        continue;
+                    }
+                    BroadcastResult result = send_daily_review(user_id, bot, scheduler_db);
+                    if (result != BroadcastResult::Failed) {
+                        remember_broadcast_sent(date_key, "morning", user_id);
+                    }
                     std::this_thread::sleep_for(std::chrono::seconds(2));
                 }
-
-                morning_sent_today = true;
             }
         }
 
         if (now_tm->tm_hour == 21 && now_tm->tm_min < 5) {
-            if (evening_day != now_tm->tm_yday) {
-                evening_sent_today = false;
-                evening_day = now_tm->tm_yday;
-            }
-
-            if (!evening_sent_today) {
-                LOG("Sending evening new words at 21:" + std::to_string(now_tm->tm_min));
+            if (ensure_scheduler_db()) {
+                LOG("Checking evening new words at 21:" + std::to_string(now_tm->tm_min));
                 auto users = configured_broadcast_users();
                 for (long long user_id : users) {
-                    send_evening_new_words(user_id, bot, db);
+                    if (broadcast_was_sent(date_key, "evening", user_id)) {
+                        continue;
+                    }
+                    BroadcastResult result = send_evening_new_words(user_id, bot, scheduler_db);
+                    if (result != BroadcastResult::Failed) {
+                        remember_broadcast_sent(date_key, "evening", user_id);
+                    }
                     std::this_thread::sleep_for(std::chrono::seconds(2));
                 }
-
-                evening_sent_today = true;
             }
         }
 
@@ -2250,23 +2778,59 @@ void scheduler_thread(TelegramClient& bot, Database& db) {
 int main(int argc, char* argv[]) {
     std::cout << "=== English Mentor Bot v2 ===" << std::endl;
 
+    bool cleanup_only = false;
+    bool cleanup_render_cache_only = false;
+    bool backfill_transcriptions_only = false;
+    bool audit_words_only = false;
+    bool cleanup_bad_words_only = false;
+    bool self_test_only = false;
+    bool send_evening_once = false;
+    long long send_evening_chat_id = 0;
+    for (int i = 1; i < argc; i++) {
+        std::string arg = argv[i];
+        if (arg == "--cleanup-db") {
+            cleanup_only = true;
+        } else if (arg == "--cleanup-render-cache") {
+            cleanup_render_cache_only = true;
+        } else if (arg == "--backfill-transcriptions") {
+            backfill_transcriptions_only = true;
+        } else if (arg == "--audit-words") {
+            audit_words_only = true;
+        } else if (arg == "--cleanup-bad-words") {
+            cleanup_bad_words_only = true;
+        } else if (arg == "--self-test") {
+            self_test_only = true;
+        } else if (arg == "--send-evening-once") {
+            send_evening_once = true;
+            if (i + 1 < argc) {
+                std::string maybe_id = argv[i + 1];
+                if (!maybe_id.empty() && maybe_id[0] != '-') {
+                    try {
+                        send_evening_chat_id = std::stoll(maybe_id);
+                        i++;
+                    } catch (const std::exception& e) {
+                        LOG_ERROR("Invalid --send-evening-once chat id: " + maybe_id + "; " + e.what());
+                        return 1;
+                    }
+                }
+            }
+        }
+    }
+
+    if (self_test_only) {
+        return run_self_tests() ? 0 : 1;
+    }
+
+    if (cleanup_render_cache_only) {
+        return cleanup_render_cache() ? 0 : 1;
+    }
+
     if (!g_config.load(".env") && !g_config.load("../.env")) {
         LOG_ERROR("Failed to load .env");
         return 1;
     }
 
-    bool cleanup_only = false;
-    bool backfill_transcriptions_only = false;
-    for (int i = 1; i < argc; i++) {
-        std::string arg = argv[i];
-        if (arg == "--cleanup-db") {
-            cleanup_only = true;
-        } else if (arg == "--backfill-transcriptions") {
-            backfill_transcriptions_only = true;
-        }
-    }
-
-    if (cleanup_only || backfill_transcriptions_only) {
+    if (cleanup_only || backfill_transcriptions_only || audit_words_only || cleanup_bad_words_only) {
         Database db;
         if (!db.connect()) {
             return 1;
@@ -2277,6 +2841,12 @@ int main(int argc, char* argv[]) {
         if (backfill_transcriptions_only) {
             GroqClient ai;
             return backfill_missing_pronunciations(db, ai) ? 0 : 1;
+        }
+        if (audit_words_only) {
+            return audit_bad_words(db, false) ? 0 : 1;
+        }
+        if (cleanup_bad_words_only) {
+            return audit_bad_words(db, true) ? 0 : 1;
         }
         LOG("Database cleanup finished");
         return 0;
@@ -2301,11 +2871,24 @@ int main(int argc, char* argv[]) {
 
     load_bot_state();
 
+    if (send_evening_once) {
+        long long target_chat_id = send_evening_chat_id > 0
+            ? send_evening_chat_id
+            : configured_user_id("USER_1_ID");
+        if (target_chat_id <= 0) {
+            LOG_ERROR("--send-evening-once requires a chat id or USER_1_ID in .env");
+            return 1;
+        }
+
+        BroadcastResult result = send_evening_new_words(target_chat_id, bot, db);
+        return result == BroadcastResult::Failed ? 1 : 0;
+    }
+
     GroqClient ai;
     LOG("Bot started!");
 
     // run scheduler thread
-    std::thread scheduler(scheduler_thread, std::ref(bot), std::ref(db));
+    std::thread scheduler(scheduler_thread, std::ref(bot));
     scheduler.detach();
     LOG("Scheduler thread launched");
 
@@ -2339,7 +2922,11 @@ int main(int argc, char* argv[]) {
                     int message_id = callback["message"]["message_id"];
                     std::string data = callback["data"];
                     bot.answer_callback_query(callback_id);
-                    remember_active_screen_message(chat_id, message_id);
+                    remember_active_screen_message(
+                        chat_id,
+                        message_id,
+                        screen_message_type_from_callback(callback["message"])
+                    );
                     delete_tracked_broadcast_hint(chat_id, bot);
                     delete_tracked_ai_input(chat_id, bot);
 

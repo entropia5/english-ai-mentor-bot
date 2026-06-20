@@ -2,8 +2,17 @@
 
 #include <string>
 #include <vector>
+#include <tuple>
 #include <memory>
 #include <pqxx/pqxx>
+
+struct WordAuditRow {
+    int id = 0;
+    long long user_id = 0;
+    std::string english;
+    std::string translation;
+    bool is_learned = false;
+};
 
 class Database {
 private:
@@ -33,6 +42,9 @@ public:
 
     bool update_word_pronunciation(int word_id, const std::string& transcription,
                                    const std::string& pronunciation_ru);
+
+    std::vector<WordAuditRow> find_words_by_normalized_english(const std::vector<std::string>& english_words);
+    int delete_words_by_ids(const std::vector<int>& word_ids);
 
     // work with users
     bool user_exists(long long user_id);

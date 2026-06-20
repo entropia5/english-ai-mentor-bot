@@ -22,6 +22,7 @@ set(SOURCES
     src/main.cpp
     src/utils/config.cpp
     src/utils/logger.cpp
+    src/utils/render_utils.cpp
     src/storage/database.cpp
     src/bot/telegram_client.cpp
     src/ai/groq_client.cpp

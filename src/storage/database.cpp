@@ -225,6 +225,60 @@ bool Database::update_word_pronunciation(int word_id, const std::string& transcr
     }
 }
 
+std::vector<WordAuditRow> Database::find_words_by_normalized_english(const std::vector<std::string>& english_words) {
+    std::vector<WordAuditRow> rows;
+    if (!connected || english_words.empty()) return rows;
+
+    try {
+        pqxx::work txn(*conn);
+        for (const std::string& english : english_words) {
+            pqxx::result res = txn.exec_params(R"(
+                SELECT id, user_id, english, COALESCE(translation_ru, ''), is_learned
+                FROM words
+                WHERE lower(trim(english)) = lower(trim($1))
+                ORDER BY user_id, id
+            )", english);
+
+            for (const auto& row : res) {
+                rows.push_back({
+                    row[0].as<int>(),
+                    row[1].as<long long>(),
+                    row[2].as<std::string>(),
+                    row[3].as<std::string>(),
+                    row[4].as<bool>()
+                });
+            }
+        }
+        txn.commit();
+    } catch (const std::exception& e) {
+        LOG_ERROR("find_words_by_normalized_english failed: " + std::string(e.what()));
+    }
+
+    return rows;
+}
+
+int Database::delete_words_by_ids(const std::vector<int>& word_ids) {
+    if (!connected || word_ids.empty()) return 0;
+
+    try {
+        pqxx::work txn(*conn);
+        int removed = 0;
+        for (int id : word_ids) {
+            pqxx::result res = txn.exec_params(
+                "DELETE FROM words WHERE id = $1 RETURNING id",
+                id
+            );
+            removed += static_cast<int>(res.size());
+        }
+        txn.commit();
+        LOG("Deleted suspicious words: " + std::to_string(removed));
+        return removed;
+    } catch (const std::exception& e) {
+        LOG_ERROR("delete_words_by_ids failed: " + std::string(e.what()));
+        return -1;
+    }
+}
+
 bool Database::user_exists(long long user_id) {
     if (!connected) return false;
 
@@ -433,12 +487,18 @@ bool Database::mark_word_learned(long long user_id, const std::string& english) 
             user_id
         );
 
-        txn.exec_params(
+        pqxx::result updated = txn.exec_params(
             "UPDATE words SET is_learned = true, last_repetition = EXTRACT(EPOCH FROM NOW()) "
-            "WHERE user_id = $1 AND lower(trim(english)) = lower(trim($2))",
+            "WHERE user_id = $1 AND lower(trim(english)) = lower(trim($2)) "
+            "RETURNING id",
             user_id, english
         );
         txn.commit();
+        if (updated.empty()) {
+            LOG("Word not marked as learned because it was not found: " + english +
+                " for user " + std::to_string(user_id));
+            return false;
+        }
         LOG("Word marked as learned: " + english + " for user " + std::to_string(user_id));
         return true;
     } catch (const std::exception& e) {
@@ -452,19 +512,11 @@ bool Database::word_exists(long long user_id, const std::string& english) {
 
     try {
         pqxx::work txn(*conn);
-        txn.exec_params(
-            "INSERT INTO users (user_id, name, last_active) VALUES ($1, '', EXTRACT(EPOCH FROM NOW())) "
-            "ON CONFLICT (user_id) DO NOTHING",
-            user_id
-        );
-        txn.commit();
-
-        pqxx::work txn2(*conn);
-        pqxx::result res = txn2.exec_params(
+        pqxx::result res = txn.exec_params(
             "SELECT 1 FROM words WHERE user_id = $1 AND lower(trim(english)) = lower(trim($2)) LIMIT 1",
             user_id, english
         );
-        txn2.commit();
+        txn.commit();
         return !res.empty();
     } catch (const std::exception& e) {
         LOG_ERROR("word_exists failed: " + std::string(e.what()));

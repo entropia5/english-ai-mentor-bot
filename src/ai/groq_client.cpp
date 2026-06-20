@@ -51,7 +51,7 @@ std::string GroqClient::ask(const std::string& prompt, const std::string& system
     payload["model"] = model;
     payload["messages"] = messages;
     payload["temperature"] = 0.7;
-    payload["max_tokens"] = 800;
+    payload["max_tokens"] = g_config.get_int("GROQ_MAX_TOKENS", 1800);
 
     std::string post_data = payload.dump();
     std::string response;

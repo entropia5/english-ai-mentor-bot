@@ -5,8 +5,14 @@
 #include <cctype>
 
 void Config::trim(std::string& s) {
-    s.erase(0, s.find_first_not_of(" \t\n\r\f\v"));
-    s.erase(s.find_last_not_of(" \t\n\r\f\v") + 1);
+    size_t start = s.find_first_not_of(" \t\n\r\f\v");
+    if (start == std::string::npos) {
+        s.clear();
+        return;
+    }
+
+    size_t end = s.find_last_not_of(" \t\n\r\f\v");
+    s = s.substr(start, end - start + 1);
 }
 
 bool Config::load(const std::string& filename) {
@@ -27,7 +33,7 @@ bool Config::load(const std::string& filename) {
             trim(value);
 
             // Убираем кавычки если есть
-            if (value.front() == '"' && value.back() == '"') {
+            if (value.size() >= 2 && value.front() == '"' && value.back() == '"') {
                 value = value.substr(1, value.size() - 2);
             }
 
