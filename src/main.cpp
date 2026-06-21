@@ -322,6 +322,7 @@ std::map<long long, bool> g_reply_keyboard_removed;
 std::map<long long, int> g_last_ai_user_message;
 std::map<long long, int> g_broadcast_hint_message;
 std::map<long long, std::string> g_chat_language;
+std::map<long long, std::string> g_screen_context;
 
 int get_active_screen_message(long long chat_id) {
     std::lock_guard<std::mutex> lock(g_screen_mutex);
@@ -358,6 +359,31 @@ ScreenMessageType screen_message_type_from_callback(const json& message) {
         return ScreenMessageType::Text;
     }
     return ScreenMessageType::Unknown;
+}
+
+bool is_persistable_screen_context(const std::string& context) {
+    return context == "main" ||
+           context == "topics" ||
+           context == "ai" ||
+           context == "stats" ||
+           context == "generation" ||
+           context == "dictionary" ||
+           context == "learned" ||
+           context == "daily" ||
+           context == "evening";
+}
+
+void remember_screen_context(long long chat_id, const std::string& context) {
+    if (!is_persistable_screen_context(context)) return;
+    std::lock_guard<std::mutex> lock(g_screen_mutex);
+    g_screen_context[chat_id] = context;
+    save_bot_state_locked();
+}
+
+std::string get_screen_context(long long chat_id) {
+    std::lock_guard<std::mutex> lock(g_screen_mutex);
+    auto it = g_screen_context.find(chat_id);
+    return it == g_screen_context.end() ? "" : it->second;
 }
 
 void remember_active_screen_message(long long chat_id, int message_id,
@@ -834,6 +860,7 @@ void save_bot_state_locked() {
     for (const auto& [chat_id, _] : g_active_screen_message) chat_ids.insert(chat_id);
     for (const auto& [chat_id, _] : g_broadcast_hint_message) chat_ids.insert(chat_id);
     for (const auto& [chat_id, _] : g_chat_language) chat_ids.insert(chat_id);
+    for (const auto& [chat_id, _] : g_screen_context) chat_ids.insert(chat_id);
 
     for (long long chat_id : chat_ids) {
         json chat_state;
@@ -852,6 +879,11 @@ void save_bot_state_locked() {
         auto language_it = g_chat_language.find(chat_id);
         if (language_it != g_chat_language.end() && !language_it->second.empty()) {
             chat_state["language"] = language_it->second;
+        }
+
+        auto context_it = g_screen_context.find(chat_id);
+        if (context_it != g_screen_context.end() && !context_it->second.empty()) {
+            chat_state["screen_context"] = context_it->second;
         }
 
         state["chats"][std::to_string(chat_id)] = chat_state;
@@ -882,6 +914,7 @@ void load_bot_state() {
         g_active_screen_message.clear();
         g_broadcast_hint_message.clear();
         g_chat_language.clear();
+        g_screen_context.clear();
 
         if (!state.contains("chats") || !state["chats"].is_object()) {
             LOG_WARNING("Bot state has no chats object: " + state_path.string());
@@ -902,6 +935,7 @@ void load_bot_state() {
             std::string live_message_type = chat_state.value("live_dashboard_message_type", "photo");
             int alert_message_id = chat_state.value("last_alert_text_message_id", 0);
             std::string language = chat_state.value("language", "");
+            std::string screen_context = chat_state.value("screen_context", "");
 
             if (live_message_id > 0) {
                 g_active_screen_message[chat_id] = {
@@ -914,6 +948,9 @@ void load_bot_state() {
             }
             if (!language.empty()) {
                 g_chat_language[chat_id] = language;
+            }
+            if (is_persistable_screen_context(screen_context)) {
+                g_screen_context[chat_id] = screen_context;
             }
         }
 
@@ -1846,6 +1883,7 @@ std::string format_word(const std::string& english, const std::string& translati
 
 // send or edit main menu with inline buttons
 void send_main_menu(long long chat_id, TelegramClient& bot, Database& db, int message_id = 0) {
+    remember_screen_context(chat_id, "main");
     int learned = db.get_words_count(chat_id, true);
     std::string user_level = english_level_from_learned(learned);
     std::string image_path = render_main_menu_image(user_level);
@@ -1859,6 +1897,7 @@ void send_main_menu(long long chat_id, TelegramClient& bot, Database& db, int me
 
 // send or edit topic selection menu with inline buttons
 void send_topic_menu(long long chat_id, TelegramClient& bot, int message_id = 0) {
+    remember_screen_context(chat_id, "topics");
     InlineKeyboard buttons = topic_keyboard();
     std::string image_path = render_topic_menu_image();
     if (!image_path.empty()) {
@@ -1872,6 +1911,7 @@ void send_topic_menu(long long chat_id, TelegramClient& bot, int message_id = 0)
 }
 
 void show_ai_prompt(long long chat_id, TelegramClient& bot, int message_id = 0) {
+    remember_screen_context(chat_id, "ai");
     InlineKeyboard buttons = column_keyboard({
         {"Главное меню", "menu_main"}
     });
@@ -1898,6 +1938,7 @@ void show_dictionary_page(long long chat_id, TelegramClient& bot,
     if (page >= total) page = total - 1;
     current_page = page;
     last_action = "dictionary";
+    remember_screen_context(chat_id, "dictionary");
 
     int start = page * per_page;
     int end = std::min(start + per_page, (int)words.size());
@@ -1941,6 +1982,7 @@ void show_learned_page(long long chat_id, TelegramClient& bot,
     if (page >= total) page = total - 1;
     current_page = page;
     last_action = "learned";
+    remember_screen_context(chat_id, "learned");
 
     if (words.empty()) {
         std::string msg = "✅ *Выученных слов пока нет*\n\n📚 Учи слова из словаря!";
@@ -1978,6 +2020,7 @@ bool show_daily_review_page(long long chat_id, TelegramClient& bot,
     if (last_action != nullptr) {
         *last_action = "daily";
     }
+    remember_screen_context(chat_id, "daily");
 
     if (words.empty()) {
         return show_status_screen(
@@ -2021,6 +2064,7 @@ bool show_evening_words_page(long long chat_id, TelegramClient& bot,
     if (last_action != nullptr) {
         *last_action = "evening";
     }
+    remember_screen_context(chat_id, "evening");
 
     if (words.empty()) {
         return show_status_screen(
@@ -2055,6 +2099,7 @@ bool show_evening_words_page(long long chat_id, TelegramClient& bot,
 
 // statistics page with progress bar and levels
 void show_stats(long long chat_id, TelegramClient& bot, Database& db, int message_id = 0) {
+    remember_screen_context(chat_id, "stats");
     int total = db.get_words_count(chat_id, false) + db.get_words_count(chat_id, true);
     int learned = db.get_words_count(chat_id, true);
 
@@ -2119,20 +2164,40 @@ void refresh_after_marking_words(long long chat_id, TelegramClient& bot, Databas
                                  int& dict_current_page, int& dict_message_id,
                                  int& learn_current_page, int& learn_message_id,
                                  std::string& current_action) {
-    if (current_action == "daily") {
+    std::string context = current_action;
+    if (!is_persistable_screen_context(context)) {
+        context = get_screen_context(chat_id);
+    }
+    current_action = context;
+
+    if (context == "daily") {
         auto words = get_learned_words_for_review(chat_id, db);
         show_daily_review_page(chat_id, bot, words, 0, get_active_screen_message(chat_id), false, &current_action);
         return;
     }
 
-    if (current_action == "evening") {
+    if (context == "evening") {
         auto words = db.get_user_words_full(chat_id, true);
         show_evening_words_page(chat_id, bot, words, 0, get_active_screen_message(chat_id), false, &current_action);
         return;
     }
 
+    if (context == "learned") {
+        auto all_words = db.get_user_words_full(chat_id, false);
+        std::vector<WordView> learned;
+        for (const auto& word : all_words) {
+            if (std::get<2>(word)) {
+                learned.push_back(word);
+            }
+        }
+        learn_message_id = get_active_screen_message(chat_id);
+        show_learned_page(chat_id, bot, learned, learn_current_page, learn_current_page,
+                          current_action, learn_message_id, false);
+        return;
+    }
+
     auto words = db.get_user_words_full(chat_id, true);
-    int page = current_action == "dictionary" ? dict_current_page : 0;
+    int page = context == "dictionary" ? dict_current_page : 0;
     dict_message_id = get_active_screen_message(chat_id);
     show_dictionary_page(chat_id, bot, words, page, dict_current_page, current_action, dict_message_id, false);
 }
@@ -2532,6 +2597,7 @@ WordGenerationResult add_generated_words_to_db(long long chat_id, Database& db, 
 void generate_words(long long chat_id, TelegramClient& bot, Database& db, GroqClient& ai,
                     const std::string& topic_keyword, const std::string& topic_name,
                     int message_id = 0) {
+    remember_screen_context(chat_id, "generation");
     show_status_screen(
         chat_id,
         bot,
@@ -2722,6 +2788,7 @@ BroadcastResult send_daily_review(long long chat_id, TelegramClient& bot, Databa
 }
 
 BroadcastResult send_evening_new_words(long long chat_id, TelegramClient& bot, Database& db) {
+    remember_screen_context(chat_id, "generation");
     bool status_ok = show_status_screen(
         chat_id,
         bot,
@@ -3356,7 +3423,7 @@ int main(int argc, char* argv[]) {
                                                     last_action[chat_id]);
                         int confirmation_message_id = 0;
                         bot.send_message(chat_id,
-                                         "Отлично, слово теперь в Вашем словаре выученных слов.",
+                                         "Готово, экран обновился.",
                                          "",
                                          &confirmation_message_id);
                         remember_broadcast_hint(chat_id, confirmation_message_id);
