@@ -14,6 +14,8 @@ struct WordAuditRow {
     bool is_learned = false;
 };
 
+using WordView = std::tuple<std::string, std::string, bool, std::string, std::string, std::string>;
+
 class Database {
 private:
     std::unique_ptr<pqxx::connection> conn;
@@ -39,9 +41,11 @@ public:
 
     // find old words without IPA transcription or Russian pronunciation
     std::vector<std::tuple<int, std::string, std::string>> get_words_missing_pronunciation(int limit = 50);
+    std::vector<std::tuple<int, std::string, std::string>> get_words_missing_definition(int limit = 50);
 
     bool update_word_pronunciation(int word_id, const std::string& transcription,
                                    const std::string& pronunciation_ru);
+    bool update_word_definition(int word_id, const std::string& definition_ru);
 
     std::vector<WordAuditRow> find_words_by_normalized_english(const std::vector<std::string>& english_words);
     int delete_words_by_ids(const std::vector<int>& word_ids);
@@ -61,7 +65,7 @@ public:
     //work with words
     bool add_word(long long user_id, const std::string& english, const std::string& translation,
                   const std::string& pronunciation = "", const std::string& transcription = "",
-                  const std::string& topic = "general");
+                  const std::string& topic = "general", const std::string& definition = "");
 
     std::vector<std::tuple<std::string, std::string, bool>> get_user_words(long long user_id, bool only_not_learned = false);
 
@@ -71,8 +75,8 @@ public:
 
     int get_words_count(long long user_id, bool learned = false);
 
-   // get full word info (translation, pronunciation, learned) for all words of user
-    std::vector<std::tuple<std::string, std::string, bool, std::string, std::string>> get_user_words_full(long long user_id, bool only_not_learned = false);
+   // get full word info for all words of user
+    std::vector<WordView> get_user_words_full(long long user_id, bool only_not_learned = false);
 
 
 };

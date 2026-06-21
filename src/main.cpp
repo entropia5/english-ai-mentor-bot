@@ -133,12 +133,18 @@ struct GeneratedWord {
     std::string transcription;
     std::string pronunciation;
     std::string translation;
+    std::string definition;
 };
 
 struct PronunciationUpdate {
     int id = 0;
     std::string transcription;
     std::string pronunciation;
+};
+
+struct DefinitionUpdate {
+    int id = 0;
+    std::string definition;
 };
 
 std::vector<GeneratedWord> parse_generated_words(const std::string& response) {
@@ -169,10 +175,8 @@ std::vector<GeneratedWord> parse_generated_words(const std::string& response) {
             current.pronunciation = value;
         } else if (label == "mean" || label == "meaning" || label == "translation") {
             current.translation = value;
-            if (!current.english.empty()) {
-                words.push_back(current);
-                current = GeneratedWord{};
-            }
+        } else if (label == "def" || label == "definition" || label == "explanation") {
+            current.definition = value;
         }
     }
 
@@ -224,7 +228,46 @@ std::vector<PronunciationUpdate> parse_pronunciation_updates(const std::string& 
     return updates;
 }
 
-std::string build_existing_words_hint(const std::vector<std::tuple<std::string, std::string, bool, std::string, std::string>>& words) {
+std::vector<DefinitionUpdate> parse_definition_updates(const std::string& response) {
+    std::vector<DefinitionUpdate> updates;
+    DefinitionUpdate current;
+
+    auto flush_current = [&]() {
+        if (current.id > 0 && !current.definition.empty()) {
+            updates.push_back(current);
+        }
+        current = DefinitionUpdate{};
+    };
+
+    std::stringstream ss(response);
+    std::string line;
+    while (std::getline(ss, line)) {
+        line = strip_list_prefix(line);
+        if (line.empty() || line == "---") continue;
+
+        size_t colon = line.find(':');
+        if (colon == std::string::npos) continue;
+
+        std::string label = to_lower_ascii(trim(line.substr(0, colon)));
+        std::string value = trim(line.substr(colon + 1));
+
+        if (label == "id") {
+            flush_current();
+            try {
+                current.id = std::stoi(value);
+            } catch (const std::exception&) {
+                current.id = 0;
+            }
+        } else if (label == "def" || label == "definition" || label == "meaning") {
+            current.definition = value;
+        }
+    }
+
+    flush_current();
+    return updates;
+}
+
+std::string build_existing_words_hint(const std::vector<WordView>& words) {
     if (words.empty()) return "";
 
     std::string hint = "\nAvoid these existing words for this user: ";
@@ -613,7 +656,7 @@ uint64_t fnv1a_update(uint64_t hash, const std::string& text) {
 }
 
 std::string learned_page_hash(
-    const std::vector<std::tuple<std::string, std::string, bool, std::string, std::string>>& words,
+    const std::vector<WordView>& words,
     int page,
     int total,
     int start,
@@ -624,7 +667,7 @@ std::string learned_page_hash(
     hash = fnv1a_update(hash, std::to_string(total));
     hash = fnv1a_update(hash, std::to_string(words.size()));
     for (int i = start; i < end; i++) {
-        const auto& [eng, trans, learned, pron, transcr] = words[i];
+        const auto& [eng, trans, learned, pron, transcr, definition] = words[i];
         hash = fnv1a_update(hash, eng);
         hash = fnv1a_update(hash, "\n");
         hash = fnv1a_update(hash, trans);
@@ -632,6 +675,8 @@ std::string learned_page_hash(
         hash = fnv1a_update(hash, pron);
         hash = fnv1a_update(hash, "\n");
         hash = fnv1a_update(hash, transcr);
+        hash = fnv1a_update(hash, "\n");
+        hash = fnv1a_update(hash, definition);
         hash = fnv1a_update(hash, "\n");
     }
 
@@ -1540,7 +1585,7 @@ body {
 
 std::string render_words_card_image(
     long long chat_id,
-    const std::vector<std::tuple<std::string, std::string, bool, std::string, std::string>>& words,
+    const std::vector<WordView>& words,
     int page,
     int total,
     int start,
@@ -1666,7 +1711,8 @@ body {
   color: #8ee6c8;
   text-shadow: 0 0 16px rgba(52, 211, 153, .18);
 }
-.translation { margin-top: 8px; padding-left: 60px; font-size: 40px; line-height: 1.2; color: #cfd7de; }
+.translation { margin-top: 8px; padding-left: 60px; font-size: 38px; line-height: 1.18; color: #cfd7de; }
+.definition { margin-top: 8px; padding-left: 60px; font-size: 32px; line-height: 1.22; color: #9ca8b3; }
 .footer {
   margin-top: 24px;
   display: flex;
@@ -1697,7 +1743,7 @@ body {
 )";
 
     for (int i = start; i < end; i++) {
-        const auto& [eng, trans, learned, pron, transcr] = words[i];
+        const auto& [eng, trans, learned, pron, transcr, definition] = words[i];
         std::string ipa = trim(transcr);
         if (!ipa.empty() && ipa.front() != '/' && ipa.front() != '[') {
             ipa = "/" + ipa + "/";
@@ -1717,8 +1763,11 @@ body {
             html << "</span>";
         }
         html << "</div>"
-             << "<div class=\"translation\">" << html_escape(trans) << "</div>"
-             << "</div>\n";
+             << "<div class=\"translation\">" << html_escape(trans) << "</div>";
+        if (!trim(definition).empty()) {
+            html << "<div class=\"definition\">" << html_escape(trim(definition)) << "</div>";
+        }
+        html << "</div>\n";
     }
 
     html << R"(</div>
@@ -1740,7 +1789,7 @@ body {
 
 std::string render_learned_words_image(
     long long chat_id,
-    const std::vector<std::tuple<std::string, std::string, bool, std::string, std::string>>& words,
+    const std::vector<WordView>& words,
     int page,
     int total,
     int start,
@@ -1754,7 +1803,7 @@ std::string render_learned_words_image(
 
 std::string render_daily_review_image(
     long long chat_id,
-    const std::vector<std::tuple<std::string, std::string, bool, std::string, std::string>>& words,
+    const std::vector<WordView>& words,
     int page,
     int total,
     int start,
@@ -1768,7 +1817,7 @@ std::string render_daily_review_image(
 
 std::string render_evening_words_image(
     long long chat_id,
-    const std::vector<std::tuple<std::string, std::string, bool, std::string, std::string>>& words,
+    const std::vector<WordView>& words,
     int page,
     int total,
     int start,
@@ -1782,12 +1831,16 @@ std::string render_evening_words_image(
 
 // better formatting for words in the dictionary
 std::string format_word(const std::string& english, const std::string& translation,
-                        const std::string& transcription, const std::string& pronunciation_ru) {
+                        const std::string& transcription, const std::string& pronunciation_ru,
+                        const std::string& definition) {
     std::string result;
     result += "🇺🇸 *" + english + "*\n";
     if (!transcription.empty()) result += "🏳️ " + transcription + "\n";
     if (!pronunciation_ru.empty()) result += "🏴 " + pronunciation_ru + "\n";
     result += "🇷🇺 " + translation;
+    if (!trim(definition).empty()) {
+        result += "\nСмысл: " + trim(definition);
+    }
     return result;
 }
 
@@ -1835,7 +1888,7 @@ void show_ai_prompt(long long chat_id, TelegramClient& bot, int message_id = 0) 
 
 // show dictionary page with INLINE buttons for pagination
 void show_dictionary_page(long long chat_id, TelegramClient& bot,
-                          const std::vector<std::tuple<std::string, std::string, bool, std::string, std::string>>& words,
+                          const std::vector<WordView>& words,
                           int page, int& current_page, std::string& last_action,
                           int& message_id, bool is_new = true) {
     int per_page = 5;
@@ -1854,8 +1907,8 @@ void show_dictionary_page(long long chat_id, TelegramClient& bot,
     msg += "▫️ Чтобы отметить слово - просто напиши его\n\n";
 
     for (int i = start; i < end; i++) {
-        const auto& [eng, trans, learned, pron, transcr] = words[i];
-        msg += format_word(eng, trans, transcr, pron) + "\n\n";
+        const auto& [eng, trans, learned, pron, transcr, definition] = words[i];
+        msg += format_word(eng, trans, transcr, pron, definition) + "\n\n";
     }
 
     if (words.empty()) {
@@ -1878,10 +1931,10 @@ void show_dictionary_page(long long chat_id, TelegramClient& bot,
 
 // show learned words page with INLINE buttons for pagination
 void show_learned_page(long long chat_id, TelegramClient& bot,
-                       const std::vector<std::tuple<std::string, std::string, bool, std::string, std::string>>& words,
+                       const std::vector<WordView>& words,
                        int page, int& current_page, std::string& last_action,
                        int& message_id, bool is_new = true) {
-    int per_page = 7;
+    int per_page = 5;
     int total = (words.size() + per_page - 1) / per_page;
     if (total == 0) total = 1;
     if (page < 0) page = 0;
@@ -1915,9 +1968,9 @@ void show_learned_page(long long chat_id, TelegramClient& bot,
 
 // show daily review page with INLINE buttons for pagination
 bool show_daily_review_page(long long chat_id, TelegramClient& bot,
-                            const std::vector<std::tuple<std::string, std::string, bool, std::string, std::string>>& words,
+                            const std::vector<WordView>& words,
                             int page, int message_id = 0, bool is_new = true, std::string* last_action = nullptr) {
-    int per_page = 7;
+    int per_page = 5;
     int total = (words.size() + per_page - 1) / per_page;
     if (total == 0) total = 1;
     if (page < 0) page = 0;
@@ -1958,9 +2011,9 @@ bool show_daily_review_page(long long chat_id, TelegramClient& bot,
 }
 
 bool show_evening_words_page(long long chat_id, TelegramClient& bot,
-                             const std::vector<std::tuple<std::string, std::string, bool, std::string, std::string>>& words,
+                             const std::vector<WordView>& words,
                              int page, int message_id = 0, bool is_new = true, std::string* last_action = nullptr) {
-    int per_page = 7;
+    int per_page = 5;
     int total = (words.size() + per_page - 1) / per_page;
     if (total == 0) total = 1;
     if (page < 0) page = 0;
@@ -2059,7 +2112,7 @@ bool try_mark_words_from_input(long long chat_id, const std::string& text, Datab
     return true;
 }
 
-std::vector<std::tuple<std::string, std::string, bool, std::string, std::string>>
+std::vector<WordView>
 get_learned_words_for_review(long long chat_id, Database& db);
 
 void refresh_after_marking_words(long long chat_id, TelegramClient& bot, Database& db,
@@ -2139,6 +2192,75 @@ bool backfill_missing_pronunciations(Database& db, GroqClient& ai) {
     }
 
     LOG_WARNING("Transcription backfill reached batch limit, updated " + std::to_string(total_updated) + " words");
+    return true;
+}
+
+bool backfill_missing_definitions(Database& db, GroqClient& ai) {
+    if (!ai.is_available()) {
+        LOG_ERROR("Cannot backfill definitions: GROQ_API_KEY is not configured");
+        return false;
+    }
+
+    int total_updated = 0;
+    constexpr int batch_size = 20;
+    constexpr int max_batches = 100;
+    int empty_update_retries = 0;
+
+    for (int batch = 1; batch <= max_batches; batch++) {
+        auto missing_words = db.get_words_missing_definition(batch_size);
+        if (missing_words.empty()) {
+            LOG("Definition backfill complete, updated " + std::to_string(total_updated) + " words");
+            return true;
+        }
+
+        std::stringstream prompt;
+        prompt << "Write short Russian meaning explanations for these English words. "
+               << "Each DEF must explain the sense in simple Russian, not just repeat the translation. "
+               << "Keep DEF concise: 1 short sentence, max 90 characters. "
+               << "Return ONLY blocks in this exact format, keep IDs exactly, no numbering and no extra text:\n"
+               << "ID: 123\n"
+               << "DEF: краткое объяснение смысла слова\n"
+               << "---\n\n"
+               << "Words:\n";
+
+        for (const auto& [id, english, translation] : missing_words) {
+            prompt << "ID: " << id << "\n"
+                   << "WORD: " << english << "\n"
+                   << "TRANSLATION: " << translation << "\n"
+                   << "---\n";
+        }
+
+        std::string response = ai.ask(prompt.str(),
+            "You return machine-readable Russian word definitions only. "
+            "Each DEF is a concise Russian explanation of meaning, not an example sentence.");
+        auto updates = parse_definition_updates(response);
+        LOG("Definition backfill batch " + std::to_string(batch) + ": parsed " +
+            std::to_string(updates.size()) + " updates");
+
+        int batch_updated = 0;
+        for (const auto& update : updates) {
+            if (db.update_word_definition(update.id, trim(update.definition))) {
+                batch_updated++;
+            }
+        }
+
+        total_updated += batch_updated;
+        if (batch_updated == 0) {
+            if (empty_update_retries < 3) {
+                empty_update_retries++;
+                LOG_WARNING("Definition backfill batch returned no usable updates; retry " +
+                            std::to_string(empty_update_retries) + "/3 after delay");
+                std::this_thread::sleep_for(std::chrono::seconds(5));
+                batch--;
+                continue;
+            }
+            LOG_ERROR("Definition backfill stopped: AI returned no usable updates");
+            return false;
+        }
+        empty_update_retries = 0;
+    }
+
+    LOG_WARNING("Definition backfill reached batch limit, updated " + std::to_string(total_updated) + " words");
     return true;
 }
 
@@ -2298,7 +2420,8 @@ WordGenerationResult add_generated_words_to_db(long long chat_id, Database& db, 
             "security scare words, hardware objects, or obscure jargon. " +
             generation_attempt_hint(attempt) + " "
             "For every word, TRANS must be the original English IPA transcription with slashes, "
-            "and PRON must be a Russian Cyrillic pronunciation hint." +
+            "PRON must be a Russian Cyrillic pronunciation hint, "
+            "and DEF must be a short Russian explanation of the word meaning, not just a synonym." +
             build_existing_words_hint(existing_words) +
             build_seen_generated_words_hint(seen_generated_words) +
             "\nReturn ONLY blocks in this exact format, no numbering and no extra text:\n"
@@ -2306,6 +2429,7 @@ WordGenerationResult add_generated_words_to_db(long long chat_id, Database& db, 
             "TRANS: /IPA transcription/\n"
             "PRON: русское произношение кириллицей\n"
             "MEAN: russian translation\n"
+            "DEF: краткое объяснение смысла на русском\n"
             "---\n";
 
         std::string response = ai.ask(prompt);
@@ -2332,7 +2456,8 @@ WordGenerationResult add_generated_words_to_db(long long chat_id, Database& db, 
             std::string translation = trim(word.translation);
             std::string pronunciation = trim(word.pronunciation);
             std::string transcription = trim(word.transcription);
-            if (translation.empty() || pronunciation.empty() || transcription.empty()) {
+            std::string definition = trim(word.definition);
+            if (translation.empty() || pronunciation.empty() || transcription.empty() || definition.empty()) {
                 result.rejected_quality++;
                 LOG("Generated incomplete word rejected: " + word.english);
                 continue;
@@ -2357,7 +2482,7 @@ WordGenerationResult add_generated_words_to_db(long long chat_id, Database& db, 
 
             LOG("Adding word: " + normalized_word + " -> " + translation);
             if (db.add_word(chat_id, normalized_word, translation, pronunciation,
-                            transcription, topic_keyword)) {
+                            transcription, topic_keyword, definition)) {
                 result.added++;
             } else {
                 result.failed++;
@@ -2373,8 +2498,12 @@ WordGenerationResult add_generated_words_to_db(long long chat_id, Database& db, 
             std::string translation = trim(word.translation);
             std::string pronunciation = trim(word.pronunciation);
             std::string transcription = trim(word.transcription);
+            std::string definition = trim(word.definition);
+            if (definition.empty() && !translation.empty()) {
+                definition = "Означает: " + translation + ".";
+            }
             if (normalized_word.empty() || seen_generated_words.count(normalized_word) > 0 ||
-                translation.empty() || pronunciation.empty() || transcription.empty() ||
+                translation.empty() || pronunciation.empty() || transcription.empty() || definition.empty() ||
                 is_suspicious_generated_word(normalized_word)) {
                 continue;
             }
@@ -2387,7 +2516,7 @@ WordGenerationResult add_generated_words_to_db(long long chat_id, Database& db, 
 
             LOG("Adding fallback word: " + normalized_word + " -> " + translation);
             if (db.add_word(chat_id, normalized_word, translation, pronunciation,
-                            transcription, topic_keyword)) {
+                            transcription, topic_keyword, definition)) {
                 result.added++;
                 result.fallback_added++;
             } else {
@@ -2457,16 +2586,84 @@ void generate_words(long long chat_id, TelegramClient& bot, Database& db, GroqCl
 
 long long configured_user_id(const std::string& key);
 
-std::vector<std::tuple<std::string, std::string, bool, std::string, std::string>>
+std::vector<WordView>
 get_learned_words_for_review(long long chat_id, Database& db) {
     auto all_words = db.get_user_words_full(chat_id, false);
-    std::vector<std::tuple<std::string, std::string, bool, std::string, std::string>> learned;
+    std::vector<WordView> learned;
     for (const auto& word : all_words) {
         if (std::get<2>(word)) {
             learned.push_back(word);
         }
     }
     return learned;
+}
+
+bool refresh_doc_screenshots(Database& db, long long chat_id) {
+    if (chat_id <= 0) {
+        LOG_ERROR("--refresh-doc-screenshots requires a chat id or USER_1_ID in .env");
+        return false;
+    }
+
+    fs::path docs_dir = "docs/ui";
+    std::error_code ec;
+    fs::create_directories(docs_dir, ec);
+    if (ec) {
+        LOG_ERROR("Failed to create docs/ui directory: " + ec.message());
+        return false;
+    }
+
+    auto copy_png = [&](const std::string& source, const std::string& name) {
+        if (source.empty() || !fs::exists(source)) {
+            LOG_ERROR("Cannot refresh docs screenshot " + name + ": source image is missing");
+            return false;
+        }
+        fs::copy_file(source, docs_dir / name, fs::copy_options::overwrite_existing, ec);
+        if (ec) {
+            LOG_ERROR("Failed to copy docs screenshot " + name + ": " + ec.message());
+            ec.clear();
+            return false;
+        }
+        return true;
+    };
+
+    bool ok = true;
+    int learned_count = db.get_words_count(chat_id, true);
+    ok = copy_png(render_main_menu_image(english_level_from_learned(learned_count)), "menu.png") && ok;
+    ok = copy_png(render_topic_menu_image(), "new_words.png") && ok;
+
+    auto all_words = db.get_user_words_full(chat_id, false);
+    std::vector<WordView> learned;
+    for (const auto& word : all_words) {
+        if (std::get<2>(word)) {
+            learned.push_back(word);
+        }
+    }
+    auto not_learned = db.get_user_words_full(chat_id, true);
+    auto review_words = get_learned_words_for_review(chat_id, db);
+
+    auto render_first_page = [](const std::vector<WordView>& words, int per_page) {
+        int total = (static_cast<int>(words.size()) + per_page - 1) / per_page;
+        if (total == 0) total = 1;
+        int start = 0;
+        int end = std::min(per_page, static_cast<int>(words.size()));
+        return std::make_tuple(total, start, end);
+    };
+
+    if (!learned.empty()) {
+        auto [total, start, end] = render_first_page(learned, 5);
+        ok = copy_png(render_learned_words_image(chat_id, learned, 0, total, start, end), "words2.png") && ok;
+    }
+    if (!review_words.empty()) {
+        auto [total, start, end] = render_first_page(review_words, 5);
+        ok = copy_png(render_daily_review_image(chat_id, review_words, 0, total, start, end), "morning.png") && ok;
+    }
+    if (!not_learned.empty()) {
+        auto [total, start, end] = render_first_page(not_learned, 5);
+        ok = copy_png(render_evening_words_image(chat_id, not_learned, 0, total, start, end), "evening.png") && ok;
+    }
+
+    LOG(ok ? "Docs screenshots refreshed" : "Docs screenshot refresh finished with errors");
+    return ok;
 }
 
 std::vector<long long> configured_broadcast_users() {
@@ -2639,15 +2836,27 @@ bool run_self_tests() {
         "TRANS: /rɪˈsiːt/\n"
         "PRON: рисит\n"
         "MEAN: чек\n"
+        "DEF: бумажное или электронное подтверждение оплаты\n"
         "---\n"
         "WORD: refund\n"
         "TRANS: /ˈriːfʌnd/\n"
         "PRON: рифанд\n"
-        "MEAN: возврат денег\n";
+        "MEAN: возврат денег\n"
+        "DEF: деньги, которые возвращают после отмены покупки\n";
     auto words = parse_generated_words(generated);
     expect(words.size() == 2 && words[0].english == "receipt" &&
-           words[1].translation == "возврат денег",
+           words[1].translation == "возврат денег" &&
+           words[1].definition == "деньги, которые возвращают после отмены покупки",
            "parse_generated_words parses machine-readable AI output");
+
+    std::string definitions =
+        "ID: 10\n"
+        "DEF: короткое объяснение\n"
+        "---\n";
+    auto definition_updates = parse_definition_updates(definitions);
+    expect(definition_updates.size() == 1 && definition_updates[0].id == 10 &&
+           definition_updates[0].definition == "короткое объяснение",
+           "parse_definition_updates parses definition backfill output");
 
     expect(is_suspicious_generated_word("html"), "filter blocks acronym-like weak word");
     expect(is_suspicious_generated_word("hacker"), "filter blocks weak security word");
@@ -2781,11 +2990,14 @@ int main(int argc, char* argv[]) {
     bool cleanup_only = false;
     bool cleanup_render_cache_only = false;
     bool backfill_transcriptions_only = false;
+    bool backfill_definitions_only = false;
     bool audit_words_only = false;
     bool cleanup_bad_words_only = false;
     bool self_test_only = false;
     bool send_evening_once = false;
     long long send_evening_chat_id = 0;
+    bool refresh_doc_screenshots_only = false;
+    long long refresh_doc_chat_id = 0;
     for (int i = 1; i < argc; i++) {
         std::string arg = argv[i];
         if (arg == "--cleanup-db") {
@@ -2794,6 +3006,8 @@ int main(int argc, char* argv[]) {
             cleanup_render_cache_only = true;
         } else if (arg == "--backfill-transcriptions") {
             backfill_transcriptions_only = true;
+        } else if (arg == "--backfill-definitions") {
+            backfill_definitions_only = true;
         } else if (arg == "--audit-words") {
             audit_words_only = true;
         } else if (arg == "--cleanup-bad-words") {
@@ -2814,6 +3028,20 @@ int main(int argc, char* argv[]) {
                     }
                 }
             }
+        } else if (arg == "--refresh-doc-screenshots") {
+            refresh_doc_screenshots_only = true;
+            if (i + 1 < argc) {
+                std::string maybe_id = argv[i + 1];
+                if (!maybe_id.empty() && maybe_id[0] != '-') {
+                    try {
+                        refresh_doc_chat_id = std::stoll(maybe_id);
+                        i++;
+                    } catch (const std::exception& e) {
+                        LOG_ERROR("Invalid --refresh-doc-screenshots chat id: " + maybe_id + "; " + e.what());
+                        return 1;
+                    }
+                }
+            }
         }
     }
 
@@ -2830,7 +3058,8 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    if (cleanup_only || backfill_transcriptions_only || audit_words_only || cleanup_bad_words_only) {
+    if (cleanup_only || backfill_transcriptions_only || backfill_definitions_only ||
+        audit_words_only || cleanup_bad_words_only || refresh_doc_screenshots_only) {
         Database db;
         if (!db.connect()) {
             return 1;
@@ -2842,11 +3071,21 @@ int main(int argc, char* argv[]) {
             GroqClient ai;
             return backfill_missing_pronunciations(db, ai) ? 0 : 1;
         }
+        if (backfill_definitions_only) {
+            GroqClient ai;
+            return backfill_missing_definitions(db, ai) ? 0 : 1;
+        }
         if (audit_words_only) {
             return audit_bad_words(db, false) ? 0 : 1;
         }
         if (cleanup_bad_words_only) {
             return audit_bad_words(db, true) ? 0 : 1;
+        }
+        if (refresh_doc_screenshots_only) {
+            long long target_chat_id = refresh_doc_chat_id > 0
+                ? refresh_doc_chat_id
+                : configured_user_id("USER_1_ID");
+            return refresh_doc_screenshots(db, target_chat_id) ? 0 : 1;
         }
         LOG("Database cleanup finished");
         return 0;
@@ -2941,7 +3180,7 @@ int main(int argc, char* argv[]) {
                     }
                     else if (data == "menu_learned") {
                         auto words = db.get_user_words_full(chat_id, false);
-                        std::vector<std::tuple<std::string, std::string, bool, std::string, std::string>> learned;
+                        std::vector<WordView> learned;
                         for (const auto& w : words) if (std::get<2>(w)) learned.push_back(w);
                         learn_page[chat_id] = 0;
                         learn_msg_id[chat_id] = message_id;
@@ -2985,7 +3224,7 @@ int main(int argc, char* argv[]) {
                     else if (data.rfind("learn_prev_", 0) == 0 || data.rfind("learn_next_", 0) == 0 ||
                              data.rfind("learn_info_", 0) == 0) {
                         auto all_words = db.get_user_words_full(chat_id, false);
-                        std::vector<std::tuple<std::string, std::string, bool, std::string, std::string>> learned;
+                        std::vector<WordView> learned;
                         for (const auto& w : all_words) if (std::get<2>(w)) learned.push_back(w);
                         size_t last_underscore = data.find_last_of('_');
                         int page = std::stoi(data.substr(last_underscore + 1));
@@ -3063,7 +3302,7 @@ int main(int argc, char* argv[]) {
                 }
                 else if (text == "✅ Выученные" || text == "Выученные" || text == "выученные") {
                     auto words = db.get_user_words_full(chat_id, false);
-                    std::vector<std::tuple<std::string, std::string, bool, std::string, std::string>> learned;
+                    std::vector<WordView> learned;
                     for (const auto& w : words) if (std::get<2>(w)) learned.push_back(w);
                     learn_page[chat_id] = 0;
                     show_learned_page(chat_id, bot, learned, 0, learn_page[chat_id], last_action[chat_id], learn_msg_id[chat_id], true);

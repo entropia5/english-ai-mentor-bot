@@ -92,6 +92,7 @@ bool Database::init_tables() {
                 transcription VARCHAR(255),
                 pronunciation_ru VARCHAR(255),
                 translation_ru TEXT,
+                definition_ru TEXT,
                 repetition_count INTEGER DEFAULT 0,
                 last_repetition BIGINT DEFAULT 0,
                 next_review BIGINT DEFAULT 0,
@@ -102,6 +103,8 @@ bool Database::init_tables() {
                 correct_in_row INTEGER DEFAULT 0
             )
         )");
+
+        txn.exec("ALTER TABLE words ADD COLUMN IF NOT EXISTS definition_ru TEXT");
 
         txn.exec(R"(
             CREATE TABLE IF NOT EXISTS conversations (
@@ -198,6 +201,35 @@ std::vector<std::tuple<int, std::string, std::string>> Database::get_words_missi
     return words;
 }
 
+std::vector<std::tuple<int, std::string, std::string>> Database::get_words_missing_definition(int limit) {
+    std::vector<std::tuple<int, std::string, std::string>> words;
+    if (!connected) return words;
+
+    try {
+        pqxx::work txn(*conn);
+        pqxx::result res = txn.exec_params(R"(
+            SELECT id, english, COALESCE(translation_ru, '')
+            FROM words
+            WHERE NULLIF(trim(COALESCE(definition_ru, '')), '') IS NULL
+            ORDER BY added_date ASC, id ASC
+            LIMIT $1
+        )", limit);
+        txn.commit();
+
+        for (const auto& row : res) {
+            words.push_back(std::make_tuple(
+                row[0].as<int>(),
+                row[1].as<std::string>(),
+                row[2].as<std::string>()
+            ));
+        }
+    } catch (const std::exception& e) {
+        LOG_ERROR("get_words_missing_definition failed: " + std::string(e.what()));
+    }
+
+    return words;
+}
+
 bool Database::update_word_pronunciation(int word_id, const std::string& transcription,
                                          const std::string& pronunciation_ru) {
     if (!connected) return false;
@@ -221,6 +253,23 @@ bool Database::update_word_pronunciation(int word_id, const std::string& transcr
         return true;
     } catch (const std::exception& e) {
         LOG_ERROR("update_word_pronunciation failed: " + std::string(e.what()));
+        return false;
+    }
+}
+
+bool Database::update_word_definition(int word_id, const std::string& definition_ru) {
+    if (!connected || definition_ru.empty()) return false;
+
+    try {
+        pqxx::work txn(*conn);
+        txn.exec_params(
+            "UPDATE words SET definition_ru = $2 WHERE id = $1",
+            word_id, definition_ru
+        );
+        txn.commit();
+        return true;
+    } catch (const std::exception& e) {
+        LOG_ERROR("update_word_definition failed: " + std::string(e.what()));
         return false;
     }
 }
@@ -413,7 +462,7 @@ std::vector<std::pair<std::string, std::string>> Database::get_conversation_hist
 
 bool Database::add_word(long long user_id, const std::string& english, const std::string& translation,
                         const std::string& pronunciation, const std::string& transcription,
-                        const std::string& topic) {
+                        const std::string& topic, const std::string& definition) {
     if (!connected) return false;
 
     try {
@@ -436,9 +485,9 @@ bool Database::add_word(long long user_id, const std::string& english, const std
         }
 
         txn.exec_params(
-            "INSERT INTO words (user_id, english, translation_ru, pronunciation_ru, transcription, topic, added_date) "
-            "VALUES ($1, $2, $3, $4, $5, $6, EXTRACT(EPOCH FROM NOW()))",
-            user_id, english, translation, pronunciation, transcription, topic
+            "INSERT INTO words (user_id, english, translation_ru, pronunciation_ru, transcription, topic, definition_ru, added_date) "
+            "VALUES ($1, $2, $3, $4, $5, $6, $7, EXTRACT(EPOCH FROM NOW()))",
+            user_id, english, translation, pronunciation, transcription, topic, definition
         );
         txn.commit();
         LOG("Word added: " + english + " for user " + std::to_string(user_id));
@@ -543,13 +592,13 @@ int Database::get_words_count(long long user_id, bool learned) {
     return 0;
 }
 
-std::vector<std::tuple<std::string, std::string, bool, std::string, std::string>> Database::get_user_words_full(long long user_id, bool only_not_learned) {
-    std::vector<std::tuple<std::string, std::string, bool, std::string, std::string>> words;
+std::vector<WordView> Database::get_user_words_full(long long user_id, bool only_not_learned) {
+    std::vector<WordView> words;
     if (!connected) return words;
 
     try {
         pqxx::work txn(*conn);
-        std::string query = "SELECT english, translation_ru, is_learned, pronunciation_ru, transcription FROM words WHERE user_id = $1";
+        std::string query = "SELECT english, translation_ru, is_learned, pronunciation_ru, transcription, definition_ru FROM words WHERE user_id = $1";
         if (only_not_learned) {
             query += " AND is_learned = false";
         }
@@ -564,8 +613,9 @@ std::vector<std::tuple<std::string, std::string, bool, std::string, std::string>
             bool learned = row[2].as<bool>();
             std::string pron = row[3].is_null() ? "" : row[3].as<std::string>();
             std::string transcr = row[4].is_null() ? "" : row[4].as<std::string>();
+            std::string definition = row[5].is_null() ? "" : row[5].as<std::string>();
 
-            words.push_back(std::make_tuple(eng, trans, learned, pron, transcr));
+            words.push_back(std::make_tuple(eng, trans, learned, pron, transcr, definition));
         }
 
         LOG("Found " + std::to_string(words.size()) + " words for user " + std::to_string(user_id));
