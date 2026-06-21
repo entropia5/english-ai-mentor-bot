@@ -543,9 +543,9 @@ InlineKeyboard column_keyboard(std::initializer_list<std::pair<std::string, std:
 
 InlineKeyboard main_menu_keyboard() {
     return column_keyboard({
-        {"Словарь", "menu_dictionary"},
-        {"Выученные", "menu_learned"},
-        {"Новые слова", "menu_new_words"},
+        {"Словарь для изучения", "menu_dictionary"},
+        {"Словарь для повторения", "menu_learned"},
+        {"Добавить слова", "menu_new_words"},
         {"Спросить AI", "menu_ai"},
         {"Статистика", "menu_stats"}
     });
@@ -1011,7 +1011,7 @@ void remember_broadcast_sent(const std::string& date_key, const std::string& kin
 std::string render_main_menu_image(const std::string& user_level) {
     fs::path render_dir = fs::path(project_data_dir()) / "rendered" / "menu";
     fs::path base = render_dir / ("main_menu_" + user_level);
-    std::string menu_hash = "main-menu-graphite-v6-title-underline-" + user_level;
+    std::string menu_hash = "main-menu-graphite-v7-entropia5-" + user_level;
     std::stringstream html;
 
     html << R"(<!doctype html>
@@ -1123,7 +1123,7 @@ body {
 <div class="canvas">
   <div class="panel">
     <div>
-      <div class="brand">English AI Mentor</div>
+      <div class="brand">by entropia5</div>
       <div class="title-row">
         <div class="title">Главное<br>меню</div>
         <div class="line"></div>
@@ -1147,7 +1147,7 @@ body {
 
 std::string render_ai_prompt_image() {
     fs::path base = fs::path(project_data_dir()) / "rendered" / "ai" / "prompt";
-    std::string hash = "ai-prompt-graphite-v4-title-underline";
+    std::string hash = "ai-prompt-graphite-v5-entropia5";
     std::stringstream html;
 
     html << R"(<!doctype html>
@@ -1230,7 +1230,7 @@ body {
 <div class="canvas">
   <div class="panel">
     <div>
-      <div class="label">English AI Mentor</div>
+      <div class="label">by entropia5</div>
       <div class="title-row">
         <div class="title">Режим<br>AI</div>
         <div class="line"></div>
@@ -1249,7 +1249,7 @@ body {
 
 std::string render_topic_menu_image() {
     fs::path base = fs::path(project_data_dir()) / "rendered" / "topics" / "topic_menu";
-    std::string hash = "topic-menu-graphite-v4-clean-title-underline";
+    std::string hash = "topic-menu-graphite-v5-entropia5";
     std::stringstream html;
 
     html << R"(<!doctype html>
@@ -1323,7 +1323,7 @@ body {
 <div class="canvas">
   <div class="panel">
     <div>
-      <div class="label">English AI Mentor</div>
+      <div class="label">by entropia5</div>
       <div class="title-row">
         <div class="title">Новые<br>слова</div>
         <div class="line"></div>
@@ -1358,7 +1358,7 @@ std::string safe_render_key(std::string text) {
 std::string render_status_image(const std::string& key, const std::string& title,
                                 const std::string& subtitle, const std::string& note) {
     fs::path base = fs::path(project_data_dir()) / "rendered" / "status" / safe_render_key(key);
-    std::string hash = "status-graphite-v1-" + title + "|" + subtitle + "|" + note;
+    std::string hash = "status-graphite-v2-entropia5-" + title + "|" + subtitle + "|" + note;
     std::stringstream html;
 
     html << R"(<!doctype html>
@@ -1438,7 +1438,7 @@ body {
 <div class="canvas">
   <div class="panel">
     <div>
-      <div class="label">English AI Mentor</div>
+      <div class="label">by entropia5</div>
       <div class="title">)";
     html << html_escape(title);
     html << R"(</div>
@@ -1478,7 +1478,7 @@ std::string render_stats_image(long long chat_id, int total, int learned, const 
     cleanup_legacy_stats_artifacts(stats_dir);
 
     fs::path base = stats_dir / std::to_string(chat_id) / "stats";
-    std::string hash = "stats-graphite-v3-title-underline-" + std::to_string(total) + "-" +
+    std::string hash = "stats-graphite-v4-entropia5-" + std::to_string(total) + "-" +
                        std::to_string(learned) + "-" + level + "-" +
                        std::to_string(next_level) + "-" + std::to_string(percent);
     int clamped_percent = std::max(0, std::min(100, percent));
@@ -1582,7 +1582,7 @@ body {
 <div class="panel">
   <div class="top">
     <div>
-      <div class="label">English AI Mentor</div>
+      <div class="label">by entropia5</div>
       <div class="title-row">
         <div class="title">Статистика</div>
         <div class="line"></div>
@@ -1630,7 +1630,8 @@ std::string render_words_card_image(
     const std::string& folder,
     const std::string& title,
     const std::string& subtitle,
-    const std::string& footer_left
+    const std::string& footer_left,
+    bool checked_marker = true
 ) {
     fs::path render_dir = fs::path(project_data_dir()) / "rendered" / folder / std::to_string(chat_id);
     std::error_code ec;
@@ -1642,7 +1643,9 @@ std::string render_words_card_image(
     cleanup_stale_page_artifacts(render_dir, total);
 
     fs::path page_base = render_dir / ("page_" + std::to_string(page + 1));
-    std::string page_hash = folder + "-graphite-mobile-v7-wide-checkword-" + learned_page_hash(words, page, total, start, end);
+    std::string page_hash = folder + "-graphite-mobile-v10-entropia5-marker-" +
+                            (checked_marker ? "checked-" : "study-") +
+                            learned_page_hash(words, page, total, start, end);
     std::stringstream html;
 
     html << R"(<!doctype html>
@@ -1723,6 +1726,12 @@ body {
   border-width: 0 5px 5px 0;
   transform: rotate(45deg);
 }
+.mark.study {
+  background: #1a222b;
+  border: 2px solid #60a5fa;
+  box-shadow: inset 0 0 0 4px rgba(96, 165, 250, .12);
+}
+.mark.study:after { display: none; }
 .word-line {
   display: flex;
   align-items: center;
@@ -1788,7 +1797,9 @@ body {
         std::string pronunciation_ru = trim(pron);
 
         html << "<div class=\"item\">"
-             << "<div class=\"word-line\"><span class=\"mark\"></span><span class=\"word\">" << html_escape(eng) << "</span>";
+             << "<div class=\"word-line\"><span class=\"mark"
+             << (checked_marker ? "" : " study")
+             << "\"></span><span class=\"word\">" << html_escape(eng) << "</span>";
         if (!ipa.empty() || !pronunciation_ru.empty()) {
             html << "<span class=\"phonetics\">";
             if (!ipa.empty()) {
@@ -1824,6 +1835,21 @@ body {
     return render_html_image(page_base, page_hash, html.str(), folder + " words", 1440);
 }
 
+std::string render_dictionary_words_image(
+    long long chat_id,
+    const std::vector<WordView>& words,
+    int page,
+    int total,
+    int start,
+    int end
+) {
+    return render_words_card_image(chat_id, words, page, total, start, end,
+                                   "dictionary", "Словарь для изучения",
+                                   "Напиши слово в чат, чтобы отметить его выученным",
+                                   "by entropia5",
+                                   false);
+}
+
 std::string render_learned_words_image(
     long long chat_id,
     const std::vector<WordView>& words,
@@ -1834,8 +1860,8 @@ std::string render_learned_words_image(
 ) {
     return render_words_card_image(chat_id, words, page, total, start, end,
                                    "learned", "Выученные слова",
-                                   "Закрепленный словарь",
-                                   "English AI Mentor");
+                                   "Словарь для повторения и закрепления выученных слов",
+                                   "by entropia5");
 }
 
 std::string render_daily_review_image(
@@ -1849,7 +1875,7 @@ std::string render_daily_review_image(
     return render_words_card_image(chat_id, words, page, total, start, end,
                                    "daily", "Доброе утро",
                                    "Повторение выученных слов",
-                                   "Закрепи утренней практикой");
+                                   "by entropia5");
 }
 
 std::string render_evening_words_image(
@@ -1863,7 +1889,7 @@ std::string render_evening_words_image(
     return render_words_card_image(chat_id, words, page, total, start, end,
                                    "evening", "Новые слова",
                                    "Вечерняя подборка для изучения",
-                                   "21:00 English AI Mentor");
+                                   "by entropia5");
 }
 
 // better formatting for words in the dictionary
@@ -1943,30 +1969,32 @@ void show_dictionary_page(long long chat_id, TelegramClient& bot,
     int start = page * per_page;
     int end = std::min(start + per_page, (int)words.size());
 
-    std::string msg = "📚 *Словарь для изучения*\n";
-    msg += "▫️ Страница " + std::to_string(page + 1) + " из " + std::to_string(total) + "\n";
-    msg += "▫️ Чтобы отметить слово - просто напиши его\n\n";
-
-    for (int i = start; i < end; i++) {
-        const auto& [eng, trans, learned, pron, transcr, definition] = words[i];
-        msg += format_word(eng, trans, transcr, pron, definition) + "\n\n";
-    }
-
     if (words.empty()) {
-        msg = "📚 *Словарь пуст*\n\n➕ Нажми «➕ Новые слова» чтобы добавить слова!";
+        std::string msg = "📚 *Словарь пуст*\n\nНажми «Добавить слова», чтобы пополнить словарь.";
         upsert_screen(chat_id, bot, msg, column_keyboard({
-            {"Новые слова", "menu_new_words"},
+            {"Добавить слова", "menu_new_words"},
             {"Главное меню", "menu_main"}
         }), is_new ? 0 : message_id);
         return;
     }
 
     InlineKeyboard buttons = page_keyboard("dict_", page, total);
+    std::string image_path = render_dictionary_words_image(chat_id, words, page, total, start, end);
 
-    if (is_new) {
-        upsert_screen(chat_id, bot, msg, buttons);
+    if (image_path.empty()) {
+        std::string msg = "📚 *Словарь для изучения*\n";
+        msg += "▫️ Страница " + std::to_string(page + 1) + " из " + std::to_string(total) + "\n";
+        msg += "▫️ Чтобы отметить слово - просто напиши его\n\n";
+
+        for (int i = start; i < end; i++) {
+            const auto& [eng, trans, learned, pron, transcr, definition] = words[i];
+            msg += format_word(eng, trans, transcr, pron, definition) + "\n\n";
+        }
+        upsert_screen(chat_id, bot, msg, buttons, is_new ? 0 : message_id);
+    } else if (is_new) {
+        upsert_photo_screen(chat_id, bot, image_path, buttons);
     } else {
-        upsert_screen(chat_id, bot, msg, buttons, message_id);
+        upsert_photo_screen(chat_id, bot, image_path, buttons, message_id);
     }
 }
 
@@ -1987,7 +2015,7 @@ void show_learned_page(long long chat_id, TelegramClient& bot,
     if (words.empty()) {
         std::string msg = "✅ *Выученных слов пока нет*\n\n📚 Учи слова из словаря!";
         upsert_screen(chat_id, bot, msg, column_keyboard({
-            {"Словарь", "menu_dictionary"},
+            {"Словарь для изучения", "menu_dictionary"},
             {"Главное меню", "menu_main"}
         }), is_new ? 0 : message_id);
         return;
@@ -2031,7 +2059,7 @@ bool show_daily_review_page(long long chat_id, TelegramClient& bot,
             "Пока нет выученных слов для повторения.",
             "Отметь несколько слов как выученные, и завтра утренний экран покажет их для практики.",
             column_keyboard({
-                {"Выученные", "menu_learned"},
+                {"Словарь для повторения", "menu_learned"},
                 {"Главное меню", "menu_main"}
             }),
             is_new ? 0 : message_id
@@ -2075,7 +2103,7 @@ bool show_evening_words_page(long long chat_id, TelegramClient& bot,
             "Сейчас нет слов для изучения.",
             "Выбери тему вручную, чтобы добавить новую подборку.",
             column_keyboard({
-                {"Новые слова", "menu_new_words"},
+                {"Добавить слова", "menu_new_words"},
                 {"Главное меню", "menu_main"}
             }),
             is_new ? 0 : message_id
@@ -2164,10 +2192,10 @@ void refresh_after_marking_words(long long chat_id, TelegramClient& bot, Databas
                                  int& dict_current_page, int& dict_message_id,
                                  int& learn_current_page, int& learn_message_id,
                                  std::string& current_action) {
-    std::string context = current_action;
-    if (!is_persistable_screen_context(context)) {
-        context = get_screen_context(chat_id);
-    }
+    std::string persisted_context = get_screen_context(chat_id);
+    std::string context = is_persistable_screen_context(persisted_context)
+        ? persisted_context
+        : current_action;
     current_action = context;
 
     if (context == "daily") {
@@ -2399,7 +2427,7 @@ bool is_suspicious_generated_word(const std::string& normalized_word) {
     return false;
 }
 
-std::vector<GeneratedWord> fallback_practical_words() {
+std::vector<GeneratedWord> built_in_fallback_practical_words() {
     return {
         {"receipt", "/rɪˈsiːt/", "рисит", "чек"},
         {"refund", "/ˈriːfʌnd/", "рифанд", "возврат денег"},
@@ -2462,6 +2490,98 @@ std::vector<GeneratedWord> fallback_practical_words() {
         {"password", "/ˈpæswɜːrd/", "пэсуорд", "пароль"},
         {"privacy", "/ˈpraɪvəsi/", "прайвэси", "конфиденциальность"}
     };
+}
+
+std::string json_string_value(const json& item,
+                              const std::string& primary_key,
+                              const std::string& fallback_key = "") {
+    if (item.contains(primary_key) && item[primary_key].is_string()) {
+        return trim(item[primary_key].get<std::string>());
+    }
+    if (!fallback_key.empty() && item.contains(fallback_key) && item[fallback_key].is_string()) {
+        return trim(item[fallback_key].get<std::string>());
+    }
+    return "";
+}
+
+std::vector<GeneratedWord> load_fallback_words_from_file(const fs::path& path) {
+    std::string text = read_text_file(path.string());
+    if (text.empty()) {
+        return {};
+    }
+
+    try {
+        json document = json::parse(text);
+        const json* words_json = &document;
+        if (document.is_object() && document.contains("words")) {
+            words_json = &document["words"];
+        }
+        if (!words_json->is_array()) {
+            LOG_WARNING("Fallback dictionary is not a JSON array: " + path.string());
+            return {};
+        }
+
+        std::vector<GeneratedWord> words;
+        std::set<std::string> seen;
+        for (size_t i = 0; i < words_json->size(); i++) {
+            const json& item = (*words_json)[i];
+            if (!item.is_object()) {
+                LOG_WARNING("Skipping fallback dictionary item " + std::to_string(i) +
+                            ": expected object");
+                continue;
+            }
+
+            GeneratedWord word;
+            word.english = to_lower_ascii(json_string_value(item, "english", "word"));
+            word.transcription = json_string_value(item, "transcription", "trans");
+            word.pronunciation = json_string_value(item, "pronunciation_ru", "pronunciation");
+            word.translation = json_string_value(item, "translation_ru", "translation");
+            word.definition = json_string_value(item, "definition_ru", "definition");
+
+            if (word.english.empty() || word.transcription.empty() || word.pronunciation.empty() ||
+                word.translation.empty() || word.definition.empty() ||
+                is_suspicious_generated_word(word.english)) {
+                LOG_WARNING("Skipping invalid fallback dictionary word at index " + std::to_string(i) +
+                            " in " + path.string());
+                continue;
+            }
+            if (seen.count(word.english) > 0) {
+                LOG_WARNING("Skipping duplicate fallback dictionary word: " + word.english);
+                continue;
+            }
+
+            seen.insert(word.english);
+            words.push_back(word);
+        }
+
+        LOG("Loaded fallback dictionary from " + path.string() +
+            ": " + std::to_string(words.size()) + " words");
+        return words;
+    } catch (const std::exception& e) {
+        LOG_ERROR("Failed to parse fallback dictionary " + path.string() + ": " + e.what());
+        return {};
+    }
+}
+
+std::vector<GeneratedWord> fallback_practical_words() {
+    std::vector<fs::path> paths = {
+        fs::path(project_data_dir()) / "fallback_words.json",
+        fs::path("resources") / "fallback_words.json",
+        fs::path("..") / "resources" / "fallback_words.json"
+    };
+
+    for (const fs::path& path : paths) {
+        if (!fs::exists(path)) {
+            continue;
+        }
+        auto words = load_fallback_words_from_file(path);
+        if (!words.empty()) {
+            return words;
+        }
+    }
+
+    LOG_WARNING("Fallback dictionary file is unavailable, using built-in fallback words");
+    return built_in_fallback_practical_words();
 }
 
 WordGenerationResult add_generated_words_to_db(long long chat_id, Database& db, GroqClient& ai,
@@ -2628,8 +2748,8 @@ void generate_words(long long chat_id, TelegramClient& bot, Database& db, GroqCl
         show_status_screen(chat_id, bot, "generate_done_" + topic_keyword,
                            "Слова добавлены", "Новая подборка готова.", note,
                            column_keyboard({
-            {"Словарь", "menu_dictionary"},
-            {"Новые слова", "menu_new_words"},
+            {"Словарь для изучения", "menu_dictionary"},
+            {"Добавить слова", "menu_new_words"},
             {"Главное меню", "menu_main"}
         }));
     } else {
@@ -2644,7 +2764,7 @@ void generate_words(long long chat_id, TelegramClient& bot, Database& db, GroqCl
         show_status_screen(chat_id, bot, "generate_failed_" + topic_keyword,
                            "Не удалось добавить", "Новых слов сейчас нет.", note,
                            column_keyboard({
-            {"Новые слова", "menu_new_words"},
+            {"Добавить слова", "menu_new_words"},
             {"Главное меню", "menu_main"}
         }));
     }
@@ -2718,6 +2838,10 @@ bool refresh_doc_screenshots(Database& db, long long chat_id) {
     if (!learned.empty()) {
         auto [total, start, end] = render_first_page(learned, 5);
         ok = copy_png(render_learned_words_image(chat_id, learned, 0, total, start, end), "words2.png") && ok;
+    }
+    if (!not_learned.empty()) {
+        auto [total, start, end] = render_first_page(not_learned, 5);
+        ok = copy_png(render_dictionary_words_image(chat_id, not_learned, 0, total, start, end), "words.png") && ok;
     }
     if (!review_words.empty()) {
         auto [total, start, end] = render_first_page(review_words, 5);
@@ -2843,7 +2967,7 @@ BroadcastResult send_evening_new_words(long long chat_id, TelegramClient& bot, D
             chat_id,
             bot,
             "Сегодня AI не добавил новых слов: все варианты оказались дублями или пришли в неверном формате.\n\n"
-            "Показываю текущий список слов для изучения. Можно выбрать тему вручную кнопкой «Новые слова»."
+            "Показываю текущий список слов для изучения. Можно выбрать тему вручную кнопкой «Добавить слова»."
         );
         return hint_ok ? BroadcastResult::NoContent : BroadcastResult::Failed;
     }
@@ -2932,6 +3056,18 @@ bool run_self_tests() {
     auto split = split_words_input(" house, meeting , refund ");
     expect(split.size() == 3 && split[0] == "house" && split[2] == "refund",
            "split_words_input trims comma-separated words");
+
+    auto fallback_words = fallback_practical_words();
+    bool fallback_has_definitions = !fallback_words.empty() &&
+        std::all_of(fallback_words.begin(), fallback_words.end(), [](const GeneratedWord& word) {
+            return !trim(word.english).empty() &&
+                   !trim(word.transcription).empty() &&
+                   !trim(word.pronunciation).empty() &&
+                   !trim(word.translation).empty() &&
+                   !trim(word.definition).empty();
+        });
+    expect(fallback_words.size() >= 50 && fallback_has_definitions,
+           "fallback_practical_words loads external dictionary with definitions");
 
     expect(format_ai_response_box("`int x = 1;`").find('`') != std::string::npos &&
            format_ai_response_box("`int x = 1;`").find("'''") == std::string::npos,
@@ -3361,13 +3497,15 @@ int main(int argc, char* argv[]) {
                     }
                     delete_incoming_after_handled = true;
                 }
-                else if (text == "📚 Словарь" || text == "Словарь" || text == "словарь") {
+                else if (text == "Словарь для изучения" || text == "словарь для изучения" ||
+                         text == "📚 Словарь" || text == "Словарь" || text == "словарь") {
                     auto words = db.get_user_words_full(chat_id, true);
                     dict_page[chat_id] = 0;
                     show_dictionary_page(chat_id, bot, words, 0, dict_page[chat_id], last_action[chat_id], dict_msg_id[chat_id], true);
                     delete_incoming_after_handled = true;
                 }
-                else if (text == "✅ Выученные" || text == "Выученные" || text == "выученные") {
+                else if (text == "Словарь для повторения" || text == "словарь для повторения" ||
+                         text == "✅ Выученные" || text == "Выученные" || text == "выученные") {
                     auto words = db.get_user_words_full(chat_id, false);
                     std::vector<WordView> learned;
                     for (const auto& w : words) if (std::get<2>(w)) learned.push_back(w);
@@ -3375,7 +3513,8 @@ int main(int argc, char* argv[]) {
                     show_learned_page(chat_id, bot, learned, 0, learn_page[chat_id], last_action[chat_id], learn_msg_id[chat_id], true);
                     delete_incoming_after_handled = true;
                 }
-                else if (text == "➕ Новые слова" || text == "Новые слова" || text == "новые слова") {
+                else if (text == "Добавить слова" || text == "добавить слова" ||
+                         text == "➕ Новые слова" || text == "Новые слова" || text == "новые слова") {
                     send_topic_menu(chat_id, bot);
                     delete_incoming_after_handled = true;
                 }
@@ -3423,7 +3562,7 @@ int main(int argc, char* argv[]) {
                                                     last_action[chat_id]);
                         int confirmation_message_id = 0;
                         bot.send_message(chat_id,
-                                         "Готово, экран обновился.",
+                                         "Готово.\n\n Новое слово внесено в Словарь для повторения и было отмечено, как выученное.",
                                          "",
                                          &confirmation_message_id);
                         remember_broadcast_hint(chat_id, confirmation_message_id);

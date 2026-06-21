@@ -1,0 +1,410 @@
+{
+  "words": [
+    {
+      "english": "receipt",
+      "transcription": "/rɪˈsiːt/",
+      "pronunciation_ru": "рисит",
+      "translation_ru": "чек",
+      "definition_ru": "документ или сообщение, подтверждающее оплату покупки"
+    },
+    {
+      "english": "refund",
+      "transcription": "/ˈriːfʌnd/",
+      "pronunciation_ru": "рифанд",
+      "translation_ru": "возврат денег",
+      "definition_ru": "деньги, которые возвращают после отмены покупки или ошибки"
+    },
+    {
+      "english": "warranty",
+      "transcription": "/ˈwɒrənti/",
+      "pronunciation_ru": "уорэнти",
+      "translation_ru": "гарантия",
+      "definition_ru": "обещание продавца или производителя исправить проблему с товаром"
+    },
+    {
+      "english": "invoice",
+      "transcription": "/ˈɪnvɔɪs/",
+      "pronunciation_ru": "инвойс",
+      "translation_ru": "счет",
+      "definition_ru": "документ с суммой к оплате за товар или услугу"
+    },
+    {
+      "english": "estimate",
+      "transcription": "/ˈestɪmət/",
+      "pronunciation_ru": "эстимэт",
+      "translation_ru": "оценка стоимости",
+      "definition_ru": "примерный расчет цены, времени или объема работы"
+    },
+    {
+      "english": "deadline",
+      "transcription": "/ˈdedlaɪn/",
+      "pronunciation_ru": "дедлайн",
+      "translation_ru": "крайний срок",
+      "definition_ru": "последний момент, когда задача должна быть завершена"
+    },
+    {
+      "english": "appointment",
+      "transcription": "/əˈpɔɪntmənt/",
+      "pronunciation_ru": "эпойнтмэнт",
+      "translation_ru": "встреча, запись",
+      "definition_ru": "заранее назначенное время для встречи или визита"
+    },
+    {
+      "english": "schedule",
+      "transcription": "/ˈʃedjuːl/",
+      "pronunciation_ru": "шеджул",
+      "translation_ru": "расписание",
+      "definition_ru": "план событий или задач с указанным временем"
+    },
+    {
+      "english": "reminder",
+      "transcription": "/rɪˈmaɪndər/",
+      "pronunciation_ru": "римайндер",
+      "translation_ru": "напоминание",
+      "definition_ru": "сообщение или знак, который помогает не забыть о деле"
+    },
+    {
+      "english": "checklist",
+      "transcription": "/ˈtʃeklɪst/",
+      "pronunciation_ru": "чеклист",
+      "translation_ru": "контрольный список",
+      "definition_ru": "список пунктов, которые нужно проверить или выполнить"
+    },
+    {
+      "english": "paperwork",
+      "transcription": "/ˈpeɪpərwɜːrk/",
+      "pronunciation_ru": "пэйпэруорк",
+      "translation_ru": "документы",
+      "definition_ru": "оформление документов и связанная с этим бумажная работа"
+    },
+    {
+      "english": "timesheet",
+      "transcription": "/ˈtaɪmʃiːt/",
+      "pronunciation_ru": "таймшит",
+      "translation_ru": "табель учета времени",
+      "definition_ru": "таблица или форма, где записывают отработанное время"
+    },
+    {
+      "english": "courier",
+      "transcription": "/ˈkʊriər/",
+      "pronunciation_ru": "куриэр",
+      "translation_ru": "курьер",
+      "definition_ru": "человек или служба, которые доставляют посылки и документы"
+    },
+    {
+      "english": "parcel",
+      "transcription": "/ˈpɑːrsl/",
+      "pronunciation_ru": "парсл",
+      "translation_ru": "посылка",
+      "definition_ru": "упакованная вещь, которую отправляют или доставляют"
+    },
+    {
+      "english": "delivery",
+      "transcription": "/dɪˈlɪvəri/",
+      "pronunciation_ru": "диливэри",
+      "translation_ru": "доставка",
+      "definition_ru": "процесс привоза товара, еды или посылки получателю"
+    },
+    {
+      "english": "package",
+      "transcription": "/ˈpækɪdʒ/",
+      "pronunciation_ru": "пэкидж",
+      "translation_ru": "упаковка, посылка",
+      "definition_ru": "коробка или сверток с вещами внутри"
+    },
+    {
+      "english": "storage",
+      "transcription": "/ˈstɔːrɪdʒ/",
+      "pronunciation_ru": "сторидж",
+      "translation_ru": "хранение",
+      "definition_ru": "место или процесс сохранения вещей до нужного момента"
+    },
+    {
+      "english": "shelf",
+      "transcription": "/ʃelf/",
+      "pronunciation_ru": "шелф",
+      "translation_ru": "полка",
+      "definition_ru": "горизонтальная поверхность для хранения вещей"
+    },
+    {
+      "english": "drawer",
+      "transcription": "/drɔːr/",
+      "pronunciation_ru": "дроэр",
+      "translation_ru": "ящик",
+      "definition_ru": "выдвижная часть мебели для хранения вещей"
+    },
+    {
+      "english": "outlet",
+      "transcription": "/ˈaʊtlet/",
+      "pronunciation_ru": "аутлет",
+      "translation_ru": "розетка",
+      "definition_ru": "место в стене, куда подключают электрический прибор"
+    },
+    {
+      "english": "adapter",
+      "transcription": "/əˈdæptər/",
+      "pronunciation_ru": "эдэптэр",
+      "translation_ru": "адаптер",
+      "definition_ru": "устройство, которое помогает соединить несовместимые разъемы"
+    },
+    {
+      "english": "blanket",
+      "transcription": "/ˈblæŋkɪt/",
+      "pronunciation_ru": "блэнкит",
+      "translation_ru": "одеяло",
+      "definition_ru": "теплая ткань, которой укрываются"
+    },
+    {
+      "english": "kettle",
+      "transcription": "/ˈketl/",
+      "pronunciation_ru": "кетл",
+      "translation_ru": "чайник",
+      "definition_ru": "предмет или прибор для кипячения воды"
+    },
+    {
+      "english": "faucet",
+      "transcription": "/ˈfɔːsɪt/",
+      "pronunciation_ru": "фосит",
+      "translation_ru": "кран",
+      "definition_ru": "устройство, через которое течет вода из трубы"
+    },
+    {
+      "english": "laundry",
+      "transcription": "/ˈlɔːndri/",
+      "pronunciation_ru": "лондри",
+      "translation_ru": "стирка",
+      "definition_ru": "грязная одежда для стирки или сам процесс стирки"
+    },
+    {
+      "english": "detergent",
+      "transcription": "/dɪˈtɜːrdʒənt/",
+      "pronunciation_ru": "дитёрджэнт",
+      "translation_ru": "моющее средство",
+      "definition_ru": "средство для стирки или очистки поверхностей"
+    },
+    {
+      "english": "commute",
+      "transcription": "/kəˈmjuːt/",
+      "pronunciation_ru": "комьют",
+      "translation_ru": "поездка на работу",
+      "definition_ru": "регулярная дорога между домом и работой или учебой"
+    },
+    {
+      "english": "shortcut",
+      "transcription": "/ˈʃɔːrtkʌt/",
+      "pronunciation_ru": "шорткат",
+      "translation_ru": "короткий путь",
+      "definition_ru": "более быстрый способ добраться куда-то или выполнить действие"
+    },
+    {
+      "english": "suburb",
+      "transcription": "/ˈsʌbɜːrb/",
+      "pronunciation_ru": "сабёрб",
+      "translation_ru": "пригород",
+      "definition_ru": "жилой район рядом с большим городом"
+    },
+    {
+      "english": "traffic",
+      "transcription": "/ˈtræfɪk/",
+      "pronunciation_ru": "трэфик",
+      "translation_ru": "дорожное движение",
+      "definition_ru": "машины и другой транспорт, движущиеся по дороге"
+    },
+    {
+      "english": "luggage",
+      "transcription": "/ˈlʌɡɪdʒ/",
+      "pronunciation_ru": "лагидж",
+      "translation_ru": "багаж",
+      "definition_ru": "сумки и чемоданы, которые берут в поездку"
+    },
+    {
+      "english": "boarding",
+      "transcription": "/ˈbɔːrdɪŋ/",
+      "pronunciation_ru": "бординг",
+      "translation_ru": "посадка",
+      "definition_ru": "процесс входа пассажиров в самолет, поезд или автобус"
+    },
+    {
+      "english": "arrival",
+      "transcription": "/əˈraɪvəl/",
+      "pronunciation_ru": "эрайвэл",
+      "translation_ru": "прибытие",
+      "definition_ru": "момент, когда кто-то или что-то приезжает в место назначения"
+    },
+    {
+      "english": "departure",
+      "transcription": "/dɪˈpɑːrtʃər/",
+      "pronunciation_ru": "дипарчер",
+      "translation_ru": "отправление",
+      "definition_ru": "момент, когда транспорт или человек уезжает"
+    },
+    {
+      "english": "platform",
+      "transcription": "/ˈplætfɔːrm/",
+      "pronunciation_ru": "плэтформ",
+      "translation_ru": "платформа",
+      "definition_ru": "место на станции, где пассажиры садятся в поезд"
+    },
+    {
+      "english": "aisle",
+      "transcription": "/aɪl/",
+      "pronunciation_ru": "айл",
+      "translation_ru": "проход",
+      "definition_ru": "пространство между рядами сидений или полок"
+    },
+    {
+      "english": "ingredient",
+      "transcription": "/ɪnˈɡriːdiənt/",
+      "pronunciation_ru": "ингридиэнт",
+      "translation_ru": "ингредиент",
+      "definition_ru": "часть блюда или продукта, из которой его готовят"
+    },
+    {
+      "english": "leftover",
+      "transcription": "/ˈleftoʊvər/",
+      "pronunciation_ru": "лэфтоувэр",
+      "translation_ru": "остаток еды",
+      "definition_ru": "еда, которая осталась после приема пищи"
+    },
+    {
+      "english": "portion",
+      "transcription": "/ˈpɔːrʃn/",
+      "pronunciation_ru": "поршн",
+      "translation_ru": "порция",
+      "definition_ru": "часть еды или количество, предназначенное для одного человека"
+    },
+    {
+      "english": "utensil",
+      "transcription": "/juːˈtensl/",
+      "pronunciation_ru": "ютенсл",
+      "translation_ru": "столовый прибор",
+      "definition_ru": "предмет вроде ложки, вилки или ножа для еды или готовки"
+    },
+    {
+      "english": "grocery",
+      "transcription": "/ˈɡroʊsəri/",
+      "pronunciation_ru": "гроусэри",
+      "translation_ru": "продукты",
+      "definition_ru": "еда и бытовые товары, которые покупают в магазине"
+    },
+    {
+      "english": "pantry",
+      "transcription": "/ˈpæntri/",
+      "pronunciation_ru": "пэнтри",
+      "translation_ru": "кладовая",
+      "definition_ru": "место для хранения продуктов и кухонных запасов"
+    },
+    {
+      "english": "summary",
+      "transcription": "/ˈsʌməri/",
+      "pronunciation_ru": "самэри",
+      "translation_ru": "краткое описание",
+      "definition_ru": "короткое изложение главной информации"
+    },
+    {
+      "english": "request",
+      "transcription": "/rɪˈkwest/",
+      "pronunciation_ru": "риквест",
+      "translation_ru": "запрос",
+      "definition_ru": "просьба о действии, информации или помощи"
+    },
+    {
+      "english": "approval",
+      "transcription": "/əˈpruːvəl/",
+      "pronunciation_ru": "эпрувэл",
+      "translation_ru": "одобрение",
+      "definition_ru": "разрешение или согласие на действие"
+    },
+    {
+      "english": "feedback",
+      "transcription": "/ˈfiːdbæk/",
+      "pronunciation_ru": "фидбэк",
+      "translation_ru": "обратная связь",
+      "definition_ru": "мнение или комментарии, которые помогают улучшить работу"
+    },
+    {
+      "english": "meeting",
+      "transcription": "/ˈmiːtɪŋ/",
+      "pronunciation_ru": "митинг",
+      "translation_ru": "встреча",
+      "definition_ru": "запланированный разговор людей по делу или теме"
+    },
+    {
+      "english": "agenda",
+      "transcription": "/əˈdʒendə/",
+      "pronunciation_ru": "эдженда",
+      "translation_ru": "повестка",
+      "definition_ru": "список тем, которые нужно обсудить на встрече"
+    },
+    {
+      "english": "priority",
+      "transcription": "/praɪˈɔːrəti/",
+      "pronunciation_ru": "прайорити",
+      "translation_ru": "приоритет",
+      "definition_ru": "задача или вещь, которая важнее других"
+    },
+    {
+      "english": "progress",
+      "transcription": "/ˈprɑːɡres/",
+      "pronunciation_ru": "прогрэс",
+      "translation_ru": "прогресс",
+      "definition_ru": "движение вперед или улучшение результата"
+    },
+    {
+      "english": "issue",
+      "transcription": "/ˈɪʃuː/",
+      "pronunciation_ru": "ишью",
+      "translation_ru": "проблема",
+      "definition_ru": "вопрос или трудность, которую нужно решить"
+    },
+    {
+      "english": "solution",
+      "transcription": "/səˈluːʃn/",
+      "pronunciation_ru": "солюшн",
+      "translation_ru": "решение",
+      "definition_ru": "способ исправить проблему или ответить на вопрос"
+    },
+    {
+      "english": "backup",
+      "transcription": "/ˈbækʌp/",
+      "pronunciation_ru": "бэкап",
+      "translation_ru": "резервная копия",
+      "definition_ru": "копия данных, которую сохраняют на случай потери оригинала"
+    },
+    {
+      "english": "folder",
+      "transcription": "/ˈfoʊldər/",
+      "pronunciation_ru": "фоулдэр",
+      "translation_ru": "папка",
+      "definition_ru": "место для хранения файлов или документов"
+    },
+    {
+      "english": "attachment",
+      "transcription": "/əˈtætʃmənt/",
+      "pronunciation_ru": "этэчмэнт",
+      "translation_ru": "вложение",
+      "definition_ru": "файл, который прикрепляют к сообщению или письму"
+    },
+    {
+      "english": "browser",
+      "transcription": "/ˈbraʊzər/",
+      "pronunciation_ru": "браузэр",
+      "translation_ru": "браузер",
+      "definition_ru": "программа для открытия сайтов в интернете"
+    },
+    {
+      "english": "password",
+      "transcription": "/ˈpæswɜːrd/",
+      "pronunciation_ru": "пэсуорд",
+      "translation_ru": "пароль",
+      "definition_ru": "секретная строка для входа в аккаунт или систему"
+    },
+    {
+      "english": "privacy",
+      "transcription": "/ˈpraɪvəsi/",
+      "pronunciation_ru": "прайвэси",
+      "translation_ru": "конфиденциальность",
+      "definition_ru": "защита личной информации от лишнего доступа"
+    }
+  ]
+}
