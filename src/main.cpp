@@ -602,13 +602,14 @@ bool upsert_screen(long long chat_id, TelegramClient& bot, const std::string& te
 }
 
 bool upsert_photo_screen(long long chat_id, TelegramClient& bot, const std::string& photo_path,
-                         const InlineKeyboard& buttons, int preferred_message_id = 0) {
+                         const InlineKeyboard& buttons, int preferred_message_id = 0,
+                         const std::string& caption = "") {
     int message_id = preferred_message_id > 0 ? preferred_message_id : get_active_screen_message(chat_id);
     if (message_id > 0) {
         ScreenMessageType current_type = get_active_screen_message_type(chat_id);
         if (current_type == ScreenMessageType::Photo || current_type == ScreenMessageType::Unknown) {
             TelegramRequestResult edit_result;
-            if (bot.edit_message_photo(chat_id, message_id, photo_path, buttons, "", &edit_result)) {
+            if (bot.edit_message_photo(chat_id, message_id, photo_path, buttons, caption, &edit_result)) {
                 remember_active_screen_message(chat_id, message_id, ScreenMessageType::Photo);
                 return true;
             }
@@ -631,12 +632,25 @@ bool upsert_photo_screen(long long chat_id, TelegramClient& bot, const std::stri
     }
 
     int sent_message_id = 0;
-    if (bot.send_photo(chat_id, photo_path, buttons, "", &sent_message_id)) {
+    if (bot.send_photo(chat_id, photo_path, buttons, caption, &sent_message_id)) {
         remember_active_screen_message(chat_id, sent_message_id, ScreenMessageType::Photo);
         return true;
     }
 
     return false;
+}
+
+std::string screen_caption(const std::string& title, int page = -1, int total = -1,
+                           const std::string& hint = "") {
+    std::string caption = "Сейчас открыто: " + title;
+    if (page >= 0 && total > 0) {
+        caption += " · страница " + std::to_string(page + 1) + "/" + std::to_string(total);
+    }
+    caption += ".";
+    if (!hint.empty()) {
+        caption += "\n" + hint;
+    }
+    return caption;
 }
 
 InlineKeyboard page_keyboard(const std::string& callback_prefix, int page, int total,
@@ -1465,7 +1479,8 @@ bool show_status_screen(long long chat_id, TelegramClient& bot, const std::strin
                         int message_id = 0) {
     std::string image_path = render_status_image(key, title, subtitle, note);
     if (!image_path.empty()) {
-        return upsert_photo_screen(chat_id, bot, image_path, buttons, message_id);
+        return upsert_photo_screen(
+            chat_id, bot, image_path, buttons, message_id, screen_caption(title));
     }
 
     return upsert_screen(chat_id, bot, "*" + title + "*\n\n" + subtitle + "\n\n" + note, buttons, message_id);
@@ -1914,7 +1929,9 @@ void send_main_menu(long long chat_id, TelegramClient& bot, Database& db, int me
     std::string user_level = english_level_from_learned(learned);
     std::string image_path = render_main_menu_image(user_level);
     if (!image_path.empty()) {
-        upsert_photo_screen(chat_id, bot, image_path, main_menu_keyboard(), message_id);
+        upsert_photo_screen(
+            chat_id, bot, image_path, main_menu_keyboard(), message_id,
+            screen_caption("Главное меню"));
         return;
     }
 
@@ -1927,7 +1944,9 @@ void send_topic_menu(long long chat_id, TelegramClient& bot, int message_id = 0)
     InlineKeyboard buttons = topic_keyboard();
     std::string image_path = render_topic_menu_image();
     if (!image_path.empty()) {
-        upsert_photo_screen(chat_id, bot, image_path, buttons, message_id);
+        upsert_photo_screen(
+            chat_id, bot, image_path, buttons, message_id,
+            screen_caption("Добавление слов"));
         return;
     }
 
@@ -1943,7 +1962,9 @@ void show_ai_prompt(long long chat_id, TelegramClient& bot, int message_id = 0) 
     });
     std::string image_path = render_ai_prompt_image();
     if (!image_path.empty()) {
-        upsert_photo_screen(chat_id, bot, image_path, buttons, message_id);
+        upsert_photo_screen(
+            chat_id, bot, image_path, buttons, message_id,
+            screen_caption("Спросить AI"));
         return;
     }
 
@@ -1992,9 +2013,13 @@ void show_dictionary_page(long long chat_id, TelegramClient& bot,
         }
         upsert_screen(chat_id, bot, msg, buttons, is_new ? 0 : message_id);
     } else if (is_new) {
-        upsert_photo_screen(chat_id, bot, image_path, buttons);
+        upsert_photo_screen(
+            chat_id, bot, image_path, buttons, 0,
+            screen_caption("Словарь для изучения", page, total));
     } else {
-        upsert_photo_screen(chat_id, bot, image_path, buttons, message_id);
+        upsert_photo_screen(
+            chat_id, bot, image_path, buttons, message_id,
+            screen_caption("Словарь для изучения", page, total));
     }
 }
 
@@ -2030,9 +2055,13 @@ void show_learned_page(long long chat_id, TelegramClient& bot,
         std::string msg = "*Выученные слова*\n\nНе удалось собрать картинку. Попробуй открыть раздел еще раз.";
         upsert_screen(chat_id, bot, msg, buttons, is_new ? 0 : message_id);
     } else if (is_new) {
-        upsert_photo_screen(chat_id, bot, image_path, buttons);
+        upsert_photo_screen(
+            chat_id, bot, image_path, buttons, 0,
+            screen_caption("Словарь для повторения", page, total));
     } else {
-        upsert_photo_screen(chat_id, bot, image_path, buttons, message_id);
+        upsert_photo_screen(
+            chat_id, bot, image_path, buttons, message_id,
+            screen_caption("Словарь для повторения", page, total));
     }
 }
 
@@ -2075,9 +2104,17 @@ bool show_daily_review_page(long long chat_id, TelegramClient& bot,
         std::string msg = "*Доброе утро*\n\nНе удалось собрать картинку повторения. Попробуй открыть раздел еще раз.";
         return upsert_screen(chat_id, bot, msg, buttons, is_new ? 0 : message_id);
     } else if (is_new) {
-        return upsert_photo_screen(chat_id, bot, image_path, buttons);
+        return upsert_photo_screen(
+            chat_id, bot, image_path, buttons, 0,
+            screen_caption(
+                "Утреннее повторение", page, total,
+                "Прочитай слова и проговори их вслух."));
     } else {
-        return upsert_photo_screen(chat_id, bot, image_path, buttons, message_id);
+        return upsert_photo_screen(
+            chat_id, bot, image_path, buttons, message_id,
+            screen_caption(
+                "Утреннее повторение", page, total,
+                "Прочитай слова и проговори их вслух."));
     }
 }
 
@@ -2119,9 +2156,17 @@ bool show_evening_words_page(long long chat_id, TelegramClient& bot,
         std::string msg = "*Новые слова*\n\nНе удалось собрать картинку. Попробуй открыть раздел еще раз.";
         return upsert_screen(chat_id, bot, msg, buttons, is_new ? 0 : message_id);
     } else if (is_new) {
-        return upsert_photo_screen(chat_id, bot, image_path, buttons);
+        return upsert_photo_screen(
+            chat_id, bot, image_path, buttons, 0,
+            screen_caption(
+                "Вечерняя подборка", page, total,
+                "Выучил слово — отправь его боту текстом."));
     } else {
-        return upsert_photo_screen(chat_id, bot, image_path, buttons, message_id);
+        return upsert_photo_screen(
+            chat_id, bot, image_path, buttons, message_id,
+            screen_caption(
+                "Вечерняя подборка", page, total,
+                "Выучил слово — отправь его боту текстом."));
     }
 }
 
@@ -2148,7 +2193,9 @@ void show_stats(long long chat_id, TelegramClient& bot, Database& db, int messag
     });
     std::string image_path = render_stats_image(chat_id, total, learned, level, next_name, next_level, percent);
     if (!image_path.empty()) {
-        upsert_photo_screen(chat_id, bot, image_path, buttons, message_id);
+        upsert_photo_screen(
+            chat_id, bot, image_path, buttons, message_id,
+            screen_caption("Статистика"));
         return;
     }
 
@@ -2890,6 +2937,9 @@ enum class BroadcastResult {
 
 // send daily review with learned words to repeat
 BroadcastResult send_daily_review(long long chat_id, TelegramClient& bot, Database& db) {
+    // Remove a hint left by an older bot version before switching to caption-only broadcasts.
+    delete_tracked_broadcast_hint(chat_id, bot);
+
     auto words = get_learned_words_for_review(chat_id, db);
     bool screen_ok = show_daily_review_page(chat_id, bot, words, 0);
     if (!screen_ok) {
@@ -2902,16 +2952,13 @@ BroadcastResult send_daily_review(long long chat_id, TelegramClient& bot, Databa
         return BroadcastResult::NoContent;
     }
 
-    bool hint_ok = send_temporary_broadcast_hint(
-        chat_id,
-        bot,
-        "Утреннее повторение выученных слов.\n\n"
-        "Прочитай слова на экране и проговори их вслух. Навигация и возврат в меню доступны кнопками ниже."
-    );
-    return hint_ok ? BroadcastResult::Delivered : BroadcastResult::Failed;
+    return BroadcastResult::Delivered;
 }
 
 BroadcastResult send_evening_new_words(long long chat_id, TelegramClient& bot, Database& db) {
+    // Remove a hint left by an older bot version before switching to caption-only broadcasts.
+    delete_tracked_broadcast_hint(chat_id, bot);
+
     remember_screen_context(chat_id, "generation");
     bool status_ok = show_status_screen(
         chat_id,
@@ -2955,21 +3002,9 @@ BroadcastResult send_evening_new_words(long long chat_id, TelegramClient& bot, D
     }
 
     if (generation.added > 0) {
-        bool hint_ok = send_temporary_broadcast_hint(
-            chat_id,
-            bot,
-            "Вечерняя подборка новых слов готова.\n\n"
-            "Когда выучил слово, отправь его текстом сюда. Бот обновит прогресс и оставит навигацию на экране."
-        );
-        return hint_ok ? BroadcastResult::Delivered : BroadcastResult::Failed;
+        return BroadcastResult::Delivered;
     } else {
-        bool hint_ok = send_temporary_broadcast_hint(
-            chat_id,
-            bot,
-            "Сегодня AI не добавил новых слов: все варианты оказались дублями или пришли в неверном формате.\n\n"
-            "Показываю текущий список слов для изучения. Можно выбрать тему вручную кнопкой «Добавить слова»."
-        );
-        return hint_ok ? BroadcastResult::NoContent : BroadcastResult::Failed;
+        return BroadcastResult::NoContent;
     }
 }
 
