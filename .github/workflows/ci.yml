@@ -1,0 +1,117 @@
+name: C++ CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  code-quality:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install tools and dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes \
+            clang-format \
+            clang-tidy \
+            cmake \
+            g++ \
+            libcurl4-openssl-dev \
+            libpqxx-dev \
+            nlohmann-json3-dev \
+            pkg-config
+
+      - name: Check formatting
+        run: |
+          find include src tests -type f \( -name '*.h' -o -name '*.cpp' \) -print0 \
+            | xargs -0 clang-format --dry-run --Werror
+
+      - name: Generate compilation database
+        run: >
+          cmake -S . -B build/tidy
+          -DCMAKE_BUILD_TYPE=Debug
+          -DENGLISH_MENTOR_BUILD_TESTS=ON
+
+      - name: Run clang-tidy
+        run: run-clang-tidy -p build/tidy -quiet
+
+  build-and-test:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes \
+            cmake \
+            g++ \
+            libcurl4-openssl-dev \
+            libpqxx-dev \
+            nlohmann-json3-dev \
+            pkg-config
+
+      - name: Configure
+        run: >
+          cmake -S . -B build
+          -DCMAKE_BUILD_TYPE=Debug
+          -DENGLISH_MENTOR_BUILD_TESTS=ON
+          -DENGLISH_MENTOR_WARNINGS_AS_ERRORS=ON
+
+      - name: Build
+        run: cmake --build build --parallel 2
+
+      - name: Test
+        run: ctest --test-dir build --output-on-failure
+
+  sanitizers:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes \
+            cmake \
+            g++ \
+            libcurl4-openssl-dev \
+            libpqxx-dev \
+            nlohmann-json3-dev \
+            pkg-config
+
+      - name: Configure sanitizers
+        run: >
+          cmake -S . -B build
+          -DCMAKE_BUILD_TYPE=Debug
+          -DENGLISH_MENTOR_BUILD_TESTS=ON
+          -DENGLISH_MENTOR_WARNINGS_AS_ERRORS=ON
+          -DENGLISH_MENTOR_ENABLE_SANITIZERS=ON
+
+      - name: Build
+        run: cmake --build build --parallel 2
+
+      - name: Test with ASan and UBSan
+        env:
+          ASAN_OPTIONS: detect_leaks=1:strict_string_checks=1
+          UBSAN_OPTIONS: print_stacktrace=1:halt_on_error=1
+        run: ctest --test-dir build --output-on-failure
+
+  docker-build:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build runtime image
+        run: docker build --target runtime --tag english-mentor:ci .

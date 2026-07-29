@@ -1,0 +1,22 @@
+:root {
+  --bg: #0b0d10;
+  --canvas-start: #171b20;
+  --canvas-mid: #101317;
+  --canvas-end: #090b0e;
+  --panel: #191e24;
+  --surface: #222830;
+  --surface-raised: #242b33;
+  --border: #303841;
+  --border-raised: #3b444d;
+  --text: #f5f7f8;
+  --text-secondary: #c9d1d8;
+  --text-muted: #95a1ad;
+  --green: #34d399;
+  --green-dark: #1f9e65;
+  --green-soft: #8ee6c8;
+  --blue: #60a5fa;
+  --cyan: #77d8ff;
+  --font: Arial, Helvetica, sans-serif;
+  --panel-radius: 34px;
+  --card-radius: 22px;
+}

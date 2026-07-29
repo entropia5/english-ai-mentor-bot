@@ -1,0 +1,25 @@
+---
+Checks: >
+  -*,
+  bugprone-branch-clone,
+  bugprone-infinite-loop,
+  bugprone-macro-parentheses,
+  bugprone-multiple-statement-macro,
+  bugprone-signed-char-misuse,
+  bugprone-sizeof-expression,
+  bugprone-string-constructor,
+  bugprone-suspicious-missing-comma,
+  bugprone-terminating-continue,
+  bugprone-use-after-move,
+  performance-for-range-copy,
+  performance-implicit-conversion-in-loop,
+  performance-move-const-arg,
+  performance-no-automatic-move,
+  performance-trivially-destructible,
+  performance-unnecessary-copy-initialization,
+  performance-unnecessary-value-param,
+  portability-simd-intrinsics
+WarningsAsErrors: '*'
+HeaderFilterRegex: '(^|.*/)(include|src)/'
+FormatStyle: file
+...

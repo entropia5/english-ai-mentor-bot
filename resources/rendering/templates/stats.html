@@ -1,0 +1,23 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>{{{theme_css}}}</style></head>
+<body class="stats">
+<div class="canvas"><div class="panel">
+  <div class="top">
+    <div>
+      <div class="label">by entropia5</div>
+      <div class="title">Статистика</div>
+      <div class="line"></div>
+    </div>
+    <div class="level">{{level}}</div>
+  </div>
+  <div class="grid">
+    <div class="metric"><div class="name">Всего слов</div><div class="value">{{total}}</div></div>
+    <div class="metric"><div class="name">Выучено</div><div class="value">{{learned}}</div></div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-head"><div>Прогресс словаря</div><div>{{percent}}%</div></div>
+    <div class="bar"><div class="fill" style="width: {{percent}}%"></div></div>
+  </div>
+  <div class="next">{{next_text}}</div>
+</div></div>
+</body></html>

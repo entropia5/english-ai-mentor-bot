@@ -1,17 +1,17 @@
 #pragma once
 
-#include <string>
 #include <map>
-#include <vector>
 #include <set>
+#include <string>
+#include <vector>
 
 class Config {
-private:
+  private:
     std::map<std::string, std::string> values;
 
-    void trim(std::string& s);
+    static void trim(std::string& s);
 
-public:
+  public:
     bool load(const std::string& filename = ".env");
 
     std::string get(const std::string& key, const std::string& default_value = "") const;

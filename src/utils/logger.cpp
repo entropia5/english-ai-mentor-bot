@@ -1,9 +1,10 @@
 #include "logger.h"
-#include <iostream>
-#include <fstream>
+
 #include <chrono>
-#include <iomanip>
 #include <ctime>
+#include <fstream>
+#include <iomanip>
+#include <iostream>
 
 Logger::Logger(const std::string& filepath) : log_file(filepath) {}
 

@@ -1,8 +1,9 @@
 #include "config.h"
-#include <fstream>
-#include <sstream>
+
 #include <algorithm>
 #include <cctype>
+#include <fstream>
+#include <sstream>
 
 void Config::trim(std::string& s) {
     size_t start = s.find_first_not_of(" \t\n\r\f\v");
@@ -23,7 +24,8 @@ bool Config::load(const std::string& filename) {
 
     std::string line;
     while (std::getline(file, line)) {
-        if (line.empty() || line[0] == '#') continue;
+        if (line.empty() || line[0] == '#')
+            continue;
 
         size_t pos = line.find('=');
         if (pos != std::string::npos) {
@@ -57,7 +59,8 @@ int Config::get_int(const std::string& key, int default_value) const {
     if (it != values.end()) {
         try {
             return std::stoi(it->second);
-        } catch (...) {}
+        } catch (...) {
+        }
     }
     return default_value;
 }
@@ -67,7 +70,8 @@ long long Config::get_long(const std::string& key, long long default_value) cons
     if (it != values.end()) {
         try {
             return std::stoll(it->second);
-        } catch (...) {}
+        } catch (...) {
+        }
     }
     return default_value;
 }
@@ -79,14 +83,14 @@ std::vector<long long> Config::get_long_list(const std::string& key, char delimi
         std::stringstream ss(it->second);
         std::string item;
         while (std::getline(ss, item, delimiter)) {
-            // Убираем пробелы (создаем копию, так как item не должен меняться в const методе)
             std::string trimmed = item;
-            const_cast<Config*>(this)->trim(trimmed);  // Временный костыль
+            trim(trimmed);
 
             if (!trimmed.empty()) {
                 try {
                     result.push_back(std::stoll(trimmed));
-                } catch (...) {}
+                } catch (...) {
+                }
             }
         }
     }

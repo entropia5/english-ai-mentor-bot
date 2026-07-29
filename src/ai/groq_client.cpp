@@ -1,6 +1,8 @@
 #include "groq_client.h"
-#include "logger.h"
+
 #include "config.h"
+#include "logger.h"
+
 #include <curl/curl.h>
 #include <nlohmann/json.hpp>
 
@@ -26,7 +28,8 @@ GroqClient::GroqClient() {
 
 std::string GroqClient::ask(const std::string& prompt, const std::string& system_prompt) {
     if (api_key.empty()) {
-        return "⚠️ API ключ не настроен. Добавьте GROQ_API_KEY в .env файл";
+        return "⚠️ API ключ не настроен. Добавьте GROQ_API_KEY в .env "
+               "файл";
     }
 
     CURL* curl = curl_easy_init();
@@ -38,11 +41,12 @@ std::string GroqClient::ask(const std::string& prompt, const std::string& system
     json messages = json::array();
 
     // set system prompt or default
-    std::string sys_prompt = system_prompt.empty() ?
-        "Ты опытный преподаватель английского языка. Отвечай полезно, кратко и по делу. "
-        "Если просят слова - давай список с переводом на русский и транскрипцией. "
-        "Используй русский язык для объяснений, английский для примеров." :
-        system_prompt;
+    std::string sys_prompt =
+        system_prompt.empty()
+            ? "Ты опытный преподаватель английского языка. Отвечай полезно, кратко и по делу. "
+              "Если просят слова - давай список с переводом на русский и транскрипцией. "
+              "Используй русский язык для объяснений, английский для примеров."
+            : system_prompt;
 
     messages.push_back({{"role", "system"}, {"content", sys_prompt}});
     messages.push_back({{"role", "user"}, {"content", prompt}});

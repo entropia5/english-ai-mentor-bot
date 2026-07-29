@@ -1,0 +1,48 @@
+services:
+  database:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME:-english_mentor}
+      POSTGRES_USER: ${DB_USER:-mentor}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env}
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  bot:
+    build:
+      context: .
+      target: runtime
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      DB_HOST: database
+      DB_PORT: 5432
+      MIGRATIONS_DIR: /app/migrations
+      RENDER_RESOURCES_DIR: /app/resources/rendering
+    depends_on:
+      database:
+        condition: service_healthy
+    volumes:
+      - bot_data:/app/data
+      - ./resources/rendering:/app/resources/rendering:ro
+    networks:
+      - backend
+
+volumes:
+  postgres_data:
+  bot_data:
+
+networks:
+  backend:

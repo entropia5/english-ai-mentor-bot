@@ -1,0 +1,32 @@
+body.compact { width: 1080px; height: 760px; }
+body.compact .canvas { width: 1080px; height: 760px; padding: 38px; }
+body.compact .panel { padding: 54px; }
+body.compact .title { font-size: 82px; line-height: 1.04; }
+body.compact .title-row { margin-top: 54px; }
+
+body.compact .subtitle, body.compact .text {
+  margin-top: 38px;
+  color: #d5dde4;
+  font-size: 38px;
+  line-height: 1.24;
+  font-weight: 800;
+}
+
+body.compact .hint, body.compact .note {
+  padding: 26px 30px;
+  border-radius: 24px;
+  color: #c7d0d8;
+  font-size: 30px;
+  line-height: 1.28;
+  font-weight: 700;
+}
+
+body.with-footer .panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+body.topics { height: 820px; }
+body.topics .canvas { height: 820px; }
+body.topics .text { max-width: 800px; font-size: 32px; line-height: 1.34; }

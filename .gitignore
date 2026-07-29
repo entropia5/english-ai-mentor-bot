@@ -1,5 +1,7 @@
 # Build artifacts
 build/
+cmake-build-*/
+CMakeUserPresets.json
 *.o
 english_mentor
 
@@ -22,6 +24,11 @@ data/
 *~
 *.tmp
 
+# Test and coverage output
+Testing/
+coverage/
+*.gcda
+*.gcno
 
 
 

@@ -1,0 +1,9 @@
+.git
+.github
+.env
+build
+cmake-build-*
+data
+docs
+*.log
+*.tmp

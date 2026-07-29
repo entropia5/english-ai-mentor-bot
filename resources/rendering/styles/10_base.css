@@ -1,0 +1,47 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+}
+
+.canvas {
+  background:
+    radial-gradient(circle at 82% 10%, rgba(52, 211, 153, .16), transparent 34%),
+    radial-gradient(circle at 8% 90%, rgba(96, 165, 250, .13), transparent 36%),
+    linear-gradient(145deg, var(--canvas-start) 0%, var(--canvas-mid) 62%, var(--canvas-end) 100%);
+}
+
+.panel {
+  height: 100%;
+  border-radius: var(--panel-radius);
+  border: 1px solid var(--border);
+  background: var(--panel);
+  box-shadow: 0 32px 90px rgba(0, 0, 0, .48);
+}
+
+.brand, .label {
+  color: var(--text-muted);
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.title {
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.accent-line, .line, .title-line {
+  width: 230px;
+  height: 8px;
+  border-radius: 99px;
+  margin-top: 18px;
+  background: linear-gradient(90deg, var(--green), var(--blue));
+}
+
+.hint, .note, .level, .badge, .next {
+  background: var(--surface-raised);
+  border: 1px solid var(--border-raised);
+}

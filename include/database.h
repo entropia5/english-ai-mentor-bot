@@ -1,10 +1,12 @@
 #pragma once
 
-#include <string>
-#include <vector>
-#include <tuple>
+#include "domain/word.h"
+
 #include <memory>
 #include <pqxx/pqxx>
+#include <string>
+#include <tuple>
+#include <vector>
 
 struct WordAuditRow {
     int id = 0;
@@ -14,20 +16,22 @@ struct WordAuditRow {
     bool is_learned = false;
 };
 
-using WordView = std::tuple<std::string, std::string, bool, std::string, std::string, std::string>;
+using WordView = Word;
 
 class Database {
-private:
+  private:
     std::unique_ptr<pqxx::connection> conn;
     std::string connection_string;
     bool connected = false;
 
-public:
+  public:
     Database();
     ~Database();
 
     bool connect();
-    bool is_connected() const { return connected; }
+    bool is_connected() const {
+        return connected;
+    }
     void disconnect();
 
     // check connection
@@ -40,14 +44,17 @@ public:
     bool cleanup_duplicate_words();
 
     // find old words without IPA transcription or Russian pronunciation
-    std::vector<std::tuple<int, std::string, std::string>> get_words_missing_pronunciation(int limit = 50);
-    std::vector<std::tuple<int, std::string, std::string>> get_words_missing_definition(int limit = 50);
+    std::vector<std::tuple<int, std::string, std::string>>
+    get_words_missing_pronunciation(int limit = 50);
+    std::vector<std::tuple<int, std::string, std::string>>
+    get_words_missing_definition(int limit = 50);
 
     bool update_word_pronunciation(int word_id, const std::string& transcription,
                                    const std::string& pronunciation_ru);
     bool update_word_definition(int word_id, const std::string& definition_ru);
 
-    std::vector<WordAuditRow> find_words_by_normalized_english(const std::vector<std::string>& english_words);
+    std::vector<WordAuditRow>
+    find_words_by_normalized_english(const std::vector<std::string>& english_words);
     int delete_words_by_ids(const std::vector<int>& word_ids);
 
     // work with users
@@ -60,14 +67,16 @@ public:
 
     // work with conversations
     bool save_conversation(long long user_id, const std::string& role, const std::string& content);
-    std::vector<std::pair<std::string, std::string>> get_conversation_history(long long user_id, int limit = 10);
+    std::vector<std::pair<std::string, std::string>> get_conversation_history(long long user_id,
+                                                                              int limit = 10);
 
-    //work with words
+    // work with words
     bool add_word(long long user_id, const std::string& english, const std::string& translation,
                   const std::string& pronunciation = "", const std::string& transcription = "",
                   const std::string& topic = "general", const std::string& definition = "");
 
-    std::vector<std::tuple<std::string, std::string, bool>> get_user_words(long long user_id, bool only_not_learned = false);
+    std::vector<std::tuple<std::string, std::string, bool>>
+    get_user_words(long long user_id, bool only_not_learned = false);
 
     bool mark_word_learned(long long user_id, const std::string& english);
 
@@ -75,8 +84,6 @@ public:
 
     int get_words_count(long long user_id, bool learned = false);
 
-   // get full word info for all words of user
+    // get full word info for all words of user
     std::vector<WordView> get_user_words_full(long long user_id, bool only_not_learned = false);
-
-
 };

@@ -1,87 +1,172 @@
-# English Mentor Bot
+# English AI Mentor Bot
 
-Telegram bot для изучения английского языка: генерирует тематические слова через AI, ведет личный словарь, помогает учить новые слова вечером и повторять выученные слова утром, а также отвечает на вопросы по английскому с помощью AI на базе Groq API.
+[![CI](https://github.com/entropia5/english-ai-mentor-bot/actions/workflows/ci.yml/badge.svg)](https://github.com/entropia5/english-ai-mentor-bot/actions/workflows/ci.yml)
+[![C++17](https://img.shields.io/badge/C%2B%2B-17-00599C?logo=cplusplus)](https://isocpp.org/)
+[![CMake](https://img.shields.io/badge/build-CMake-064F8C?logo=cmake)](https://cmake.org/)
+[![PostgreSQL](https://img.shields.io/badge/database-PostgreSQL-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-## Что умеет
+Модульный Telegram-бот на C++17 для изучения английского языка. Он генерирует
+тематические подборки слов через Groq AI, ведёт личный словарь, организует утренние
+повторения и вечерние занятия и отображает интерфейс как HTML/CSS → PNG-экраны.
 
-- Личный словарь для каждого пользователя.
-- `Словарь для изучения` и `Словарь для повторения` показываются HTML/CSS PNG-экранами в едином темно-графитовом стиле.
-- Генерация новых слов по темам: быт, путешествия, еда, работа, IT/C++, общение.
-- Отметка слов как выученных одним сообщением: `word`, `Word`, `word, another word`.
-- Настоящая английская транскрипция и русская подсказка произношения.
-- Краткое толкование смысла слова на русском под переводом.
-- Защита от дублей и слабых AI-вариантов; при нехватке слов бот добирает их из резервного словаря.
-- Утренняя и вечерняя рассылки редактируют активный экран и его подпись, не создавая дополнительных сообщений.
-- AI-помощник на базе Groq API.
+Главная инженерная особенность проекта — разделение доменной логики, Telegram,
+PostgreSQL, AI, presentation и rendering. Внешний вид экранов меняется через
+runtime-шаблоны и CSS **без перекомпиляции C++**.
 
-## UI бота
+## Интерфейс
 
-Интерфейс в Telegram построен вокруг темно-графитовых PNG-экранов и inline-кнопок: пользователь видит один активный экран, а навигация идет через меню, пагинацию и возврат в главное меню.
-Основные разделы ниже генерируются как PNG-экраны; слова по-прежнему можно отмечать выученными обычным текстовым вводом в чат.
-В верхней подписи экранов используется брендинг `by entropia5`.
-
-| Главное меню | Добавить слова |
-| --- | --- |
-| ![Главное меню English AI Mentor](docs/ui/menu.png) | ![Экран выбора темы для новых слов](docs/ui/new_words.png) |
+| Главное меню | Выбор темы |
+|:---:|:---:|
+| ![Главное меню English AI Mentor](docs/ui/menu.png) | ![Выбор темы для новых слов](docs/ui/new_words.png) |
 
 | Словарь для изучения | Словарь для повторения |
-| --- | --- |
-| ![Страница словаря с новыми словами](docs/ui/words.png) | ![Страница выученных слов](docs/ui/words2.png) |
+|:---:|:---:|
+| ![Новые слова](docs/ui/words.png) | ![Выученные слова](docs/ui/words2.png) |
 
 | Утреннее повторение | Вечерняя подборка |
-| --- | --- |
-| ![Экран утреннего повторения выученных слов](docs/ui/morning.png) | ![Экран вечерней подборки новых слов](docs/ui/evening.png) |
+|:---:|:---:|
+| ![Утреннее повторение](docs/ui/morning.png) | ![Вечерняя подборка](docs/ui/evening.png) |
 
-## Стек
+Скриншоты создаёт сам production-renderer — это не отдельные макеты. Их можно
+обновить из актуальных данных командой:
 
-- C++17
-- CMake
-- PostgreSQL
-- libpqxx
-- libcurl
-- nlohmann/json
-- wkhtmltoimage для рендера HTML/CSS-картинок
-- Telegram Bot API
-- Groq Chat Completions API
+```bash
+./build/dev/english_mentor --refresh-doc-screenshots <telegram_chat_id>
+```
+
+## Возможности
+
+- личный словарь и независимый прогресс каждого пользователя;
+- генерация слов по темам: быт, путешествия, еда, работа, IT/C++ и общение;
+- английская IPA-транскрипция, русская подсказка произношения, перевод и толкование;
+- фильтрация некачественных AI-ответов, защита от дублей и резервный JSON-словарь;
+- отметка одного или нескольких слов как выученных обычным сообщением;
+- PNG-интерфейс с inline-навигацией и пагинацией;
+- редактирование одного активного Telegram-сообщения вместо засорения чата;
+- утренние повторения и вечерние подборки с защитой от повторной рассылки;
+- AI-помощник по вопросам английского языка;
+- автоматические SQL-миграции и сохранение runtime-состояния;
+- preview, self-test, maintenance-команды, unit-тесты и sanitizer-сборка.
+
+## Технологии
+
+- C++17, CMake и CTest;
+- Telegram Bot API и libcurl;
+- Groq Chat Completions API;
+- PostgreSQL и libpqxx;
+- nlohmann/json;
+- HTML/CSS и `wkhtmltoimage`;
+- Docker Compose;
+- GitHub Actions, clang-format, clang-tidy, ASan и UBSan.
+
+## Архитектура
+
+```text
+Telegram update
+      │
+      ▼
+┌───────────────────┐
+│ Application layer │  polling, CLI, routing
+└─────────┬─────────┘
+          │
+    ┌─────┴──────────────┐
+    ▼                    ▼
+┌──────────┐      ┌──────────────┐
+│ Services │      │ Presentation │
+└────┬─────┘      └──────┬───────┘
+     │                   │
+ ┌───┴────┐         ┌────┴─────┐
+ ▼        ▼         ▼          ▼
+Domain  Storage  Rendering  Telegram API
+          │          │
+      PostgreSQL  HTML/CSS → PNG
+```
+
+Основная логика собирается в статическую библиотеку `english_mentor_core`.
+Исполняемый файл является composition root, а тесты используют ту же библиотеку.
+
+| Модуль | Ответственность |
+|---|---|
+| `domain` | Модели слов и правила прогресса без Telegram и БД |
+| `app` | CLI, polling loop, маршрутизация сообщений и callback-запросов |
+| `services` | Генерация, словари, рассылки, аудит и обслуживание |
+| `presentation` | Экраны, пагинация, UI-сессии и доставка сообщений |
+| `rendering` | HTML-шаблоны, CSS, PNG-рендер и кэш |
+| `bot` | Telegram API, keyboards, JSON/multipart transport |
+| `ai` | Groq client и разбор структурированных AI-ответов |
+| `storage` | PostgreSQL, миграции и файловые checkpoints |
+| `scheduler` | RAII-владение worker-потоком и плановые задачи |
+| `core` | Общие переиспользуемые операции |
+
+Более подробные границы и потоки данных описаны в
+[ARCHITECTURE.md](ARCHITECTURE.md), правила разработки — в
+[CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Структура проекта
 
 ```text
-include/                 # заголовочные файлы
-src/
-  ai/                    # клиент Groq API
-  bot/                   # клиент Telegram API
-  storage/               # работа с PostgreSQL
-  utils/                 # конфиг и логгер
-  main.cpp               # основной цикл бота, команды, рассылка
-resources/
-  fallback_words.json    # резервный словарь для добора слов
-data/                    # локальные данные и серверный кэш PNG-картинок
-build/                   # директория сборки
+.
+├── include/                    # публичные интерфейсы модулей
+│   ├── ai/
+│   ├── app/
+│   ├── core/
+│   ├── domain/
+│   ├── presentation/
+│   ├── rendering/
+│   ├── scheduler/
+│   ├── services/
+│   └── storage/
+├── src/                        # реализации модулей
+│   ├── ai/
+│   ├── app/
+│   ├── bot/
+│   ├── core/
+│   ├── domain/
+│   ├── presentation/
+│   ├── rendering/
+│   ├── scheduler/
+│   ├── services/
+│   ├── storage/
+│   └── utils/
+├── resources/
+│   ├── fallback_words.json
+│   └── rendering/
+│       ├── styles/             # runtime CSS-модули
+│       └── templates/          # runtime HTML-шаблоны
+├── migrations/                 # последовательные SQL-миграции
+├── tests/                      # unit-тесты
+├── docs/ui/                    # скриншоты для README
+├── .github/workflows/          # CI
+├── CMakePresets.json
+├── Dockerfile
+└── compose.yaml
 ```
 
-## Настройка
+## Быстрый старт
 
-1. Установите зависимости:
+### 1. Зависимости
+
+Для Debian/Ubuntu:
 
 ```bash
 sudo apt-get update
-sudo apt-get install libpqxx-dev libcurl4-openssl-dev nlohmann-json3-dev wkhtmltopdf cmake build-essential
+sudo apt-get install \
+  build-essential cmake \
+  libpqxx-dev libcurl4-openssl-dev nlohmann-json3-dev \
+  wkhtmltopdf postgresql
 ```
 
-2. Создайте PostgreSQL-базу:
+Требуется CMake 3.25 или новее.
+
+### 2. Конфигурация
 
 ```bash
 createdb english_mentor
-```
-
-3. Скопируйте пример окружения:
-
-```bash
 cp .env.example .env
 ```
 
-4. Заполните `.env`:
+Заполните `.env`:
 
 ```env
 TELEGRAM_TOKEN=YOUR_TELEGRAM_BOT_TOKEN
@@ -92,306 +177,167 @@ GROQ_MAX_TOKENS=1800
 DB_HOST=localhost
 DB_PORT=5432
 DB_NAME=english_mentor
-DB_USER=n8n
+DB_USER=mentor
 DB_PASSWORD=YOUR_DB_PASSWORD
 
-ALLOWED_USERS=123456789,987654321
+ALLOWED_USERS=123456789
 USER_1_ID=123456789
 ```
 
-Токен Telegram можно получить через BotFather. Ключ Groq нужен для генерации слов и AI-ответов.
+Telegram-токен создаётся через BotFather. Секреты из `.env` не должны попадать в Git.
 
-## Сборка
-
-```bash
-mkdir -p build
-cd build
-cmake ..
-cmake --build .
-```
-
-После сборки появится бинарник:
-
-```text
-build/english_mentor
-```
-
-## Запуск
-
-Из директории `build`:
+### 3. Сборка и тесты
 
 ```bash
-./english_mentor
+cmake --preset dev
+cmake --build --preset dev
+ctest --preset dev
 ```
 
-Или из корня проекта:
+### 4. Проверка и запуск
 
 ```bash
-cd build
-./english_mentor
+./build/dev/english_mentor --self-test
+./build/dev/english_mentor --render-preview
+./build/dev/english_mentor
 ```
 
-При первом запуске бот создаст нужные таблицы и индексы в PostgreSQL.
+При первом запуске бот применит миграции и создаст необходимые таблицы и индексы.
+Preview-изображения появятся в `data/rendered/`.
 
-## Перезапуск после изменений
-
-Пересоберите проект:
+## Docker Compose
 
 ```bash
-cd /path/to/cxx_english_mentor_v2
-cmake --build build
+cp .env.example .env
+# Заполните TELEGRAM_TOKEN, GROQ_API_KEY и DB_PASSWORD
+docker compose up --build -d
+docker compose logs -f bot
 ```
 
-Если бот запущен в терминале, остановите его через `Ctrl+C` и запустите снова:
+Compose запускает PostgreSQL с healthcheck и bot в отдельной сети. Runtime image
+не содержит компилятор, процесс работает от непривилегированного пользователя,
+а `resources/rendering` подключается read-only для изменения темы с host-машины.
+
+Остановка:
 
 ```bash
-cd build
-./english_mentor
+docker compose down
 ```
 
-Если бот запущен в фоне:
+Удаление volumes и локальной базы:
 
 ```bash
-pgrep -af english_mentor
-kill PID
-cd build
-./english_mentor
+docker compose down --volumes
 ```
 
-## Основные команды в Telegram
+> Последняя команда безвозвратно удаляет данные PostgreSQL из Docker volume.
 
-- `/start` или `start` - открыть inline-меню; команда удаляется из чата после выполнения.
-- Кнопка `Словарь для изучения` - показать невыученные слова.
-- Кнопка `Словарь для повторения` - показать выученные слова картинкой с пагинацией `< 1/100 >`.
-- Кнопка `Добавить слова` - выбрать тему и сгенерировать новые слова.
-- Кнопка `Статистика` - показать прогресс.
-- Любой вопрос текстом - спросить AI; ответ редактирует активный экран бота, а текст вопроса удаляется из чата после ответа.
+## Дизайн без перекомпиляции
 
-## Картинки слов
-
-PNG-картинка главного меню хранится на сервере в:
+Rendering-слой читает ресурсы при создании изображения:
 
 ```text
-data/rendered/menu/main_menu_<level>.png
+resources/rendering/
+├── styles/
+│   ├── 00_tokens.css   # цвета, шрифты, радиусы, design tokens
+│   ├── 10_base.css     # canvas, panels и общие компоненты
+│   ├── 20_compact.css  # компактные и status-экраны
+│   ├── 30_menu.css     # главное меню
+│   ├── 40_stats.css    # статистика и progress bar
+│   └── 50_words.css    # карточки слов
+└── templates/
+    ├── word_item.html  # отдельная карточка слова
+    └── ...             # шаблоны экранов
 ```
 
-PNG-картинки словаря для изучения хранятся на сервере в:
+Чтобы изменить визуальный стиль:
 
-```text
-data/rendered/dictionary/<telegram_chat_id>/page_N.png
+1. отредактируйте CSS или HTML;
+2. запустите `./build/dev/english_mentor --render-preview`;
+3. проверьте результат в `data/rendered/`.
+
+Перекомпиляция не нужна. Содержимое runtime-ресурсов участвует в hash кэша:
+после изменения стиля устаревший PNG автоматически перерендерится. CSS-файлы
+подключаются в лексикографическом порядке, поэтому числовой префикс управляет
+каскадом.
+
+Другую тему можно подключить без изменения исходников:
+
+```env
+RENDER_RESOURCES_DIR=/absolute/path/to/rendering
 ```
 
-PNG-картинки выученных слов хранятся на сервере в:
+## Проверка качества
 
-```text
-data/rendered/learned/<telegram_chat_id>/page_N.png
-```
-
-PNG-картинки утреннего повторения хранятся на сервере в:
-
-```text
-data/rendered/daily/<telegram_chat_id>/page_N.png
-```
-
-PNG-картинки вечерней подборки новых слов хранятся на сервере в:
-
-```text
-data/rendered/evening/<telegram_chat_id>/page_N.png
-```
-
-PNG-картинка экрана AI хранится в:
-
-```text
-data/rendered/ai/prompt.png
-```
-
-PNG-картинки статистики кэшируются по значениям прогресса в:
-
-```text
-data/rendered/stats/<telegram_chat_id>/stats.png
-```
-
-PNG-картинка выбора темы хранится в:
-
-```text
-data/rendered/topics/topic_menu.png
-```
-
-Служебные экраны статусов, например генерация слов или пустое утреннее повторение, хранятся в:
-
-```text
-data/rendered/status/<status_key>.png
-```
-
-Для каждой страницы используется постоянное имя файла. Рядом хранится `page_N.hash`: если слова на странице не изменились, бот переиспользует готовую картинку; если изменились, перезаписывает тот же PNG, а не создает копии.
-Если количество страниц стало меньше, устаревшие `page_N.png`, `page_N.html` и `page_N.hash` удаляются автоматически.
-
-Можно безопасно убрать временные и legacy-артефакты рендера без запуска Telegram polling:
+Dev preset включает строгие предупреждения и рассматривает их как ошибки:
 
 ```bash
-./build/english_mentor --cleanup-render-cache
+cmake --preset dev
+cmake --build --preset dev
+ctest --preset dev
 ```
 
-Быстрые встроенные проверки чистых функций запускаются без `.env` и без Telegram:
+Проверка AddressSanitizer и UndefinedBehaviorSanitizer:
 
 ```bash
-./build/english_mentor --self-test
+cmake --preset sanitize
+cmake --build --preset sanitize
+ctest --preset sanitize
 ```
 
-Скриншоты README можно пересобрать из текущего рендера и данных пользователя:
+CI дополнительно проверяет форматирование, clang-tidy и Docker image.
+Unit-тестам не нужны Telegram, Groq или запущенный PostgreSQL.
+
+## Основные команды бота
+
+- `/start` или `start` — открыть главное меню;
+- `Словарь для изучения` — показать новые слова;
+- `Словарь для повторения` — открыть выученные слова;
+- `Добавить слова` — выбрать тему и создать подборку;
+- `Статистика` — показать текущий прогресс;
+- обычный вопрос — обратиться к AI-помощнику;
+- `house, travel, meeting` — отметить несколько слов как выученные.
+
+Планировщик использует локальное время сервера:
+
+- около `09:00` — утреннее повторение;
+- около `21:00` — вечерняя подборка из 10 новых слов.
+
+Успешные рассылки фиксируются в `data/state/broadcast_runs.json`, поэтому одна и та
+же задача не отправляется повторно в течение дня.
+
+## Служебные CLI-команды
+
+Все команды выполняются без запуска Telegram polling:
 
 ```bash
-./build/english_mentor --refresh-doc-screenshots
-./build/english_mentor --refresh-doc-screenshots <telegram_chat_id>
+./build/dev/english_mentor --self-test
+./build/dev/english_mentor --render-preview
+./build/dev/english_mentor --refresh-doc-screenshots <chat_id>
+./build/dev/english_mentor --cleanup-render-cache
+./build/dev/english_mentor --cleanup-db
+./build/dev/english_mentor --audit-words
+./build/dev/english_mentor --cleanup-bad-words
+./build/dev/english_mentor --backfill-transcriptions
+./build/dev/english_mentor --backfill-definitions
+./build/dev/english_mentor --send-evening-once <chat_id>
 ```
 
-## Чистка дублей
-
-При старте бот удаляет дубли слов по ключу `user_id + lower(trim(english))` и создает уникальный индекс, чтобы новые дубли не попадали в таблицу.
-
-Можно выполнить только чистку БД без запуска Telegram polling:
-
-```bash
-./build/english_mentor --cleanup-db
-```
-
-Можно посмотреть слабые старые слова, которые больше не проходят текущий фильтр генерации:
-
-```bash
-./build/english_mentor --audit-words
-```
-
-Можно удалить такие слова из БД по точным `id`:
-
-```bash
-./build/english_mentor --cleanup-bad-words
-```
-
-Можно один раз заполнить английскую IPA-транскрипцию и русскую подсказку произношения для старых слов, где эти поля пустые:
-
-```bash
-./build/english_mentor --backfill-transcriptions
-```
-
-Можно один раз заполнить краткие толкования смысла для старых слов:
-
-```bash
-./build/english_mentor --backfill-definitions
-```
-
-Чтобы отметить слова как выученные, отправьте одно слово или список через запятую:
+## Runtime-данные
 
 ```text
-house
-House
-house, travel, meeting
+data/
+├── rendered/            # PNG, HTML и hash-кэш
+├── state/
+│   ├── bot_state.json
+│   ├── broadcast_runs.json
+│   └── telegram_update_state.json
+└── fallback_words.json # необязательный локальный override
 ```
 
-## Как устроены слова
+`data/`, `.env`, логи и build-артефакты исключены из Git. Резервный словарь,
+который входит в репозиторий, находится в `resources/fallback_words.json`.
 
-Каждое слово хранится с такими данными:
+## Лицензия
 
-- английское слово;
-- перевод на русский;
-- краткое толкование смысла на русском;
-- настоящая транскрипция, например `/haʊs/`;
-- русская подсказка произношения;
-- тема;
-- статус выучено/не выучено.
-
-В PNG-картинках слово отображается примерно так:
-
-```text
-[✓] house  /haʊs/  хаус
-    дом
-    здание или место, где живут люди
-```
-
-## Резервный словарь
-
-Если AI не смог дать достаточно качественных новых слов, бот добирает слова из резервного словаря:
-
-```text
-resources/fallback_words.json
-```
-
-Формат одной записи:
-
-```json
-{
-  "english": "receipt",
-  "transcription": "/rɪˈsiːt/",
-  "pronunciation_ru": "рисит",
-  "translation_ru": "чек",
-  "definition_ru": "документ или сообщение, подтверждающее оплату покупки"
-}
-```
-
-На сервере можно создать локальный override-файл:
-
-```text
-data/fallback_words.json
-```
-
-Если `data/fallback_words.json` существует и корректно читается, бот использует его. Если нет, используется словарь из `resources/fallback_words.json`.
-
-## Рассылки
-
-Планировщик работает по локальному времени сервера:
-
-- около `09:00` показывает повторение из уже выученных слов;
-- около `21:00` генерирует 10 новых слов и показывает вечернюю подборку.
-
-Если у пользователя уже есть активный экран бота, он редактируется; если нет, бот создает новый inline-экран. Оба экрана показываются PNG-картинкой с inline-пагинацией вида `< 1/100 >`.
-
-Каждый фотоэкран показывает актуальную подпись `Сейчас открыто: ...`. При переходе по кнопкам, пагинации, а также после утренней и вечерней рассылки фотография, кнопки и подпись заменяются в одном активном сообщении. Для экранов со страницами подпись содержит номер страницы; отдельные временные подсказки не отправляются.
-
-Если утром у пользователя нет выученных слов, бот показывает отдельный экран. Такая рассылка считается обработанной на сегодня, чтобы не повторяться каждую минуту. Если Telegram/API не принял экран, день не помечается как отправленный, и планировщик сможет повторить попытку в текущем временном окне.
-
-Факты успешных рассылок хранятся в:
-
-```text
-data/state/broadcast_runs.json
-```
-
-Для ручной проверки пользователь из `.env` `USER_1_ID` может отправить текстовые команды:
-
-```text
-testing
-testing_evening
-```
-
-Тот же вечерний сценарий можно запустить с сервера без ожидания 21:00:
-
-```bash
-./build/english_mentor --send-evening-once
-./build/english_mentor --send-evening-once <telegram_chat_id>
-```
-
-Список пользователей для рассылки берется из `.env` `ALLOWED_USERS`. Если он пустой, бот пробует `USER_1_ID`, `USER_2_ID` и так далее.
-
-## База данных
-
-Таблицы создаются автоматически:
-
-- `users`
-- `words`
-- `conversations`
-
-Для слов создаются индексы по пользователю, статусу изучения, дате повторения и регистронезависимому английскому слову.
-
-## Логи
-
-Логи пишутся в файл:
-
-```text
-build/bot.log
-```
-
-По логам удобно смотреть:
-
-- ответы Groq;
-- сколько слов удалось распарсить;
-- какие слова пропущены как дубли;
-- отправку сообщений Telegram;
-- ошибки API или базы.
+Проект распространяется по лицензии [MIT](LICENSE).

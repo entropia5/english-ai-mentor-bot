@@ -1,0 +1,15 @@
+body.stats { width: 1080px; height: 940px; }
+body.stats .canvas { width: 1080px; height: 940px; padding: 34px; }
+body.stats .panel { padding: 48px; }
+.top { display: flex; justify-content: space-between; align-items: flex-start; gap: 26px; }
+body.stats .title { margin-top: 18px; font-size: 76px; line-height: 1.04; }
+.level { min-width: 150px; text-align: center; padding: 22px 26px; border-radius: 24px; font-size: 42px; font-weight: 900; }
+.grid { margin-top: 44px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.metric { border-radius: var(--card-radius); background: var(--surface); border: 1px solid var(--border); padding: 28px; }
+.metric .name { color: #9ba7b2; font-size: 28px; font-weight: 800; }
+.metric .value { margin-top: 12px; font-size: 64px; line-height: 1; font-weight: 900; }
+.progress-wrap { margin-top: 42px; }
+.progress-head { display: flex; justify-content: space-between; font-size: 32px; font-weight: 900; }
+.bar { margin-top: 18px; height: 58px; border-radius: 999px; background: #101419; border: 1px solid var(--border); overflow: hidden; }
+.fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--green), var(--blue)); }
+.next { margin-top: 34px; padding: 28px; border-radius: 24px; color: #d7e0e7; font-size: 36px; line-height: 1.22; font-weight: 900; }
