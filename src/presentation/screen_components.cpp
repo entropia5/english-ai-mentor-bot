@@ -15,16 +15,14 @@ InlineKeyboard main_menu_keyboard() {
                             {"Словарь для повторения", "menu_learned"},
                             {"Добавить слова", "menu_new_words"},
                             {"Спросить AI", "menu_ai"},
-                            {"Статистика", "menu_stats"}});
+                            {"Статистика", "menu_stats"},
+                            {"Напоминания", "menu_reminders"}});
 }
 
 InlineKeyboard topic_keyboard() {
-    return column_keyboard({{"Быт и дом", "topic_daily_life"},
-                            {"Путешествия", "topic_travel"},
-                            {"Еда", "topic_food"},
-                            {"Работа", "topic_business"},
-                            {"IT и C++", "topic_it_cpp"},
-                            {"Общение", "topic_communication"},
+    return column_keyboard({{"Разговорный английский · 2000 слов", "course_conversation"},
+                            {"Медицинский английский", "course_medicine"},
+                            {"IT", "course_it"},
                             {"Главное меню", "menu_main"}});
 }
 

@@ -46,12 +46,14 @@ class TelegramClient {
 
     bool send_photo(long long chat_id, const std::string& photo_path,
                     const std::vector<std::vector<std::pair<std::string, std::string>>>& buttons,
-                    const std::string& caption = "", int* message_id = nullptr);
+                    const std::string& caption = "", int* message_id = nullptr,
+                    const std::string& parse_mode = "");
 
     bool
     edit_message_photo(long long chat_id, int message_id, const std::string& photo_path,
                        const std::vector<std::vector<std::pair<std::string, std::string>>>& buttons,
-                       const std::string& caption = "", TelegramRequestResult* result = nullptr);
+                       const std::string& caption = "", TelegramRequestResult* result = nullptr,
+                       const std::string& parse_mode = "");
 
     // edit message with inline keyboard
     bool

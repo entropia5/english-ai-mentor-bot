@@ -1,6 +1,8 @@
 #pragma once
 
+#include "domain/reminder_settings.h"
 #include "domain/word.h"
+#include "services/course_catalog.h"
 
 #include <memory>
 #include <pqxx/pqxx>
@@ -57,6 +59,16 @@ class Database {
     find_words_by_normalized_english(const std::vector<std::string>& english_words);
     int delete_words_by_ids(const std::vector<int>& word_ids);
 
+    std::string get_dictionary_filter(long long user_id);
+    bool set_dictionary_filter(long long user_id, const std::string& filter);
+    ReminderSettings get_reminder_settings(long long user_id);
+    bool set_reminder_setting(long long user_id, const std::string& key, const std::string& value);
+
+    std::string get_active_course(long long user_id);
+    bool set_active_course(long long user_id, const std::string& course);
+    int add_course_words(long long user_id, const std::string& course,
+                         const std::vector<CourseWord>& catalog, int count);
+
     // work with users
     bool user_exists(long long user_id);
     bool add_user(long long user_id, const std::string& name);
@@ -76,14 +88,17 @@ class Database {
                   const std::string& topic = "general", const std::string& definition = "");
 
     std::vector<std::tuple<std::string, std::string, bool>>
-    get_user_words(long long user_id, bool only_not_learned = false);
+    get_user_words(long long user_id, bool only_not_learned = false,
+                   const std::string& course = "");
 
-    bool mark_word_learned(long long user_id, const std::string& english);
+    bool mark_word_learned(long long user_id, const std::string& english,
+                           const std::string& filter = "");
 
-    bool word_exists(long long user_id, const std::string& english);
+    bool word_exists(long long user_id, const std::string& english, const std::string& filter = "");
 
-    int get_words_count(long long user_id, bool learned = false);
+    int get_words_count(long long user_id, bool learned = false, const std::string& course = "");
 
     // get full word info for all words of user
-    std::vector<WordView> get_user_words_full(long long user_id, bool only_not_learned = false);
+    std::vector<WordView> get_user_words_full(long long user_id, bool only_not_learned = false,
+                                              const std::string& course = "");
 };

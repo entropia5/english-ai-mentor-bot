@@ -8,6 +8,7 @@
 #include "presentation/screen_components.h"
 #include "presentation/screen_transport.h"
 #include "services/broadcast_service.h"
+#include "services/course_catalog.h"
 #include "services/dictionary_service.h"
 #include "services/vocabulary_presentation.h"
 #include "telegram_client.h"
@@ -37,7 +38,7 @@ void handle_text_message(const nlohmann::json& update, TelegramClient& bot, Data
     const std::string name = update["message"]["from"]["first_name"];
 
     LOG("[" + name + "]: " + text);
-    database.save_conversation(chat_id, "user", text);
+    database.add_user(chat_id, name);
     ensure_reply_keyboard_removed(chat_id, bot);
     delete_tracked_ai_input(chat_id, bot, incoming_message_id);
     delete_tracked_broadcast_hint(chat_id, bot);
@@ -68,24 +69,11 @@ void handle_text_message(const nlohmann::json& update, TelegramClient& bot, Data
         delete_incoming_after_handled = true;
     } else if (text == "Словарь для изучения" || text == "словарь для изучения" ||
                text == "📚 Словарь" || text == "Словарь" || text == "словарь") {
-        const auto words = database.get_user_words_full(chat_id, true);
-        state.dictionary_page[chat_id] = 0;
-        show_dictionary_page(chat_id, bot, words, 0, state.dictionary_page[chat_id],
-                             state.last_action[chat_id], state.dictionary_message_id[chat_id],
-                             true);
+        show_user_dictionary(chat_id, bot, database, false, 0, 0, true);
         delete_incoming_after_handled = true;
     } else if (text == "Словарь для повторения" || text == "словарь для повторения" ||
                text == "✅ Выученные" || text == "Выученные" || text == "выученные") {
-        const auto words = database.get_user_words_full(chat_id, false);
-        std::vector<WordView> learned;
-        for (const auto& word : words) {
-            if (word.learned) {
-                learned.push_back(word);
-            }
-        }
-        state.learned_page[chat_id] = 0;
-        show_learned_page(chat_id, bot, learned, 0, state.learned_page[chat_id],
-                          state.last_action[chat_id], state.learned_message_id[chat_id], true);
+        show_user_dictionary(chat_id, bot, database, true, 0, 0, true);
         delete_incoming_after_handled = true;
     } else if (text == "Добавить слова" || text == "добавить слова" || text == "➕ Новые слова" ||
                text == "Новые слова" || text == "новые слова") {
@@ -98,28 +86,20 @@ void handle_text_message(const nlohmann::json& update, TelegramClient& bot, Data
     } else if (text == "📊 Статистика" || text == "Статистика" || text == "статистика") {
         show_stats(chat_id, bot, database);
         delete_incoming_after_handled = true;
+    } else if (text == "Напоминания" || text == "напоминания") {
+        show_reminder_settings(chat_id, bot, database);
+        delete_incoming_after_handled = true;
     } else if (text == "/menu" || text == "🔙 Главное меню" || text == "Главное меню") {
         send_main_menu(chat_id, bot, database);
         delete_incoming_after_handled = true;
-    } else if (text == "🏠 Быт и дом" || text == "Быт и дом") {
-        generate_words(chat_id, bot, database, ai, "daily life", "Быт и дом");
+    } else if (text == "Разговорный английский" || text == "Медицинский английский" ||
+               text == "IT") {
+        const std::string course =
+            text == "IT" ? "it" : (text == "Медицинский английский" ? "medicine" : "conversation");
+        generate_words(chat_id, bot, database, ai, course, text);
         delete_incoming_after_handled = true;
-    } else if (text == "✈️ Путешествия" || text == "Путешествия") {
-        generate_words(chat_id, bot, database, ai, "travel", "Путешествия");
-        delete_incoming_after_handled = true;
-    } else if (text == "🍕 Еда" || text == "Еда") {
-        generate_words(chat_id, bot, database, ai, "food", "Еда");
-        delete_incoming_after_handled = true;
-    } else if (text == "💼 Работа" || text == "Работа") {
-        generate_words(chat_id, bot, database, ai, "business", "Работа");
-        delete_incoming_after_handled = true;
-    } else if (text == "💻 IT и C++" || text == "IT и C++") {
-        generate_words(chat_id, bot, database, ai, "IT programming", "IT и C++");
-        delete_incoming_after_handled = true;
-    } else if (text == "🗣️ Общение" || text == "Общение") {
-        generate_words(chat_id, bot, database, ai, "communication", "Общение");
-        delete_incoming_after_handled = true;
-    } else if (try_mark_words_from_input(chat_id, text, database)) {
+    } else if (get_screen_context(chat_id) != "ai" &&
+               try_mark_words_from_input(chat_id, text, database)) {
         refresh_after_marking_words(chat_id, bot, database, state.dictionary_page[chat_id],
                                     state.dictionary_message_id[chat_id],
                                     state.learned_page[chat_id], state.learned_message_id[chat_id],
@@ -135,7 +115,15 @@ void handle_text_message(const nlohmann::json& update, TelegramClient& bot, Data
     } else {
         remember_ai_input(chat_id, incoming_message_id);
         upsert_screen(chat_id, bot, "*Думаю...*", column_keyboard({{"Главное меню", "menu_main"}}));
-        const std::string response = ai.ask(text);
+        std::string prompt = "Продолжи учебный диалог. Направление: " +
+                             course_title(database.get_active_course(chat_id)) +
+                             ". Последнее сообщение пользователя в конце.\n";
+        const auto history = database.get_conversation_history(chat_id, 6);
+        for (const auto& entry : history)
+            prompt += entry.first + ": " + entry.second + "\n";
+        prompt += "user: " + text;
+        database.save_conversation(chat_id, "user", text);
+        const std::string response = ai.ask(prompt);
         upsert_screen(chat_id, bot, format_ai_response_box(response),
                       column_keyboard({{"Главное меню", "menu_main"}}));
         database.save_conversation(chat_id, "assistant", response);

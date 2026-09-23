@@ -8,10 +8,13 @@
 #include "presentation/bot_presentation.h"
 #include "presentation/bot_state.h"
 #include "presentation/screen_components.h"
+#include "services/course_catalog.h"
 #include "services/dictionary_service.h"
 #include "services/vocabulary_service.h"
 #include "user_config.h"
 
+#include <set>
+#include <stdexcept>
 #include <string>
 #include <vector>
 
@@ -40,53 +43,97 @@ std::vector<long long> configured_broadcast_users() {
     return users;
 }
 
-BroadcastResult send_daily_review(long long chat_id, TelegramClient& bot, Database& database) {
-    delete_tracked_broadcast_hint(chat_id, bot);
+ReminderContent prepare_morning_review(long long chat_id, Database& database) {
+    ReminderContent result;
+    try {
+        const auto settings = database.get_reminder_settings(chat_id);
+        result.enabled = settings.morning_enabled;
+        result.filter = settings.morning_course;
+        if (!result.enabled)
+            return result;
+        result.words = get_learned_words_for_review(chat_id, database, result.filter);
+    } catch (const std::exception& e) {
+        LOG_ERROR("Morning reminder preparation failed: " + std::string(e.what()));
+        result.failed = true;
+    }
+    return result;
+}
 
-    const auto words = get_learned_words_for_review(chat_id, database);
-    if (!show_daily_review_page(chat_id, bot, words, 0)) {
-        LOG_ERROR("Morning review screen delivery failed for " + std::to_string(chat_id));
+ReminderContent prepare_evening_review(long long chat_id, Database& database) {
+    ReminderContent result;
+    try {
+        const auto settings = database.get_reminder_settings(chat_id);
+        result.enabled = settings.evening_enabled;
+        result.filter = settings.evening_course;
+        if (!result.enabled)
+            return result;
+        if (settings.evening_add_new) {
+            const std::vector<std::string> courses =
+                result.filter == "all" ? std::vector<std::string>{"conversation", "medicine", "it"}
+                                       : std::vector<std::string>{result.filter};
+            std::vector<std::vector<CourseWord>> catalogs;
+            std::vector<int> available;
+            std::vector<int> allocations(courses.size(), 0);
+            for (const auto& course : courses) {
+                catalogs.push_back(load_course_catalog(course));
+                std::set<std::string> existing;
+                for (const auto& word : database.get_user_words_full(chat_id, false, course))
+                    existing.insert(to_lower_ascii(trim(word.english)));
+                available.push_back(
+                    static_cast<int>(select_course_words(catalogs.back(), existing, 5).size()));
+            }
+            // 'All' adds at most five words total, distributed across non-exhausted courses.
+            int remaining = 5;
+            while (remaining > 0) {
+                bool found = false;
+                for (std::size_t i = 0; i < courses.size() && remaining > 0; ++i) {
+                    if (allocations[i] >= available[i])
+                        continue;
+                    ++allocations[i];
+                    --remaining;
+                    found = true;
+                }
+                if (!found)
+                    break;
+            }
+            for (std::size_t i = 0; i < courses.size(); ++i) {
+                if (allocations[i] > 0 &&
+                    database.add_course_words(chat_id, courses[i], catalogs[i], allocations[i]) < 0)
+                    throw std::runtime_error("Could not add evening words");
+            }
+        }
+        result.words = database.get_user_words_full(chat_id, true, result.filter);
+    } catch (const std::exception& e) {
+        LOG_ERROR("Evening reminder preparation failed: " + std::string(e.what()));
+        result.failed = true;
+    }
+    return result;
+}
+
+BroadcastResult send_daily_review(long long chat_id, TelegramClient& bot, Database& database) {
+    const auto content = prepare_morning_review(chat_id, database);
+    if (content.failed)
         return BroadcastResult::Failed;
-    }
-    if (words.empty()) {
-        LOG("Morning review skipped for " + std::to_string(chat_id) + ": no learned words");
+    if (!content.enabled)
+        return BroadcastResult::Disabled;
+    if (content.words.empty())
         return BroadcastResult::NoContent;
-    }
-    return BroadcastResult::Delivered;
+    delete_tracked_broadcast_hint(chat_id, bot);
+    return show_daily_review_page(chat_id, bot, content.words, 0, 0, true, nullptr, content.filter)
+               ? BroadcastResult::Delivered
+               : BroadcastResult::Failed;
 }
 
 BroadcastResult send_evening_new_words(long long chat_id, TelegramClient& bot, Database& database) {
-    delete_tracked_broadcast_hint(chat_id, bot);
-    remember_screen_context(chat_id, "generation");
-
-    const bool status_ok =
-        show_status_screen(chat_id, bot, "evening_generation", "Вечерняя подборка",
-                           "Генерирую новые слова для изучения.",
-                           "AI проверяет дубли, отсеивает слабые варианты и готовит произношение.",
-                           column_keyboard({{"Главное меню", "menu_main"}}));
-    if (!status_ok) {
-        LOG_WARNING("Evening generation status screen delivery failed for " +
-                    std::to_string(chat_id));
-    }
-
-    GroqClient ai;
-    const WordGenerationResult generation = add_generated_words_to_db(
-        chat_id, database, ai,
-        "mixed practical English for daily life, work, travel, food, IT and communication", 10);
-    LOG("Evening words generated for " + std::to_string(chat_id) + ": added " +
-        std::to_string(generation.added) + ", duplicates " + std::to_string(generation.duplicates) +
-        ", response duplicates " + std::to_string(generation.duplicate_in_response) +
-        ", rejected quality " + std::to_string(generation.rejected_quality) + ", fallback added " +
-        std::to_string(generation.fallback_added));
-
-    const auto words = database.get_user_words_full(chat_id, true);
-    if (!show_evening_words_page(chat_id, bot, words, 0)) {
-        LOG_ERROR("Evening words screen delivery failed for " + std::to_string(chat_id));
+    const auto content = prepare_evening_review(chat_id, database);
+    if (content.failed)
         return BroadcastResult::Failed;
-    }
-    if (words.empty()) {
-        LOG("Evening words skipped for " + std::to_string(chat_id) + ": no words to show");
+    if (!content.enabled)
+        return BroadcastResult::Disabled;
+    if (content.words.empty())
         return BroadcastResult::NoContent;
-    }
-    return generation.added > 0 ? BroadcastResult::Delivered : BroadcastResult::NoContent;
+    delete_tracked_broadcast_hint(chat_id, bot);
+    return show_evening_words_page(chat_id, bot, content.words, 0, 0, true, nullptr, content.filter)
+               ? BroadcastResult::Delivered
+               : BroadcastResult::Failed;
 }

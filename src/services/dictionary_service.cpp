@@ -5,6 +5,12 @@
 #include "presentation/bot_state.h"
 
 bool try_mark_words_from_input(long long chat_id, const std::string& text, Database& db) {
+    std::string filter = db.get_dictionary_filter(chat_id);
+    const auto context = get_screen_context(chat_id);
+    if (context == "daily")
+        filter = db.get_reminder_settings(chat_id).morning_course;
+    if (context == "evening")
+        filter = db.get_reminder_settings(chat_id).evening_course;
     auto requested_words = split_words_input(text);
     if (requested_words.empty())
         return false;
@@ -13,8 +19,8 @@ bool try_mark_words_from_input(long long chat_id, const std::string& text, Datab
     std::vector<std::string> not_found_words;
 
     for (const auto& word : requested_words) {
-        if (db.word_exists(chat_id, word)) {
-            if (db.mark_word_learned(chat_id, word)) {
+        if (db.word_exists(chat_id, word, filter)) {
+            if (db.mark_word_learned(chat_id, word, filter)) {
                 marked_words.push_back(word);
             }
         } else if (requested_words.size() > 1) {
@@ -28,8 +34,9 @@ bool try_mark_words_from_input(long long chat_id, const std::string& text, Datab
     return true;
 }
 
-std::vector<WordView> get_learned_words_for_review(long long chat_id, Database& db) {
-    const auto all_words = db.get_user_words_full(chat_id, false);
+std::vector<WordView> get_learned_words_for_review(long long chat_id, Database& db,
+                                                   const std::string& filter) {
+    const auto all_words = db.get_user_words_full(chat_id, false, filter);
     std::vector<WordView> learned;
     for (const auto& word : all_words) {
         if (word.learned) {
@@ -49,36 +56,22 @@ void refresh_after_marking_words(long long chat_id, TelegramClient& bot, Databas
     current_action = context;
 
     if (context == "daily") {
-        auto words = get_learned_words_for_review(chat_id, db);
+        const auto filter = db.get_reminder_settings(chat_id).morning_course;
+        const auto words = get_learned_words_for_review(chat_id, db, filter);
         show_daily_review_page(chat_id, bot, words, 0, get_active_screen_message(chat_id), false,
-                               &current_action);
+                               &current_action, filter);
         return;
     }
-
     if (context == "evening") {
-        auto words = db.get_user_words_full(chat_id, true);
+        const auto filter = db.get_reminder_settings(chat_id).evening_course;
+        const auto words = db.get_user_words_full(chat_id, true, filter);
         show_evening_words_page(chat_id, bot, words, 0, get_active_screen_message(chat_id), false,
-                                &current_action);
+                                &current_action, filter);
         return;
     }
-
-    if (context == "learned") {
-        auto all_words = db.get_user_words_full(chat_id, false);
-        std::vector<WordView> learned;
-        for (const auto& word : all_words) {
-            if (word.learned) {
-                learned.push_back(word);
-            }
-        }
-        learn_message_id = get_active_screen_message(chat_id);
-        show_learned_page(chat_id, bot, learned, learn_current_page, learn_current_page,
-                          current_action, learn_message_id, false);
-        return;
-    }
-
-    auto words = db.get_user_words_full(chat_id, true);
-    int page = context == "dictionary" ? dict_current_page : 0;
+    dict_current_page = 0;
+    learn_current_page = 0;
     dict_message_id = get_active_screen_message(chat_id);
-    show_dictionary_page(chat_id, bot, words, page, dict_current_page, current_action,
-                         dict_message_id, false);
+    learn_message_id = dict_message_id;
+    show_user_dictionary(chat_id, bot, db, context == "learned", 0, dict_message_id);
 }

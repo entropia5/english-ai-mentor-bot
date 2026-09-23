@@ -14,7 +14,7 @@ bool Database::cleanup_duplicate_words() {
                 SELECT
                     id,
                     ROW_NUMBER() OVER (
-                        PARTITION BY user_id, lower(trim(english))
+                        PARTITION BY user_id, topic, lower(trim(english))
                         ORDER BY is_learned DESC, added_date ASC, id ASC
                     ) AS rn
                 FROM words
@@ -25,8 +25,8 @@ bool Database::cleanup_duplicate_words() {
             RETURNING w.id
         )");
         transaction.exec(R"(
-            CREATE UNIQUE INDEX IF NOT EXISTS idx_words_user_english_unique
-            ON words(user_id, lower(trim(english)))
+            CREATE UNIQUE INDEX IF NOT EXISTS idx_words_user_course_english_unique
+            ON words(user_id, topic, lower(trim(english)))
         )");
         transaction.commit();
         LOG("Duplicate word cleanup complete, removed " + std::to_string(removed.size()) + " rows");

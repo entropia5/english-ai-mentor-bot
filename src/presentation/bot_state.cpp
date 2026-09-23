@@ -54,9 +54,9 @@ ScreenMessageType screen_message_type_from_callback(const json& message) {
 }
 
 bool is_persistable_screen_context(const std::string& context) {
-    return context == "main" || context == "topics" || context == "ai" || context == "stats" ||
-           context == "generation" || context == "dictionary" || context == "learned" ||
-           context == "daily" || context == "evening";
+    return context == "reminders" || context == "main" || context == "topics" || context == "ai" ||
+           context == "stats" || context == "generation" || context == "dictionary" ||
+           context == "learned" || context == "daily" || context == "evening";
 }
 
 void remember_screen_context(long long chat_id, const std::string& context) {

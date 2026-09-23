@@ -1,17 +1,30 @@
 #include "services/maintenance_service.h"
 
+#include "core/text.h"
 #include "database.h"
 #include "logger.h"
+#include "services/course_catalog.h"
 #include "services/vocabulary_service.h"
 
 #include <iostream>
+#include <set>
 #include <string>
 #include <vector>
 
 namespace {
 
 std::vector<std::string> suspicious_words_for_cleanup() {
-    return {blocked_generated_words().begin(), blocked_generated_words().end()};
+    std::set<std::string> approved;
+    for (const std::string course : {"conversation", "medicine", "it"}) {
+        for (const auto& word : load_course_catalog(course))
+            approved.insert(to_lower_ascii(word.english));
+    }
+    std::vector<std::string> suspicious;
+    for (const auto& word : blocked_generated_words()) {
+        if (!approved.count(word))
+            suspicious.push_back(word);
+    }
+    return suspicious;
 }
 
 } // namespace

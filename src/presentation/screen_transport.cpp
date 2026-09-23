@@ -44,7 +44,7 @@ bool upsert_screen(long long chat_id, TelegramClient& bot, const std::string& te
 
 bool upsert_photo_screen(long long chat_id, TelegramClient& bot, const std::string& photo_path,
                          const InlineKeyboard& buttons, int preferred_message_id,
-                         const std::string& caption) {
+                         const std::string& caption, const std::string& parse_mode) {
     const int message_id =
         preferred_message_id > 0 ? preferred_message_id : get_active_screen_message(chat_id);
     if (message_id > 0) {
@@ -53,7 +53,7 @@ bool upsert_photo_screen(long long chat_id, TelegramClient& bot, const std::stri
             current_type == ScreenMessageType::Unknown) {
             TelegramRequestResult edit_result;
             if (bot.edit_message_photo(chat_id, message_id, photo_path, buttons, caption,
-                                       &edit_result)) {
+                                       &edit_result, parse_mode)) {
                 remember_active_screen_message(chat_id, message_id, ScreenMessageType::Photo);
                 return true;
             }
@@ -76,7 +76,7 @@ bool upsert_photo_screen(long long chat_id, TelegramClient& bot, const std::stri
     }
 
     int sent_message_id = 0;
-    if (bot.send_photo(chat_id, photo_path, buttons, caption, &sent_message_id)) {
+    if (bot.send_photo(chat_id, photo_path, buttons, caption, &sent_message_id, parse_mode)) {
         remember_active_screen_message(chat_id, sent_message_id, ScreenMessageType::Photo);
         return true;
     }

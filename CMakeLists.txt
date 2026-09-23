@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.16)
 project(
     EnglishMentorBot
     VERSION 2.0.0
-    DESCRIPTION "Telegram bot for learning English with AI-generated vocabulary"
+    DESCRIPTION "Telegram bot for learning English with curated courses and AI practice"
     LANGUAGES CXX
 )
 
@@ -40,7 +40,6 @@ add_library(english_mentor_core
     src/bot/telegram_client_support.cpp
     src/bot/telegram_client_transport.cpp
     src/core/text.cpp
-    src/domain/progress.cpp
     src/presentation/bot_state.cpp
     src/presentation/bot_state_persistence.cpp
     src/presentation/message_cleanup.cpp
@@ -56,6 +55,10 @@ add_library(english_mentor_core
     src/rendering/template_resources.cpp
     src/rendering/words_renderer.cpp
     src/services/broadcast_service.cpp
+    src/services/course_catalog.cpp
+    src/storage/database_courses.cpp
+    src/storage/database_preferences.cpp
+    src/presentation/reminder_settings.cpp
     src/services/dictionary_service.cpp
     src/services/documentation_service.cpp
     src/services/maintenance_service.cpp
@@ -163,7 +166,23 @@ if(ENGLISH_MENTOR_BUILD_TESTS)
     english_mentor_enable_warnings(english_mentor_tests)
     english_mentor_enable_sanitizers(english_mentor_tests)
 
+    add_executable(english_mentor_database_tests tests/test_courses_database.cpp)
+    target_link_libraries(english_mentor_database_tests PRIVATE english_mentor_core)
+    english_mentor_enable_warnings(english_mentor_database_tests)
+    english_mentor_enable_sanitizers(english_mentor_database_tests)
+    add_test(NAME english_mentor_database_tests COMMAND english_mentor_database_tests)
+    set_tests_properties(english_mentor_database_tests PROPERTIES
+        WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}" SKIP_RETURN_CODE 77)
     add_test(NAME english_mentor_unit_tests COMMAND english_mentor_tests)
+    find_program(WKHTMLTOIMAGE_EXECUTABLE wkhtmltoimage)
+    if(WKHTMLTOIMAGE_EXECUTABLE)
+        add_executable(english_mentor_render_tests tests/test_render_photo_size.cpp)
+        target_link_libraries(english_mentor_render_tests PRIVATE english_mentor_core)
+        english_mentor_enable_warnings(english_mentor_render_tests)
+        english_mentor_enable_sanitizers(english_mentor_render_tests)
+        add_test(NAME english_mentor_render_tests COMMAND english_mentor_render_tests)
+    endif()
+
     set_tests_properties(
         english_mentor_unit_tests
         PROPERTIES WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"

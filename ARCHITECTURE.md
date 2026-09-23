@@ -30,9 +30,9 @@ The domain model does not know about Telegram, HTTP, JSON or PostgreSQL.
 
 ## Modules
 
-- `domain` — named business models (`Word`, progress calculations) and pure rules.
+- `domain` — named business models (`Word`) and pure rules.
 - `core` — small reusable text operations without infrastructure dependencies.
-- `services` — application use cases: vocabulary generation, dictionary updates,
+- `services` — application use cases: curated vocabulary selection, dictionary updates,
   broadcasts, documentation export and maintenance. Documentation screenshots are
   isolated in `documentation_service` and are not part of scheduled delivery.
 - `ai` — the Groq adapter and layered machine-readable response parsing:
@@ -163,3 +163,25 @@ When adding functionality:
 - keep HTML structure and visual constants in `resources/rendering`;
 - prefer explicit dependencies passed by reference over new global state;
 - add a unit test for pure parsing, validation and domain behavior.
+
+## Curated courses
+
+`course_catalog` loads versioned JSON and rejects invalid, duplicate or incomplete cards.
+Conversation has exactly 2000 entries; professional courses also allow phrases and
+acronyms. Selection is deterministic, excludes already learned and pending words, and
+stops at the end of the catalog. Groq is not called for course additions.
+
+`users.active_course` selects manual additions, AI practice and course statistics.
+`users.dictionary_filter` independently selects all courses or one course for both
+dictionary views. Reminder preferences persist independently for morning and evening:
+enabled flag, course filter, and evening repeat/add-new mode. Migration 004 preserves
+existing reminder sources and vocabulary; dictionary browsing initially shows all.
+Reminder preparation is testable without Telegram, and disabled reminders do not add words.
+Uniqueness is `(user_id, topic, lower(trim(english)))`, preserving distinct professional
+meanings. `database_courses` uses a per-user transaction advisory lock and a single
+transaction for batch selection and insertion, preventing duplicate concurrent additions.
+Legacy audit commands exclude approved course vocabulary.
+
+Migration 003 preserves existing vocabulary and maps retired topics into courses.
+Clearing production words is an explicit one-off operation after a verified backup,
+never an automatic startup migration.

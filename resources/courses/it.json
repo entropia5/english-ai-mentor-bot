@@ -1,0 +1,2263 @@
+{
+  "version": 1,
+  "course": "it",
+  "pronunciation_note": "US broad transcription from CMUdict plus authored additions; Russian hints are approximate.",
+  "words": [
+    {
+      "english": "developer",
+      "translation": "разработчик",
+      "example": "I work as a software developer.",
+      "lesson": "Работа в IT и команда",
+      "transcription": "/dɪˈvɛləpɚ/",
+      "pronunciation": "≈ дивэ́лэпёр"
+    },
+    {
+      "english": "engineer",
+      "translation": "инженер",
+      "example": "The engineer investigated the issue.",
+      "lesson": "Работа в IT и команда",
+      "transcription": "/ˈɛndʒəˈnɪɹ/",
+      "pronunciation": "≈ э́нджэни́р"
+    },
+    {
+      "english": "software",
+      "translation": "программное обеспечение",
+      "example": "We develop software for small businesses.",
+      "lesson": "Работа в IT и команда",
+      "transcription": "/ˈsɔfˌtwɛɹ/",
+      "pronunciation": "≈ со́фтуэр"
+    },
+    {
+      "english": "hardware",
+      "translation": "аппаратное обеспечение",
+      "example": "This looks like a hardware problem.",
+      "lesson": "Работа в IT и команда",
+      "transcription": "/ˈhɑɹˌdwɛɹ/",
+      "pronunciation": "≈ ха́рдуэр"
+    },
+    {
+      "english": "application",
+      "translation": "приложение",
+      "example": "The application is running slowly.",
+      "lesson": "Работа в IT и команда",
+      "transcription": "/ˌæpləˈkeɪʃən/",
+      "pronunciation": "≈ эплэкэ́йшэн"
+    },
+    {
+      "english": "service",
+      "translation": "сервис; служба",
+      "example": "The service is temporarily unavailable.",
+      "lesson": "Работа в IT и команда",
+      "transcription": "/ˈsɝvəs/",
+      "pronunciation": "≈ сё́рвэс"
+    },
+    {
+      "english": "platform",
+      "translation": "платформа",
+      "example": "Which platform does this application support?",
+      "lesson": "Работа в IT и команда",
+      "transcription": "/ˈplætˌfɔɹm/",
+      "pronunciation": "≈ плэ́тформ"
+    },
+    {
+      "english": "product",
+      "translation": "продукт",
+      "example": "What problem does the product solve?",
+      "lesson": "Работа в IT и команда",
+      "transcription": "/ˈpɹɑdəkt/",
+      "pronunciation": "≈ пра́дэкт"
+    },
+    {
+      "english": "feature",
+      "translation": "функция продукта; возможность",
+      "example": "We are working on a new feature.",
+      "lesson": "Работа в IT и команда",
+      "transcription": "/ˈfitʃɚ/",
+      "pronunciation": "≈ фи́чёр"
+    },
+    {
+      "english": "requirement",
+      "translation": "требование",
+      "example": "Could you clarify this requirement?",
+      "lesson": "Работа в IT и команда",
+      "transcription": "/ɹɪˈkwaɪɹmənt/",
+      "pronunciation": "≈ рикуа́йрмэнт"
+    },
+    {
+      "english": "specification",
+      "translation": "спецификация",
+      "example": "The specification needs updating.",
+      "lesson": "Работа в IT и команда",
+      "transcription": "/ˌspɛsɪfɪˈkeɪʃən/",
+      "pronunciation": "≈ спэсификэ́йшэн"
+    },
+    {
+      "english": "stakeholder",
+      "translation": "заинтересованная сторона",
+      "example": "We need feedback from the stakeholders.",
+      "lesson": "Работа в IT и команда",
+      "transcription": "/ˈsteɪkˌhoʊldɚ/",
+      "pronunciation": "≈ стэ́йкхоулдёр"
+    },
+    {
+      "english": "user",
+      "translation": "пользователь",
+      "example": "How will the user complete this task?",
+      "lesson": "Работа в IT и команда",
+      "transcription": "/ˈjuzɚ/",
+      "pronunciation": "≈ йу́зёр"
+    },
+    {
+      "english": "customer",
+      "translation": "заказчик; клиент",
+      "example": "The customer reported a problem.",
+      "lesson": "Работа в IT и команда",
+      "transcription": "/ˈkʌstəmɚ/",
+      "pronunciation": "≈ ка́стэмёр"
+    },
+    {
+      "english": "team",
+      "translation": "команда",
+      "example": "I will discuss it with the team.",
+      "lesson": "Работа в IT и команда",
+      "transcription": "/tim/",
+      "pronunciation": "≈ ти́м"
+    },
+    {
+      "english": "colleague",
+      "translation": "коллега",
+      "example": "My colleague reviewed the change.",
+      "lesson": "Работа в IT и команда",
+      "transcription": "/ˈkɑliɡ/",
+      "pronunciation": "≈ ка́лиг"
+    },
+    {
+      "english": "manager",
+      "translation": "руководитель",
+      "example": "I will check with my manager.",
+      "lesson": "Работа в IT и команда",
+      "transcription": "/ˈmænədʒɚ/",
+      "pronunciation": "≈ мэ́нэджёр"
+    },
+    {
+      "english": "meeting",
+      "translation": "встреча; совещание",
+      "example": "Can we schedule a short meeting?",
+      "lesson": "Работа в IT и команда",
+      "transcription": "/ˈmitɪŋ/",
+      "pronunciation": "≈ ми́тинг"
+    },
+    {
+      "english": "stand-up",
+      "translation": "короткая регулярная встреча команды",
+      "example": "I will mention the blocker at stand-up.",
+      "lesson": "Работа в IT и команда",
+      "transcription": "/ˈstænˌdʌp/",
+      "pronunciation": "≈ стэ́ндап"
+    },
+    {
+      "english": "sprint",
+      "translation": "спринт; короткий цикл разработки",
+      "example": "This task is planned for the next sprint.",
+      "lesson": "Работа в IT и команда",
+      "transcription": "/spɹɪnt/",
+      "pronunciation": "≈ спри́нт"
+    },
+    {
+      "english": "backlog",
+      "translation": "список запланированных задач",
+      "example": "Add the request to the backlog.",
+      "lesson": "Работа в IT и команда",
+      "transcription": "/ˈbæˌklɑɡ/",
+      "pronunciation": "≈ бэ́клаг"
+    },
+    {
+      "english": "ticket",
+      "translation": "задача или обращение в системе учёта",
+      "example": "Please create a ticket for this issue.",
+      "lesson": "Работа в IT и команда",
+      "transcription": "/ˈtɪkət/",
+      "pronunciation": "≈ ти́кэт"
+    },
+    {
+      "english": "task",
+      "translation": "задача",
+      "example": "The task is ready for review.",
+      "lesson": "Работа в IT и команда",
+      "transcription": "/tæsk/",
+      "pronunciation": "≈ тэ́ск"
+    },
+    {
+      "english": "priority",
+      "translation": "приоритет",
+      "example": "What is the priority of this issue?",
+      "lesson": "Работа в IT и команда",
+      "transcription": "/pɹaɪˈɔɹəti/",
+      "pronunciation": "≈ прайо́рэти"
+    },
+    {
+      "english": "deadline",
+      "translation": "срок выполнения",
+      "example": "Can we agree on a realistic deadline?",
+      "lesson": "Работа в IT и команда",
+      "transcription": "/ˈdɛdˌlaɪn/",
+      "pronunciation": "≈ дэ́длайн"
+    },
+    {
+      "english": "estimate",
+      "translation": "оценка трудозатрат",
+      "example": "I need more details before giving an estimate.",
+      "lesson": "Работа в IT и команда",
+      "transcription": "/ˈɛstəmət/",
+      "pronunciation": "≈ э́стэмэт"
+    },
+    {
+      "english": "scope",
+      "translation": "объём работ; область",
+      "example": "This request changes the scope.",
+      "lesson": "Работа в IT и команда",
+      "transcription": "/skoʊp/",
+      "pronunciation": "≈ ско́уп"
+    },
+    {
+      "english": "blocker",
+      "translation": "препятствие, блокирующее работу",
+      "example": "I have a blocker with the test environment.",
+      "lesson": "Работа в IT и команда",
+      "transcription": "/ˈblɑkɚ/",
+      "pronunciation": "≈ бла́кёр"
+    },
+    {
+      "english": "progress",
+      "translation": "ход выполнения",
+      "example": "Here is a quick progress update.",
+      "lesson": "Работа в IT и команда",
+      "transcription": "/ˈpɹɑˌɡɹɛs/",
+      "pronunciation": "≈ пра́грэс"
+    },
+    {
+      "english": "feedback",
+      "translation": "обратная связь",
+      "example": "Thank you for the feedback.",
+      "lesson": "Работа в IT и команда",
+      "transcription": "/ˈfidˌbæk/",
+      "pronunciation": "≈ фи́дбэк"
+    },
+    {
+      "english": "code",
+      "translation": "код",
+      "example": "The code is ready for review.",
+      "lesson": "Код и базовые понятия",
+      "transcription": "/koʊd/",
+      "pronunciation": "≈ ко́уд"
+    },
+    {
+      "english": "source code",
+      "translation": "исходный код",
+      "example": "Where is the source code stored?",
+      "lesson": "Код и базовые понятия",
+      "transcription": "/sɔɹs koʊd/",
+      "pronunciation": "≈ со́рс ко́уд"
+    },
+    {
+      "english": "function",
+      "translation": "функция",
+      "example": "This function returns a value.",
+      "lesson": "Код и базовые понятия",
+      "transcription": "/ˈfʌŋkʃən/",
+      "pronunciation": "≈ фа́нгкшэн"
+    },
+    {
+      "english": "method",
+      "translation": "метод",
+      "example": "This method updates the object.",
+      "lesson": "Код и базовые понятия",
+      "transcription": "/ˈmɛθəd/",
+      "pronunciation": "≈ мэ́сэд"
+    },
+    {
+      "english": "variable",
+      "translation": "переменная",
+      "example": "Use a clear variable name.",
+      "lesson": "Код и базовые понятия",
+      "transcription": "/ˈvɛɹiəbəl/",
+      "pronunciation": "≈ вэ́риэбэл"
+    },
+    {
+      "english": "constant",
+      "translation": "константа",
+      "example": "This value should be a constant.",
+      "lesson": "Код и базовые понятия",
+      "transcription": "/ˈkɑnstənt/",
+      "pronunciation": "≈ ка́нстэнт"
+    },
+    {
+      "english": "type",
+      "translation": "тип",
+      "example": "What type does this function return?",
+      "lesson": "Код и базовые понятия",
+      "transcription": "/taɪp/",
+      "pronunciation": "≈ та́йп"
+    },
+    {
+      "english": "string",
+      "translation": "строка",
+      "example": "The input is an empty string.",
+      "lesson": "Код и базовые понятия",
+      "transcription": "/stɹɪŋ/",
+      "pronunciation": "≈ стри́нг"
+    },
+    {
+      "english": "integer",
+      "translation": "целое число",
+      "example": "The parameter must be an integer.",
+      "lesson": "Код и базовые понятия",
+      "transcription": "/ˈɪntədʒɚ/",
+      "pronunciation": "≈ и́нтэджёр"
+    },
+    {
+      "english": "boolean",
+      "translation": "логическое значение",
+      "example": "The function returns a boolean.",
+      "lesson": "Код и базовые понятия",
+      "transcription": "/buˈliən/",
+      "pronunciation": "≈ були́эн"
+    },
+    {
+      "english": "array",
+      "translation": "массив",
+      "example": "The array contains ten elements.",
+      "lesson": "Код и базовые понятия",
+      "transcription": "/ɚˈeɪ/",
+      "pronunciation": "≈ ёрэ́й"
+    },
+    {
+      "english": "list",
+      "translation": "список",
+      "example": "Add the item to the list.",
+      "lesson": "Код и базовые понятия",
+      "transcription": "/lɪst/",
+      "pronunciation": "≈ ли́ст"
+    },
+    {
+      "english": "map",
+      "translation": "ассоциативный контейнер; отображение",
+      "example": "Store the values in a map.",
+      "lesson": "Код и базовые понятия",
+      "transcription": "/mæp/",
+      "pronunciation": "≈ мэ́п"
+    },
+    {
+      "english": "set",
+      "translation": "множество",
+      "example": "The set contains unique values.",
+      "lesson": "Код и базовые понятия",
+      "transcription": "/sɛt/",
+      "pronunciation": "≈ сэ́т"
+    },
+    {
+      "english": "object",
+      "translation": "объект",
+      "example": "Create a new object.",
+      "lesson": "Код и базовые понятия",
+      "transcription": "/ˈɑbdʒɛkt/",
+      "pronunciation": "≈ а́бджэкт"
+    },
+    {
+      "english": "class",
+      "translation": "класс",
+      "example": "This class handles file access.",
+      "lesson": "Код и базовые понятия",
+      "transcription": "/klæs/",
+      "pronunciation": "≈ клэ́с"
+    },
+    {
+      "english": "interface",
+      "translation": "интерфейс",
+      "example": "The interface should remain stable.",
+      "lesson": "Код и базовые понятия",
+      "transcription": "/ˈɪntɚˌfeɪs/",
+      "pronunciation": "≈ и́нтёрфэйс"
+    },
+    {
+      "english": "module",
+      "translation": "модуль",
+      "example": "The module has no external dependencies.",
+      "lesson": "Код и базовые понятия",
+      "transcription": "/ˈmɑdʒul/",
+      "pronunciation": "≈ ма́джул"
+    },
+    {
+      "english": "library",
+      "translation": "библиотека",
+      "example": "We use a standard library function.",
+      "lesson": "Код и базовые понятия",
+      "transcription": "/ˈlaɪbɹɛˌɹi/",
+      "pronunciation": "≈ ла́йбрэри"
+    },
+    {
+      "english": "framework",
+      "translation": "программный каркас; фреймворк",
+      "example": "Which framework does the project use?",
+      "lesson": "Код и базовые понятия",
+      "transcription": "/ˈfɹeɪmˌwɝk/",
+      "pronunciation": "≈ фрэ́ймуёрк"
+    },
+    {
+      "english": "package",
+      "translation": "пакет",
+      "example": "Install the required package.",
+      "lesson": "Код и базовые понятия",
+      "transcription": "/ˈpækədʒ/",
+      "pronunciation": "≈ пэ́кэдж"
+    },
+    {
+      "english": "dependency",
+      "translation": "зависимость",
+      "example": "We need to update this dependency.",
+      "lesson": "Код и базовые понятия",
+      "transcription": "/dɪˈpɛndənsi/",
+      "pronunciation": "≈ дипэ́ндэнси"
+    },
+    {
+      "english": "parameter",
+      "translation": "параметр",
+      "example": "This parameter is optional.",
+      "lesson": "Код и базовые понятия",
+      "transcription": "/pɚˈæmətɚ/",
+      "pronunciation": "≈ пёрэ́мэтёр"
+    },
+    {
+      "english": "argument",
+      "translation": "аргумент вызова",
+      "example": "Pass the file name as an argument.",
+      "lesson": "Код и базовые понятия",
+      "transcription": "/ˈɑɹɡjəmənt/",
+      "pronunciation": "≈ а́ргйэмэнт"
+    },
+    {
+      "english": "return value",
+      "translation": "возвращаемое значение",
+      "example": "Check the return value.",
+      "lesson": "Код и базовые понятия",
+      "transcription": "/ɹɪˈtɝn ˈvælju/",
+      "pronunciation": "≈ ритё́рн вэ́лйу"
+    },
+    {
+      "english": "condition",
+      "translation": "условие",
+      "example": "The condition is always false.",
+      "lesson": "Код и базовые понятия",
+      "transcription": "/kənˈdɪʃən/",
+      "pronunciation": "≈ кэнди́шэн"
+    },
+    {
+      "english": "loop",
+      "translation": "цикл",
+      "example": "The loop processes each item.",
+      "lesson": "Код и базовые понятия",
+      "transcription": "/lup/",
+      "pronunciation": "≈ лу́п"
+    },
+    {
+      "english": "iteration",
+      "translation": "итерация",
+      "example": "The error occurs on the second iteration.",
+      "lesson": "Код и базовые понятия",
+      "transcription": "/ˌɪtɚˈeɪʃən/",
+      "pronunciation": "≈ итёрэ́йшэн"
+    },
+    {
+      "english": "branch",
+      "translation": "ветка кода или репозитория",
+      "example": "Create a branch for this change.",
+      "lesson": "Код и базовые понятия",
+      "transcription": "/bɹæntʃ/",
+      "pronunciation": "≈ брэ́нч"
+    },
+    {
+      "english": "exception",
+      "translation": "исключение",
+      "example": "The function throws an exception.",
+      "lesson": "Код и базовые понятия",
+      "transcription": "/ɪkˈsɛpʃən/",
+      "pronunciation": "≈ иксэ́пшэн"
+    },
+    {
+      "english": "repository",
+      "translation": "репозиторий",
+      "example": "Clone the repository first.",
+      "lesson": "Репозиторий и совместная работа",
+      "transcription": "/ɹiˈpɑzəˌtɔɹi/",
+      "pronunciation": "≈ рипа́зэтори"
+    },
+    {
+      "english": "version control",
+      "translation": "контроль версий",
+      "example": "We use version control for all changes.",
+      "lesson": "Репозиторий и совместная работа",
+      "transcription": "/ˈvɝʒən kənˈtɹoʊl/",
+      "pronunciation": "≈ вё́ржэн кэнтро́ул"
+    },
+    {
+      "english": "commit",
+      "translation": "коммит; зафиксировать изменение",
+      "example": "Keep the commit message clear.",
+      "lesson": "Репозиторий и совместная работа",
+      "transcription": "/kəˈmɪt/",
+      "pronunciation": "≈ кэми́т"
+    },
+    {
+      "english": "merge",
+      "translation": "слияние; объединять",
+      "example": "Merge the branch after review.",
+      "lesson": "Репозиторий и совместная работа",
+      "transcription": "/mɝdʒ/",
+      "pronunciation": "≈ мё́рдж"
+    },
+    {
+      "english": "pull request",
+      "translation": "запрос на включение изменений",
+      "example": "I opened a pull request.",
+      "lesson": "Репозиторий и совместная работа",
+      "transcription": "/pʊl ɹɪˈkwɛst/",
+      "pronunciation": "≈ пу́л рикуэ́ст"
+    },
+    {
+      "english": "review",
+      "translation": "проверка изменений; ревью",
+      "example": "Could you review my change?",
+      "lesson": "Репозиторий и совместная работа",
+      "transcription": "/ˌɹiˈvju/",
+      "pronunciation": "≈ ривйу́"
+    },
+    {
+      "english": "approval",
+      "translation": "одобрение",
+      "example": "The change needs approval before merging.",
+      "lesson": "Репозиторий и совместная работа",
+      "transcription": "/əˈpɹuvəl/",
+      "pronunciation": "≈ эпру́вэл"
+    },
+    {
+      "english": "conflict",
+      "translation": "конфликт изменений",
+      "example": "I resolved the merge conflict.",
+      "lesson": "Репозиторий и совместная работа",
+      "transcription": "/ˈkɑnflɪkt/",
+      "pronunciation": "≈ ка́нфликт"
+    },
+    {
+      "english": "rebase",
+      "translation": "перенос коммитов на другую базу",
+      "example": "Rebase the branch on the latest main.",
+      "lesson": "Репозиторий и совместная работа",
+      "transcription": "/ɹiˈbeɪs/",
+      "pronunciation": "≈ рибэ́йс"
+    },
+    {
+      "english": "rollback",
+      "translation": "откат",
+      "example": "We prepared a rollback plan.",
+      "lesson": "Репозиторий и совместная работа",
+      "transcription": "/ˈɹoʊlˌbæk/",
+      "pronunciation": "≈ ро́улбэк"
+    },
+    {
+      "english": "revert",
+      "translation": "отменять изменение обратным коммитом",
+      "example": "We need to revert this commit.",
+      "lesson": "Репозиторий и совместная работа",
+      "transcription": "/ɹɪˈvɝt/",
+      "pronunciation": "≈ ривё́рт"
+    },
+    {
+      "english": "patch",
+      "translation": "исправление; набор изменений",
+      "example": "The patch fixes the reported issue.",
+      "lesson": "Репозиторий и совместная работа",
+      "transcription": "/pætʃ/",
+      "pronunciation": "≈ пэ́ч"
+    },
+    {
+      "english": "diff",
+      "translation": "разница между версиями",
+      "example": "The diff contains a small change.",
+      "lesson": "Репозиторий и совместная работа",
+      "transcription": "/dɪf/",
+      "pronunciation": "≈ ди́ф"
+    },
+    {
+      "english": "changelog",
+      "translation": "журнал изменений",
+      "example": "Update the changelog before release.",
+      "lesson": "Репозиторий и совместная работа",
+      "transcription": "/ˈtʃeɪndʒˌlɔɡ/",
+      "pronunciation": "≈ чэ́йнджлог"
+    },
+    {
+      "english": "tag",
+      "translation": "метка версии",
+      "example": "Create a tag for the release.",
+      "lesson": "Репозиторий и совместная работа",
+      "transcription": "/tæɡ/",
+      "pronunciation": "≈ тэ́г"
+    },
+    {
+      "english": "release",
+      "translation": "выпуск; версия",
+      "example": "The release is scheduled for Friday.",
+      "lesson": "Репозиторий и совместная работа",
+      "transcription": "/ɹiˈlis/",
+      "pronunciation": "≈ рили́с"
+    },
+    {
+      "english": "version",
+      "translation": "версия",
+      "example": "Which version are you using?",
+      "lesson": "Репозиторий и совместная работа",
+      "transcription": "/ˈvɝʒən/",
+      "pronunciation": "≈ вё́ржэн"
+    },
+    {
+      "english": "upgrade",
+      "translation": "обновление до новой версии",
+      "example": "Test the upgrade in staging.",
+      "lesson": "Репозиторий и совместная работа",
+      "transcription": "/əpˈɡɹeɪd/",
+      "pronunciation": "≈ эпгрэ́йд"
+    },
+    {
+      "english": "compatibility",
+      "translation": "совместимость",
+      "example": "We need to preserve compatibility.",
+      "lesson": "Репозиторий и совместная работа",
+      "transcription": "/kəmˌpætəˈbɪləˌti/",
+      "pronunciation": "≈ кэмпэтэби́лэти"
+    },
+    {
+      "english": "breaking change",
+      "translation": "изменение, нарушающее совместимость",
+      "example": "This is a breaking change.",
+      "lesson": "Репозиторий и совместная работа",
+      "transcription": "/ˈbɹeɪkɪŋ tʃeɪndʒ/",
+      "pronunciation": "≈ брэ́йкинг чэ́йндж"
+    },
+    {
+      "english": "backward compatibility",
+      "translation": "обратная совместимость",
+      "example": "The update preserves backward compatibility.",
+      "lesson": "Репозиторий и совместная работа",
+      "transcription": "/ˈbækwɚd kəmˌpætəˈbɪləˌti/",
+      "pronunciation": "≈ бэ́куёрд кэмпэтэби́лэти"
+    },
+    {
+      "english": "deprecation",
+      "translation": "объявление устаревшим",
+      "example": "The documentation includes a deprecation notice.",
+      "lesson": "Репозиторий и совместная работа",
+      "transcription": "/ˌdɛpɹəˈkeɪʃən/",
+      "pronunciation": "≈ дэпрэкэ́йшэн"
+    },
+    {
+      "english": "documentation",
+      "translation": "документация",
+      "example": "The documentation explains the setup.",
+      "lesson": "Репозиторий и совместная работа",
+      "transcription": "/ˌdɑkjəmɛnˈteɪʃən/",
+      "pronunciation": "≈ дакйэмэнтэ́йшэн"
+    },
+    {
+      "english": "README",
+      "translation": "файл с основной информацией о проекте",
+      "example": "Follow the instructions in the README.",
+      "lesson": "Репозиторий и совместная работа",
+      "transcription": "/ˈɹidˌmi/",
+      "pronunciation": "≈ ри́дми"
+    },
+    {
+      "english": "comment",
+      "translation": "комментарий",
+      "example": "This comment explains the reason for the check.",
+      "lesson": "Репозиторий и совместная работа",
+      "transcription": "/ˈkɑmɛnt/",
+      "pronunciation": "≈ ка́мэнт"
+    },
+    {
+      "english": "convention",
+      "translation": "соглашение; принятый стиль",
+      "example": "Follow the project's naming conventions.",
+      "lesson": "Репозиторий и совместная работа",
+      "transcription": "/kənˈvɛnʃən/",
+      "pronunciation": "≈ кэнвэ́ншэн"
+    },
+    {
+      "english": "refactor",
+      "translation": "реорганизовать код без изменения поведения",
+      "example": "I want to refactor this function.",
+      "lesson": "Репозиторий и совместная работа",
+      "transcription": "/ɹiˈfæktɚ/",
+      "pronunciation": "≈ рифэ́ктёр"
+    },
+    {
+      "english": "cleanup",
+      "translation": "упорядочивание; очистка",
+      "example": "This is a small code cleanup.",
+      "lesson": "Репозиторий и совместная работа",
+      "transcription": "/ˈkliˌnʌp/",
+      "pronunciation": "≈ кли́нап"
+    },
+    {
+      "english": "maintainer",
+      "translation": "сопровождающий проекта",
+      "example": "Ask the maintainer before changing the public interface.",
+      "lesson": "Репозиторий и совместная работа",
+      "transcription": "/meɪnˈteɪnɚ/",
+      "pronunciation": "≈ мэйнтэ́йнёр"
+    },
+    {
+      "english": "contributor",
+      "translation": "участник проекта",
+      "example": "The contributor added a useful test.",
+      "lesson": "Репозиторий и совместная работа",
+      "transcription": "/kənˈtɹɪbjətɚ/",
+      "pronunciation": "≈ кэнтри́бйэтёр"
+    },
+    {
+      "english": "bug",
+      "translation": "ошибка в программе",
+      "example": "I found a bug in the login flow.",
+      "lesson": "Ошибки и тестирование",
+      "transcription": "/bʌɡ/",
+      "pronunciation": "≈ ба́г"
+    },
+    {
+      "english": "defect",
+      "translation": "дефект",
+      "example": "The defect affects older versions.",
+      "lesson": "Ошибки и тестирование",
+      "transcription": "/ˈdifɛkt/",
+      "pronunciation": "≈ ди́фэкт"
+    },
+    {
+      "english": "issue",
+      "translation": "проблема; задача",
+      "example": "Can you reproduce the issue?",
+      "lesson": "Ошибки и тестирование",
+      "transcription": "/ˈɪʃu/",
+      "pronunciation": "≈ и́шу"
+    },
+    {
+      "english": "error",
+      "translation": "ошибка",
+      "example": "What error message do you see?",
+      "lesson": "Ошибки и тестирование",
+      "transcription": "/ˈɛɹɚ/",
+      "pronunciation": "≈ э́рёр"
+    },
+    {
+      "english": "failure",
+      "translation": "сбой; неуспех",
+      "example": "The test failure is reproducible.",
+      "lesson": "Ошибки и тестирование",
+      "transcription": "/ˈfeɪljɚ/",
+      "pronunciation": "≈ фэ́йлйёр"
+    },
+    {
+      "english": "crash",
+      "translation": "аварийное завершение",
+      "example": "The application crashes on startup.",
+      "lesson": "Ошибки и тестирование",
+      "transcription": "/kɹæʃ/",
+      "pronunciation": "≈ крэ́ш"
+    },
+    {
+      "english": "hang",
+      "translation": "зависание; зависать",
+      "example": "The process hangs after the request.",
+      "lesson": "Ошибки и тестирование",
+      "transcription": "/hæŋ/",
+      "pronunciation": "≈ хэ́нг"
+    },
+    {
+      "english": "freeze",
+      "translation": "зависать; замораживать",
+      "example": "The screen freezes when I click this.",
+      "lesson": "Ошибки и тестирование",
+      "transcription": "/fɹiz/",
+      "pronunciation": "≈ фри́з"
+    },
+    {
+      "english": "reproduce",
+      "translation": "воспроизводить",
+      "example": "I cannot reproduce it locally.",
+      "lesson": "Ошибки и тестирование",
+      "transcription": "/ˌɹipɹəˈdus/",
+      "pronunciation": "≈ рипрэду́с"
+    },
+    {
+      "english": "reproduction steps",
+      "translation": "шаги воспроизведения",
+      "example": "Please include the reproduction steps.",
+      "lesson": "Ошибки и тестирование",
+      "transcription": "/ˌɹipɹəˈdʌkʃən stɛps/",
+      "pronunciation": "≈ рипрэда́кшэн стэ́пс"
+    },
+    {
+      "english": "expected behavior",
+      "translation": "ожидаемое поведение",
+      "example": "Describe the expected behavior.",
+      "lesson": "Ошибки и тестирование",
+      "transcription": "/ɪkˈspɛktəd bɪˈheɪvjɚ/",
+      "pronunciation": "≈ икспэ́ктэд бихэ́йвйёр"
+    },
+    {
+      "english": "actual behavior",
+      "translation": "фактическое поведение",
+      "example": "What is the actual behavior?",
+      "lesson": "Ошибки и тестирование",
+      "transcription": "/ˈæktʃəwəl bɪˈheɪvjɚ/",
+      "pronunciation": "≈ э́кчэуэл бихэ́йвйёр"
+    },
+    {
+      "english": "root cause",
+      "translation": "первопричина",
+      "example": "We found the root cause.",
+      "lesson": "Ошибки и тестирование",
+      "transcription": "/ɹut kɑz/",
+      "pronunciation": "≈ ру́т ка́з"
+    },
+    {
+      "english": "workaround",
+      "translation": "временный обходной путь",
+      "example": "There is a temporary workaround.",
+      "lesson": "Ошибки и тестирование",
+      "transcription": "/ˈwɝkɚˈaʊnd/",
+      "pronunciation": "≈ уё́ркёра́унд"
+    },
+    {
+      "english": "fix",
+      "translation": "исправление; исправлять",
+      "example": "The fix is included in this release.",
+      "lesson": "Ошибки и тестирование",
+      "transcription": "/fɪks/",
+      "pronunciation": "≈ фи́кс"
+    },
+    {
+      "english": "regression",
+      "translation": "повторное нарушение работоспособности",
+      "example": "We added a test for the regression.",
+      "lesson": "Ошибки и тестирование",
+      "transcription": "/ɹəˈɡɹɛʃən/",
+      "pronunciation": "≈ рэгрэ́шэн"
+    },
+    {
+      "english": "test case",
+      "translation": "тестовый сценарий",
+      "example": "Add a test case for an empty input.",
+      "lesson": "Ошибки и тестирование",
+      "transcription": "/tɛst keɪs/",
+      "pronunciation": "≈ тэ́ст кэ́йс"
+    },
+    {
+      "english": "unit test",
+      "translation": "модульный тест",
+      "example": "The unit test checks the calculation.",
+      "lesson": "Ошибки и тестирование",
+      "transcription": "/ˈjunət tɛst/",
+      "pronunciation": "≈ йу́нэт тэ́ст"
+    },
+    {
+      "english": "integration test",
+      "translation": "интеграционный тест",
+      "example": "The integration test uses a temporary database.",
+      "lesson": "Ошибки и тестирование",
+      "transcription": "/ˌɪntəˈɡɹeɪʃən tɛst/",
+      "pronunciation": "≈ интэгрэ́йшэн тэ́ст"
+    },
+    {
+      "english": "end-to-end test",
+      "translation": "сквозной тест",
+      "example": "The end-to-end test covers the checkout flow.",
+      "lesson": "Ошибки и тестирование",
+      "transcription": "/ɛnd tu ɛnd tɛst/",
+      "pronunciation": "≈ э́нд ту́ э́нд тэ́ст"
+    },
+    {
+      "english": "assertion",
+      "translation": "проверочное утверждение",
+      "example": "The assertion failed.",
+      "lesson": "Ошибки и тестирование",
+      "transcription": "/əˈsɝʃən/",
+      "pronunciation": "≈ эсё́ршэн"
+    },
+    {
+      "english": "fixture",
+      "translation": "подготовленные данные или окружение теста",
+      "example": "The fixture creates a test user.",
+      "lesson": "Ошибки и тестирование",
+      "transcription": "/ˈfɪkstʃɚ/",
+      "pronunciation": "≈ фи́ксчёр"
+    },
+    {
+      "english": "mock",
+      "translation": "подмена зависимости для теста",
+      "example": "Use a mock for the external service.",
+      "lesson": "Ошибки и тестирование",
+      "transcription": "/mɑk/",
+      "pronunciation": "≈ ма́к"
+    },
+    {
+      "english": "coverage",
+      "translation": "покрытие тестами",
+      "example": "Coverage alone does not prove correctness.",
+      "lesson": "Ошибки и тестирование",
+      "transcription": "/ˈkʌvɚədʒ/",
+      "pronunciation": "≈ ка́вёрэдж"
+    },
+    {
+      "english": "edge case",
+      "translation": "пограничный случай",
+      "example": "We missed an edge case.",
+      "lesson": "Ошибки и тестирование",
+      "transcription": "/ɛdʒ keɪs/",
+      "pronunciation": "≈ э́дж кэ́йс"
+    },
+    {
+      "english": "boundary",
+      "translation": "граница",
+      "example": "Test the boundary values.",
+      "lesson": "Ошибки и тестирование",
+      "transcription": "/ˈbaʊndɚi/",
+      "pronunciation": "≈ ба́ундёри"
+    },
+    {
+      "english": "validation",
+      "translation": "проверка допустимости",
+      "example": "Input validation happens before saving.",
+      "lesson": "Ошибки и тестирование",
+      "transcription": "/ˌvæləˈdeɪʃən/",
+      "pronunciation": "≈ вэлэдэ́йшэн"
+    },
+    {
+      "english": "debug",
+      "translation": "отлаживать",
+      "example": "I need to debug this request.",
+      "lesson": "Ошибки и тестирование",
+      "transcription": "/diˈbʌɡ/",
+      "pronunciation": "≈ диба́г"
+    },
+    {
+      "english": "breakpoint",
+      "translation": "точка останова",
+      "example": "Set a breakpoint before the call.",
+      "lesson": "Ошибки и тестирование",
+      "transcription": "/ˈbɹeɪkˌpɔɪnt/",
+      "pronunciation": "≈ брэ́йкпойнт"
+    },
+    {
+      "english": "stack trace",
+      "translation": "стек вызовов в момент ошибки",
+      "example": "Can you share the stack trace?",
+      "lesson": "Ошибки и тестирование",
+      "transcription": "/stæk tɹeɪs/",
+      "pronunciation": "≈ стэ́к трэ́йс"
+    },
+    {
+      "english": "build",
+      "translation": "сборка; собирать",
+      "example": "The build failed.",
+      "lesson": "Сборка, процессы и память",
+      "transcription": "/bɪld/",
+      "pronunciation": "≈ би́лд"
+    },
+    {
+      "english": "compile",
+      "translation": "компилировать",
+      "example": "The code does not compile.",
+      "lesson": "Сборка, процессы и память",
+      "transcription": "/kəmˈpaɪl/",
+      "pronunciation": "≈ кэмпа́йл"
+    },
+    {
+      "english": "compiler",
+      "translation": "компилятор",
+      "example": "The compiler reported a warning.",
+      "lesson": "Сборка, процессы и память",
+      "transcription": "/kəmˈpaɪlɚ/",
+      "pronunciation": "≈ кэмпа́йлёр"
+    },
+    {
+      "english": "linker",
+      "translation": "компоновщик",
+      "example": "The linker cannot find the symbol.",
+      "lesson": "Сборка, процессы и память",
+      "transcription": "/ˈlɪŋkɚ/",
+      "pronunciation": "≈ ли́нгкёр"
+    },
+    {
+      "english": "warning",
+      "translation": "предупреждение",
+      "example": "Please fix the compiler warning.",
+      "lesson": "Сборка, процессы и память",
+      "transcription": "/ˈwɔɹnɪŋ/",
+      "pronunciation": "≈ уо́рнинг"
+    },
+    {
+      "english": "binary",
+      "translation": "двоичный файл; исполняемый файл",
+      "example": "Run the newly built binary.",
+      "lesson": "Сборка, процессы и память",
+      "transcription": "/ˈbaɪnɚi/",
+      "pronunciation": "≈ ба́йнёри"
+    },
+    {
+      "english": "executable",
+      "translation": "исполняемый файл",
+      "example": "Where is the executable installed?",
+      "lesson": "Сборка, процессы и память",
+      "transcription": "/ɛɡˈzɛkjətəbəl/",
+      "pronunciation": "≈ эгзэ́кйэтэбэл"
+    },
+    {
+      "english": "runtime",
+      "translation": "время выполнения; среда выполнения",
+      "example": "The error occurs at runtime.",
+      "lesson": "Сборка, процессы и память",
+      "transcription": "/ˈɹʌnˌtaɪm/",
+      "pronunciation": "≈ ра́нтайм"
+    },
+    {
+      "english": "process",
+      "translation": "процесс",
+      "example": "The process is still running.",
+      "lesson": "Сборка, процессы и память",
+      "transcription": "/ˈpɹɑˌsɛs/",
+      "pronunciation": "≈ пра́сэс"
+    },
+    {
+      "english": "thread",
+      "translation": "поток выполнения",
+      "example": "This code runs on another thread.",
+      "lesson": "Сборка, процессы и память",
+      "transcription": "/θɹɛd/",
+      "pronunciation": "≈ срэ́д"
+    },
+    {
+      "english": "concurrency",
+      "translation": "конкурентное выполнение",
+      "example": "The bug only appears under concurrency.",
+      "lesson": "Сборка, процессы и память",
+      "transcription": "/kənˈkɝənsi/",
+      "pronunciation": "≈ кэнкё́рэнси"
+    },
+    {
+      "english": "parallelism",
+      "translation": "параллельное выполнение",
+      "example": "Parallelism can reduce processing time.",
+      "lesson": "Сборка, процессы и память",
+      "transcription": "/ˈpɛɹəˌlɛˌlɪzəm/",
+      "pronunciation": "≈ пэ́рэлэлизэм"
+    },
+    {
+      "english": "synchronization",
+      "translation": "синхронизация",
+      "example": "This shared state needs synchronization.",
+      "lesson": "Сборка, процессы и память",
+      "transcription": "/ˌsɪŋkɹənəˈzeɪʃən/",
+      "pronunciation": "≈ сингкрэнэзэ́йшэн"
+    },
+    {
+      "english": "mutex",
+      "translation": "мьютекс",
+      "example": "The mutex protects the shared data.",
+      "lesson": "Сборка, процессы и память",
+      "transcription": "/ˈmjuˌtɛks/",
+      "pronunciation": "≈ мйу́тэкс"
+    },
+    {
+      "english": "lock",
+      "translation": "блокировка",
+      "example": "Release the lock before the network call.",
+      "lesson": "Сборка, процессы и память",
+      "transcription": "/lɑk/",
+      "pronunciation": "≈ ла́к"
+    },
+    {
+      "english": "deadlock",
+      "translation": "взаимная блокировка",
+      "example": "The threads are stuck in a deadlock.",
+      "lesson": "Сборка, процессы и память",
+      "transcription": "/ˈdɛdˌlɑk/",
+      "pronunciation": "≈ дэ́длак"
+    },
+    {
+      "english": "race condition",
+      "translation": "состояние гонки",
+      "example": "There is a race condition in this code.",
+      "lesson": "Сборка, процессы и память",
+      "transcription": "/ɹeɪs kənˈdɪʃən/",
+      "pronunciation": "≈ рэ́йс кэнди́шэн"
+    },
+    {
+      "english": "memory",
+      "translation": "оперативная память",
+      "example": "The process uses too much memory.",
+      "lesson": "Сборка, процессы и память",
+      "transcription": "/ˈmɛmɚi/",
+      "pronunciation": "≈ мэ́мёри"
+    },
+    {
+      "english": "allocation",
+      "translation": "выделение памяти",
+      "example": "This operation performs a memory allocation.",
+      "lesson": "Сборка, процессы и память",
+      "transcription": "/ˌæləˈkeɪʃən/",
+      "pronunciation": "≈ элэкэ́йшэн"
+    },
+    {
+      "english": "leak",
+      "translation": "утечка",
+      "example": "We found a memory leak.",
+      "lesson": "Сборка, процессы и память",
+      "transcription": "/lik/",
+      "pronunciation": "≈ ли́к"
+    },
+    {
+      "english": "stack",
+      "translation": "стек",
+      "example": "This object is stored on the stack.",
+      "lesson": "Сборка, процессы и память",
+      "transcription": "/stæk/",
+      "pronunciation": "≈ стэ́к"
+    },
+    {
+      "english": "heap",
+      "translation": "куча; область динамической памяти",
+      "example": "The data is allocated on the heap.",
+      "lesson": "Сборка, процессы и память",
+      "transcription": "/hip/",
+      "pronunciation": "≈ хи́п"
+    },
+    {
+      "english": "pointer",
+      "translation": "указатель",
+      "example": "Check whether the pointer is null.",
+      "lesson": "Сборка, процессы и память",
+      "transcription": "/ˈpɔɪntɚ/",
+      "pronunciation": "≈ по́йнтёр"
+    },
+    {
+      "english": "reference",
+      "translation": "ссылка",
+      "example": "The function accepts a reference.",
+      "lesson": "Сборка, процессы и память",
+      "transcription": "/ˈɹɛfɚəns/",
+      "pronunciation": "≈ рэ́фёрэнс"
+    },
+    {
+      "english": "ownership",
+      "translation": "владение ресурсом",
+      "example": "Resource ownership should be explicit.",
+      "lesson": "Сборка, процессы и память",
+      "transcription": "/ˈoʊnɚˌʃɪp/",
+      "pronunciation": "≈ о́унёршип"
+    },
+    {
+      "english": "lifetime",
+      "translation": "время жизни",
+      "example": "The reference must not outlive the object's lifetime.",
+      "lesson": "Сборка, процессы и память",
+      "transcription": "/ˈlaɪfˌtaɪm/",
+      "pronunciation": "≈ ла́йфтайм"
+    },
+    {
+      "english": "resource",
+      "translation": "ресурс",
+      "example": "Release the resource after use.",
+      "lesson": "Сборка, процессы и память",
+      "transcription": "/ˈɹisɔɹs/",
+      "pronunciation": "≈ ри́сорс"
+    },
+    {
+      "english": "buffer",
+      "translation": "буфер",
+      "example": "Check the buffer size.",
+      "lesson": "Сборка, процессы и память",
+      "transcription": "/ˈbʌfɚ/",
+      "pronunciation": "≈ ба́фёр"
+    },
+    {
+      "english": "overflow",
+      "translation": "переполнение",
+      "example": "The check prevents an integer overflow.",
+      "lesson": "Сборка, процессы и память",
+      "transcription": "/ˈoʊvɚˌfloʊ/",
+      "pronunciation": "≈ о́увёрфлоу"
+    },
+    {
+      "english": "undefined behavior",
+      "translation": "неопределённое поведение",
+      "example": "This code may cause undefined behavior.",
+      "lesson": "Сборка, процессы и память",
+      "transcription": "/ˌʌndɪˈfaɪnd bɪˈheɪvjɚ/",
+      "pronunciation": "≈ андифа́йнд бихэ́йвйёр"
+    },
+    {
+      "english": "network",
+      "translation": "сеть",
+      "example": "The network connection is unstable.",
+      "lesson": "Сети и веб",
+      "transcription": "/ˈnɛˌtwɝk/",
+      "pronunciation": "≈ нэ́туёрк"
+    },
+    {
+      "english": "server",
+      "translation": "сервер",
+      "example": "The server is not responding.",
+      "lesson": "Сети и веб",
+      "transcription": "/ˈsɝvɚ/",
+      "pronunciation": "≈ сё́рвёр"
+    },
+    {
+      "english": "client",
+      "translation": "клиентское приложение",
+      "example": "The client sends a request.",
+      "lesson": "Сети и веб",
+      "transcription": "/ˈklaɪənt/",
+      "pronunciation": "≈ кла́йэнт"
+    },
+    {
+      "english": "request",
+      "translation": "запрос",
+      "example": "The request timed out.",
+      "lesson": "Сети и веб",
+      "transcription": "/ɹɪˈkwɛst/",
+      "pronunciation": "≈ рикуэ́ст"
+    },
+    {
+      "english": "response",
+      "translation": "ответ",
+      "example": "Check the response status.",
+      "lesson": "Сети и веб",
+      "transcription": "/ɹɪˈspɑns/",
+      "pronunciation": "≈ риспа́нс"
+    },
+    {
+      "english": "endpoint",
+      "translation": "адрес операции API",
+      "example": "Which endpoint handles this request?",
+      "lesson": "Сети и веб",
+      "transcription": "/ˈɛndˌpɔɪnt/",
+      "pronunciation": "≈ э́ндпойнт"
+    },
+    {
+      "english": "API",
+      "translation": "программный интерфейс",
+      "example": "The API returns JSON.",
+      "lesson": "Сети и веб",
+      "transcription": "/ˌeɪ pi ˈaɪ/",
+      "pronunciation": "≈ эй пи ай"
+    },
+    {
+      "english": "HTTP",
+      "translation": "протокол передачи веб-данных",
+      "example": "The service uses HTTP.",
+      "lesson": "Сети и веб",
+      "transcription": "/ˌeɪtʃ ti ti ˈpi/",
+      "pronunciation": "≈ эйч ти ти пи"
+    },
+    {
+      "english": "URL",
+      "translation": "адрес ресурса",
+      "example": "Check the URL for typos.",
+      "lesson": "Сети и веб",
+      "transcription": "/ˌju ɑɹ ˈɛl/",
+      "pronunciation": "≈ ю ар эл"
+    },
+    {
+      "english": "header",
+      "translation": "заголовок",
+      "example": "The authorization header is missing.",
+      "lesson": "Сети и веб",
+      "transcription": "/ˈhɛdɚ/",
+      "pronunciation": "≈ хэ́дёр"
+    },
+    {
+      "english": "payload",
+      "translation": "полезные данные запроса",
+      "example": "The payload contains the user name.",
+      "lesson": "Сети и веб",
+      "transcription": "/ˈpeɪˌloʊd/",
+      "pronunciation": "≈ пэ́йлоуд"
+    },
+    {
+      "english": "status code",
+      "translation": "код состояния",
+      "example": "What status code did the server return?",
+      "lesson": "Сети и веб",
+      "transcription": "/ˈstætəs koʊd/",
+      "pronunciation": "≈ стэ́тэс ко́уд"
+    },
+    {
+      "english": "timeout",
+      "translation": "истечение времени ожидания",
+      "example": "Increase the timeout only if necessary.",
+      "lesson": "Сети и веб",
+      "transcription": "/ˈtaɪˌmaʊt/",
+      "pronunciation": "≈ та́ймаут"
+    },
+    {
+      "english": "retry",
+      "translation": "повторная попытка",
+      "example": "The client will retry the request.",
+      "lesson": "Сети и веб",
+      "transcription": "/ɹiˈtɹaɪ/",
+      "pronunciation": "≈ ритра́й"
+    },
+    {
+      "english": "latency",
+      "translation": "задержка",
+      "example": "We need to reduce latency.",
+      "lesson": "Сети и веб",
+      "transcription": "/ˈleɪtənsi/",
+      "pronunciation": "≈ лэ́йтэнси"
+    },
+    {
+      "english": "bandwidth",
+      "translation": "пропускная способность канала",
+      "example": "The upload uses a lot of bandwidth.",
+      "lesson": "Сети и веб",
+      "transcription": "/ˈbændwɪdθ/",
+      "pronunciation": "≈ бэ́ндуидс"
+    },
+    {
+      "english": "throughput",
+      "translation": "производительность по объёму операций",
+      "example": "Measure throughput under load.",
+      "lesson": "Сети и веб",
+      "transcription": "/ˈθɹuˌpʊt/",
+      "pronunciation": "≈ сру́пут"
+    },
+    {
+      "english": "connection",
+      "translation": "соединение",
+      "example": "The connection was closed.",
+      "lesson": "Сети и веб",
+      "transcription": "/kəˈnɛkʃən/",
+      "pronunciation": "≈ кэнэ́кшэн"
+    },
+    {
+      "english": "socket",
+      "translation": "сетевой сокет",
+      "example": "The socket is ready for reading.",
+      "lesson": "Сети и веб",
+      "transcription": "/ˈsɑkət/",
+      "pronunciation": "≈ са́кэт"
+    },
+    {
+      "english": "port",
+      "translation": "сетевой порт",
+      "example": "Which port does the service use?",
+      "lesson": "Сети и веб",
+      "transcription": "/pɔɹt/",
+      "pronunciation": "≈ по́рт"
+    },
+    {
+      "english": "protocol",
+      "translation": "протокол",
+      "example": "Both systems use the same protocol.",
+      "lesson": "Сети и веб",
+      "transcription": "/ˈpɹoʊtəˌkɑl/",
+      "pronunciation": "≈ про́утэкал"
+    },
+    {
+      "english": "DNS",
+      "translation": "система доменных имён",
+      "example": "Check the DNS configuration.",
+      "lesson": "Сети и веб",
+      "transcription": "/ˌdi ɛn ˈɛs/",
+      "pronunciation": "≈ ди эн эс"
+    },
+    {
+      "english": "domain",
+      "translation": "домен; предметная область",
+      "example": "The domain name has changed.",
+      "lesson": "Сети и веб",
+      "transcription": "/doʊˈmeɪn/",
+      "pronunciation": "≈ доумэ́йн"
+    },
+    {
+      "english": "proxy",
+      "translation": "прокси-сервер",
+      "example": "The request passes through a proxy.",
+      "lesson": "Сети и веб",
+      "transcription": "/ˈpɹɑksi/",
+      "pronunciation": "≈ пра́кси"
+    },
+    {
+      "english": "firewall",
+      "translation": "межсетевой экран",
+      "example": "The firewall blocks this connection.",
+      "lesson": "Сети и веб",
+      "transcription": "/ˈfaɪɹwɑl/",
+      "pronunciation": "≈ фа́йруал"
+    },
+    {
+      "english": "TLS",
+      "translation": "протокол защиты транспортного соединения",
+      "example": "The connection uses TLS.",
+      "lesson": "Сети и веб",
+      "transcription": "/ˌti ɛl ˈɛs/",
+      "pronunciation": "≈ ти эл эс"
+    },
+    {
+      "english": "certificate",
+      "translation": "цифровой сертификат",
+      "example": "The certificate has expired.",
+      "lesson": "Сети и веб",
+      "transcription": "/sɚˈtɪfɪkət/",
+      "pronunciation": "≈ сёрти́фикэт"
+    },
+    {
+      "english": "webhook",
+      "translation": "обратный HTTP-вызов по событию",
+      "example": "The payment service sends a webhook.",
+      "lesson": "Сети и веб",
+      "transcription": "/ˈwɛbˌhʊk/",
+      "pronunciation": "≈ уэ́бхук"
+    },
+    {
+      "english": "cache",
+      "translation": "кеш",
+      "example": "The response was served from the cache.",
+      "lesson": "Сети и веб",
+      "transcription": "/kæʃ/",
+      "pronunciation": "≈ кэ́ш"
+    },
+    {
+      "english": "cookie",
+      "translation": "данные браузера для сайта",
+      "example": "The session cookie has expired.",
+      "lesson": "Сети и веб",
+      "transcription": "/ˈkʊki/",
+      "pronunciation": "≈ ку́ки"
+    },
+    {
+      "english": "database",
+      "translation": "база данных",
+      "example": "The database is unavailable.",
+      "lesson": "Базы данных и данные",
+      "transcription": "/ˈdeɪtəˌbeɪs/",
+      "pronunciation": "≈ дэ́йтэбэйс"
+    },
+    {
+      "english": "table",
+      "translation": "таблица",
+      "example": "The table stores user accounts.",
+      "lesson": "Базы данных и данные",
+      "transcription": "/ˈteɪbəl/",
+      "pronunciation": "≈ тэ́йбэл"
+    },
+    {
+      "english": "row",
+      "translation": "строка таблицы",
+      "example": "The query returned one row.",
+      "lesson": "Базы данных и данные",
+      "transcription": "/ɹoʊ/",
+      "pronunciation": "≈ ро́у"
+    },
+    {
+      "english": "column",
+      "translation": "столбец",
+      "example": "Add a column for the timestamp.",
+      "lesson": "Базы данных и данные",
+      "transcription": "/ˈkɑləm/",
+      "pronunciation": "≈ ка́лэм"
+    },
+    {
+      "english": "schema",
+      "translation": "схема базы или данных",
+      "example": "The migration changes the schema.",
+      "lesson": "Базы данных и данные",
+      "transcription": "/ˈskimə/",
+      "pronunciation": "≈ ски́мэ"
+    },
+    {
+      "english": "query",
+      "translation": "запрос к базе данных",
+      "example": "This query is slow.",
+      "lesson": "Базы данных и данные",
+      "transcription": "/ˈkwiɹi/",
+      "pronunciation": "≈ куи́ри"
+    },
+    {
+      "english": "index",
+      "translation": "индекс",
+      "example": "The index improves lookup speed.",
+      "lesson": "Базы данных и данные",
+      "transcription": "/ˈɪndɛks/",
+      "pronunciation": "≈ и́ндэкс"
+    },
+    {
+      "english": "primary key",
+      "translation": "первичный ключ",
+      "example": "Each row has a primary key.",
+      "lesson": "Базы данных и данные",
+      "transcription": "/ˈpɹaɪˌmɛɹi ki/",
+      "pronunciation": "≈ пра́ймэри ки́"
+    },
+    {
+      "english": "foreign key",
+      "translation": "внешний ключ",
+      "example": "The foreign key references the users table.",
+      "lesson": "Базы данных и данные",
+      "transcription": "/ˈfɔɹən ki/",
+      "pronunciation": "≈ фо́рэн ки́"
+    },
+    {
+      "english": "constraint",
+      "translation": "ограничение целостности",
+      "example": "The insert violated a constraint.",
+      "lesson": "Базы данных и данные",
+      "transcription": "/kənˈstɹeɪnt/",
+      "pronunciation": "≈ кэнстрэ́йнт"
+    },
+    {
+      "english": "transaction",
+      "translation": "транзакция",
+      "example": "Save both changes in one transaction.",
+      "lesson": "Базы данных и данные",
+      "transcription": "/tɹænˈzækʃən/",
+      "pronunciation": "≈ трэнзэ́кшэн"
+    },
+    {
+      "english": "migration",
+      "translation": "миграция схемы или данных",
+      "example": "Back up the database before the migration.",
+      "lesson": "Базы данных и данные",
+      "transcription": "/maɪˈɡɹeɪʃən/",
+      "pronunciation": "≈ майгрэ́йшэн"
+    },
+    {
+      "english": "backup",
+      "translation": "резервная копия",
+      "example": "We have a verified backup.",
+      "lesson": "Базы данных и данные",
+      "transcription": "/ˈbæˌkʌp/",
+      "pronunciation": "≈ бэ́кап"
+    },
+    {
+      "english": "restore",
+      "translation": "восстанавливать",
+      "example": "Restore the backup into a test database.",
+      "lesson": "Базы данных и данные",
+      "transcription": "/ɹɪˈstɔɹ/",
+      "pronunciation": "≈ ристо́р"
+    },
+    {
+      "english": "insert",
+      "translation": "вставлять",
+      "example": "Insert a new row.",
+      "lesson": "Базы данных и данные",
+      "transcription": "/ˌɪnˈsɝt/",
+      "pronunciation": "≈ инсё́рт"
+    },
+    {
+      "english": "update",
+      "translation": "обновлять",
+      "example": "Update the user's settings.",
+      "lesson": "Базы данных и данные",
+      "transcription": "/əpˈdeɪt/",
+      "pronunciation": "≈ эпдэ́йт"
+    },
+    {
+      "english": "delete",
+      "translation": "удалять",
+      "example": "Delete only the selected records.",
+      "lesson": "Базы данных и данные",
+      "transcription": "/dɪˈlit/",
+      "pronunciation": "≈ дили́т"
+    },
+    {
+      "english": "record",
+      "translation": "запись",
+      "example": "The record already exists.",
+      "lesson": "Базы данных и данные",
+      "transcription": "/ˈɹɛkɚd/",
+      "pronunciation": "≈ рэ́кёрд"
+    },
+    {
+      "english": "duplicate",
+      "translation": "дубликат",
+      "example": "The unique constraint prevents duplicates.",
+      "lesson": "Базы данных и данные",
+      "transcription": "/ˈdupləkət/",
+      "pronunciation": "≈ ду́плэкэт"
+    },
+    {
+      "english": "null",
+      "translation": "отсутствующее значение NULL",
+      "example": "null is different from an empty string.",
+      "lesson": "Базы данных и данные",
+      "transcription": "/nʌl/",
+      "pronunciation": "≈ на́л"
+    },
+    {
+      "english": "join",
+      "translation": "соединение таблиц",
+      "example": "The query uses a join.",
+      "lesson": "Базы данных и данные",
+      "transcription": "/dʒɔɪn/",
+      "pronunciation": "≈ джо́йн"
+    },
+    {
+      "english": "filter",
+      "translation": "фильтр; фильтровать",
+      "example": "Filter the results by date.",
+      "lesson": "Базы данных и данные",
+      "transcription": "/ˈfɪltɚ/",
+      "pronunciation": "≈ фи́лтёр"
+    },
+    {
+      "english": "sort",
+      "translation": "сортировать",
+      "example": "Sort the rows by creation time.",
+      "lesson": "Базы данных и данные",
+      "transcription": "/sɔɹt/",
+      "pronunciation": "≈ со́рт"
+    },
+    {
+      "english": "aggregate",
+      "translation": "агрегировать; объединять показатели",
+      "example": "Aggregate the results by user.",
+      "lesson": "Базы данных и данные",
+      "transcription": "/ˈæɡɹəɡət/",
+      "pronunciation": "≈ э́грэгэт"
+    },
+    {
+      "english": "consistency",
+      "translation": "согласованность",
+      "example": "The transaction preserves consistency.",
+      "lesson": "Базы данных и данные",
+      "transcription": "/kənˈsɪstənsi/",
+      "pronunciation": "≈ кэнси́стэнси"
+    },
+    {
+      "english": "isolation",
+      "translation": "изоляция",
+      "example": "Check the transaction isolation level.",
+      "lesson": "Базы данных и данные",
+      "transcription": "/ˌaɪsəˈleɪʃən/",
+      "pronunciation": "≈ айсэлэ́йшэн"
+    },
+    {
+      "english": "serialization",
+      "translation": "сериализация",
+      "example": "Serialization converts the object into a message.",
+      "lesson": "Базы данных и данные",
+      "transcription": "/ˌsɪɹiələˈzeɪʃən/",
+      "pronunciation": "≈ сириэлэзэ́йшэн"
+    },
+    {
+      "english": "encoding",
+      "translation": "кодирование; кодировка",
+      "example": "Use UTF-8 encoding.",
+      "lesson": "Базы данных и данные",
+      "transcription": "/ɛnˈkoʊdɪŋ/",
+      "pronunciation": "≈ энко́удинг"
+    },
+    {
+      "english": "deploy",
+      "translation": "развёртывать",
+      "example": "We will deploy after the checks pass.",
+      "lesson": "Развёртывание и эксплуатация",
+      "transcription": "/dɪˈplɔɪ/",
+      "pronunciation": "≈ дипло́й"
+    },
+    {
+      "english": "deployment",
+      "translation": "развёртывание",
+      "example": "The deployment completed successfully.",
+      "lesson": "Развёртывание и эксплуатация",
+      "transcription": "/dɪˈplɔɪmənt/",
+      "pronunciation": "≈ дипло́ймэнт"
+    },
+    {
+      "english": "environment",
+      "translation": "окружение",
+      "example": "Which environment has the problem?",
+      "lesson": "Развёртывание и эксплуатация",
+      "transcription": "/ɪnˈvaɪɹənmənt/",
+      "pronunciation": "≈ инва́йрэнмэнт"
+    },
+    {
+      "english": "production",
+      "translation": "рабочая среда",
+      "example": "Do not use test credentials in production.",
+      "lesson": "Развёртывание и эксплуатация",
+      "transcription": "/pɹəˈdʌkʃən/",
+      "pronunciation": "≈ прэда́кшэн"
+    },
+    {
+      "english": "staging",
+      "translation": "предпродакшен; проверочное окружение",
+      "example": "Test the migration in staging.",
+      "lesson": "Развёртывание и эксплуатация",
+      "transcription": "/ˈsteɪdʒɪŋ/",
+      "pronunciation": "≈ стэ́йджинг"
+    },
+    {
+      "english": "configuration",
+      "translation": "конфигурация",
+      "example": "Check the service configuration.",
+      "lesson": "Развёртывание и эксплуатация",
+      "transcription": "/kənˌfɪɡjɚˈeɪʃən/",
+      "pronunciation": "≈ кэнфигйёрэ́йшэн"
+    },
+    {
+      "english": "environment variable",
+      "translation": "переменная окружения",
+      "example": "Store the setting in an environment variable.",
+      "lesson": "Развёртывание и эксплуатация",
+      "transcription": "/ɪnˈvaɪɹənmənt ˈvɛɹiəbəl/",
+      "pronunciation": "≈ инва́йрэнмэнт вэ́риэбэл"
+    },
+    {
+      "english": "secret",
+      "translation": "секрет; чувствительное значение",
+      "example": "Do not put secrets in the repository.",
+      "lesson": "Развёртывание и эксплуатация",
+      "transcription": "/ˈsikɹət/",
+      "pronunciation": "≈ си́крэт"
+    },
+    {
+      "english": "credential",
+      "translation": "учётные данные",
+      "example": "The credentials are stored securely.",
+      "lesson": "Развёртывание и эксплуатация",
+      "transcription": "/kɹɪˈdɛnʃəl/",
+      "pronunciation": "≈ кридэ́ншэл"
+    },
+    {
+      "english": "container",
+      "translation": "контейнер",
+      "example": "Restart the container after updating the image.",
+      "lesson": "Развёртывание и эксплуатация",
+      "transcription": "/kənˈteɪnɚ/",
+      "pronunciation": "≈ кэнтэ́йнёр"
+    },
+    {
+      "english": "image",
+      "translation": "образ контейнера или диска",
+      "example": "Build the image from the new source.",
+      "lesson": "Развёртывание и эксплуатация",
+      "transcription": "/ˈɪmədʒ/",
+      "pronunciation": "≈ и́мэдж"
+    },
+    {
+      "english": "volume",
+      "translation": "том хранения",
+      "example": "The database files are stored on a volume.",
+      "lesson": "Развёртывание и эксплуатация",
+      "transcription": "/ˈvɑljum/",
+      "pronunciation": "≈ ва́лйум"
+    },
+    {
+      "english": "log",
+      "translation": "журнал; записывать в журнал",
+      "example": "Check the logs for errors.",
+      "lesson": "Развёртывание и эксплуатация",
+      "transcription": "/lɔɡ/",
+      "pronunciation": "≈ ло́г"
+    },
+    {
+      "english": "metric",
+      "translation": "метрика",
+      "example": "This metric measures request latency.",
+      "lesson": "Развёртывание и эксплуатация",
+      "transcription": "/ˈmɛtɹɪk/",
+      "pronunciation": "≈ мэ́трик"
+    },
+    {
+      "english": "monitoring",
+      "translation": "мониторинг",
+      "example": "Monitoring detected the outage.",
+      "lesson": "Развёртывание и эксплуатация",
+      "transcription": "/ˈmɑnətɚɪŋ/",
+      "pronunciation": "≈ ма́нэтёринг"
+    },
+    {
+      "english": "alert",
+      "translation": "оповещение",
+      "example": "The alert fired after repeated failures.",
+      "lesson": "Развёртывание и эксплуатация",
+      "transcription": "/əˈlɝt/",
+      "pronunciation": "≈ элё́рт"
+    },
+    {
+      "english": "outage",
+      "translation": "период недоступности",
+      "example": "The outage lasted ten minutes.",
+      "lesson": "Развёртывание и эксплуатация",
+      "transcription": "/ˈaʊtədʒ/",
+      "pronunciation": "≈ а́утэдж"
+    },
+    {
+      "english": "incident",
+      "translation": "инцидент",
+      "example": "We are investigating the incident.",
+      "lesson": "Развёртывание и эксплуатация",
+      "transcription": "/ˈɪnsədənt/",
+      "pronunciation": "≈ и́нсэдэнт"
+    },
+    {
+      "english": "uptime",
+      "translation": "время доступности",
+      "example": "We track service uptime.",
+      "lesson": "Развёртывание и эксплуатация",
+      "transcription": "/ˈʌpˌtaɪm/",
+      "pronunciation": "≈ а́птайм"
+    },
+    {
+      "english": "health check",
+      "translation": "проверка работоспособности",
+      "example": "The health check is failing.",
+      "lesson": "Развёртывание и эксплуатация",
+      "transcription": "/hɛlθ tʃɛk/",
+      "pronunciation": "≈ хэ́лс чэ́к"
+    },
+    {
+      "english": "load",
+      "translation": "нагрузка",
+      "example": "Test the service under load.",
+      "lesson": "Развёртывание и эксплуатация",
+      "transcription": "/loʊd/",
+      "pronunciation": "≈ ло́уд"
+    },
+    {
+      "english": "scaling",
+      "translation": "масштабирование",
+      "example": "We need to plan for scaling.",
+      "lesson": "Развёртывание и эксплуатация",
+      "transcription": "/ˈskeɪlɪŋ/",
+      "pronunciation": "≈ скэ́йлинг"
+    },
+    {
+      "english": "replica",
+      "translation": "реплика",
+      "example": "The read replica is behind the primary.",
+      "lesson": "Развёртывание и эксплуатация",
+      "transcription": "/ˈɹɛplɪkə/",
+      "pronunciation": "≈ рэ́пликэ"
+    },
+    {
+      "english": "queue",
+      "translation": "очередь",
+      "example": "The worker reads from the queue.",
+      "lesson": "Развёртывание и эксплуатация",
+      "transcription": "/kju/",
+      "pronunciation": "≈ кйу́"
+    },
+    {
+      "english": "worker",
+      "translation": "фоновый обработчик",
+      "example": "The worker processes incoming jobs.",
+      "lesson": "Развёртывание и эксплуатация",
+      "transcription": "/ˈwɝkɚ/",
+      "pronunciation": "≈ уё́ркёр"
+    },
+    {
+      "english": "scheduler",
+      "translation": "планировщик",
+      "example": "The scheduler runs the task daily.",
+      "lesson": "Развёртывание и эксплуатация",
+      "transcription": "/ˈskɛdʒʊlɚ/",
+      "pronunciation": "≈ скэ́джулёр"
+    },
+    {
+      "english": "job",
+      "translation": "фоновая задача",
+      "example": "The job failed and will be retried.",
+      "lesson": "Развёртывание и эксплуатация",
+      "transcription": "/dʒɑb/",
+      "pronunciation": "≈ джа́б"
+    },
+    {
+      "english": "pipeline",
+      "translation": "конвейер обработки или проверки",
+      "example": "The pipeline runs the tests automatically.",
+      "lesson": "Развёртывание и эксплуатация",
+      "transcription": "/ˈpaɪˌplaɪn/",
+      "pronunciation": "≈ па́йплайн"
+    },
+    {
+      "english": "continuous integration",
+      "translation": "непрерывная интеграция",
+      "example": "Continuous integration checks each change.",
+      "lesson": "Развёртывание и эксплуатация",
+      "transcription": "/kənˈtɪnjuəs ˌɪntəˈɡɹeɪʃən/",
+      "pronunciation": "≈ кэнти́нйуэс интэгрэ́йшэн"
+    },
+    {
+      "english": "release notes",
+      "translation": "примечания к выпуску",
+      "example": "Read the release notes before upgrading.",
+      "lesson": "Развёртывание и эксплуатация",
+      "transcription": "/ɹiˈlis noʊts/",
+      "pronunciation": "≈ рили́с но́утс"
+    },
+    {
+      "english": "authentication",
+      "translation": "проверка личности",
+      "example": "Authentication failed.",
+      "lesson": "Безопасность и качество решений",
+      "transcription": "/ɔˌθɛntəˈkeɪʃən/",
+      "pronunciation": "≈ осэнтэкэ́йшэн"
+    },
+    {
+      "english": "authorization",
+      "translation": "проверка прав доступа",
+      "example": "Authorization is checked on the server.",
+      "lesson": "Безопасность и качество решений",
+      "transcription": "/ˌɔθɚəˈzeɪʃən/",
+      "pronunciation": "≈ осёрэзэ́йшэн"
+    },
+    {
+      "english": "permission",
+      "translation": "право доступа",
+      "example": "The user lacks permission to edit this.",
+      "lesson": "Безопасность и качество решений",
+      "transcription": "/pɚˈmɪʃən/",
+      "pronunciation": "≈ пёрми́шэн"
+    },
+    {
+      "english": "role",
+      "translation": "роль",
+      "example": "Assign the correct role to the account.",
+      "lesson": "Безопасность и качество решений",
+      "transcription": "/ɹoʊl/",
+      "pronunciation": "≈ ро́ул"
+    },
+    {
+      "english": "token",
+      "translation": "токен",
+      "example": "The access token has expired.",
+      "lesson": "Безопасность и качество решений",
+      "transcription": "/ˈtoʊkən/",
+      "pronunciation": "≈ то́укэн"
+    },
+    {
+      "english": "encryption",
+      "translation": "шифрование",
+      "example": "The connection uses encryption.",
+      "lesson": "Безопасность и качество решений",
+      "transcription": "/ɛnˈkɹɪpʃən/",
+      "pronunciation": "≈ энкри́пшэн"
+    },
+    {
+      "english": "hash",
+      "translation": "хеш",
+      "example": "Compare the file hash.",
+      "lesson": "Безопасность и качество решений",
+      "transcription": "/hæʃ/",
+      "pronunciation": "≈ хэ́ш"
+    },
+    {
+      "english": "salt",
+      "translation": "соль для хеширования",
+      "example": "Use a unique salt for each password.",
+      "lesson": "Безопасность и качество решений",
+      "transcription": "/sɔlt/",
+      "pronunciation": "≈ со́лт"
+    },
+    {
+      "english": "vulnerability",
+      "translation": "уязвимость",
+      "example": "The update fixes a vulnerability.",
+      "lesson": "Безопасность и качество решений",
+      "transcription": "/ˌvʌlnɚəˈbɪlɪti/",
+      "pronunciation": "≈ валнёрэби́лити"
+    },
+    {
+      "english": "exploit",
+      "translation": "эксплуатация уязвимости; эксплойт",
+      "example": "The report describes a possible exploit.",
+      "lesson": "Безопасность и качество решений",
+      "transcription": "/ˈɛkˌsplɔɪt/",
+      "pronunciation": "≈ э́ксплойт"
+    },
+    {
+      "english": "sanitize",
+      "translation": "очищать данные от опасных элементов",
+      "example": "Sanitize untrusted HTML before rendering.",
+      "lesson": "Безопасность и качество решений",
+      "transcription": "/ˈsænɪˌtaɪz/",
+      "pronunciation": "≈ сэ́нитайз"
+    },
+    {
+      "english": "escape",
+      "translation": "экранировать",
+      "example": "Escape text before inserting it into HTML.",
+      "lesson": "Безопасность и качество решений",
+      "transcription": "/ɪˈskeɪp/",
+      "pronunciation": "≈ искэ́йп"
+    },
+    {
+      "english": "access control",
+      "translation": "контроль доступа",
+      "example": "Review the access control rules.",
+      "lesson": "Безопасность и качество решений",
+      "transcription": "/ˈækˌsɛs kənˈtɹoʊl/",
+      "pronunciation": "≈ э́ксэс кэнтро́ул"
+    },
+    {
+      "english": "least privilege",
+      "translation": "минимально необходимые права",
+      "example": "Follow the principle of least privilege.",
+      "lesson": "Безопасность и качество решений",
+      "transcription": "/list ˈpɹɪvlədʒ/",
+      "pronunciation": "≈ ли́ст при́влэдж"
+    },
+    {
+      "english": "audit",
+      "translation": "аудит; проверка",
+      "example": "Keep an audit log of sensitive changes.",
+      "lesson": "Безопасность и качество решений",
+      "transcription": "/ˈɔdɪt/",
+      "pronunciation": "≈ о́дит"
+    },
+    {
+      "english": "privacy",
+      "translation": "конфиденциальность",
+      "example": "Consider user privacy when logging data.",
+      "lesson": "Безопасность и качество решений",
+      "transcription": "/ˈpɹaɪvəsi/",
+      "pronunciation": "≈ пра́йвэси"
+    },
+    {
+      "english": "performance",
+      "translation": "производительность",
+      "example": "Measure performance before optimizing.",
+      "lesson": "Безопасность и качество решений",
+      "transcription": "/pɚˈfɔɹməns/",
+      "pronunciation": "≈ пёрфо́рмэнс"
+    },
+    {
+      "english": "benchmark",
+      "translation": "измерительный тест производительности",
+      "example": "Run the benchmark on the same machine.",
+      "lesson": "Безопасность и качество решений",
+      "transcription": "/ˈbɛntʃˌmɑɹk/",
+      "pronunciation": "≈ бэ́нчмарк"
+    },
+    {
+      "english": "bottleneck",
+      "translation": "узкое место",
+      "example": "The database is the bottleneck.",
+      "lesson": "Безопасность и качество решений",
+      "transcription": "/ˈbɑtəlˌnɛk/",
+      "pronunciation": "≈ ба́тэлнэк"
+    },
+    {
+      "english": "optimization",
+      "translation": "оптимизация",
+      "example": "This optimization reduces allocations.",
+      "lesson": "Безопасность и качество решений",
+      "transcription": "/ɑptəməˈzeɪʃən/",
+      "pronunciation": "≈ аптэмэзэ́йшэн"
+    },
+    {
+      "english": "trade-off",
+      "translation": "компромисс между свойствами",
+      "example": "There is a trade-off between speed and memory use.",
+      "lesson": "Безопасность и качество решений",
+      "transcription": "/ˈtɹeɪˌdɔf/",
+      "pronunciation": "≈ трэ́йдоф"
+    },
+    {
+      "english": "maintainability",
+      "translation": "удобство сопровождения",
+      "example": "Clear names improve maintainability.",
+      "lesson": "Безопасность и качество решений",
+      "transcription": "/meɪnˌteɪnəˈbɪləti/",
+      "pronunciation": "≈ мэйнтэйнэби́лэти"
+    },
+    {
+      "english": "readability",
+      "translation": "читаемость",
+      "example": "This change improves readability.",
+      "lesson": "Безопасность и качество решений",
+      "transcription": "/ˌɹidəˈbɪlɪti/",
+      "pronunciation": "≈ ридэби́лити"
+    },
+    {
+      "english": "reliability",
+      "translation": "надёжность",
+      "example": "Retries can improve reliability.",
+      "lesson": "Безопасность и качество решений",
+      "transcription": "/ɹiˌlaɪəˈbɪləti/",
+      "pronunciation": "≈ рилайэби́лэти"
+    },
+    {
+      "english": "scalability",
+      "translation": "масштабируемость",
+      "example": "We need to test scalability.",
+      "lesson": "Безопасность и качество решений",
+      "transcription": "/ˈskeɪləˈbɪlɪti/",
+      "pronunciation": "≈ скэ́йлэби́лити"
+    },
+    {
+      "english": "robustness",
+      "translation": "устойчивость к ошибкам",
+      "example": "Input checks improve robustness.",
+      "lesson": "Безопасность и качество решений",
+      "transcription": "/ɹoʊˈbʌstnəs/",
+      "pronunciation": "≈ роуба́стнэс"
+    },
+    {
+      "english": "idempotent",
+      "translation": "идемпотентный; повтор не меняет итог",
+      "example": "The operation should be idempotent.",
+      "lesson": "Безопасность и качество решений",
+      "transcription": "/ˌaɪdəmˈpoʊtənt/",
+      "pronunciation": "≈ айдэмпо́утэнт"
+    },
+    {
+      "english": "atomic",
+      "translation": "атомарный; неделимый",
+      "example": "The update must be atomic.",
+      "lesson": "Безопасность и качество решений",
+      "transcription": "/əˈtɑmɪk/",
+      "pronunciation": "≈ эта́мик"
+    },
+    {
+      "english": "deterministic",
+      "translation": "детерминированный",
+      "example": "The test should be deterministic.",
+      "lesson": "Безопасность и качество решений",
+      "transcription": "/dɪˌtɝməˈnɪstɪk/",
+      "pronunciation": "≈ дитёрмэни́стик"
+    },
+    {
+      "english": "Could you clarify the requirement?",
+      "translation": "Не могли бы вы уточнить требование?",
+      "example": "Could you clarify the requirement?",
+      "lesson": "Фразы для рабочего общения",
+      "transcription": "/kʊd ju ˈklɛɹəˌfaɪ ðə ɹɪˈkwaɪɹmənt/",
+      "pronunciation": "≈ ку́д йу́ клэ́рэфай зэ рикуа́йрмэнт"
+    },
+    {
+      "english": "I can reproduce the issue.",
+      "translation": "Я могу воспроизвести проблему.",
+      "example": "I can reproduce the issue.",
+      "lesson": "Фразы для рабочего общения",
+      "transcription": "/aɪ kæn ˌɹipɹəˈdus ðə ˈɪʃu/",
+      "pronunciation": "≈ а́й кэ́н рипрэду́с зэ и́шу"
+    },
+    {
+      "english": "I cannot reproduce it locally.",
+      "translation": "У меня локально не получается воспроизвести.",
+      "example": "I cannot reproduce it locally.",
+      "lesson": "Фразы для рабочего общения",
+      "transcription": "/aɪ ˈkænɑt ˌɹipɹəˈdus ɪt ˈloʊkəli/",
+      "pronunciation": "≈ а́й кэ́нат рипрэду́с и́т ло́укэли"
+    },
+    {
+      "english": "What is the expected behavior?",
+      "translation": "Какое поведение ожидается?",
+      "example": "What is the expected behavior?",
+      "lesson": "Фразы для рабочего общения",
+      "transcription": "/wʌt ɪz ðə ɪkˈspɛktəd bɪˈheɪvjɚ/",
+      "pronunciation": "≈ уа́т и́з зэ икспэ́ктэд бихэ́йвйёр"
+    },
+    {
+      "english": "This change is ready for review.",
+      "translation": "Это изменение готово к проверке.",
+      "example": "This change is ready for review.",
+      "lesson": "Фразы для рабочего общения",
+      "transcription": "/ðɪs tʃeɪndʒ ɪz ˈɹɛdi fɔɹ ˌɹiˈvju/",
+      "pronunciation": "≈ зи́с чэ́йндж и́з рэ́ди фо́р ривйу́"
+    },
+    {
+      "english": "I need more time to investigate.",
+      "translation": "Мне нужно больше времени на исследование.",
+      "example": "I need more time to investigate.",
+      "lesson": "Фразы для рабочего общения",
+      "transcription": "/aɪ nid mɔɹ taɪm tu ˌɪnˈvɛstəˌɡeɪt/",
+      "pronunciation": "≈ а́й ни́д мо́р та́йм ту́ инвэ́стэгэйт"
+    },
+    {
+      "english": "I am blocked by this issue.",
+      "translation": "Эта проблема блокирует мою работу.",
+      "example": "I am blocked by this issue.",
+      "lesson": "Фразы для рабочего общения",
+      "transcription": "/aɪ æm blɑkt baɪ ðɪs ˈɪʃu/",
+      "pronunciation": "≈ а́й э́м бла́кт ба́й зи́с и́шу"
+    },
+    {
+      "english": "Could you share the logs?",
+      "translation": "Не могли бы вы прислать журналы?",
+      "example": "Could you share the logs?",
+      "lesson": "Фразы для рабочего общения",
+      "transcription": "/kʊd ju ʃɛɹ ðə lɔɡz/",
+      "pronunciation": "≈ ку́д йу́ шэ́р зэ ло́гз"
+    },
+    {
+      "english": "The tests pass locally.",
+      "translation": "Локально тесты проходят.",
+      "example": "The tests pass locally.",
+      "lesson": "Фразы для рабочего общения",
+      "transcription": "/ðə tɛsts pæs ˈloʊkəli/",
+      "pronunciation": "≈ зэ тэ́стс пэ́с ло́укэли"
+    },
+    {
+      "english": "This is outside the current scope.",
+      "translation": "Это вне текущего объёма работ.",
+      "example": "This is outside the current scope.",
+      "lesson": "Фразы для рабочего общения",
+      "transcription": "/ðɪs ɪz ˈaʊtˈsaɪd ðə ˈkɝənt skoʊp/",
+      "pronunciation": "≈ зи́с и́з а́утса́йд зэ кё́рэнт ско́уп"
+    },
+    {
+      "english": "What are the trade-offs?",
+      "translation": "Какие здесь компромиссы?",
+      "example": "What are the trade-offs?",
+      "lesson": "Фразы для рабочего общения",
+      "transcription": "/wʌt ɑɹ ðə tɹeɪd ɔfs/",
+      "pronunciation": "≈ уа́т а́р зэ трэ́йд о́фс"
+    },
+    {
+      "english": "Let us verify the assumption.",
+      "translation": "Давайте проверим предположение.",
+      "example": "Let us verify the assumption.",
+      "lesson": "Фразы для рабочего общения",
+      "transcription": "/lɛt ʌs ˈvɛɹəˌfaɪ ðə əˈsʌmpʃən/",
+      "pronunciation": "≈ лэ́т а́с вэ́рэфай зэ эса́мпшэн"
+    },
+    {
+      "english": "We need a rollback plan.",
+      "translation": "Нам нужен план отката.",
+      "example": "We need a rollback plan.",
+      "lesson": "Фразы для рабочего общения",
+      "transcription": "/wi nid eɪ ˈɹoʊlˌbæk plæn/",
+      "pronunciation": "≈ уи́ ни́д э́й ро́улбэк плэ́н"
+    },
+    {
+      "english": "I will update the documentation.",
+      "translation": "Я обновлю документацию.",
+      "example": "I will update the documentation.",
+      "lesson": "Фразы для рабочего общения",
+      "transcription": "/aɪ wɪl əpˈdeɪt ðə ˌdɑkjəmɛnˈteɪʃən/",
+      "pronunciation": "≈ а́й уи́л эпдэ́йт зэ дакйэмэнтэ́йшэн"
+    },
+    {
+      "english": "Thanks for catching that.",
+      "translation": "Спасибо, что заметили это.",
+      "example": "Thanks for catching that.",
+      "lesson": "Фразы для рабочего общения",
+      "transcription": "/θæŋks fɔɹ ˈkætʃɪŋ ðæt/",
+      "pronunciation": "≈ сэ́нгкс фо́р кэ́чинг зэ́т"
+    }
+  ]
+}

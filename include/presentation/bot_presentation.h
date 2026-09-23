@@ -16,16 +16,22 @@ void send_topic_menu(long long chat_id, TelegramClient& bot, int message_id = 0)
 void show_ai_prompt(long long chat_id, TelegramClient& bot, int message_id = 0);
 void show_dictionary_page(long long chat_id, TelegramClient& bot,
                           const std::vector<WordView>& words, int requested_page, int& current_page,
-                          std::string& last_action, int& message_id, bool force_new);
+                          std::string& last_action, int& message_id, bool force_new,
+                          const std::string& filter = "all");
 void show_learned_page(long long chat_id, TelegramClient& bot, const std::vector<WordView>& words,
                        int requested_page, int& current_page, std::string& last_action,
-                       int& message_id, bool force_new);
+                       int& message_id, bool force_new, const std::string& filter = "all");
 bool show_daily_review_page(long long chat_id, TelegramClient& bot,
                             const std::vector<WordView>& words, int requested_page,
                             int message_id = 0, bool force_new = true,
-                            std::string* last_action = nullptr);
+                            std::string* last_action = nullptr, const std::string& filter = "all");
 bool show_evening_words_page(long long chat_id, TelegramClient& bot,
                              const std::vector<WordView>& words, int requested_page,
                              int message_id = 0, bool force_new = true,
-                             std::string* last_action = nullptr);
+                             std::string* last_action = nullptr, const std::string& filter = "all");
 void show_stats(long long chat_id, TelegramClient& bot, Database& database, int message_id = 0);
+
+void show_reminder_settings(long long chat_id, TelegramClient& bot, Database& database,
+                            int message_id = 0);
+void show_user_dictionary(long long chat_id, TelegramClient& bot, Database& database, bool learned,
+                          int page = 0, int message_id = 0, bool is_new = false);

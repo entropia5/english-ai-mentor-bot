@@ -37,10 +37,10 @@ Database::get_conversation_history(long long user_id, int limit) {
 
     try {
         pqxx::work transaction(*conn);
-        const pqxx::result result =
-            transaction.exec_params("SELECT role, content FROM conversations "
-                                    "WHERE user_id = $1 ORDER BY timestamp ASC LIMIT $2",
-                                    user_id, limit);
+        const pqxx::result result = transaction.exec_params(
+            "SELECT role, content FROM (SELECT id, role, content FROM conversations "
+            "WHERE user_id = $1 ORDER BY id DESC LIMIT $2) recent ORDER BY id ASC",
+            user_id, limit);
         transaction.commit();
         for (const auto& row : result) {
             history.emplace_back(row[0].as<std::string>(), row[1].as<std::string>());

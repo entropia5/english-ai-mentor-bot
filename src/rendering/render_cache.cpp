@@ -12,7 +12,7 @@ namespace fs = std::filesystem;
 namespace {
 
 void remove_render_artifact_set(const fs::path& base_path) {
-    for (const char* extension : {".png", ".html", ".hash"}) {
+    for (const char* extension : {".png", ".jpg", ".html", ".hash"}) {
         std::error_code error;
         fs::remove(base_path.string() + extension, error);
     }

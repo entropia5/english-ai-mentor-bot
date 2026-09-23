@@ -80,7 +80,7 @@ void BroadcastScheduler::run() {
                     continue;
                 }
                 const BroadcastResult result = send_daily_review(user_id, bot_, scheduler_database);
-                if (result != BroadcastResult::Failed) {
+                if (result == BroadcastResult::Delivered || result == BroadcastResult::NoContent) {
                     remember_broadcast_sent(date_key, "morning", user_id);
                 }
                 if (wait_for_stop(std::chrono::seconds(2))) {
@@ -100,7 +100,7 @@ void BroadcastScheduler::run() {
                 }
                 const BroadcastResult result =
                     send_evening_new_words(user_id, bot_, scheduler_database);
-                if (result != BroadcastResult::Failed) {
+                if (result == BroadcastResult::Delivered || result == BroadcastResult::NoContent) {
                     remember_broadcast_sent(date_key, "evening", user_id);
                 }
                 if (wait_for_stop(std::chrono::seconds(2))) {

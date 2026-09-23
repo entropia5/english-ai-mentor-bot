@@ -1,5 +1,5 @@
-body.stats { width: 1080px; height: 940px; }
-body.stats .canvas { width: 1080px; height: 940px; padding: 34px; }
+body.stats { width: 1080px; min-height: 940px; }
+body.stats .canvas { width: 1080px; min-height: 940px; padding: 34px; }
 body.stats .panel { padding: 48px; }
 .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 26px; }
 body.stats .title { margin-top: 18px; font-size: 76px; line-height: 1.04; }
@@ -13,3 +13,7 @@ body.stats .title { margin-top: 18px; font-size: 76px; line-height: 1.04; }
 .bar { margin-top: 18px; height: 58px; border-radius: 999px; background: #101419; border: 1px solid var(--border); overflow: hidden; }
 .fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--green), var(--blue)); }
 .next { margin-top: 34px; padding: 28px; border-radius: 24px; color: #d7e0e7; font-size: 36px; line-height: 1.22; font-weight: 900; }
+
+body.stats .panel { height: auto; }
+body.stats .top { display: block; }
+body.stats .level { margin-top: 24px; text-align: left; font-size: 34px; }

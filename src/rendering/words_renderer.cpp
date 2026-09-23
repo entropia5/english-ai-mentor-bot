@@ -107,7 +107,8 @@ std::string render_words_card_image(long long chat_id, const std::vector<WordVie
         {"footer_left", footer_left},
         {"word_count", std::to_string(words.size())},
     };
-    const std::string data_fingerprint = folder + "-" + (checked_marker ? "checked-" : "study-") +
+    const std::string data_fingerprint = folder + "-" + subtitle + "-" +
+                                         (checked_marker ? "checked-" : "study-") +
                                          words_page_fingerprint(words, page, total, start, end);
     return rendering::detail::render_screen(render_dir / ("page_" + std::to_string(page + 1)),
                                             "words_card.html", values, data_fingerprint,
@@ -117,29 +118,36 @@ std::string render_words_card_image(long long chat_id, const std::vector<WordVie
 } // namespace
 
 std::string render_dictionary_words_image(long long chat_id, const std::vector<WordView>& words,
-                                          int page, int total, int start, int end) {
+                                          int page, int total, int start, int end,
+                                          const std::string& filter) {
     return render_words_card_image(
         chat_id, words, page, total, start, end, "dictionary", "Словарь для изучения",
-        "Напиши слово в чат, чтобы отметить его выученным", "by entropia5", false);
+        course_filter_title(filter) + " · Напиши слово или фразу, чтобы отметить выученными",
+        "by entropia5", false);
 }
 
 std::string render_learned_words_image(long long chat_id, const std::vector<WordView>& words,
-                                       int page, int total, int start, int end) {
+                                       int page, int total, int start, int end,
+                                       const std::string& filter) {
     return render_words_card_image(
         chat_id, words, page, total, start, end, "learned", "Выученные слова",
-        "Словарь для повторения и закрепления выученных слов", "by entropia5");
+        course_filter_title(filter) + " · Выученные слова", "by entropia5");
 }
 
 std::string render_daily_review_image(long long chat_id, const std::vector<WordView>& words,
-                                      int page, int total, int start, int end) {
+                                      int page, int total, int start, int end,
+                                      const std::string& filter) {
     return render_words_card_image(chat_id, words, page, total, start, end, "daily", "Доброе утро",
-                                   "Повторение выученных слов", "by entropia5");
+                                   course_filter_title(filter) + " · Повторение выученных слов",
+                                   "by entropia5");
 }
 
 std::string render_evening_words_image(long long chat_id, const std::vector<WordView>& words,
-                                       int page, int total, int start, int end) {
-    return render_words_card_image(chat_id, words, page, total, start, end, "evening",
-                                   "Новые слова", "Вечерняя подборка для изучения", "by entropia5");
+                                       int page, int total, int start, int end,
+                                       const std::string& filter) {
+    return render_words_card_image(
+        chat_id, words, page, total, start, end, "evening", "Вечернее занятие",
+        course_filter_title(filter) + " · Слова для изучения", "by entropia5");
 }
 
 std::string format_word(const std::string& english, const std::string& translation,
@@ -154,7 +162,7 @@ std::string format_word(const std::string& english, const std::string& translati
     }
     result += "🇷🇺 " + translation;
     if (!trim(definition).empty()) {
-        result += "\nСмысл: " + trim(definition);
+        result += "\n" + trim(definition);
     }
     return result;
 }

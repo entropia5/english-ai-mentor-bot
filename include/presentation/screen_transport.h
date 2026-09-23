@@ -8,4 +8,4 @@ bool upsert_screen(long long chat_id, TelegramClient& bot, const std::string& te
                    const InlineKeyboard& buttons, int preferred_message_id = 0);
 bool upsert_photo_screen(long long chat_id, TelegramClient& bot, const std::string& photo_path,
                          const InlineKeyboard& buttons, int preferred_message_id = 0,
-                         const std::string& caption = "");
+                         const std::string& caption = "", const std::string& parse_mode = "");

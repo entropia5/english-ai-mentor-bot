@@ -30,3 +30,8 @@ body.with-footer .panel {
 body.topics { height: 820px; }
 body.topics .canvas { height: 820px; }
 body.topics .text { max-width: 800px; font-size: 32px; line-height: 1.34; }
+
+body.status, body.status .canvas { height: auto; min-height: 760px; }
+body.status .panel { height: auto; min-height: 680px; display: block; }
+body.status .note { margin-top: 32px; }
+body.status .title { font-size: 64px; }

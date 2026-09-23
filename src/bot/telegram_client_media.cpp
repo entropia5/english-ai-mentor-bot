@@ -28,13 +28,15 @@ void log_media_transport_failure(const std::string& action, const TelegramHttpRe
 bool TelegramClient::send_photo(
     long long chat_id, const std::string& photo_path,
     const std::vector<std::vector<std::pair<std::string, std::string>>>& buttons,
-    const std::string& caption, int* message_id) {
+    const std::string& caption, int* message_id, const std::string& parse_mode) {
     std::vector<TelegramMultipartField> fields = {
         {"chat_id", std::to_string(chat_id), false},
         {"photo", photo_path, true},
     };
     if (!caption.empty()) {
         fields.push_back({"caption", caption, false});
+        if (!parse_mode.empty())
+            fields.push_back({"parse_mode", parse_mode, false});
     }
     fields.push_back({"reply_markup", build_inline_keyboard_json(buttons).dump(), false});
 
@@ -54,10 +56,12 @@ bool TelegramClient::send_photo(
 bool TelegramClient::edit_message_photo(
     long long chat_id, int message_id, const std::string& photo_path,
     const std::vector<std::vector<std::pair<std::string, std::string>>>& buttons,
-    const std::string& caption, TelegramRequestResult* result) {
+    const std::string& caption, TelegramRequestResult* result, const std::string& parse_mode) {
     nlohmann::json media = {{"type", "photo"}, {"media", "attach://photo"}};
     if (!caption.empty()) {
         media["caption"] = caption;
+        if (!parse_mode.empty())
+            media["parse_mode"] = parse_mode;
     }
     const std::vector<TelegramMultipartField> fields = {
         {"chat_id", std::to_string(chat_id), false},

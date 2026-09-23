@@ -68,15 +68,21 @@ std::string render_status_image(const std::string& key, const std::string& title
         title + "|" + subtitle + "|" + note, "status " + key);
 }
 
+std::string render_reminder_settings_image() {
+    return render_status_image("reminders", "Напоминания",
+                               "Утром — повторение выученных слов.\nВечером — неизученные слова.",
+                               "Выбери направление и включи удобные занятия кнопками ниже.");
+}
+
 std::string render_stats_image(long long chat_id, int total, int learned, const std::string& level,
-                               const std::string& next_name, int next_level, int percent) {
+                               const std::string&, int next_level, int percent) {
     const fs::path stats_dir = fs::path(project_data_dir()) / "rendered" / "stats";
     rendering::detail::cleanup_legacy_stats_artifacts(stats_dir);
 
     const int clamped_percent = std::clamp(percent, 0, 100);
-    const std::string next_text =
-        next_level > 0 ? "До " + next_name + " осталось " + std::to_string(next_level) + " слов"
-                       : "Уровень C1 достигнут";
+    const std::string next_text = "Выучено " + std::to_string(learned) + " из " +
+                                  std::to_string(next_level) +
+                                  " единиц курса. Это прогресс словаря, а не оценка уровня языка.";
     const TemplateValues values = {
         {"level", level},
         {"total", std::to_string(total)},

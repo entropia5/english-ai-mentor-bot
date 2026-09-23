@@ -5,8 +5,10 @@
 #include "domain/word.h"
 #include "presentation/bot_presentation.h"
 #include "presentation/bot_state.h"
+#include "presentation/screen_components.h"
 #include "rendering/bot_renderer.h"
 #include "rendering/template_engine.h"
+#include "services/course_catalog.h"
 #include "services/vocabulary_service.h"
 #include "storage/broadcast_run_state.h"
 
@@ -115,6 +117,66 @@ void test_fallback_dictionary(TestRunner& runner) {
     runner.expect(complete, "fallback repository returns complete word records");
 }
 
+void test_course_catalogs(TestRunner& runner) {
+    const auto conversation = load_course_catalog("conversation");
+    const auto medicine = load_course_catalog("medicine");
+    const auto it = load_course_catalog("it");
+    runner.expect(conversation.size() == 2000, "conversation contains exactly 2000 entries");
+    runner.expect(medicine.size() >= 300 && it.size() >= 250,
+                  "professional catalogs contain substantial topic-specific material");
+    std::set<std::string> keys;
+    bool complete = true;
+    for (const auto& word : conversation) {
+        keys.insert(to_lower_ascii(word.english));
+        complete = complete && !word.translation.empty() && !word.example.empty() &&
+                   !word.lesson.empty() && !word.transcription.empty() &&
+                   !word.pronunciation.empty();
+    }
+    runner.expect(keys.size() == 2000 && complete, "unique complete conversation cards");
+    runner.expect(keys.count("i") && keys.count("be") && keys.count("go") && keys.count("do"),
+                  "short essential words are not rejected by legacy AI filters");
+    const auto first = select_course_words(conversation, {}, 10);
+    runner.expect(first.size() == 10 && first.front().english == "I",
+                  "curriculum begins with useful simple speech");
+    std::set<std::string> existing;
+    for (const auto& w : first)
+        existing.insert(to_lower_ascii(w.english));
+    const auto second = select_course_words(conversation, existing, 10);
+    bool disjoint = true;
+    for (const auto& w : second)
+        disjoint = disjoint && !existing.count(to_lower_ascii(w.english));
+    runner.expect(disjoint && second.size() == 10,
+                  "next batch excludes all previously added words");
+    runner.expect(select_course_words(conversation, keys, 10).empty(),
+                  "exhausted catalog produces no invented fallback");
+    keys.erase(to_lower_ascii(conversation.back().english));
+    runner.expect(select_course_words(conversation, keys, 10).size() == 1,
+                  "last partial batch contains only remaining entries");
+    runner.expect(select_course_words(conversation, {}, 0).empty(), "zero count adds nothing");
+    bool medical_term = false, medical_phrase = false, it_term = false;
+    for (const auto& w : medicine) {
+        medical_term = medical_term || w.english == "outpatient";
+        medical_phrase = medical_phrase || w.english == "blood pressure";
+    }
+    for (const auto& w : it)
+        it_term = it_term || w.english == "API";
+    runner.expect(medical_term && medical_phrase && it_term,
+                  "professional terms and expressions bypass obsolete bans");
+    bool invalid_rejected = false;
+    try {
+        load_course_catalog("../../etc/passwd");
+    } catch (const std::exception&) {
+        invalid_rejected = true;
+    }
+    runner.expect(invalid_rejected && canonical_course("unknown").empty(),
+                  "unknown courses fail closed");
+    const auto keyboard = topic_keyboard();
+    runner.expect(keyboard.size() == 4 && keyboard[0][0].second == "course_conversation" &&
+                      keyboard[1][0].second == "course_medicine" &&
+                      keyboard[2][0].second == "course_it",
+                  "menu has exactly three courses and a back button");
+}
+
 void test_word_formatting(TestRunner& runner) {
     const std::string formatted =
         format_word("receipt", "чек", "/rɪˈsiːt/", "рисит", "подтверждение оплаты");
@@ -215,6 +277,7 @@ int main() {
     test_word_model(runner);
     test_vocabulary_policy(runner);
     test_fallback_dictionary(runner);
+    test_course_catalogs(runner);
     test_word_formatting(runner);
     test_rendering_templates(runner);
     test_config(runner);

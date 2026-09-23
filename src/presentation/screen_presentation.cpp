@@ -1,9 +1,9 @@
-#include "domain/progress.h"
 #include "presentation/bot_presentation.h"
 #include "presentation/bot_state.h"
 #include "presentation/screen_components.h"
 #include "presentation/screen_transport.h"
 #include "rendering/bot_renderer.h"
+#include "services/course_catalog.h"
 
 bool show_status_screen(long long chat_id, TelegramClient& bot, const std::string& key,
                         const std::string& title, const std::string& subtitle,
@@ -20,8 +20,8 @@ bool show_status_screen(long long chat_id, TelegramClient& bot, const std::strin
 
 void send_main_menu(long long chat_id, TelegramClient& bot, Database& database, int message_id) {
     remember_screen_context(chat_id, "main");
-    const int learned = database.get_words_count(chat_id, true);
-    const std::string user_level = english_level_from_learned(learned);
+    const int learned = database.get_words_count(chat_id, true, "all");
+    const std::string user_level = std::to_string(learned);
     const std::string image_path = render_main_menu_image(user_level);
     if (!image_path.empty()) {
         upsert_photo_screen(chat_id, bot, image_path, main_menu_keyboard(), message_id,
@@ -43,7 +43,9 @@ void send_topic_menu(long long chat_id, TelegramClient& bot, int message_id) {
         return;
     }
 
-    upsert_screen(chat_id, bot, "*Выбери тему для новых слов:*\n\nAI подберет 10 новых слов.",
+    upsert_screen(chat_id, bot,
+                  "*Выбери тему для новых слов:*\n\nВыбери направление. Слова идут по порядку из "
+                  "учебного каталога.",
                   buttons, message_id);
 }
 
@@ -69,48 +71,26 @@ void show_stats(long long chat_id, TelegramClient& bot, Database& database, int 
         database.get_words_count(chat_id, false) + database.get_words_count(chat_id, true);
     const int learned = database.get_words_count(chat_id, true);
 
-    std::string level;
-    int next_level;
-    std::string next_name;
-    if (learned < 300) {
-        level = "A1";
-        next_level = 300 - learned;
-        next_name = "A2";
-    } else if (learned < 600) {
-        level = "A2";
-        next_level = 600 - learned;
-        next_name = "B1";
-    } else if (learned < 1000) {
-        level = "B1";
-        next_level = 1000 - learned;
-        next_name = "B2";
-    } else if (learned < 1500) {
-        level = "B2";
-        next_level = 1500 - learned;
-        next_name = "C1";
-    } else {
-        level = "C1";
-        next_level = 0;
-        next_name = "";
+    const auto course = database.get_active_course(chat_id);
+    int catalog_size = 0;
+    try {
+        catalog_size = static_cast<int>(load_course_catalog(course).size());
+    } catch (const std::exception&) {
     }
-
-    const int percent = total > 0 ? learned * 100 / total : 0;
-    const InlineKeyboard buttons = column_keyboard({{"Главное меню", "menu_main"}});
-    const std::string image_path =
-        render_stats_image(chat_id, total, learned, level, next_name, next_level, percent);
+    const int percent = catalog_size > 0 ? learned * 100 / catalog_size : 0;
+    const auto buttons =
+        column_keyboard({{"Выбрать направление", "menu_new_words"}, {"Главное меню", "menu_main"}});
+    const auto image_path = render_stats_image(chat_id, total, learned, course_title(course), "",
+                                               catalog_size, percent);
     if (!image_path.empty()) {
         upsert_photo_screen(chat_id, bot, image_path, buttons, message_id,
                             screen_caption("Статистика"));
         return;
     }
-
-    std::string message = "*Статистика*\n\n";
-    message += "Уровень: " + level + "\n";
-    message += "Всего слов: " + std::to_string(total) + "\n";
-    message += "Выучено: " + std::to_string(learned) + "\n";
-    message += "Прогресс: " + std::to_string(percent) + "%\n\n";
-    message += next_level > 0
-                   ? "До " + next_name + " осталось " + std::to_string(next_level) + " слов"
-                   : "Ты достиг уровня C1!";
-    upsert_screen(chat_id, bot, message, buttons, message_id);
+    upsert_screen(chat_id, bot,
+                  "*" + course_title(course) + "*\nДобавлено: " + std::to_string(total) +
+                      "\nВыучено: " + std::to_string(learned) + " из " +
+                      std::to_string(catalog_size) +
+                      "\nКоличество слов не определяет уровень владения языком.",
+                  buttons, message_id);
 }

@@ -1,0 +1,2407 @@
+{
+  "version": 1,
+  "course": "medicine",
+  "pronunciation_note": "US broad transcription from CMUdict plus authored additions; Russian hints are approximate.",
+  "words": [
+    {
+      "english": "consultation",
+      "translation": "консультация; приём",
+      "example": "The consultation will take about twenty minutes.",
+      "lesson": "Приём: установить контакт и уточнить жалобу",
+      "transcription": "/ˌkɑnsəlˈteɪʃən/",
+      "pronunciation": "≈ кансэлтэ́йшэн"
+    },
+    {
+      "english": "patient",
+      "translation": "пациент",
+      "example": "How would the patient like to be addressed?",
+      "lesson": "Приём: установить контакт и уточнить жалобу",
+      "transcription": "/ˈpeɪʃənt/",
+      "pronunciation": "≈ пэ́йшэнт"
+    },
+    {
+      "english": "clinician",
+      "translation": "клинический специалист",
+      "example": "The clinician will review the results.",
+      "lesson": "Приём: установить контакт и уточнить жалобу",
+      "transcription": "/klɪˈnɪʃən/",
+      "pronunciation": "≈ клини́шэн"
+    },
+    {
+      "english": "physician",
+      "translation": "врач",
+      "example": "Please contact the referring physician.",
+      "lesson": "Приём: установить контакт и уточнить жалобу",
+      "transcription": "/fəˈzɪʃən/",
+      "pronunciation": "≈ фэзи́шэн"
+    },
+    {
+      "english": "general practitioner",
+      "translation": "врач общей практики (GP)",
+      "example": "Your general practitioner can arrange follow-up.",
+      "lesson": "Приём: установить контакт и уточнить жалобу",
+      "transcription": "/ˈdʒɛnɚəl pɹækˈtɪʃənɚ/",
+      "pronunciation": "≈ джэ́нёрэл прэкти́шэнёр"
+    },
+    {
+      "english": "specialist",
+      "translation": "врач-специалист",
+      "example": "I would like to refer you to a specialist.",
+      "lesson": "Приём: установить контакт и уточнить жалобу",
+      "transcription": "/ˈspɛʃələst/",
+      "pronunciation": "≈ спэ́шэлэст"
+    },
+    {
+      "english": "referral",
+      "translation": "направление к специалисту",
+      "example": "We have received your referral.",
+      "lesson": "Приём: установить контакт и уточнить жалобу",
+      "transcription": "/ɹɪˈfɝəl/",
+      "pronunciation": "≈ рифё́рэл"
+    },
+    {
+      "english": "appointment",
+      "translation": "запись на приём",
+      "example": "Is this your first appointment here?",
+      "lesson": "Приём: установить контакт и уточнить жалобу",
+      "transcription": "/əˈpɔɪntmənt/",
+      "pronunciation": "≈ эпо́йнтмэнт"
+    },
+    {
+      "english": "chief complaint",
+      "translation": "основная жалоба",
+      "example": "What is the patient's chief complaint?",
+      "lesson": "Приём: установить контакт и уточнить жалобу",
+      "transcription": "/tʃif kəmˈpleɪnt/",
+      "pronunciation": "≈ чи́ф кэмплэ́йнт"
+    },
+    {
+      "english": "presenting complaint",
+      "translation": "жалоба, с которой обратился пациент",
+      "example": "Document the presenting complaint in the patient's words.",
+      "lesson": "Приём: установить контакт и уточнить жалобу",
+      "transcription": "/pɹɪˈzɛntɪŋ kəmˈpleɪnt/",
+      "pronunciation": "≈ призэ́нтинг кэмплэ́йнт"
+    },
+    {
+      "english": "concern",
+      "translation": "беспокойство; вопрос пациента",
+      "example": "What concerns you most about this?",
+      "lesson": "Приём: установить контакт и уточнить жалобу",
+      "transcription": "/kənˈsɝn/",
+      "pronunciation": "≈ кэнсё́рн"
+    },
+    {
+      "english": "onset",
+      "translation": "начало симптомов",
+      "example": "Was the onset sudden or gradual?",
+      "lesson": "Приём: установить контакт и уточнить жалобу",
+      "transcription": "/ˈɑnˌsɛt/",
+      "pronunciation": "≈ а́нсэт"
+    },
+    {
+      "english": "duration",
+      "translation": "продолжительность",
+      "example": "What is the duration of the pain?",
+      "lesson": "Приём: установить контакт и уточнить жалобу",
+      "transcription": "/ˈdʊˈɹeɪʃən/",
+      "pronunciation": "≈ ду́рэ́йшэн"
+    },
+    {
+      "english": "frequency",
+      "translation": "частота",
+      "example": "How often does this happen?",
+      "lesson": "Приём: установить контакт и уточнить жалобу",
+      "transcription": "/ˈfɹikwənsi/",
+      "pronunciation": "≈ фри́куэнси"
+    },
+    {
+      "english": "severity",
+      "translation": "выраженность; тяжесть",
+      "example": "How would you describe the severity?",
+      "lesson": "Приём: установить контакт и уточнить жалобу",
+      "transcription": "/sɪˈvɛɹɪti/",
+      "pronunciation": "≈ сивэ́рити"
+    },
+    {
+      "english": "location",
+      "translation": "локализация",
+      "example": "Can you point to the location of the pain?",
+      "lesson": "Приём: установить контакт и уточнить жалобу",
+      "transcription": "/loʊˈkeɪʃən/",
+      "pronunciation": "≈ лоукэ́йшэн"
+    },
+    {
+      "english": "radiation",
+      "translation": "иррадиация боли; излучение",
+      "example": "Is there any radiation of the pain?",
+      "lesson": "Приём: установить контакт и уточнить жалобу",
+      "transcription": "/ˌɹeɪdiˈeɪʃən/",
+      "pronunciation": "≈ рэйдиэ́йшэн"
+    },
+    {
+      "english": "trigger",
+      "translation": "провоцирующий фактор",
+      "example": "Have you noticed any triggers?",
+      "lesson": "Приём: установить контакт и уточнить жалобу",
+      "transcription": "/ˈtɹɪɡɚ/",
+      "pronunciation": "≈ три́гёр"
+    },
+    {
+      "english": "aggravating factor",
+      "translation": "фактор, усиливающий симптом",
+      "example": "What aggravating factors have you noticed?",
+      "lesson": "Приём: установить контакт и уточнить жалобу",
+      "transcription": "/ˈæɡɹəˌveɪtɪŋ ˈfæktɚ/",
+      "pronunciation": "≈ э́грэвэйтинг фэ́ктёр"
+    },
+    {
+      "english": "relieving factor",
+      "translation": "фактор, облегчающий симптом",
+      "example": "Are there any relieving factors?",
+      "lesson": "Приём: установить контакт и уточнить жалобу",
+      "transcription": "/ɹɪˈlivɪŋ ˈfæktɚ/",
+      "pronunciation": "≈ рили́винг фэ́ктёр"
+    },
+    {
+      "english": "intermittent",
+      "translation": "периодический; возникающий временами",
+      "example": "Is the pain intermittent or constant?",
+      "lesson": "Приём: установить контакт и уточнить жалобу",
+      "transcription": "/ˌɪntɚˈmɪtənt/",
+      "pronunciation": "≈ интёрми́тэнт"
+    },
+    {
+      "english": "constant",
+      "translation": "постоянный",
+      "example": "Has the pain been constant?",
+      "lesson": "Приём: установить контакт и уточнить жалобу",
+      "transcription": "/ˈkɑnstənt/",
+      "pronunciation": "≈ ка́нстэнт"
+    },
+    {
+      "english": "acute",
+      "translation": "острый по началу или течению",
+      "example": "The patient reports acute abdominal pain.",
+      "lesson": "Приём: установить контакт и уточнить жалобу",
+      "transcription": "/əˈkjut/",
+      "pronunciation": "≈ экйу́т"
+    },
+    {
+      "english": "chronic",
+      "translation": "хронический",
+      "example": "How does chronic pain affect your daily life?",
+      "lesson": "Приём: установить контакт и уточнить жалобу",
+      "transcription": "/ˈkɹɑnɪk/",
+      "pronunciation": "≈ кра́ник"
+    },
+    {
+      "english": "progressive",
+      "translation": "постепенно нарастающий",
+      "example": "The patient describes progressive weakness.",
+      "lesson": "Приём: установить контакт и уточнить жалобу",
+      "transcription": "/pɹəˈɡɹɛsɪv/",
+      "pronunciation": "≈ прэгрэ́сив"
+    },
+    {
+      "english": "recurrent",
+      "translation": "повторяющийся; рецидивирующий",
+      "example": "Have you had recurrent infections?",
+      "lesson": "Приём: установить контакт и уточнить жалобу",
+      "transcription": "/ɹɪˈkɝənt/",
+      "pronunciation": "≈ рикё́рэнт"
+    },
+    {
+      "english": "sudden",
+      "translation": "внезапный",
+      "example": "Was there a sudden change?",
+      "lesson": "Приём: установить контакт и уточнить жалобу",
+      "transcription": "/ˈsʌdən/",
+      "pronunciation": "≈ са́дэн"
+    },
+    {
+      "english": "gradual",
+      "translation": "постепенный",
+      "example": "Was the onset gradual?",
+      "lesson": "Приём: установить контакт и уточнить жалобу",
+      "transcription": "/ˈɡɹædʒuəl/",
+      "pronunciation": "≈ грэ́джуэл"
+    },
+    {
+      "english": "persistent",
+      "translation": "стойкий; длительно сохраняющийся",
+      "example": "How long has the persistent cough lasted?",
+      "lesson": "Приём: установить контакт и уточнить жалобу",
+      "transcription": "/pɚˈsɪstənt/",
+      "pronunciation": "≈ пёрси́стэнт"
+    },
+    {
+      "english": "associated symptom",
+      "translation": "сопутствующий симптом",
+      "example": "Are there any associated symptoms?",
+      "lesson": "Приём: установить контакт и уточнить жалобу",
+      "transcription": "/əˈsoʊsiˌeɪtɪd ˈsɪmptəm/",
+      "pronunciation": "≈ эсо́усиэйтид си́мптэм"
+    },
+    {
+      "english": "medical history",
+      "translation": "медицинский анамнез",
+      "example": "Could you tell me about your medical history?",
+      "lesson": "Анамнез и лекарства",
+      "transcription": "/ˈmɛdəkəl ˈhɪstɚi/",
+      "pronunciation": "≈ мэ́дэкэл хи́стёри"
+    },
+    {
+      "english": "past medical history",
+      "translation": "анамнез перенесённых и хронических заболеваний",
+      "example": "Let us review your past medical history.",
+      "lesson": "Анамнез и лекарства",
+      "transcription": "/pæst ˈmɛdəkəl ˈhɪstɚi/",
+      "pronunciation": "≈ пэ́ст мэ́дэкэл хи́стёри"
+    },
+    {
+      "english": "surgical history",
+      "translation": "сведения о перенесённых операциях",
+      "example": "What is your surgical history?",
+      "lesson": "Анамнез и лекарства",
+      "transcription": "/ˈsɝdʒɪkəl ˈhɪstɚi/",
+      "pronunciation": "≈ сё́рджикэл хи́стёри"
+    },
+    {
+      "english": "family history",
+      "translation": "семейный анамнез",
+      "example": "Is there a family history of diabetes?",
+      "lesson": "Анамнез и лекарства",
+      "transcription": "/ˈfæməli ˈhɪstɚi/",
+      "pronunciation": "≈ фэ́мэли хи́стёри"
+    },
+    {
+      "english": "social history",
+      "translation": "социальный анамнез",
+      "example": "The social history includes occupation and living conditions.",
+      "lesson": "Анамнез и лекарства",
+      "transcription": "/ˈsoʊʃəl ˈhɪstɚi/",
+      "pronunciation": "≈ со́ушэл хи́стёри"
+    },
+    {
+      "english": "medication history",
+      "translation": "сведения о принимаемых лекарствах",
+      "example": "Please confirm the medication history.",
+      "lesson": "Анамнез и лекарства",
+      "transcription": "/ˌmɛdəˈkeɪʃən ˈhɪstɚi/",
+      "pronunciation": "≈ мэдэкэ́йшэн хи́стёри"
+    },
+    {
+      "english": "allergy",
+      "translation": "аллергия",
+      "example": "Do you have any known allergies?",
+      "lesson": "Анамнез и лекарства",
+      "transcription": "/ˈælɚdʒi/",
+      "pronunciation": "≈ э́лёрджи"
+    },
+    {
+      "english": "adverse reaction",
+      "translation": "нежелательная реакция",
+      "example": "Have you had an adverse reaction to a medicine?",
+      "lesson": "Анамнез и лекарства",
+      "transcription": "/ædˈvɝs ɹiˈækʃən/",
+      "pronunciation": "≈ эдвё́рс риэ́кшэн"
+    },
+    {
+      "english": "side effect",
+      "translation": "побочный эффект",
+      "example": "Have you noticed any side effects?",
+      "lesson": "Анамнез и лекарства",
+      "transcription": "/saɪd ɪˈfɛkt/",
+      "pronunciation": "≈ са́йд ифэ́кт"
+    },
+    {
+      "english": "medication",
+      "translation": "лекарственный препарат; лекарства",
+      "example": "What medications are you taking?",
+      "lesson": "Анамнез и лекарства",
+      "transcription": "/ˌmɛdəˈkeɪʃən/",
+      "pronunciation": "≈ мэдэкэ́йшэн"
+    },
+    {
+      "english": "prescription",
+      "translation": "рецепт на лекарство",
+      "example": "Do you have a copy of your prescription?",
+      "lesson": "Анамнез и лекарства",
+      "transcription": "/pɹəˈskɹɪpʃən/",
+      "pronunciation": "≈ прэскри́пшэн"
+    },
+    {
+      "english": "over-the-counter",
+      "translation": "безрецептурный",
+      "example": "Do you take any over-the-counter medicines?",
+      "lesson": "Анамнез и лекарства",
+      "transcription": "/ˈoʊvɚ ðə ˈkaʊntɚ/",
+      "pronunciation": "≈ о́увёр зэ ка́унтёр"
+    },
+    {
+      "english": "supplement",
+      "translation": "пищевая добавка; дополнительное средство",
+      "example": "Do you take any supplements?",
+      "lesson": "Анамнез и лекарства",
+      "transcription": "/ˈsʌpləmənt/",
+      "pronunciation": "≈ са́плэмэнт"
+    },
+    {
+      "english": "dose",
+      "translation": "доза на один приём или введение",
+      "example": "What dose are you currently taking?",
+      "lesson": "Анамнез и лекарства",
+      "transcription": "/doʊs/",
+      "pronunciation": "≈ до́ус"
+    },
+    {
+      "english": "dosage",
+      "translation": "режим дозирования",
+      "example": "Let us check the prescribed dosage.",
+      "lesson": "Анамнез и лекарства",
+      "transcription": "/ˈdoʊsədʒ/",
+      "pronunciation": "≈ до́усэдж"
+    },
+    {
+      "english": "route",
+      "translation": "путь введения",
+      "example": "Please confirm the route of administration.",
+      "lesson": "Анамнез и лекарства",
+      "transcription": "/ɹut/",
+      "pronunciation": "≈ ру́т"
+    },
+    {
+      "english": "oral",
+      "translation": "пероральный; относящийся ко рту",
+      "example": "Is this medication for oral use?",
+      "lesson": "Анамнез и лекарства",
+      "transcription": "/ˈɔɹəl/",
+      "pronunciation": "≈ о́рэл"
+    },
+    {
+      "english": "topical",
+      "translation": "местный; для нанесения на поверхность",
+      "example": "This is listed as a topical medication.",
+      "lesson": "Анамнез и лекарства",
+      "transcription": "/ˈtɑpəkəl/",
+      "pronunciation": "≈ та́пэкэл"
+    },
+    {
+      "english": "intravenous",
+      "translation": "внутривенный",
+      "example": "The chart records intravenous administration.",
+      "lesson": "Анамнез и лекарства",
+      "transcription": "/ˌɪntɹəˈvinəs/",
+      "pronunciation": "≈ интрэви́нэс"
+    },
+    {
+      "english": "intramuscular",
+      "translation": "внутримышечный",
+      "example": "Please check the documented intramuscular route.",
+      "lesson": "Анамнез и лекарства",
+      "transcription": "/ˌɪntɹəˈmʌskjəlɚ/",
+      "pronunciation": "≈ интрэма́скйэлёр"
+    },
+    {
+      "english": "subcutaneous",
+      "translation": "подкожный",
+      "example": "The prescription specifies subcutaneous administration.",
+      "lesson": "Анамнез и лекарства",
+      "transcription": "/səbˌkjuˈteɪniəs/",
+      "pronunciation": "≈ сэбкйутэ́йниэс"
+    },
+    {
+      "english": "inhaler",
+      "translation": "ингалятор",
+      "example": "Could you show me how you use your inhaler?",
+      "lesson": "Анамнез и лекарства",
+      "transcription": "/ˌɪnˈheɪlɚ/",
+      "pronunciation": "≈ инхэ́йлёр"
+    },
+    {
+      "english": "adherence",
+      "translation": "соблюдение согласованного лечения",
+      "example": "Are there any difficulties with medication adherence?",
+      "lesson": "Анамнез и лекарства",
+      "transcription": "/ədˈhɪɹəns/",
+      "pronunciation": "≈ эдхи́рэнс"
+    },
+    {
+      "english": "missed dose",
+      "translation": "пропущенная доза",
+      "example": "Have you had any missed doses?",
+      "lesson": "Анамнез и лекарства",
+      "transcription": "/mɪst doʊs/",
+      "pronunciation": "≈ ми́ст до́ус"
+    },
+    {
+      "english": "contraindication",
+      "translation": "противопоказание",
+      "example": "Check the documented contraindications.",
+      "lesson": "Анамнез и лекарства",
+      "transcription": "/ˌkɑntɹəˌɪndəˈkeɪʃən/",
+      "pronunciation": "≈ кантрэиндэкэ́йшэн"
+    },
+    {
+      "english": "interaction",
+      "translation": "взаимодействие лекарств",
+      "example": "The pharmacist will check for interactions.",
+      "lesson": "Анамнез и лекарства",
+      "transcription": "/ˌɪntɚˈækʃən/",
+      "pronunciation": "≈ интёрэ́кшэн"
+    },
+    {
+      "english": "reconciliation",
+      "translation": "сверка лекарственных назначений",
+      "example": "Medication reconciliation is part of admission.",
+      "lesson": "Анамнез и лекарства",
+      "transcription": "/ˌɹɛkənˌsɪliˈeɪʃən/",
+      "pronunciation": "≈ рэкэнсилиэ́йшэн"
+    },
+    {
+      "english": "anticoagulant",
+      "translation": "антикоагулянт",
+      "example": "Are you taking an anticoagulant?",
+      "lesson": "Анамнез и лекарства",
+      "transcription": "/ˌæntikoʊˈæɡjələnt/",
+      "pronunciation": "≈ энтикоуэ́гйэлэнт"
+    },
+    {
+      "english": "antibiotic",
+      "translation": "антибиотик",
+      "example": "Have you recently taken any antibiotics?",
+      "lesson": "Анамнез и лекарства",
+      "transcription": "/ˌæntibaɪˈɑtɪk/",
+      "pronunciation": "≈ энтибайа́тик"
+    },
+    {
+      "english": "analgesic",
+      "translation": "обезболивающий препарат",
+      "example": "Which analgesic have you used?",
+      "lesson": "Анамнез и лекарства",
+      "transcription": "/ˌænəlˈdʒisɪk/",
+      "pronunciation": "≈ энэлджи́сик"
+    },
+    {
+      "english": "pain",
+      "translation": "боль",
+      "example": "Can you describe the pain in your own words?",
+      "lesson": "Боль и общие симптомы",
+      "transcription": "/peɪn/",
+      "pronunciation": "≈ пэ́йн"
+    },
+    {
+      "english": "ache",
+      "translation": "ноющая боль; болеть",
+      "example": "Is it a dull ache?",
+      "lesson": "Боль и общие симптомы",
+      "transcription": "/eɪk/",
+      "pronunciation": "≈ э́йк"
+    },
+    {
+      "english": "sharp",
+      "translation": "острый; колющий (о боли)",
+      "example": "Is the pain sharp?",
+      "lesson": "Боль и общие симптомы",
+      "transcription": "/ʃɑɹp/",
+      "pronunciation": "≈ ша́рп"
+    },
+    {
+      "english": "dull",
+      "translation": "тупой (о боли)",
+      "example": "Would you describe it as a dull pain?",
+      "lesson": "Боль и общие симптомы",
+      "transcription": "/dʌl/",
+      "pronunciation": "≈ да́л"
+    },
+    {
+      "english": "burning",
+      "translation": "жгучий",
+      "example": "Do you feel a burning sensation?",
+      "lesson": "Боль и общие симптомы",
+      "transcription": "/ˈbɝnɪŋ/",
+      "pronunciation": "≈ бё́рнинг"
+    },
+    {
+      "english": "throbbing",
+      "translation": "пульсирующий",
+      "example": "Is the headache throbbing?",
+      "lesson": "Боль и общие симптомы",
+      "transcription": "/ˈθɹɑbɪŋ/",
+      "pronunciation": "≈ сра́бинг"
+    },
+    {
+      "english": "cramping",
+      "translation": "схваткообразный; спастический",
+      "example": "Is the pain cramping?",
+      "lesson": "Боль и общие симптомы",
+      "transcription": "/ˈkɹæmpɪŋ/",
+      "pronunciation": "≈ крэ́мпинг"
+    },
+    {
+      "english": "stabbing",
+      "translation": "колющий; кинжальный",
+      "example": "Does the pain feel stabbing?",
+      "lesson": "Боль и общие симптомы",
+      "transcription": "/ˈstæbɪŋ/",
+      "pronunciation": "≈ стэ́бинг"
+    },
+    {
+      "english": "tenderness",
+      "translation": "болезненность при пальпации",
+      "example": "There is tenderness on palpation.",
+      "lesson": "Боль и общие симптомы",
+      "transcription": "/ˈtɛndɚnəs/",
+      "pronunciation": "≈ тэ́ндёрнэс"
+    },
+    {
+      "english": "swelling",
+      "translation": "припухлость; отёк",
+      "example": "When did you first notice the swelling?",
+      "lesson": "Боль и общие симптомы",
+      "transcription": "/ˈswɛlɪŋ/",
+      "pronunciation": "≈ суэ́линг"
+    },
+    {
+      "english": "edema",
+      "translation": "отёк (BrE: oedema)",
+      "example": "The examination notes bilateral leg edema.",
+      "lesson": "Боль и общие симптомы",
+      "transcription": "/ɪˈdimə/",
+      "pronunciation": "≈ иди́мэ"
+    },
+    {
+      "english": "fatigue",
+      "translation": "утомляемость; усталость",
+      "example": "How has fatigue affected your activities?",
+      "lesson": "Боль и общие симптомы",
+      "transcription": "/fəˈtiɡ/",
+      "pronunciation": "≈ фэти́г"
+    },
+    {
+      "english": "malaise",
+      "translation": "общее недомогание",
+      "example": "The patient describes general malaise.",
+      "lesson": "Боль и общие симптомы",
+      "transcription": "/mæˈleɪz/",
+      "pronunciation": "≈ мэлэ́йз"
+    },
+    {
+      "english": "fever",
+      "translation": "лихорадка; повышенная температура",
+      "example": "Have you measured your temperature during the fever?",
+      "lesson": "Боль и общие симптомы",
+      "transcription": "/ˈfivɚ/",
+      "pronunciation": "≈ фи́вёр"
+    },
+    {
+      "english": "chills",
+      "translation": "озноб",
+      "example": "Have you had chills?",
+      "lesson": "Боль и общие симптомы",
+      "transcription": "/tʃɪlz/",
+      "pronunciation": "≈ чи́лз"
+    },
+    {
+      "english": "night sweats",
+      "translation": "ночная потливость",
+      "example": "Have you noticed night sweats?",
+      "lesson": "Боль и общие симптомы",
+      "transcription": "/naɪt swɛts/",
+      "pronunciation": "≈ на́йт суэ́тс"
+    },
+    {
+      "english": "weight loss",
+      "translation": "снижение массы тела",
+      "example": "Has the weight loss been intentional?",
+      "lesson": "Боль и общие симптомы",
+      "transcription": "/weɪt lɔs/",
+      "pronunciation": "≈ уэ́йт ло́с"
+    },
+    {
+      "english": "loss of appetite",
+      "translation": "снижение или отсутствие аппетита",
+      "example": "When did the loss of appetite begin?",
+      "lesson": "Боль и общие симптомы",
+      "transcription": "/lɔs əv ˈæpəˌtaɪt/",
+      "pronunciation": "≈ ло́с эв э́пэтайт"
+    },
+    {
+      "english": "nausea",
+      "translation": "тошнота",
+      "example": "Do you feel nausea now?",
+      "lesson": "Боль и общие симптомы",
+      "transcription": "/ˈnɔziə/",
+      "pronunciation": "≈ но́зиэ"
+    },
+    {
+      "english": "vomiting",
+      "translation": "рвота",
+      "example": "How many episodes of vomiting have you had?",
+      "lesson": "Боль и общие симптомы",
+      "transcription": "/ˈvɑmətɪŋ/",
+      "pronunciation": "≈ ва́мэтинг"
+    },
+    {
+      "english": "dizziness",
+      "translation": "головокружение; ощущение неустойчивости",
+      "example": "What do you mean by dizziness?",
+      "lesson": "Боль и общие симптомы",
+      "transcription": "/ˈdɪzinəs/",
+      "pronunciation": "≈ ди́зинэс"
+    },
+    {
+      "english": "vertigo",
+      "translation": "ощущение вращения; системное головокружение",
+      "example": "Does the vertigo feel like the room is spinning?",
+      "lesson": "Боль и общие симптомы",
+      "transcription": "/ˈvɝtɪˌɡoʊ/",
+      "pronunciation": "≈ вё́ртигоу"
+    },
+    {
+      "english": "syncope",
+      "translation": "кратковременная потеря сознания; обморок",
+      "example": "Was the episode of syncope witnessed?",
+      "lesson": "Боль и общие симптомы",
+      "transcription": "/ˈsɪnkəˌpi/",
+      "pronunciation": "≈ си́нкэпи"
+    },
+    {
+      "english": "fainting",
+      "translation": "обморок (обычная речь)",
+      "example": "Have you had any fainting episodes?",
+      "lesson": "Боль и общие симптомы",
+      "transcription": "/ˈfeɪntɪŋ/",
+      "pronunciation": "≈ фэ́йнтинг"
+    },
+    {
+      "english": "numbness",
+      "translation": "онемение",
+      "example": "Where do you feel numbness?",
+      "lesson": "Боль и общие симптомы",
+      "transcription": "/ˈnʌmnəs/",
+      "pronunciation": "≈ на́мнэс"
+    },
+    {
+      "english": "tingling",
+      "translation": "покалывание",
+      "example": "Is there tingling in your fingers?",
+      "lesson": "Боль и общие симптомы",
+      "transcription": "/ˈtɪŋɡəlɪŋ/",
+      "pronunciation": "≈ ти́нггэлинг"
+    },
+    {
+      "english": "weakness",
+      "translation": "слабость",
+      "example": "Is the weakness on one side or both?",
+      "lesson": "Боль и общие симптомы",
+      "transcription": "/ˈwiknəs/",
+      "pronunciation": "≈ уи́кнэс"
+    },
+    {
+      "english": "rash",
+      "translation": "сыпь",
+      "example": "When did the rash appear?",
+      "lesson": "Боль и общие симптомы",
+      "transcription": "/ɹæʃ/",
+      "pronunciation": "≈ рэ́ш"
+    },
+    {
+      "english": "itching",
+      "translation": "зуд",
+      "example": "Does the itching keep you awake?",
+      "lesson": "Боль и общие симптомы",
+      "transcription": "/ˈɪtʃɪŋ/",
+      "pronunciation": "≈ и́чинг"
+    },
+    {
+      "english": "bleeding",
+      "translation": "кровотечение",
+      "example": "When did the bleeding start?",
+      "lesson": "Боль и общие симптомы",
+      "transcription": "/ˈblidɪŋ/",
+      "pronunciation": "≈ бли́динг"
+    },
+    {
+      "english": "chest pain",
+      "translation": "боль в грудной клетке",
+      "example": "When did the chest pain start?",
+      "lesson": "Сердце и дыхание",
+      "transcription": "/tʃɛst peɪn/",
+      "pronunciation": "≈ чэ́ст пэ́йн"
+    },
+    {
+      "english": "shortness of breath",
+      "translation": "одышка (понятно пациенту)",
+      "example": "Do you have shortness of breath at rest?",
+      "lesson": "Сердце и дыхание",
+      "transcription": "/ˈʃɔɹtnəs əv bɹɛθ/",
+      "pronunciation": "≈ шо́ртнэс эв брэ́с"
+    },
+    {
+      "english": "dyspnea",
+      "translation": "одышка (BrE: dyspnoea)",
+      "example": "Document whether the dyspnea occurs on exertion.",
+      "lesson": "Сердце и дыхание",
+      "transcription": "/ˌdɪspˈniə/",
+      "pronunciation": "≈ диспни́э"
+    },
+    {
+      "english": "exertion",
+      "translation": "физическое усилие; нагрузка",
+      "example": "Do symptoms occur with exertion?",
+      "lesson": "Сердце и дыхание",
+      "transcription": "/ɪɡˈzɝʃən/",
+      "pronunciation": "≈ игзё́ршэн"
+    },
+    {
+      "english": "orthopnea",
+      "translation": "одышка в положении лёжа",
+      "example": "Ask about orthopnea when taking the history.",
+      "lesson": "Сердце и дыхание",
+      "transcription": "/ˌɔɹθɑpˈniə/",
+      "pronunciation": "≈ орсапни́э"
+    },
+    {
+      "english": "palpitations",
+      "translation": "ощущение сердцебиения",
+      "example": "How long do the palpitations last?",
+      "lesson": "Сердце и дыхание",
+      "transcription": "/ˌpælpɪˈteɪʃənz/",
+      "pronunciation": "≈ пэлпитэ́йшэнз"
+    },
+    {
+      "english": "cough",
+      "translation": "кашель",
+      "example": "Is the cough dry or productive?",
+      "lesson": "Сердце и дыхание",
+      "transcription": "/kɑf/",
+      "pronunciation": "≈ ка́ф"
+    },
+    {
+      "english": "productive cough",
+      "translation": "кашель с мокротой",
+      "example": "How long have you had a productive cough?",
+      "lesson": "Сердце и дыхание",
+      "transcription": "/pɹəˈdʌktɪv kɑf/",
+      "pronunciation": "≈ прэда́ктив ка́ф"
+    },
+    {
+      "english": "sputum",
+      "translation": "мокрота",
+      "example": "Have you noticed a change in the sputum?",
+      "lesson": "Сердце и дыхание",
+      "transcription": "/ˈspjutəm/",
+      "pronunciation": "≈ спйу́тэм"
+    },
+    {
+      "english": "hemoptysis",
+      "translation": "кровохарканье",
+      "example": "The history includes an episode of hemoptysis.",
+      "lesson": "Сердце и дыхание",
+      "transcription": "/hiˈmɑptəsɪs/",
+      "pronunciation": "≈ хима́птэсис"
+    },
+    {
+      "english": "wheeze",
+      "translation": "свистящее дыхание; хрип",
+      "example": "Have you noticed any wheeze?",
+      "lesson": "Сердце и дыхание",
+      "transcription": "/wiz/",
+      "pronunciation": "≈ уи́з"
+    },
+    {
+      "english": "stridor",
+      "translation": "стридор; шумное дыхание при сужении верхних дыхательных путей",
+      "example": "Document the presence of stridor.",
+      "lesson": "Сердце и дыхание",
+      "transcription": "/ˈstɹaɪdɚ/",
+      "pronunciation": "≈ стра́йдёр"
+    },
+    {
+      "english": "respiratory rate",
+      "translation": "частота дыхания",
+      "example": "Record the respiratory rate.",
+      "lesson": "Сердце и дыхание",
+      "transcription": "/ˈɹɛspɚəˌtɔɹi ɹeɪt/",
+      "pronunciation": "≈ рэ́спёрэтори рэ́йт"
+    },
+    {
+      "english": "oxygen saturation",
+      "translation": "насыщение крови кислородом",
+      "example": "Record the oxygen saturation and oxygen support.",
+      "lesson": "Сердце и дыхание",
+      "transcription": "/ˈɑksədʒən ˌsætʃɚˈeɪʃən/",
+      "pronunciation": "≈ а́ксэджэн сэчёрэ́йшэн"
+    },
+    {
+      "english": "blood pressure",
+      "translation": "артериальное давление",
+      "example": "May I check your blood pressure?",
+      "lesson": "Сердце и дыхание",
+      "transcription": "/blʌd ˈpɹɛʃɚ/",
+      "pronunciation": "≈ бла́д прэ́шёр"
+    },
+    {
+      "english": "heart rate",
+      "translation": "частота сердечных сокращений",
+      "example": "Record the heart rate.",
+      "lesson": "Сердце и дыхание",
+      "transcription": "/hɑɹt ɹeɪt/",
+      "pronunciation": "≈ ха́рт рэ́йт"
+    },
+    {
+      "english": "pulse",
+      "translation": "пульс",
+      "example": "I am going to check your pulse.",
+      "lesson": "Сердце и дыхание",
+      "transcription": "/pʌls/",
+      "pronunciation": "≈ па́лс"
+    },
+    {
+      "english": "rhythm",
+      "translation": "ритм",
+      "example": "The report describes an irregular rhythm.",
+      "lesson": "Сердце и дыхание",
+      "transcription": "/ˈɹɪðəm/",
+      "pronunciation": "≈ ри́зэм"
+    },
+    {
+      "english": "arrhythmia",
+      "translation": "аритмия",
+      "example": "Is there a history of arrhythmia?",
+      "lesson": "Сердце и дыхание",
+      "transcription": "/ɚˈɪðmiə/",
+      "pronunciation": "≈ ёри́змиэ"
+    },
+    {
+      "english": "hypertension",
+      "translation": "артериальная гипертензия",
+      "example": "Have you been diagnosed with hypertension?",
+      "lesson": "Сердце и дыхание",
+      "transcription": "/ˌhaɪpɚˈtɛnʃən/",
+      "pronunciation": "≈ хайпёртэ́ншэн"
+    },
+    {
+      "english": "high blood pressure",
+      "translation": "повышенное артериальное давление (обычная речь)",
+      "example": "Have you ever been told you have high blood pressure?",
+      "lesson": "Сердце и дыхание",
+      "transcription": "/haɪ blʌd ˈpɹɛʃɚ/",
+      "pronunciation": "≈ ха́й бла́д прэ́шёр"
+    },
+    {
+      "english": "hypotension",
+      "translation": "пониженное артериальное давление",
+      "example": "The handover mentions hypotension.",
+      "lesson": "Сердце и дыхание",
+      "transcription": "/ˌhaɪpoʊˈtɛnʃən/",
+      "pronunciation": "≈ хайпоутэ́ншэн"
+    },
+    {
+      "english": "heart failure",
+      "translation": "сердечная недостаточность",
+      "example": "The referral notes a history of heart failure.",
+      "lesson": "Сердце и дыхание",
+      "transcription": "/hɑɹt ˈfeɪljɚ/",
+      "pronunciation": "≈ ха́рт фэ́йлйёр"
+    },
+    {
+      "english": "myocardial infarction",
+      "translation": "инфаркт миокарда",
+      "example": "The discharge summary records a previous myocardial infarction.",
+      "lesson": "Сердце и дыхание",
+      "transcription": "/ˌmaɪəˈkɑɹdiəl ˌɪnˈfɑɹkʃən/",
+      "pronunciation": "≈ майэка́рдиэл инфа́ркшэн"
+    },
+    {
+      "english": "heart attack",
+      "translation": "инфаркт; сердечный приступ (обычная речь)",
+      "example": "Have you ever had a heart attack?",
+      "lesson": "Сердце и дыхание",
+      "transcription": "/hɑɹt əˈtæk/",
+      "pronunciation": "≈ ха́рт этэ́к"
+    },
+    {
+      "english": "stroke",
+      "translation": "инсульт",
+      "example": "Is there a family history of stroke?",
+      "lesson": "Сердце и дыхание",
+      "transcription": "/stɹoʊk/",
+      "pronunciation": "≈ стро́ук"
+    },
+    {
+      "english": "asthma",
+      "translation": "астма",
+      "example": "How does asthma affect your daily activities?",
+      "lesson": "Сердце и дыхание",
+      "transcription": "/ˈæzmə/",
+      "pronunciation": "≈ э́змэ"
+    },
+    {
+      "english": "pneumonia",
+      "translation": "пневмония",
+      "example": "The referral lists pneumonia as a possible diagnosis.",
+      "lesson": "Сердце и дыхание",
+      "transcription": "/nuˈmoʊnjə/",
+      "pronunciation": "≈ нумо́унйэ"
+    },
+    {
+      "english": "pulmonary embolism",
+      "translation": "тромбоэмболия лёгочной артерии",
+      "example": "Pulmonary embolism is included in the differential diagnosis.",
+      "lesson": "Сердце и дыхание",
+      "transcription": "/ˈpʊlməˌnɛɹi ˈɛmboʊˌlɪzəm/",
+      "pronunciation": "≈ пу́лмэнэри э́мбоулизэм"
+    },
+    {
+      "english": "electrocardiogram",
+      "translation": "электрокардиограмма; ЭКГ",
+      "example": "I will explain what an electrocardiogram involves.",
+      "lesson": "Сердце и дыхание",
+      "transcription": "/ˌɪˌlɛktɹoʊˈkɑɹdiəˌɡɹæm/",
+      "pronunciation": "≈ илэктроука́рдиэгрэм"
+    },
+    {
+      "english": "abdomen",
+      "translation": "живот (анатомическая область)",
+      "example": "May I examine your abdomen?",
+      "lesson": "Живот, мочеиспускание и обмен веществ",
+      "transcription": "/æbˈdoʊmən/",
+      "pronunciation": "≈ эбдо́умэн"
+    },
+    {
+      "english": "abdominal pain",
+      "translation": "боль в животе",
+      "example": "Can you point to the abdominal pain?",
+      "lesson": "Живот, мочеиспускание и обмен веществ",
+      "transcription": "/æbˈdɑmənəl peɪn/",
+      "pronunciation": "≈ эбда́мэнэл пэ́йн"
+    },
+    {
+      "english": "bloating",
+      "translation": "вздутие живота",
+      "example": "When do you notice the bloating?",
+      "lesson": "Живот, мочеиспускание и обмен веществ",
+      "transcription": "/ˈbloʊtɪŋ/",
+      "pronunciation": "≈ бло́утинг"
+    },
+    {
+      "english": "heartburn",
+      "translation": "изжога",
+      "example": "How often do you get heartburn?",
+      "lesson": "Живот, мочеиспускание и обмен веществ",
+      "transcription": "/ˈhɑɹtˌbɝn/",
+      "pronunciation": "≈ ха́ртбёрн"
+    },
+    {
+      "english": "dysphagia",
+      "translation": "затруднение глотания",
+      "example": "Is the dysphagia associated with solids or liquids?",
+      "lesson": "Живот, мочеиспускание и обмен веществ",
+      "transcription": "/dɪˈsfeɪdʒə/",
+      "pronunciation": "≈ дисфэ́йджэ"
+    },
+    {
+      "english": "diarrhea",
+      "translation": "диарея (BrE: diarrhoea)",
+      "example": "When did the diarrhea begin?",
+      "lesson": "Живот, мочеиспускание и обмен веществ",
+      "transcription": "/ˌdaɪɚˈiə/",
+      "pronunciation": "≈ дайёри́э"
+    },
+    {
+      "english": "constipation",
+      "translation": "запор",
+      "example": "How long have you had constipation?",
+      "lesson": "Живот, мочеиспускание и обмен веществ",
+      "transcription": "/ˌkɑnstəˈpeɪʃən/",
+      "pronunciation": "≈ канстэпэ́йшэн"
+    },
+    {
+      "english": "bowel movement",
+      "translation": "дефекация; стул",
+      "example": "When was your last bowel movement?",
+      "lesson": "Живот, мочеиспускание и обмен веществ",
+      "transcription": "/ˈbaʊəl ˈmuvmənt/",
+      "pronunciation": "≈ ба́уэл му́вмэнт"
+    },
+    {
+      "english": "stool",
+      "translation": "кал; стул",
+      "example": "Have you noticed blood in your stool?",
+      "lesson": "Живот, мочеиспускание и обмен веществ",
+      "transcription": "/stul/",
+      "pronunciation": "≈ сту́л"
+    },
+    {
+      "english": "melena",
+      "translation": "мелена; чёрный дегтеобразный стул",
+      "example": "Ask whether the patient has noticed melena.",
+      "lesson": "Живот, мочеиспускание и обмен веществ",
+      "transcription": "/məˈlinə/",
+      "pronunciation": "≈ мэли́нэ"
+    },
+    {
+      "english": "hematemesis",
+      "translation": "рвота кровью",
+      "example": "Document any reported hematemesis.",
+      "lesson": "Живот, мочеиспускание и обмен веществ",
+      "transcription": "/ˌhiməˈtɛməsɪs/",
+      "pronunciation": "≈ химэтэ́мэсис"
+    },
+    {
+      "english": "jaundice",
+      "translation": "желтуха",
+      "example": "Has anyone noticed jaundice or yellowing of your eyes?",
+      "lesson": "Живот, мочеиспускание и обмен веществ",
+      "transcription": "/ˈdʒɔndəs/",
+      "pronunciation": "≈ джо́ндэс"
+    },
+    {
+      "english": "liver",
+      "translation": "печень",
+      "example": "The report mentions the liver.",
+      "lesson": "Живот, мочеиспускание и обмен веществ",
+      "transcription": "/ˈlɪvɚ/",
+      "pronunciation": "≈ ли́вёр"
+    },
+    {
+      "english": "gallbladder",
+      "translation": "желчный пузырь",
+      "example": "The scan includes the gallbladder.",
+      "lesson": "Живот, мочеиспускание и обмен веществ",
+      "transcription": "/ˈɡɔlˌblædɚ/",
+      "pronunciation": "≈ го́лблэдёр"
+    },
+    {
+      "english": "pancreas",
+      "translation": "поджелудочная железа",
+      "example": "The pancreas is described in the imaging report.",
+      "lesson": "Живот, мочеиспускание и обмен веществ",
+      "transcription": "/ˈpænkɹiəs/",
+      "pronunciation": "≈ пэ́нкриэс"
+    },
+    {
+      "english": "kidney",
+      "translation": "почка",
+      "example": "Have you had kidney problems before?",
+      "lesson": "Живот, мочеиспускание и обмен веществ",
+      "transcription": "/ˈkɪdni/",
+      "pronunciation": "≈ ки́дни"
+    },
+    {
+      "english": "urine",
+      "translation": "моча",
+      "example": "We need a urine sample.",
+      "lesson": "Живот, мочеиспускание и обмен веществ",
+      "transcription": "/ˈjɝən/",
+      "pronunciation": "≈ йё́рэн"
+    },
+    {
+      "english": "urination",
+      "translation": "мочеиспускание",
+      "example": "Have you noticed pain during urination?",
+      "lesson": "Живот, мочеиспускание и обмен веществ",
+      "transcription": "/ˌjʊɹəˈneɪʃən/",
+      "pronunciation": "≈ йурэнэ́йшэн"
+    },
+    {
+      "english": "dysuria",
+      "translation": "болезненное или затруднённое мочеиспускание",
+      "example": "Ask about dysuria and urinary frequency.",
+      "lesson": "Живот, мочеиспускание и обмен веществ",
+      "transcription": "/dɪsˈjʊɹiə/",
+      "pronunciation": "≈ дисйу́риэ"
+    },
+    {
+      "english": "hematuria",
+      "translation": "кровь в моче (BrE: haematuria)",
+      "example": "Has the patient noticed visible hematuria?",
+      "lesson": "Живот, мочеиспускание и обмен веществ",
+      "transcription": "/ˌhiməˈtʊɹiə/",
+      "pronunciation": "≈ химэту́риэ"
+    },
+    {
+      "english": "incontinence",
+      "translation": "недержание",
+      "example": "Would you like to discuss the incontinence?",
+      "lesson": "Живот, мочеиспускание и обмен веществ",
+      "transcription": "/ˌɪnˈkɑntənəns/",
+      "pronunciation": "≈ инка́нтэнэнс"
+    },
+    {
+      "english": "retention",
+      "translation": "задержка; удержание",
+      "example": "The referral mentions urinary retention.",
+      "lesson": "Живот, мочеиспускание и обмен веществ",
+      "transcription": "/ɹiˈtɛnʃən/",
+      "pronunciation": "≈ ритэ́ншэн"
+    },
+    {
+      "english": "urinary tract infection",
+      "translation": "инфекция мочевых путей",
+      "example": "Have you had a urinary tract infection before?",
+      "lesson": "Живот, мочеиспускание и обмен веществ",
+      "transcription": "/ˈjɝəˌnɛɹi tɹækt ˌɪnˈfɛkʃən/",
+      "pronunciation": "≈ йё́рэнэри трэ́кт инфэ́кшэн"
+    },
+    {
+      "english": "diabetes",
+      "translation": "диабет",
+      "example": "How long have you had diabetes?",
+      "lesson": "Живот, мочеиспускание и обмен веществ",
+      "transcription": "/ˌdaɪəˈbitiz/",
+      "pronunciation": "≈ дайэби́тиз"
+    },
+    {
+      "english": "blood glucose",
+      "translation": "уровень глюкозы крови",
+      "example": "When was your blood glucose last checked?",
+      "lesson": "Живот, мочеиспускание и обмен веществ",
+      "transcription": "/blʌd ˈɡluˌkoʊs/",
+      "pronunciation": "≈ бла́д глу́коус"
+    },
+    {
+      "english": "hypoglycemia",
+      "translation": "пониженный уровень глюкозы крови",
+      "example": "Have you had episodes of hypoglycemia?",
+      "lesson": "Живот, мочеиспускание и обмен веществ",
+      "transcription": "/ˌhaɪpoʊɡlaɪˈsimiə/",
+      "pronunciation": "≈ хайпоуглайси́миэ"
+    },
+    {
+      "english": "hyperglycemia",
+      "translation": "повышенный уровень глюкозы крови",
+      "example": "The notes mention hyperglycemia.",
+      "lesson": "Живот, мочеиспускание и обмен веществ",
+      "transcription": "/ˌhaɪpɚɡlaɪˈsimiə/",
+      "pronunciation": "≈ хайпёрглайси́миэ"
+    },
+    {
+      "english": "thyroid",
+      "translation": "щитовидная железа",
+      "example": "Have you had thyroid problems?",
+      "lesson": "Живот, мочеиспускание и обмен веществ",
+      "transcription": "/ˈθaɪɹɔɪd/",
+      "pronunciation": "≈ са́йройд"
+    },
+    {
+      "english": "dehydration",
+      "translation": "обезвоживание",
+      "example": "The examination will assess for dehydration.",
+      "lesson": "Живот, мочеиспускание и обмен веществ",
+      "transcription": "/ˌdihaɪˈdɹeɪʃən/",
+      "pronunciation": "≈ дихайдрэ́йшэн"
+    },
+    {
+      "english": "fluid intake",
+      "translation": "потребление жидкости",
+      "example": "How has your fluid intake been today?",
+      "lesson": "Живот, мочеиспускание и обмен веществ",
+      "transcription": "/ˈfluəd ˈɪnˌteɪk/",
+      "pronunciation": "≈ флу́эд и́нтэйк"
+    },
+    {
+      "english": "physical examination",
+      "translation": "физикальный осмотр",
+      "example": "I would like to perform a physical examination.",
+      "lesson": "Осмотр и обследования",
+      "transcription": "/ˈfɪzɪkəl ɪɡˌzæməˈneɪʃən/",
+      "pronunciation": "≈ фи́зикэл игзэмэнэ́йшэн"
+    },
+    {
+      "english": "consent",
+      "translation": "согласие",
+      "example": "May I ask for your consent to examine you?",
+      "lesson": "Осмотр и обследования",
+      "transcription": "/kənˈsɛnt/",
+      "pronunciation": "≈ кэнсэ́нт"
+    },
+    {
+      "english": "chaperone",
+      "translation": "сопровождающий медицинский работник при осмотре",
+      "example": "Would you like a chaperone present?",
+      "lesson": "Осмотр и обследования",
+      "transcription": "/ˈʃæpɚˌoʊn/",
+      "pronunciation": "≈ шэ́пёроун"
+    },
+    {
+      "english": "privacy",
+      "translation": "приватность; конфиденциальность",
+      "example": "We will protect your privacy during the examination.",
+      "lesson": "Осмотр и обследования",
+      "transcription": "/ˈpɹaɪvəsi/",
+      "pronunciation": "≈ пра́йвэси"
+    },
+    {
+      "english": "inspection",
+      "translation": "осмотр (визуальная оценка)",
+      "example": "Inspection is the first part of the examination.",
+      "lesson": "Осмотр и обследования",
+      "transcription": "/ˌɪnˈspɛkʃən/",
+      "pronunciation": "≈ инспэ́кшэн"
+    },
+    {
+      "english": "palpation",
+      "translation": "пальпация",
+      "example": "Tell me if palpation causes discomfort.",
+      "lesson": "Осмотр и обследования",
+      "transcription": "/pælˈpeɪʃən/",
+      "pronunciation": "≈ пэлпэ́йшэн"
+    },
+    {
+      "english": "percussion",
+      "translation": "перкуссия; выстукивание",
+      "example": "I will explain the percussion part of the examination.",
+      "lesson": "Осмотр и обследования",
+      "transcription": "/pɚˈkʌʃən/",
+      "pronunciation": "≈ пёрка́шэн"
+    },
+    {
+      "english": "auscultation",
+      "translation": "аускультация; выслушивание",
+      "example": "Auscultation was performed with a stethoscope.",
+      "lesson": "Осмотр и обследования",
+      "transcription": "/ˌɔskəlˈteɪʃən/",
+      "pronunciation": "≈ оскэлтэ́йшэн"
+    },
+    {
+      "english": "stethoscope",
+      "translation": "стетоскоп",
+      "example": "The stethoscope may feel cold.",
+      "lesson": "Осмотр и обследования",
+      "transcription": "/ˈstɛθəˌskoʊp/",
+      "pronunciation": "≈ стэ́сэскоуп"
+    },
+    {
+      "english": "blood test",
+      "translation": "анализ крови",
+      "example": "I will explain why we are considering a blood test.",
+      "lesson": "Осмотр и обследования",
+      "transcription": "/blʌd tɛst/",
+      "pronunciation": "≈ бла́д тэ́ст"
+    },
+    {
+      "english": "sample",
+      "translation": "образец биоматериала",
+      "example": "Please label the sample correctly.",
+      "lesson": "Осмотр и обследования",
+      "transcription": "/ˈsæmpəl/",
+      "pronunciation": "≈ сэ́мпэл"
+    },
+    {
+      "english": "specimen",
+      "translation": "образец биоматериала",
+      "example": "Check the specimen label before sending it.",
+      "lesson": "Осмотр и обследования",
+      "transcription": "/ˈspɛsəmən/",
+      "pronunciation": "≈ спэ́сэмэн"
+    },
+    {
+      "english": "full blood count",
+      "translation": "общий анализ крови (BrE: FBC)",
+      "example": "The full blood count is pending.",
+      "lesson": "Осмотр и обследования",
+      "transcription": "/fʊl blʌd kaʊnt/",
+      "pronunciation": "≈ фу́л бла́д ка́унт"
+    },
+    {
+      "english": "complete blood count",
+      "translation": "общий анализ крови (AmE: CBC)",
+      "example": "The complete blood count has been reviewed.",
+      "lesson": "Осмотр и обследования",
+      "transcription": "/kəmˈplit blʌd kaʊnt/",
+      "pronunciation": "≈ кэмпли́т бла́д ка́унт"
+    },
+    {
+      "english": "hemoglobin",
+      "translation": "гемоглобин (BrE: haemoglobin)",
+      "example": "Check the hemoglobin result.",
+      "lesson": "Осмотр и обследования",
+      "transcription": "/ˌhiməˈɡloʊbən/",
+      "pronunciation": "≈ химэгло́убэн"
+    },
+    {
+      "english": "platelet",
+      "translation": "тромбоцит",
+      "example": "The report includes the platelet count.",
+      "lesson": "Осмотр и обследования",
+      "transcription": "/ˈpleɪtlət/",
+      "pronunciation": "≈ плэ́йтлэт"
+    },
+    {
+      "english": "white blood cell",
+      "translation": "лейкоцит",
+      "example": "The white blood cell count is recorded here.",
+      "lesson": "Осмотр и обследования",
+      "transcription": "/waɪt blʌd sɛl/",
+      "pronunciation": "≈ уа́йт бла́д сэ́л"
+    },
+    {
+      "english": "creatinine",
+      "translation": "креатинин",
+      "example": "The creatinine result is available.",
+      "lesson": "Осмотр и обследования",
+      "transcription": "/kɹiˈætɪˌnin/",
+      "pronunciation": "≈ криэ́тинин"
+    },
+    {
+      "english": "electrolyte",
+      "translation": "электролит",
+      "example": "The electrolyte results are pending.",
+      "lesson": "Осмотр и обследования",
+      "transcription": "/ɪˌlɛktɹɑˈlaɪt/",
+      "pronunciation": "≈ илэктрала́йт"
+    },
+    {
+      "english": "reference range",
+      "translation": "референсный диапазон",
+      "example": "Compare the result with the laboratory reference range.",
+      "lesson": "Осмотр и обследования",
+      "transcription": "/ˈɹɛfɚəns ɹeɪndʒ/",
+      "pronunciation": "≈ рэ́фёрэнс рэ́йндж"
+    },
+    {
+      "english": "imaging",
+      "translation": "лучевая диагностика; визуализация",
+      "example": "The imaging report is not yet available.",
+      "lesson": "Осмотр и обследования",
+      "transcription": "/ˈɪmɪdʒɪŋ/",
+      "pronunciation": "≈ и́миджинг"
+    },
+    {
+      "english": "X-ray",
+      "translation": "рентгеновский снимок; рентгенография",
+      "example": "Have you had an X-ray before?",
+      "lesson": "Осмотр и обследования",
+      "transcription": "/ˈɛksˌɹeɪ/",
+      "pronunciation": "≈ э́ксрэй"
+    },
+    {
+      "english": "ultrasound",
+      "translation": "ультразвуковое исследование",
+      "example": "I will explain what the ultrasound involves.",
+      "lesson": "Осмотр и обследования",
+      "transcription": "/ˌʌltɹəˈsaʊnd/",
+      "pronunciation": "≈ алтрэса́унд"
+    },
+    {
+      "english": "CT scan",
+      "translation": "компьютерная томография; КТ",
+      "example": "The CT scan report has been reviewed.",
+      "lesson": "Осмотр и обследования",
+      "transcription": "/ˈsiˈti skæn/",
+      "pronunciation": "≈ си́ти́ скэ́н"
+    },
+    {
+      "english": "MRI scan",
+      "translation": "магнитно-резонансная томография; МРТ",
+      "example": "Do you have any questions about the MRI scan?",
+      "lesson": "Осмотр и обследования",
+      "transcription": "/ˈɛˈmɑˈɹaɪ skæn/",
+      "pronunciation": "≈ э́ма́ра́й скэ́н"
+    },
+    {
+      "english": "biopsy",
+      "translation": "биопсия",
+      "example": "The clinician will explain the biopsy procedure.",
+      "lesson": "Осмотр и обследования",
+      "transcription": "/ˈbaɪɑpsi/",
+      "pronunciation": "≈ ба́йапси"
+    },
+    {
+      "english": "culture",
+      "translation": "посев (микробиологическое исследование)",
+      "example": "The sample has been sent for culture.",
+      "lesson": "Осмотр и обследования",
+      "transcription": "/ˈkʌltʃɚ/",
+      "pronunciation": "≈ ка́лчёр"
+    },
+    {
+      "english": "pending",
+      "translation": "ожидающий выполнения или результата",
+      "example": "The blood test results are pending.",
+      "lesson": "Осмотр и обследования",
+      "transcription": "/ˈpɛndɪŋ/",
+      "pronunciation": "≈ пэ́ндинг"
+    },
+    {
+      "english": "finding",
+      "translation": "результат наблюдения; находка",
+      "example": "Explain the findings in plain language.",
+      "lesson": "Осмотр и обследования",
+      "transcription": "/ˈfaɪndɪŋ/",
+      "pronunciation": "≈ фа́йндинг"
+    },
+    {
+      "english": "incidental finding",
+      "translation": "случайная находка при обследовании",
+      "example": "The report mentions an incidental finding.",
+      "lesson": "Осмотр и обследования",
+      "transcription": "/ˌɪnsɪˈdɛntəl ˈfaɪndɪŋ/",
+      "pronunciation": "≈ инсидэ́нтэл фа́йндинг"
+    },
+    {
+      "english": "diagnosis",
+      "translation": "диагноз",
+      "example": "We need more information before confirming the diagnosis.",
+      "lesson": "Диагноз, план и документация",
+      "transcription": "/ˌdaɪəɡˈnoʊsəs/",
+      "pronunciation": "≈ дайэгно́усэс"
+    },
+    {
+      "english": "differential diagnosis",
+      "translation": "дифференциальный диагноз",
+      "example": "Discuss the differential diagnosis with the team.",
+      "lesson": "Диагноз, план и документация",
+      "transcription": "/ˌdɪfɚˈɛnʃəl ˌdaɪəɡˈnoʊsəs/",
+      "pronunciation": "≈ дифёрэ́ншэл дайэгно́усэс"
+    },
+    {
+      "english": "provisional diagnosis",
+      "translation": "предварительный диагноз",
+      "example": "Record the provisional diagnosis clearly.",
+      "lesson": "Диагноз, план и документация",
+      "transcription": "/pɹəˈvɪʒənəl ˌdaɪəɡˈnoʊsəs/",
+      "pronunciation": "≈ прэви́жэнэл дайэгно́усэс"
+    },
+    {
+      "english": "assessment",
+      "translation": "оценка состояния",
+      "example": "The assessment is documented in the notes.",
+      "lesson": "Диагноз, план и документация",
+      "transcription": "/əˈsɛsmənt/",
+      "pronunciation": "≈ эсэ́смэнт"
+    },
+    {
+      "english": "management plan",
+      "translation": "план ведения пациента",
+      "example": "Let us discuss the management plan together.",
+      "lesson": "Диагноз, план и документация",
+      "transcription": "/ˈmænədʒmənt plæn/",
+      "pronunciation": "≈ мэ́нэджмэнт плэ́н"
+    },
+    {
+      "english": "prognosis",
+      "translation": "прогноз",
+      "example": "The patient has questions about the prognosis.",
+      "lesson": "Диагноз, план и документация",
+      "transcription": "/pɹɑɡˈnoʊsəs/",
+      "pronunciation": "≈ прагно́усэс"
+    },
+    {
+      "english": "follow-up",
+      "translation": "последующее наблюдение; повторный приём",
+      "example": "How will the follow-up be arranged?",
+      "lesson": "Диагноз, план и документация",
+      "transcription": "/ˈfɑloʊˌʌp/",
+      "pronunciation": "≈ фа́лоуап"
+    },
+    {
+      "english": "review",
+      "translation": "повторная оценка; пересмотр",
+      "example": "We will arrange a review of the results.",
+      "lesson": "Диагноз, план и документация",
+      "transcription": "/ˌɹiˈvju/",
+      "pronunciation": "≈ ривйу́"
+    },
+    {
+      "english": "monitoring",
+      "translation": "наблюдение; мониторинг",
+      "example": "Explain the purpose of monitoring.",
+      "lesson": "Диагноз, план и документация",
+      "transcription": "/ˈmɑnətɚɪŋ/",
+      "pronunciation": "≈ ма́нэтёринг"
+    },
+    {
+      "english": "observation",
+      "translation": "наблюдение; измерение показателей",
+      "example": "Record the observations in the chart.",
+      "lesson": "Диагноз, план и документация",
+      "transcription": "/ˌɑbzɚˈveɪʃən/",
+      "pronunciation": "≈ абзёрвэ́йшэн"
+    },
+    {
+      "english": "admission",
+      "translation": "госпитализация; поступление",
+      "example": "The admission note is complete.",
+      "lesson": "Диагноз, план и документация",
+      "transcription": "/ædˈmɪʃən/",
+      "pronunciation": "≈ эдми́шэн"
+    },
+    {
+      "english": "discharge",
+      "translation": "выписка; выделения (по контексту)",
+      "example": "The discharge summary is ready.",
+      "lesson": "Диагноз, план и документация",
+      "transcription": "/dɪsˈtʃɑɹdʒ/",
+      "pronunciation": "≈ дисча́рдж"
+    },
+    {
+      "english": "discharge summary",
+      "translation": "выписной эпикриз",
+      "example": "Send the discharge summary to the general practitioner.",
+      "lesson": "Диагноз, план и документация",
+      "transcription": "/dɪsˈtʃɑɹdʒ ˈsʌmɚi/",
+      "pronunciation": "≈ дисча́рдж са́мёри"
+    },
+    {
+      "english": "inpatient",
+      "translation": "стационарный пациент",
+      "example": "The inpatient team will review the case.",
+      "lesson": "Диагноз, план и документация",
+      "transcription": "/ˈɪnˌpeɪʃənt/",
+      "pronunciation": "≈ и́нпэйшэнт"
+    },
+    {
+      "english": "outpatient",
+      "translation": "амбулаторный пациент; амбулаторный",
+      "example": "The outpatient appointment is next week.",
+      "lesson": "Диагноз, план и документация",
+      "transcription": "/ˈaʊtˌpeɪʃənt/",
+      "pronunciation": "≈ а́утпэйшэнт"
+    },
+    {
+      "english": "ward",
+      "translation": "больничное отделение; палата",
+      "example": "Which ward is the patient on?",
+      "lesson": "Диагноз, план и документация",
+      "transcription": "/wɔɹd/",
+      "pronunciation": "≈ уо́рд"
+    },
+    {
+      "english": "emergency department",
+      "translation": "отделение неотложной помощи",
+      "example": "The patient was seen in the emergency department.",
+      "lesson": "Диагноз, план и документация",
+      "transcription": "/ɪˈmɝdʒənsi dɪˈpɑɹtmənt/",
+      "pronunciation": "≈ имё́рджэнси дипа́ртмэнт"
+    },
+    {
+      "english": "intensive care unit",
+      "translation": "отделение интенсивной терапии",
+      "example": "The handover is for the intensive care unit.",
+      "lesson": "Диагноз, план и документация",
+      "transcription": "/ˌɪnˈtɛnsɪv kɛɹ ˈjunət/",
+      "pronunciation": "≈ интэ́нсив кэ́р йу́нэт"
+    },
+    {
+      "english": "handover",
+      "translation": "передача информации о пациенте между сотрудниками",
+      "example": "Give a structured handover to the next team.",
+      "lesson": "Диагноз, план и документация",
+      "transcription": "/ˈhændoʊvɚ/",
+      "pronunciation": "≈ хэ́ндоувёр"
+    },
+    {
+      "english": "medical record",
+      "translation": "медицинская документация",
+      "example": "Please update the medical record.",
+      "lesson": "Диагноз, план и документация",
+      "transcription": "/ˈmɛdəkəl ˈɹɛkɚd/",
+      "pronunciation": "≈ мэ́дэкэл рэ́кёрд"
+    },
+    {
+      "english": "chart",
+      "translation": "медицинская карта; лист наблюдений",
+      "example": "Check the medication chart.",
+      "lesson": "Диагноз, план и документация",
+      "transcription": "/tʃɑɹt/",
+      "pronunciation": "≈ ча́рт"
+    },
+    {
+      "english": "clinical note",
+      "translation": "клиническая запись",
+      "example": "Write a clear clinical note.",
+      "lesson": "Диагноз, план и документация",
+      "transcription": "/ˈklɪnəkəl noʊt/",
+      "pronunciation": "≈ кли́нэкэл но́ут"
+    },
+    {
+      "english": "confidentiality",
+      "translation": "конфиденциальность",
+      "example": "Patient confidentiality must be respected.",
+      "lesson": "Диагноз, план и документация",
+      "transcription": "/ˌkɑnfəˌdɛnʃiˈæləti/",
+      "pronunciation": "≈ канфэдэншиэ́лэти"
+    },
+    {
+      "english": "capacity",
+      "translation": "способность принимать конкретное решение",
+      "example": "Document the assessment of decision-making capacity.",
+      "lesson": "Диагноз, план и документация",
+      "transcription": "/kəˈpæsəti/",
+      "pronunciation": "≈ кэпэ́сэти"
+    },
+    {
+      "english": "shared decision-making",
+      "translation": "совместное принятие решений врачом и пациентом",
+      "example": "Shared decision-making includes the patient's preferences.",
+      "lesson": "Диагноз, план и документация",
+      "transcription": "/ʃɛɹd dɪˈsɪʒən ˈmeɪkɪŋ/",
+      "pronunciation": "≈ шэ́рд диси́жэн мэ́йкинг"
+    },
+    {
+      "english": "safety-netting",
+      "translation": "объяснение, когда и как обратиться за помощью при изменении состояния",
+      "example": "Document the safety-netting discussion.",
+      "lesson": "Диагноз, план и документация",
+      "transcription": "/ˈseɪfti ˈnɛtɪŋ/",
+      "pronunciation": "≈ сэ́йфти нэ́тинг"
+    },
+    {
+      "english": "red flag",
+      "translation": "настораживающий признак",
+      "example": "Discuss any red flags with the supervising clinician.",
+      "lesson": "Диагноз, план и документация",
+      "transcription": "/ɹɛd flæɡ/",
+      "pronunciation": "≈ рэ́д флэ́г"
+    },
+    {
+      "english": "escalation",
+      "translation": "привлечение помощи более высокого уровня",
+      "example": "Follow the local escalation procedure.",
+      "lesson": "Диагноз, план и документация",
+      "transcription": "/ˌɛskəˈleɪʃən/",
+      "pronunciation": "≈ эскэлэ́йшэн"
+    },
+    {
+      "english": "clinical guideline",
+      "translation": "клиническое руководство",
+      "example": "Consult the relevant clinical guideline.",
+      "lesson": "Диагноз, план и документация",
+      "transcription": "/ˈklɪnəkəl ˈɡaɪdˌlaɪn/",
+      "pronunciation": "≈ кли́нэкэл га́йдлайн"
+    },
+    {
+      "english": "evidence-based",
+      "translation": "основанный на научных доказательствах",
+      "example": "The team discussed evidence-based practice.",
+      "lesson": "Диагноз, план и документация",
+      "transcription": "/ˈɛvədəns beɪst/",
+      "pronunciation": "≈ э́вэдэнс бэ́йст"
+    },
+    {
+      "english": "plain language",
+      "translation": "понятный неспециалисту язык",
+      "example": "Explain the result in plain language.",
+      "lesson": "Профессиональное общение с пациентом",
+      "transcription": "/pleɪn ˈlæŋɡwədʒ/",
+      "pronunciation": "≈ плэ́йн лэ́нггуэдж"
+    },
+    {
+      "english": "empathy",
+      "translation": "эмпатия",
+      "example": "Show empathy when discussing the patient's concerns.",
+      "lesson": "Профессиональное общение с пациентом",
+      "transcription": "/ˈɛmpəθi/",
+      "pronunciation": "≈ э́мпэси"
+    },
+    {
+      "english": "reassurance",
+      "translation": "поддержка; обоснованное успокоение",
+      "example": "Offer reassurance without dismissing concerns.",
+      "lesson": "Профессиональное общение с пациентом",
+      "transcription": "/ˌɹiəˈʃʊɹəns/",
+      "pronunciation": "≈ риэшу́рэнс"
+    },
+    {
+      "english": "expectation",
+      "translation": "ожидание",
+      "example": "What are your expectations for this consultation?",
+      "lesson": "Профессиональное общение с пациентом",
+      "transcription": "/ˌɛkspɛkˈteɪʃən/",
+      "pronunciation": "≈ экспэктэ́йшэн"
+    },
+    {
+      "english": "preference",
+      "translation": "предпочтение",
+      "example": "What is your preference?",
+      "lesson": "Профессиональное общение с пациентом",
+      "transcription": "/ˈpɹɛfɚəns/",
+      "pronunciation": "≈ прэ́фёрэнс"
+    },
+    {
+      "english": "understanding",
+      "translation": "понимание",
+      "example": "I would like to check your understanding.",
+      "lesson": "Профессиональное общение с пациентом",
+      "transcription": "/ˌʌndɚˈstændɪŋ/",
+      "pronunciation": "≈ андёрстэ́ндинг"
+    },
+    {
+      "english": "teach-back",
+      "translation": "проверка понимания пересказом пациента",
+      "example": "Use teach-back to check that the explanation was clear.",
+      "lesson": "Профессиональное общение с пациентом",
+      "transcription": "/titʃ bæk/",
+      "pronunciation": "≈ ти́ч бэ́к"
+    },
+    {
+      "english": "interpreter",
+      "translation": "устный переводчик",
+      "example": "Would you like a professional interpreter?",
+      "lesson": "Профессиональное общение с пациентом",
+      "transcription": "/ˌɪnˈtɝpɹətɚ/",
+      "pronunciation": "≈ интё́рпрэтёр"
+    },
+    {
+      "english": "next of kin",
+      "translation": "ближайший родственник; контактное лицо",
+      "example": "Who is listed as your next of kin?",
+      "lesson": "Профессиональное общение с пациентом",
+      "transcription": "/nɛkst əv kɪn/",
+      "pronunciation": "≈ нэ́кст эв ки́н"
+    },
+    {
+      "english": "caregiver",
+      "translation": "человек, осуществляющий уход",
+      "example": "Does your caregiver help with daily activities?",
+      "lesson": "Профессиональное общение с пациентом",
+      "transcription": "/ˈkɛɹˌɡɪvɚ/",
+      "pronunciation": "≈ кэ́ргивёр"
+    },
+    {
+      "english": "carer",
+      "translation": "человек, осуществляющий уход (BrE)",
+      "example": "Would you like your carer to join us?",
+      "lesson": "Профессиональное общение с пациентом",
+      "transcription": "/ˈkɛɹɚ/",
+      "pronunciation": "≈ кэ́рёр"
+    },
+    {
+      "english": "sensitive question",
+      "translation": "деликатный вопрос",
+      "example": "May I ask a sensitive question?",
+      "lesson": "Профессиональное общение с пациентом",
+      "transcription": "/ˈsɛnsətɪv ˈkwɛstʃən/",
+      "pronunciation": "≈ сэ́нсэтив куэ́счэн"
+    },
+    {
+      "english": "informed consent",
+      "translation": "информированное согласие",
+      "example": "Allow time for questions before seeking informed consent.",
+      "lesson": "Профессиональное общение с пациентом",
+      "transcription": "/ˌɪnˈfɔɹmd kənˈsɛnt/",
+      "pronunciation": "≈ инфо́рмд кэнсэ́нт"
+    },
+    {
+      "english": "benefit",
+      "translation": "польза",
+      "example": "Let us discuss the potential benefits.",
+      "lesson": "Профессиональное общение с пациентом",
+      "transcription": "/ˈbɛnəfɪt/",
+      "pronunciation": "≈ бэ́нэфит"
+    },
+    {
+      "english": "risk",
+      "translation": "риск",
+      "example": "What would you like to know about the risks?",
+      "lesson": "Профессиональное общение с пациентом",
+      "transcription": "/ɹɪsk/",
+      "pronunciation": "≈ ри́ск"
+    },
+    {
+      "english": "alternative",
+      "translation": "альтернативный вариант",
+      "example": "We can discuss the available alternatives.",
+      "lesson": "Профессиональное общение с пациентом",
+      "transcription": "/ɔlˈtɝnətɪv/",
+      "pronunciation": "≈ олтё́рнэтив"
+    },
+    {
+      "english": "uncertainty",
+      "translation": "неопределённость",
+      "example": "Explain the uncertainty honestly.",
+      "lesson": "Профессиональное общение с пациентом",
+      "transcription": "/ənˈsɝtənti/",
+      "pronunciation": "≈ энсё́ртэнти"
+    },
+    {
+      "english": "What brings you in today?",
+      "translation": "Что привело вас сегодня на приём?",
+      "example": "What brings you in today?",
+      "lesson": "Профессиональное общение с пациентом",
+      "transcription": "/wʌt bɹɪŋz ju ɪn təˈdeɪ/",
+      "pronunciation": "≈ уа́т бри́нгз йу́ ин тэдэ́й"
+    },
+    {
+      "english": "Could you tell me more?",
+      "translation": "Не могли бы вы рассказать подробнее?",
+      "example": "Could you tell me more about the pain?",
+      "lesson": "Профессиональное общение с пациентом",
+      "transcription": "/kʊd ju tɛl mi mɔɹ/",
+      "pronunciation": "≈ ку́д йу́ тэ́л ми́ мо́р"
+    },
+    {
+      "english": "When did it start?",
+      "translation": "Когда это началось?",
+      "example": "When did it start?",
+      "lesson": "Профессиональное общение с пациентом",
+      "transcription": "/wɛn dɪd ɪt stɑɹt/",
+      "pronunciation": "≈ уэ́н ди́д и́т ста́рт"
+    },
+    {
+      "english": "What makes it worse?",
+      "translation": "От чего становится хуже?",
+      "example": "What makes it worse?",
+      "lesson": "Профессиональное общение с пациентом",
+      "transcription": "/wʌt meɪks ɪt wɝs/",
+      "pronunciation": "≈ уа́т мэ́йкс и́т уё́рс"
+    },
+    {
+      "english": "What helps relieve it?",
+      "translation": "Что помогает облегчить это?",
+      "example": "What helps relieve it?",
+      "lesson": "Профессиональное общение с пациентом",
+      "transcription": "/wʌt hɛlps ɹɪˈliv ɪt/",
+      "pronunciation": "≈ уа́т хэ́лпс рили́в и́т"
+    },
+    {
+      "english": "How is this affecting your daily life?",
+      "translation": "Как это влияет на вашу повседневную жизнь?",
+      "example": "How is this affecting your daily life?",
+      "lesson": "Профессиональное общение с пациентом",
+      "transcription": "/haʊ ɪz ðɪs əˈfɛktɪŋ jɔɹ ˈdeɪli laɪf/",
+      "pronunciation": "≈ ха́у и́з зи́с эфэ́ктинг йо́р дэ́йли ла́йф"
+    },
+    {
+      "english": "I can see this is worrying you.",
+      "translation": "Я вижу, что это вас тревожит.",
+      "example": "I can see this is worrying you.",
+      "lesson": "Профессиональное общение с пациентом",
+      "transcription": "/aɪ kæn si ðɪs ɪz ˈwɝiɪŋ ju/",
+      "pronunciation": "≈ а́й кэ́н си́ зи́с и́з уё́риинг йу́"
+    },
+    {
+      "english": "May I examine you?",
+      "translation": "Можно вас осмотреть?",
+      "example": "May I examine you?",
+      "lesson": "Профессиональное общение с пациентом",
+      "transcription": "/meɪ aɪ ɪɡˈzæmɪn ju/",
+      "pronunciation": "≈ мэ́й а́й игзэ́мин йу́"
+    },
+    {
+      "english": "Please let me know if it hurts.",
+      "translation": "Скажите, пожалуйста, если будет больно.",
+      "example": "Please let me know if it hurts.",
+      "lesson": "Профессиональное общение с пациентом",
+      "transcription": "/pliz lɛt mi noʊ ɪf ɪt hɝts/",
+      "pronunciation": "≈ пли́з лэ́т ми́ но́у и́ф и́т хё́ртс"
+    },
+    {
+      "english": "What questions do you have?",
+      "translation": "Какие у вас есть вопросы?",
+      "example": "What questions do you have?",
+      "lesson": "Профессиональное общение с пациентом",
+      "transcription": "/wʌt ˈkwɛstʃənz du ju hæv/",
+      "pronunciation": "≈ уа́т куэ́счэнз ду́ йу́ хэ́в"
+    },
+    {
+      "english": "Let me check I have understood.",
+      "translation": "Позвольте уточнить, правильно ли я понял.",
+      "example": "Let me check I have understood.",
+      "lesson": "Профессиональное общение с пациентом",
+      "transcription": "/lɛt mi tʃɛk aɪ hæv ˌʌndɚˈstʊd/",
+      "pronunciation": "≈ лэ́т ми́ чэ́к а́й хэ́в андёрсту́д"
+    },
+    {
+      "english": "Could you explain it back in your own words?",
+      "translation": "Можете повторить своими словами, как вы это поняли?",
+      "example": "Could you explain it back in your own words?",
+      "lesson": "Профессиональное общение с пациентом",
+      "transcription": "/kʊd ju ɪkˈspleɪn ɪt bæk ɪn jɔɹ oʊn wɝdz/",
+      "pronunciation": "≈ ку́д йу́ иксплэ́йн и́т бэ́к ин йо́р о́ун уё́рдз"
+    },
+    {
+      "english": "We will decide together.",
+      "translation": "Мы примем решение вместе.",
+      "example": "We will decide together.",
+      "lesson": "Профессиональное общение с пациентом",
+      "transcription": "/wi wɪl ˌdɪˈsaɪd təˈɡɛðɚ/",
+      "pronunciation": "≈ уи́ уи́л диса́йд тэгэ́зёр"
+    },
+    {
+      "english": "anatomy",
+      "translation": "анатомия",
+      "example": "The course covers basic anatomy.",
+      "lesson": "Общая анатомия и неврология",
+      "transcription": "/əˈnætəmi/",
+      "pronunciation": "≈ энэ́тэми"
+    },
+    {
+      "english": "tissue",
+      "translation": "ткань организма",
+      "example": "The sample contains soft tissue.",
+      "lesson": "Общая анатомия и неврология",
+      "transcription": "/ˈtɪsˌju/",
+      "pronunciation": "≈ ти́сйу"
+    },
+    {
+      "english": "organ",
+      "translation": "орган",
+      "example": "The report describes the affected organ.",
+      "lesson": "Общая анатомия и неврология",
+      "transcription": "/ˈɔɹɡən/",
+      "pronunciation": "≈ о́ргэн"
+    },
+    {
+      "english": "bone",
+      "translation": "кость",
+      "example": "Can you point to the painful area over the bone?",
+      "lesson": "Общая анатомия и неврология",
+      "transcription": "/boʊn/",
+      "pronunciation": "≈ бо́ун"
+    },
+    {
+      "english": "joint",
+      "translation": "сустав",
+      "example": "Which joint is painful?",
+      "lesson": "Общая анатомия и неврология",
+      "transcription": "/dʒɔɪnt/",
+      "pronunciation": "≈ джо́йнт"
+    },
+    {
+      "english": "muscle",
+      "translation": "мышца",
+      "example": "Does the muscle feel weak?",
+      "lesson": "Общая анатомия и неврология",
+      "transcription": "/ˈmʌsəl/",
+      "pronunciation": "≈ ма́сэл"
+    },
+    {
+      "english": "tendon",
+      "translation": "сухожилие",
+      "example": "The examination includes the tendon.",
+      "lesson": "Общая анатомия и неврология",
+      "transcription": "/ˈtɛndən/",
+      "pronunciation": "≈ тэ́ндэн"
+    },
+    {
+      "english": "ligament",
+      "translation": "связка",
+      "example": "The imaging report describes the ligament.",
+      "lesson": "Общая анатомия и неврология",
+      "transcription": "/ˈlɪɡəmənt/",
+      "pronunciation": "≈ ли́гэмэнт"
+    },
+    {
+      "english": "nerve",
+      "translation": "нерв",
+      "example": "The symptoms may follow a nerve distribution.",
+      "lesson": "Общая анатомия и неврология",
+      "transcription": "/nɝv/",
+      "pronunciation": "≈ нё́рв"
+    },
+    {
+      "english": "artery",
+      "translation": "артерия",
+      "example": "The report describes the artery.",
+      "lesson": "Общая анатомия и неврология",
+      "transcription": "/ˈɑɹtɚi/",
+      "pronunciation": "≈ а́ртёри"
+    },
+    {
+      "english": "vein",
+      "translation": "вена",
+      "example": "The sample is taken from a vein.",
+      "lesson": "Общая анатомия и неврология",
+      "transcription": "/veɪn/",
+      "pronunciation": "≈ вэ́йн"
+    },
+    {
+      "english": "spine",
+      "translation": "позвоночник",
+      "example": "Have you had surgery on your spine?",
+      "lesson": "Общая анатомия и неврология",
+      "transcription": "/spaɪn/",
+      "pronunciation": "≈ спа́йн"
+    },
+    {
+      "english": "spinal cord",
+      "translation": "спинной мозг",
+      "example": "The report describes the spinal cord.",
+      "lesson": "Общая анатомия и неврология",
+      "transcription": "/ˈspaɪnəl kɔɹd/",
+      "pronunciation": "≈ спа́йнэл ко́рд"
+    },
+    {
+      "english": "brain",
+      "translation": "головной мозг",
+      "example": "The imaging report includes the brain.",
+      "lesson": "Общая анатомия и неврология",
+      "transcription": "/bɹeɪn/",
+      "pronunciation": "≈ брэ́йн"
+    },
+    {
+      "english": "consciousness",
+      "translation": "сознание",
+      "example": "Was there any loss of consciousness?",
+      "lesson": "Общая анатомия и неврология",
+      "transcription": "/ˈkɑnʃəsnəs/",
+      "pronunciation": "≈ ка́ншэснэс"
+    },
+    {
+      "english": "alert",
+      "translation": "бодрствующий; реагирующий",
+      "example": "The patient is alert and able to answer questions.",
+      "lesson": "Общая анатомия и неврология",
+      "transcription": "/əˈlɝt/",
+      "pronunciation": "≈ элё́рт"
+    },
+    {
+      "english": "orientation",
+      "translation": "ориентировка во времени, месте и собственной личности",
+      "example": "Assess orientation during the examination.",
+      "lesson": "Общая анатомия и неврология",
+      "transcription": "/ˌɔɹiɛnˈteɪʃən/",
+      "pronunciation": "≈ ориэнтэ́йшэн"
+    },
+    {
+      "english": "confusion",
+      "translation": "спутанность сознания",
+      "example": "When did the confusion begin?",
+      "lesson": "Общая анатомия и неврология",
+      "transcription": "/kənˈfjuʒən/",
+      "pronunciation": "≈ кэнфйу́жэн"
+    },
+    {
+      "english": "seizure",
+      "translation": "судорожный или иной эпилептический приступ",
+      "example": "Was the seizure witnessed?",
+      "lesson": "Общая анатомия и неврология",
+      "transcription": "/ˈsiʒɚ/",
+      "pronunciation": "≈ си́жёр"
+    },
+    {
+      "english": "tremor",
+      "translation": "тремор; дрожание",
+      "example": "When do you notice the tremor?",
+      "lesson": "Общая анатомия и неврология",
+      "transcription": "/ˈtɹɛmɚ/",
+      "pronunciation": "≈ трэ́мёр"
+    },
+    {
+      "english": "gait",
+      "translation": "походка",
+      "example": "The examination includes gait assessment.",
+      "lesson": "Общая анатомия и неврология",
+      "transcription": "/ɡeɪt/",
+      "pronunciation": "≈ гэ́йт"
+    },
+    {
+      "english": "reflex",
+      "translation": "рефлекс",
+      "example": "I am going to check your reflexes.",
+      "lesson": "Общая анатомия и неврология",
+      "transcription": "/ˈɹiflɛks/",
+      "pronunciation": "≈ ри́флэкс"
+    },
+    {
+      "english": "sensation",
+      "translation": "чувствительность; ощущение",
+      "example": "Tell me whether the sensation feels the same on both sides.",
+      "lesson": "Общая анатомия и неврология",
+      "transcription": "/sɛnˈseɪʃən/",
+      "pronunciation": "≈ сэнсэ́йшэн"
+    },
+    {
+      "english": "range of motion",
+      "translation": "объём движений",
+      "example": "We will assess the range of motion.",
+      "lesson": "Общая анатомия и неврология",
+      "transcription": "/ɹeɪndʒ əv ˈmoʊʃən/",
+      "pronunciation": "≈ рэ́йндж эв мо́ушэн"
+    },
+    {
+      "english": "fracture",
+      "translation": "перелом",
+      "example": "The report describes a fracture.",
+      "lesson": "Общая анатомия и неврология",
+      "transcription": "/ˈfɹæktʃɚ/",
+      "pronunciation": "≈ фрэ́кчёр"
+    },
+    {
+      "english": "sprain",
+      "translation": "растяжение или повреждение связок",
+      "example": "The referral mentions an ankle sprain.",
+      "lesson": "Общая анатомия и неврология",
+      "transcription": "/spɹeɪn/",
+      "pronunciation": "≈ спрэ́йн"
+    },
+    {
+      "english": "strain",
+      "translation": "растяжение или повреждение мышцы или сухожилия",
+      "example": "The notes describe a muscle strain.",
+      "lesson": "Общая анатомия и неврология",
+      "transcription": "/stɹeɪn/",
+      "pronunciation": "≈ стрэ́йн"
+    },
+    {
+      "english": "concussion",
+      "translation": "сотрясение мозга",
+      "example": "The clinician assessed the patient for concussion.",
+      "lesson": "Общая анатомия и неврология",
+      "transcription": "/kənˈkʌʃən/",
+      "pronunciation": "≈ кэнка́шэн"
+    },
+    {
+      "english": "loss of consciousness",
+      "translation": "потеря сознания",
+      "example": "Was there any loss of consciousness?",
+      "lesson": "Общая анатомия и неврология",
+      "transcription": "/lɔs əv ˈkɑnʃəsnəs/",
+      "pronunciation": "≈ ло́с эв ка́ншэснэс"
+    },
+    {
+      "english": "functional limitation",
+      "translation": "ограничение функции",
+      "example": "Describe any functional limitations.",
+      "lesson": "Общая анатомия и неврология",
+      "transcription": "/ˈfʌŋkʃənəl ˌlɪmɪˈteɪʃən/",
+      "pronunciation": "≈ фа́нгкшэнэл лимитэ́йшэн"
+    },
+    {
+      "english": "infection",
+      "translation": "инфекция",
+      "example": "Have you recently had an infection?",
+      "lesson": "Инфекции, уход и дополнительные области",
+      "transcription": "/ˌɪnˈfɛkʃən/",
+      "pronunciation": "≈ инфэ́кшэн"
+    },
+    {
+      "english": "inflammation",
+      "translation": "воспаление",
+      "example": "The report describes signs of inflammation.",
+      "lesson": "Инфекции, уход и дополнительные области",
+      "transcription": "/ˌɪnfləˈmeɪʃən/",
+      "pronunciation": "≈ инфлэмэ́йшэн"
+    },
+    {
+      "english": "contagious",
+      "translation": "заразный",
+      "example": "The patient asks whether the condition is contagious.",
+      "lesson": "Инфекции, уход и дополнительные области",
+      "transcription": "/kənˈteɪdʒəs/",
+      "pronunciation": "≈ кэнтэ́йджэс"
+    },
+    {
+      "english": "sterile",
+      "translation": "стерильный",
+      "example": "Check that the equipment is sterile.",
+      "lesson": "Инфекции, уход и дополнительные области",
+      "transcription": "/ˈstɛɹəl/",
+      "pronunciation": "≈ стэ́рэл"
+    },
+    {
+      "english": "aseptic",
+      "translation": "асептический",
+      "example": "Follow the local aseptic technique protocol.",
+      "lesson": "Инфекции, уход и дополнительные области",
+      "transcription": "/eɪˈsɛptɪk/",
+      "pronunciation": "≈ эйсэ́птик"
+    },
+    {
+      "english": "wound",
+      "translation": "рана",
+      "example": "When did the wound occur?",
+      "lesson": "Инфекции, уход и дополнительные области",
+      "transcription": "/wund/",
+      "pronunciation": "≈ уу́нд"
+    },
+    {
+      "english": "dressing",
+      "translation": "повязка; перевязочный материал",
+      "example": "When was the dressing last changed?",
+      "lesson": "Инфекции, уход и дополнительные области",
+      "transcription": "/ˈdɹɛsɪŋ/",
+      "pronunciation": "≈ дрэ́синг"
+    },
+    {
+      "english": "suture",
+      "translation": "шов; шовный материал",
+      "example": "The note records the number of sutures.",
+      "lesson": "Инфекции, уход и дополнительные области",
+      "transcription": "/ˈsutʃɚ/",
+      "pronunciation": "≈ су́чёр"
+    },
+    {
+      "english": "healing",
+      "translation": "заживление",
+      "example": "The appointment is to review wound healing.",
+      "lesson": "Инфекции, уход и дополнительные области",
+      "transcription": "/ˈhilɪŋ/",
+      "pronunciation": "≈ хи́линг"
+    },
+    {
+      "english": "vaccination",
+      "translation": "вакцинация",
+      "example": "Can we review your vaccination history?",
+      "lesson": "Инфекции, уход и дополнительные области",
+      "transcription": "/væksəˈneɪʃən/",
+      "pronunciation": "≈ вэксэнэ́йшэн"
+    },
+    {
+      "english": "immunization",
+      "translation": "иммунизация",
+      "example": "The immunization record is available.",
+      "lesson": "Инфекции, уход и дополнительные области",
+      "transcription": "/ˌɪmjunəˈzeɪʃən/",
+      "pronunciation": "≈ имйунэзэ́йшэн"
+    },
+    {
+      "english": "pregnancy",
+      "translation": "беременность",
+      "example": "Is there any possibility of pregnancy?",
+      "lesson": "Инфекции, уход и дополнительные области",
+      "transcription": "/ˈpɹɛɡnənsi/",
+      "pronunciation": "≈ прэ́гнэнси"
+    },
+    {
+      "english": "menstrual cycle",
+      "translation": "менструальный цикл",
+      "example": "Has your menstrual cycle changed?",
+      "lesson": "Инфекции, уход и дополнительные области",
+      "transcription": "/ˈmɛnstɹuəl ˈsaɪkəl/",
+      "pronunciation": "≈ мэ́нструэл са́йкэл"
+    },
+    {
+      "english": "last menstrual period",
+      "translation": "последняя менструация",
+      "example": "When was your last menstrual period?",
+      "lesson": "Инфекции, уход и дополнительные области",
+      "transcription": "/læst ˈmɛnstɹuəl ˈpɪɹiəd/",
+      "pronunciation": "≈ лэ́ст мэ́нструэл пи́риэд"
+    },
+    {
+      "english": "breastfeeding",
+      "translation": "грудное вскармливание",
+      "example": "Are you currently breastfeeding?",
+      "lesson": "Инфекции, уход и дополнительные области",
+      "transcription": "/ˈbɹɛstfidɪŋ/",
+      "pronunciation": "≈ брэ́стфидинг"
+    },
+    {
+      "english": "antenatal",
+      "translation": "дородовой (BrE)",
+      "example": "The antenatal appointment has been arranged.",
+      "lesson": "Инфекции, уход и дополнительные области",
+      "transcription": "/ˌæntiˈneɪtəl/",
+      "pronunciation": "≈ энтинэ́йтэл"
+    },
+    {
+      "english": "prenatal",
+      "translation": "дородовой (AmE)",
+      "example": "The prenatal record has been reviewed.",
+      "lesson": "Инфекции, уход и дополнительные области",
+      "transcription": "/pɹiˈneɪtəl/",
+      "pronunciation": "≈ принэ́йтэл"
+    },
+    {
+      "english": "pediatric",
+      "translation": "педиатрический (BrE: paediatric)",
+      "example": "The pediatric team will review the referral.",
+      "lesson": "Инфекции, уход и дополнительные области",
+      "transcription": "/ˌpidiˈætɹɪk/",
+      "pronunciation": "≈ пидиэ́трик"
+    },
+    {
+      "english": "developmental milestone",
+      "translation": "этап развития ребёнка",
+      "example": "Ask about developmental milestones.",
+      "lesson": "Инфекции, уход и дополнительные области",
+      "transcription": "/dɪˌvɛləpˈmɛntəl ˈmaɪlˌstoʊn/",
+      "pronunciation": "≈ дивэлэпмэ́нтэл ма́йлстоун"
+    },
+    {
+      "english": "mental health",
+      "translation": "психическое здоровье",
+      "example": "Would you like to discuss your mental health?",
+      "lesson": "Инфекции, уход и дополнительные области",
+      "transcription": "/ˈmɛntəl hɛlθ/",
+      "pronunciation": "≈ мэ́нтэл хэ́лс"
+    },
+    {
+      "english": "anxiety",
+      "translation": "тревога; тревожность",
+      "example": "How has anxiety affected your sleep?",
+      "lesson": "Инфекции, уход и дополнительные области",
+      "transcription": "/æŋˈzaɪəti/",
+      "pronunciation": "≈ энгза́йэти"
+    },
+    {
+      "english": "depression",
+      "translation": "депрессия",
+      "example": "Have you previously received care for depression?",
+      "lesson": "Инфекции, уход и дополнительные области",
+      "transcription": "/dɪˈpɹɛʃən/",
+      "pronunciation": "≈ дипрэ́шэн"
+    },
+    {
+      "english": "sleep disturbance",
+      "translation": "нарушение сна",
+      "example": "When did the sleep disturbance begin?",
+      "lesson": "Инфекции, уход и дополнительные области",
+      "transcription": "/slip dɪˈstɝbəns/",
+      "pronunciation": "≈ сли́п дистё́рбэнс"
+    },
+    {
+      "english": "screening",
+      "translation": "скрининг",
+      "example": "I will explain the purpose of screening.",
+      "lesson": "Инфекции, уход и дополнительные области",
+      "transcription": "/ˈskɹinɪŋ/",
+      "pronunciation": "≈ скри́нинг"
+    },
+    {
+      "english": "rehabilitation",
+      "translation": "реабилитация",
+      "example": "The team will discuss rehabilitation goals.",
+      "lesson": "Инфекции, уход и дополнительные области",
+      "transcription": "/ˌɹihəˌbɪləˈteɪʃən/",
+      "pronunciation": "≈ рихэбилэтэ́йшэн"
+    },
+    {
+      "english": "physiotherapy",
+      "translation": "физиотерапия и двигательная реабилитация (BrE)",
+      "example": "The referral is for physiotherapy.",
+      "lesson": "Инфекции, уход и дополнительные области",
+      "transcription": "/ˌfɪzioʊˈθɛɹəpi/",
+      "pronunciation": "≈ физиоусэ́рэпи"
+    },
+    {
+      "english": "occupational therapy",
+      "translation": "эрготерапия",
+      "example": "Occupational therapy focuses on everyday activities.",
+      "lesson": "Инфекции, уход и дополнительные области",
+      "transcription": "/ɑkjəˈpeɪʃənəl ˈθɛɹəpi/",
+      "pronunciation": "≈ акйэпэ́йшэнэл сэ́рэпи"
+    },
+    {
+      "english": "palliative care",
+      "translation": "паллиативная помощь",
+      "example": "The team discussed palliative care needs.",
+      "lesson": "Инфекции, уход и дополнительные области",
+      "transcription": "/ˈpæliətɪv kɛɹ/",
+      "pronunciation": "≈ пэ́лиэтив кэ́р"
+    },
+    {
+      "english": "advance care planning",
+      "translation": "предварительное планирование медицинской помощи",
+      "example": "The patient would like to discuss advance care planning.",
+      "lesson": "Инфекции, уход и дополнительные области",
+      "transcription": "/ədˈvæns kɛɹ ˈplænɪŋ/",
+      "pronunciation": "≈ эдвэ́нс кэ́р плэ́нинг"
+    },
+    {
+      "english": "quality of life",
+      "translation": "качество жизни",
+      "example": "What matters most to your quality of life?",
+      "lesson": "Инфекции, уход и дополнительные области",
+      "transcription": "/ˈkwɑləti əv laɪf/",
+      "pronunciation": "≈ куа́лэти эв ла́йф"
+    }
+  ]
+}

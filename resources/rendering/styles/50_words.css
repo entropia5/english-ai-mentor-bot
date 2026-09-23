@@ -17,5 +17,5 @@ body.words .subtitle { margin-top: 12px; color: #9ca8b3; font-size: 40px; line-h
 .ipa { margin-right: 12px; color: var(--cyan); }
 .pron { color: var(--green-soft); }
 .translation { margin-top: 8px; padding-left: 60px; font-size: 38px; line-height: 1.18; color: #cfd7de; }
-.definition { margin-top: 8px; padding-left: 60px; font-size: 32px; line-height: 1.22; color: #9ca8b3; }
+.definition { white-space: pre-line; margin-top: 8px; padding-left: 60px; font-size: 32px; line-height: 1.22; color: #9ca8b3; }
 .footer { margin-top: 24px; display: flex; justify-content: space-between; color: #88939f; font-size: 32px; }

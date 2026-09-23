@@ -10,6 +10,7 @@ class Database;
 class GroqClient;
 
 struct WordGenerationResult {
+    bool exhausted = false;
     int added = 0;
     int duplicates = 0;
     int duplicate_in_response = 0;

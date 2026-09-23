@@ -1,0 +1,292 @@
+# Работа в IT и команда
+developer|разработчик|I work as a software developer.
+engineer|инженер|The engineer investigated the issue.
+software|программное обеспечение|We develop software for small businesses.
+hardware|аппаратное обеспечение|This looks like a hardware problem.
+application|приложение|The application is running slowly.
+service|сервис; служба|The service is temporarily unavailable.
+platform|платформа|Which platform does this application support?
+product|продукт|What problem does the product solve?
+feature|функция продукта; возможность|We are working on a new feature.
+requirement|требование|Could you clarify this requirement?
+specification|спецификация|The specification needs updating.
+stakeholder|заинтересованная сторона|We need feedback from the stakeholders.
+user|пользователь|How will the user complete this task?
+customer|заказчик; клиент|The customer reported a problem.
+team|команда|I will discuss it with the team.
+colleague|коллега|My colleague reviewed the change.
+manager|руководитель|I will check with my manager.
+meeting|встреча; совещание|Can we schedule a short meeting?
+stand-up|короткая регулярная встреча команды|I will mention the blocker at stand-up.
+sprint|спринт; короткий цикл разработки|This task is planned for the next sprint.
+backlog|список запланированных задач|Add the request to the backlog.
+ticket|задача или обращение в системе учёта|Please create a ticket for this issue.
+task|задача|The task is ready for review.
+priority|приоритет|What is the priority of this issue?
+deadline|срок выполнения|Can we agree on a realistic deadline?
+estimate|оценка трудозатрат|I need more details before giving an estimate.
+scope|объём работ; область|This request changes the scope.
+blocker|препятствие, блокирующее работу|I have a blocker with the test environment.
+progress|ход выполнения|Here is a quick progress update.
+feedback|обратная связь|Thank you for the feedback.
+# Код и базовые понятия
+code|код|The code is ready for review.
+source code|исходный код|Where is the source code stored?
+function|функция|This function returns a value.
+method|метод|This method updates the object.
+variable|переменная|Use a clear variable name.
+constant|константа|This value should be a constant.
+type|тип|What type does this function return?
+string|строка|The input is an empty string.
+integer|целое число|The parameter must be an integer.
+boolean|логическое значение|The function returns a boolean.
+array|массив|The array contains ten elements.
+list|список|Add the item to the list.
+map|ассоциативный контейнер; отображение|Store the values in a map.
+set|множество|The set contains unique values.
+object|объект|Create a new object.
+class|класс|This class handles file access.
+interface|интерфейс|The interface should remain stable.
+module|модуль|The module has no external dependencies.
+library|библиотека|We use a standard library function.
+framework|программный каркас; фреймворк|Which framework does the project use?
+package|пакет|Install the required package.
+dependency|зависимость|We need to update this dependency.
+parameter|параметр|This parameter is optional.
+argument|аргумент вызова|Pass the file name as an argument.
+return value|возвращаемое значение|Check the return value.
+condition|условие|The condition is always false.
+loop|цикл|The loop processes each item.
+iteration|итерация|The error occurs on the second iteration.
+branch|ветка кода или репозитория|Create a branch for this change.
+exception|исключение|The function throws an exception.
+# Репозиторий и совместная работа
+repository|репозиторий|Clone the repository first.
+version control|контроль версий|We use version control for all changes.
+commit|коммит; зафиксировать изменение|Keep the commit message clear.
+merge|слияние; объединять|Merge the branch after review.
+pull request|запрос на включение изменений|I opened a pull request.
+review|проверка изменений; ревью|Could you review my change?
+approval|одобрение|The change needs approval before merging.
+conflict|конфликт изменений|I resolved the merge conflict.
+rebase|перенос коммитов на другую базу|Rebase the branch on the latest main.
+rollback|откат|We prepared a rollback plan.
+revert|отменять изменение обратным коммитом|We need to revert this commit.
+patch|исправление; набор изменений|The patch fixes the reported issue.
+diff|разница между версиями|The diff contains a small change.
+changelog|журнал изменений|Update the changelog before release.
+tag|метка версии|Create a tag for the release.
+release|выпуск; версия|The release is scheduled for Friday.
+version|версия|Which version are you using?
+upgrade|обновление до новой версии|Test the upgrade in staging.
+compatibility|совместимость|We need to preserve compatibility.
+breaking change|изменение, нарушающее совместимость|This is a breaking change.
+backward compatibility|обратная совместимость|The update preserves backward compatibility.
+deprecation|объявление устаревшим|The documentation includes a deprecation notice.
+documentation|документация|The documentation explains the setup.
+README|файл с основной информацией о проекте|Follow the instructions in the README.
+comment|комментарий|This comment explains the reason for the check.
+convention|соглашение; принятый стиль|Follow the project's naming conventions.
+refactor|реорганизовать код без изменения поведения|I want to refactor this function.
+cleanup|упорядочивание; очистка|This is a small code cleanup.
+maintainer|сопровождающий проекта|Ask the maintainer before changing the public interface.
+contributor|участник проекта|The contributor added a useful test.
+# Ошибки и тестирование
+bug|ошибка в программе|I found a bug in the login flow.
+defect|дефект|The defect affects older versions.
+issue|проблема; задача|Can you reproduce the issue?
+error|ошибка|What error message do you see?
+failure|сбой; неуспех|The test failure is reproducible.
+crash|аварийное завершение|The application crashes on startup.
+hang|зависание; зависать|The process hangs after the request.
+freeze|зависать; замораживать|The screen freezes when I click this.
+reproduce|воспроизводить|I cannot reproduce it locally.
+reproduction steps|шаги воспроизведения|Please include the reproduction steps.
+expected behavior|ожидаемое поведение|Describe the expected behavior.
+actual behavior|фактическое поведение|What is the actual behavior?
+root cause|первопричина|We found the root cause.
+workaround|временный обходной путь|There is a temporary workaround.
+fix|исправление; исправлять|The fix is included in this release.
+regression|повторное нарушение работоспособности|We added a test for the regression.
+test case|тестовый сценарий|Add a test case for an empty input.
+unit test|модульный тест|The unit test checks the calculation.
+integration test|интеграционный тест|The integration test uses a temporary database.
+end-to-end test|сквозной тест|The end-to-end test covers the checkout flow.
+assertion|проверочное утверждение|The assertion failed.
+fixture|подготовленные данные или окружение теста|The fixture creates a test user.
+mock|подмена зависимости для теста|Use a mock for the external service.
+coverage|покрытие тестами|Coverage alone does not prove correctness.
+edge case|пограничный случай|We missed an edge case.
+boundary|граница|Test the boundary values.
+validation|проверка допустимости|Input validation happens before saving.
+debug|отлаживать|I need to debug this request.
+breakpoint|точка останова|Set a breakpoint before the call.
+stack trace|стек вызовов в момент ошибки|Can you share the stack trace?
+# Сборка, процессы и память
+build|сборка; собирать|The build failed.
+compile|компилировать|The code does not compile.
+compiler|компилятор|The compiler reported a warning.
+linker|компоновщик|The linker cannot find the symbol.
+warning|предупреждение|Please fix the compiler warning.
+binary|двоичный файл; исполняемый файл|Run the newly built binary.
+executable|исполняемый файл|Where is the executable installed?
+runtime|время выполнения; среда выполнения|The error occurs at runtime.
+process|процесс|The process is still running.
+thread|поток выполнения|This code runs on another thread.
+concurrency|конкурентное выполнение|The bug only appears under concurrency.
+parallelism|параллельное выполнение|Parallelism can reduce processing time.
+synchronization|синхронизация|This shared state needs synchronization.
+mutex|мьютекс|The mutex protects the shared data.
+lock|блокировка|Release the lock before the network call.
+deadlock|взаимная блокировка|The threads are stuck in a deadlock.
+race condition|состояние гонки|There is a race condition in this code.
+memory|оперативная память|The process uses too much memory.
+allocation|выделение памяти|This operation performs a memory allocation.
+leak|утечка|We found a memory leak.
+stack|стек|This object is stored on the stack.
+heap|куча; область динамической памяти|The data is allocated on the heap.
+pointer|указатель|Check whether the pointer is null.
+reference|ссылка|The function accepts a reference.
+ownership|владение ресурсом|Resource ownership should be explicit.
+lifetime|время жизни|The reference must not outlive the object's lifetime.
+resource|ресурс|Release the resource after use.
+buffer|буфер|Check the buffer size.
+overflow|переполнение|The check prevents an integer overflow.
+undefined behavior|неопределённое поведение|This code may cause undefined behavior.
+# Сети и веб
+network|сеть|The network connection is unstable.
+server|сервер|The server is not responding.
+client|клиентское приложение|The client sends a request.
+request|запрос|The request timed out.
+response|ответ|Check the response status.
+endpoint|адрес операции API|Which endpoint handles this request?
+API|программный интерфейс|The API returns JSON.
+HTTP|протокол передачи веб-данных|The service uses HTTP.
+URL|адрес ресурса|Check the URL for typos.
+header|заголовок|The authorization header is missing.
+payload|полезные данные запроса|The payload contains the user name.
+status code|код состояния|What status code did the server return?
+timeout|истечение времени ожидания|Increase the timeout only if necessary.
+retry|повторная попытка|The client will retry the request.
+latency|задержка|We need to reduce latency.
+bandwidth|пропускная способность канала|The upload uses a lot of bandwidth.
+throughput|производительность по объёму операций|Measure throughput under load.
+connection|соединение|The connection was closed.
+socket|сетевой сокет|The socket is ready for reading.
+port|сетевой порт|Which port does the service use?
+protocol|протокол|Both systems use the same protocol.
+DNS|система доменных имён|Check the DNS configuration.
+domain|домен; предметная область|The domain name has changed.
+proxy|прокси-сервер|The request passes through a proxy.
+firewall|межсетевой экран|The firewall blocks this connection.
+TLS|протокол защиты транспортного соединения|The connection uses TLS.
+certificate|цифровой сертификат|The certificate has expired.
+webhook|обратный HTTP-вызов по событию|The payment service sends a webhook.
+cache|кеш|The response was served from the cache.
+cookie|данные браузера для сайта|The session cookie has expired.
+# Базы данных и данные
+database|база данных|The database is unavailable.
+table|таблица|The table stores user accounts.
+row|строка таблицы|The query returned one row.
+column|столбец|Add a column for the timestamp.
+schema|схема базы или данных|The migration changes the schema.
+query|запрос к базе данных|This query is slow.
+index|индекс|The index improves lookup speed.
+primary key|первичный ключ|Each row has a primary key.
+foreign key|внешний ключ|The foreign key references the users table.
+constraint|ограничение целостности|The insert violated a constraint.
+transaction|транзакция|Save both changes in one transaction.
+migration|миграция схемы или данных|Back up the database before the migration.
+backup|резервная копия|We have a verified backup.
+restore|восстанавливать|Restore the backup into a test database.
+insert|вставлять|Insert a new row.
+update|обновлять|Update the user's settings.
+delete|удалять|Delete only the selected records.
+record|запись|The record already exists.
+duplicate|дубликат|The unique constraint prevents duplicates.
+null|отсутствующее значение NULL|null is different from an empty string.
+join|соединение таблиц|The query uses a join.
+filter|фильтр; фильтровать|Filter the results by date.
+sort|сортировать|Sort the rows by creation time.
+aggregate|агрегировать; объединять показатели|Aggregate the results by user.
+consistency|согласованность|The transaction preserves consistency.
+isolation|изоляция|Check the transaction isolation level.
+serialization|сериализация|Serialization converts the object into a message.
+encoding|кодирование; кодировка|Use UTF-8 encoding.
+# Развёртывание и эксплуатация
+deploy|развёртывать|We will deploy after the checks pass.
+deployment|развёртывание|The deployment completed successfully.
+environment|окружение|Which environment has the problem?
+production|рабочая среда|Do not use test credentials in production.
+staging|предпродакшен; проверочное окружение|Test the migration in staging.
+configuration|конфигурация|Check the service configuration.
+environment variable|переменная окружения|Store the setting in an environment variable.
+secret|секрет; чувствительное значение|Do not put secrets in the repository.
+credential|учётные данные|The credentials are stored securely.
+container|контейнер|Restart the container after updating the image.
+image|образ контейнера или диска|Build the image from the new source.
+volume|том хранения|The database files are stored on a volume.
+log|журнал; записывать в журнал|Check the logs for errors.
+metric|метрика|This metric measures request latency.
+monitoring|мониторинг|Monitoring detected the outage.
+alert|оповещение|The alert fired after repeated failures.
+outage|период недоступности|The outage lasted ten minutes.
+incident|инцидент|We are investigating the incident.
+uptime|время доступности|We track service uptime.
+health check|проверка работоспособности|The health check is failing.
+load|нагрузка|Test the service under load.
+scaling|масштабирование|We need to plan for scaling.
+replica|реплика|The read replica is behind the primary.
+queue|очередь|The worker reads from the queue.
+worker|фоновый обработчик|The worker processes incoming jobs.
+scheduler|планировщик|The scheduler runs the task daily.
+job|фоновая задача|The job failed and will be retried.
+pipeline|конвейер обработки или проверки|The pipeline runs the tests automatically.
+continuous integration|непрерывная интеграция|Continuous integration checks each change.
+release notes|примечания к выпуску|Read the release notes before upgrading.
+# Безопасность и качество решений
+authentication|проверка личности|Authentication failed.
+authorization|проверка прав доступа|Authorization is checked on the server.
+permission|право доступа|The user lacks permission to edit this.
+role|роль|Assign the correct role to the account.
+token|токен|The access token has expired.
+encryption|шифрование|The connection uses encryption.
+hash|хеш|Compare the file hash.
+salt|соль для хеширования|Use a unique salt for each password.
+vulnerability|уязвимость|The update fixes a vulnerability.
+exploit|эксплуатация уязвимости; эксплойт|The report describes a possible exploit.
+sanitize|очищать данные от опасных элементов|Sanitize untrusted HTML before rendering.
+escape|экранировать|Escape text before inserting it into HTML.
+access control|контроль доступа|Review the access control rules.
+least privilege|минимально необходимые права|Follow the principle of least privilege.
+audit|аудит; проверка|Keep an audit log of sensitive changes.
+privacy|конфиденциальность|Consider user privacy when logging data.
+performance|производительность|Measure performance before optimizing.
+benchmark|измерительный тест производительности|Run the benchmark on the same machine.
+bottleneck|узкое место|The database is the bottleneck.
+optimization|оптимизация|This optimization reduces allocations.
+trade-off|компромисс между свойствами|There is a trade-off between speed and memory use.
+maintainability|удобство сопровождения|Clear names improve maintainability.
+readability|читаемость|This change improves readability.
+reliability|надёжность|Retries can improve reliability.
+scalability|масштабируемость|We need to test scalability.
+robustness|устойчивость к ошибкам|Input checks improve robustness.
+idempotent|идемпотентный; повтор не меняет итог|The operation should be idempotent.
+atomic|атомарный; неделимый|The update must be atomic.
+deterministic|детерминированный|The test should be deterministic.
+# Фразы для рабочего общения
+Could you clarify the requirement?|Не могли бы вы уточнить требование?|Could you clarify the requirement?
+I can reproduce the issue.|Я могу воспроизвести проблему.|I can reproduce the issue.
+I cannot reproduce it locally.|У меня локально не получается воспроизвести.|I cannot reproduce it locally.
+What is the expected behavior?|Какое поведение ожидается?|What is the expected behavior?
+This change is ready for review.|Это изменение готово к проверке.|This change is ready for review.
+I need more time to investigate.|Мне нужно больше времени на исследование.|I need more time to investigate.
+I am blocked by this issue.|Эта проблема блокирует мою работу.|I am blocked by this issue.
+Could you share the logs?|Не могли бы вы прислать журналы?|Could you share the logs?
+The tests pass locally.|Локально тесты проходят.|The tests pass locally.
+This is outside the current scope.|Это вне текущего объёма работ.|This is outside the current scope.
+What are the trade-offs?|Какие здесь компромиссы?|What are the trade-offs?
+Let us verify the assumption.|Давайте проверим предположение.|Let us verify the assumption.
+We need a rollback plan.|Нам нужен план отката.|We need a rollback plan.
+I will update the documentation.|Я обновлю документацию.|I will update the documentation.
+Thanks for catching that.|Спасибо, что заметили это.|Thanks for catching that.

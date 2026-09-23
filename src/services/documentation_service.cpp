@@ -1,7 +1,6 @@
 #include "services/documentation_service.h"
 
 #include "database.h"
-#include "domain/progress.h"
 #include "logger.h"
 #include "rendering/bot_renderer.h"
 #include "services/dictionary_service.h"
@@ -44,8 +43,7 @@ bool refresh_doc_screenshots(Database& database, long long chat_id) {
 
     bool ok = true;
     const int learned_count = database.get_words_count(chat_id, true);
-    ok = copy_png(render_main_menu_image(english_level_from_learned(learned_count)), "menu.png") &&
-         ok;
+    ok = copy_png(render_main_menu_image(std::to_string(learned_count)), "menu.png") && ok;
     ok = copy_png(render_topic_menu_image(), "new_words.png") && ok;
 
     const auto learned = get_learned_words_for_review(chat_id, database);

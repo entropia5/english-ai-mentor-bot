@@ -1,8 +1,13 @@
 #include "bot_application_internal.h"
+#include "core/text.h"
 #include "database.h"
+#include "groq_client.h"
 #include "presentation/bot_presentation.h"
 #include "presentation/bot_state.h"
+#include "presentation/screen_components.h"
+#include "presentation/screen_transport.h"
 #include "services/broadcast_service.h"
+#include "services/course_catalog.h"
 #include "services/dictionary_service.h"
 #include "services/vocabulary_presentation.h"
 #include "telegram_client.h"
@@ -29,80 +34,96 @@ void handle_callback(const nlohmann::json& update, TelegramClient& bot, Database
 
     if (data == "menu_main") {
         send_main_menu(chat_id, bot, database, message_id);
-    } else if (data == "menu_dictionary") {
-        const auto words = database.get_user_words_full(chat_id, true);
-        state.dictionary_page[chat_id] = 0;
-        state.dictionary_message_id[chat_id] = message_id;
-        show_dictionary_page(chat_id, bot, words, 0, state.dictionary_page[chat_id],
-                             state.last_action[chat_id], state.dictionary_message_id[chat_id],
-                             false);
-    } else if (data == "menu_learned") {
-        const auto words = database.get_user_words_full(chat_id, false);
-        std::vector<WordView> learned;
-        for (const auto& word : words) {
-            if (word.learned) {
-                learned.push_back(word);
+    } else if (data == "menu_dictionary" || data == "menu_learned") {
+        show_user_dictionary(chat_id, bot, database, data == "menu_learned", 0, message_id);
+    } else if (data.rfind("dict_filter_", 0) == 0 || data.rfind("learn_filter_", 0) == 0) {
+        const bool learned = data.rfind("learn_", 0) == 0;
+        const auto filter = data.substr(learned ? 13 : 12);
+        if (database.set_dictionary_filter(chat_id, filter))
+            show_user_dictionary(chat_id, bot, database, learned, 0, message_id);
+    } else if (data == "menu_reminders") {
+        show_reminder_settings(chat_id, bot, database, message_id);
+    } else if (data.rfind("rem_", 0) == 0) {
+        for (const std::string key : {"morning_enabled", "evening_enabled", "morning_course",
+                                      "evening_course", "evening_add_new"}) {
+            const std::string prefix = "rem_" + key + "_";
+            if (data.rfind(prefix, 0) == 0 &&
+                database.set_reminder_setting(chat_id, key, data.substr(prefix.size()))) {
+                show_reminder_settings(chat_id, bot, database, message_id);
+                break;
             }
         }
-        state.learned_page[chat_id] = 0;
-        state.learned_message_id[chat_id] = message_id;
-        show_learned_page(chat_id, bot, learned, 0, state.learned_page[chat_id],
-                          state.last_action[chat_id], state.learned_message_id[chat_id], false);
     } else if (data == "menu_new_words") {
         send_topic_menu(chat_id, bot, message_id);
     } else if (data == "menu_ai") {
         show_ai_prompt(chat_id, bot, message_id);
     } else if (data == "menu_stats") {
         show_stats(chat_id, bot, database, message_id);
-    } else if (data == "topic_daily_life") {
-        generate_words(chat_id, bot, database, ai, "daily life", "Быт и дом", message_id);
-    } else if (data == "topic_travel") {
-        generate_words(chat_id, bot, database, ai, "travel", "Путешествия", message_id);
-    } else if (data == "topic_food") {
-        generate_words(chat_id, bot, database, ai, "food", "Еда", message_id);
-    } else if (data == "topic_business") {
-        generate_words(chat_id, bot, database, ai, "business", "Работа", message_id);
-    } else if (data == "topic_it_cpp") {
-        generate_words(chat_id, bot, database, ai, "IT programming", "IT и C++", message_id);
-    } else if (data == "topic_communication") {
-        generate_words(chat_id, bot, database, ai, "communication", "Общение", message_id);
+    } else if (data.rfind("course_", 0) == 0) {
+        const auto course = canonical_course(data.substr(7));
+        if (!course.empty() && database.set_active_course(chat_id, course)) {
+            show_status_screen(chat_id, bot, "course_" + course, course_title(course),
+                               "Добавляй слова по порядку и используй их в своих предложениях.",
+                               "Произнеси пример вслух и составь свою фразу. Напоминания "
+                               "настраиваются отдельно в главном меню.",
+                               column_keyboard({{"Добавить 5 слов", "add_" + course},
+                                                {"Словарь для изучения", "menu_dictionary"},
+                                                {"Выученные", "menu_learned"},
+                                                {"Практика с AI", "practice_course"},
+                                                {"Другие направления", "menu_new_words"}}),
+                               message_id);
+        }
+    } else if (data.rfind("add_", 0) == 0) {
+        const auto course = canonical_course(data.substr(4));
+        if (!course.empty())
+            generate_words(chat_id, bot, database, ai, course, course_title(course), message_id);
+    } else if (data == "practice_course") {
+        const auto course = database.get_active_course(chat_id);
+        auto words = database.get_user_words_full(chat_id, true);
+        if (words.empty())
+            words = database.get_user_words_full(chat_id, false);
+        std::string prompt =
+            "Начни короткую тренировку английского. Направление: " + course_title(course) +
+            ". Задай один простой вопрос на английском, добавь перевод на русский. "
+            "Используй несколько слов из списка: ";
+        for (std::size_t i = 0; i < words.size() && i < 10; ++i)
+            prompt += words[i].english + " (" + words[i].translation + "), ";
+        if (course == "medicine")
+            prompt += "Разыграй вымышленного пациента; тренируем язык общения врача, без лечебных "
+                      "назначений.";
+        database.save_conversation(chat_id, "user", prompt);
+        const auto response = ai.ask(prompt);
+        database.save_conversation(chat_id, "assistant", response);
+        remember_screen_context(chat_id, "ai");
+        upsert_screen(chat_id, bot, format_ai_response_box(response),
+                      column_keyboard({{"Главное меню", "menu_main"}}), message_id);
+    } else if (data.rfind("topic_", 0) == 0) {
+        // Old Telegram messages may still contain the retired topic buttons.
+        send_topic_menu(chat_id, bot, message_id);
     } else if (data.rfind("dict_prev_", 0) == 0 || data.rfind("dict_next_", 0) == 0 ||
                data.rfind("dict_info_", 0) == 0) {
-        const auto words = database.get_user_words_full(chat_id, true);
-        const std::size_t last_underscore = data.find_last_of('_');
-        const int page = std::stoi(data.substr(last_underscore + 1));
-        state.dictionary_message_id[chat_id] = message_id;
-        show_dictionary_page(chat_id, bot, words, page, state.dictionary_page[chat_id],
-                             state.last_action[chat_id], state.dictionary_message_id[chat_id],
-                             false);
+        const int page = std::stoi(data.substr(data.find_last_of('_') + 1));
+        show_user_dictionary(chat_id, bot, database, false, page, message_id);
     } else if (data.rfind("learn_prev_", 0) == 0 || data.rfind("learn_next_", 0) == 0 ||
                data.rfind("learn_info_", 0) == 0) {
-        const auto all_words = database.get_user_words_full(chat_id, false);
-        std::vector<WordView> learned;
-        for (const auto& word : all_words) {
-            if (word.learned) {
-                learned.push_back(word);
-            }
-        }
-        const std::size_t last_underscore = data.find_last_of('_');
-        const int page = std::stoi(data.substr(last_underscore + 1));
-        state.learned_message_id[chat_id] = message_id;
-        show_learned_page(chat_id, bot, learned, page, state.learned_page[chat_id],
-                          state.last_action[chat_id], state.learned_message_id[chat_id], false);
+        const int page = std::stoi(data.substr(data.find_last_of('_') + 1));
+        show_user_dictionary(chat_id, bot, database, true, page, message_id);
     } else if (data.rfind("daily_prev_", 0) == 0 || data.rfind("daily_next_", 0) == 0 ||
                data.rfind("daily_info_", 0) == 0) {
         const std::size_t last_underscore = data.find_last_of('_');
         const int page = std::stoi(data.substr(last_underscore + 1));
-        const auto words = get_learned_words_for_review(chat_id, database);
+        const auto filter = database.get_reminder_settings(chat_id).morning_course;
+        const auto words = get_learned_words_for_review(chat_id, database, filter);
         show_daily_review_page(chat_id, bot, words, page, message_id, false,
-                               &state.last_action[chat_id]);
+                               &state.last_action[chat_id], filter);
     } else if (data.rfind("evening_prev_", 0) == 0 || data.rfind("evening_next_", 0) == 0 ||
                data.rfind("evening_info_", 0) == 0) {
         const std::size_t last_underscore = data.find_last_of('_');
         const int page = std::stoi(data.substr(last_underscore + 1));
-        const auto words = database.get_user_words_full(chat_id, true);
+        const auto filter = database.get_reminder_settings(chat_id).evening_course;
+        const auto words = database.get_user_words_full(chat_id, true, filter);
         show_evening_words_page(chat_id, bot, words, page, message_id, false,
-                                &state.last_action[chat_id]);
+                                &state.last_action[chat_id], filter);
     }
 }
 
