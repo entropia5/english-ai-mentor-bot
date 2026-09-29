@@ -2,6 +2,9 @@
 #pragma once
 
 #include <string>
+#include <map>
+#include <mutex>
+#include <chrono>
 #include <vector>
 
 enum class TelegramFailureKind { None, Permanent, Temporary };
@@ -19,6 +22,15 @@ class TelegramClient {
   private:
     std::string token;
     std::string api_url;
+    struct CachedPhoto {
+        std::string file_id;
+        std::chrono::steady_clock::time_point used;
+    };
+    std::mutex photo_cache_mutex;
+    std::map<std::string, CachedPhoto> photo_cache;
+    std::string cached_photo(const std::string& key);
+    void remember_photo(const std::string& key, const std::string& response);
+    void forget_photo(const std::string& key);
 
   public:
     TelegramClient(const std::string& bot_token);

@@ -1,6 +1,7 @@
 #include "scheduler/broadcast_scheduler.h"
 
 #include "database.h"
+#include "rendering/cache_maintenance.h"
 #include "logger.h"
 #include "presentation/bot_presentation.h"
 #include "services/broadcast_service.h"
@@ -58,6 +59,8 @@ void BroadcastScheduler::run() {
     };
 
     while (!stopping_.load()) {
+        try { maintain_render_cache(); }
+        catch (const std::exception& error) { LOG_ERROR(std::string("Cache cleanup: ") + error.what()); }
         const auto now = std::chrono::system_clock::now();
         const std::time_t now_time = std::chrono::system_clock::to_time_t(now);
         const std::tm* now_tm = std::localtime(&now_time);

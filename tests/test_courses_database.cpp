@@ -34,6 +34,11 @@ int main() {
         const auto conversation = load_course_catalog("conversation");
         const auto medicine = load_course_catalog("medicine");
         const auto it = load_course_catalog("it");
+        expect(db.set_active_course(900003, "conversation"), "manual course selected");
+        expect(db.add_course_words(900003, "conversation", conversation, 5) == 5 &&
+                   db.add_course_words(900003, "conversation", conversation, 5) == 5 &&
+                   db.get_words_count(900003, false) == 10,
+               "add another five stores ten distinct words after two clicks");
         constexpr long long user = 1001;
         expect(db.set_active_course(user, "conversation"), "course selection persists");
         expect(db.add_course_words(user, "conversation", conversation, 10) == 10,

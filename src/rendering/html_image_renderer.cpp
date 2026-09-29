@@ -1,6 +1,7 @@
 #include "rendering/html_image_renderer.h"
 
 #include "file_utils.h"
+#include "rendering/cache_maintenance.h"
 #include "logger.h"
 
 #include <cstdlib>
@@ -27,6 +28,7 @@ std::string shell_quote(const std::string& text) {
 std::string render_html_image(const fs::path& base, const std::string& hash_value,
                               const std::string& html_content, const std::string& log_name,
                               int width) {
+    std::lock_guard<std::mutex> lock(render_cache_mutex());
     std::error_code error;
     fs::create_directories(base.parent_path(), error);
     if (error) {
@@ -41,7 +43,7 @@ std::string render_html_image(const fs::path& base, const std::string& hash_valu
     png_path += ".png";
     fs::path jpeg_path = base;
     jpeg_path += ".jpg";
-    const std::string render_hash = "photo-size-v1:" + hash_value;
+    const std::string render_hash = "photo-jpeg-v2:" + hash_value;
     constexpr std::uintmax_t max_photo_bytes = 9 * 1024 * 1024;
     const auto usable_photo = [&](const fs::path& path) {
         std::error_code size_error;
@@ -51,8 +53,9 @@ std::string render_html_image(const fs::path& base, const std::string& hash_valu
     fs::path hash_path = base;
     hash_path += ".hash";
     if (read_text_file(hash_path.string()) == render_hash) {
-        for (const auto& cached : {png_path, jpeg_path}) {
+        for (const auto& cached : {jpeg_path, png_path}) {
             if (usable_photo(cached)) {
+                fs::last_write_time(hash_path, fs::file_time_type::clock::now(), error);
                 LOG("Reusing " + log_name + " image: " + cached.string());
                 return cached.string();
             }
@@ -64,7 +67,7 @@ std::string render_html_image(const fs::path& base, const std::string& hash_valu
         return {};
     }
 
-    fs::path output_path = png_path;
+    fs::path output_path = jpeg_path;
     fs::path temporary_image;
     const auto render = [&](const fs::path& destination) {
         temporary_image = destination.parent_path() /
@@ -83,13 +86,10 @@ std::string render_html_image(const fs::path& base, const std::string& hash_valu
         }
         return true;
     };
-    if (!render(output_path))
-        return {};
-    // wkhtmltoimage can emit uncompressed PNGs larger than Telegram's photo limit.
-    // Keep small PNGs; render large cards as high-quality JPEG at the same resolution.
-    if (!usable_photo(temporary_image)) {
+    // JPEG сохраняет размеры и заметно уменьшает передачу; PNG — запасной вариант.
+    if (!render(output_path) || !usable_photo(temporary_image)) {
         fs::remove(temporary_image, error);
-        output_path = jpeg_path;
+        output_path = png_path;
         if (!render(output_path))
             return {};
     }

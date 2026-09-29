@@ -19,6 +19,8 @@ TelegramHttpResponse telegram_post_json(const std::string& url, const nlohmann::
 
     const std::string post_data = payload.dump();
     curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+    curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, 10L);
+    curl_easy_setopt(curl, CURLOPT_TIMEOUT, 35L);
     curl_easy_setopt(curl, CURLOPT_POSTFIELDS, post_data.c_str());
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, telegram_write_callback);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response.body);
@@ -66,6 +68,8 @@ TelegramHttpResponse telegram_post_multipart(const std::string& url,
     }
 
     curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+    curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, 10L);
+    curl_easy_setopt(curl, CURLOPT_TIMEOUT, 35L);
     curl_easy_setopt(curl, CURLOPT_MIMEPOST, mime);
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, telegram_write_callback);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response.body);

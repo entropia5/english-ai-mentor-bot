@@ -27,12 +27,17 @@ void generate_words(long long chat_id, TelegramClient& bot, Database& database, 
                            : "Добавлено: " + std::to_string(result.added) +
                                  ". Прочитайте примеры вслух и составьте свои предложения. Уже "
                                  "знакомые слова можно сразу отметить выученными.";
+    if (result.failed == 0)
+        note += " Всего слов в направлении: " +
+                std::to_string(database.get_words_count(chat_id, false, course) +
+                               database.get_words_count(chat_id, true, course)) + ".";
+    if (result.added > 0)
+        database.set_dictionary_filter(chat_id, course);
     if (result.exhausted)
         note += " Каталог исчерпан: продолжайте повторение и разговорную практику.";
     show_status_screen(chat_id, bot, "course_result_" + course, title, course_title(course), note,
                        column_keyboard({{"Слова, которые я ещё учу", "menu_dictionary"},
-                                        {"Практика с AI", "practice_course"},
-                                        {"Ещё 5 слов", "add_" + course},
+                                        {"Добавить ещё 5 слов", "add_" + course},
                                         {"Другие направления", "menu_new_words"},
                                         {"Главное меню", "menu_main"}}),
                        message_id);

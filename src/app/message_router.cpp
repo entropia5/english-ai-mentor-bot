@@ -100,18 +100,17 @@ void handle_text_message(const nlohmann::json& update, TelegramClient& bot, Data
         delete_incoming_after_handled = true;
     } else if (get_screen_context(chat_id) != "ai" &&
                try_mark_words_from_input(chat_id, text, database)) {
+        bot.delete_message(chat_id, incoming_message_id);
+        int confirmation_message_id = 0;
+        bot.send_message(chat_id,
+                         "Готово ✅",
+                         "", &confirmation_message_id);
+        remember_broadcast_hint(chat_id, confirmation_message_id);
+        delete_messages_after_delay(bot, chat_id, {confirmation_message_id}, 1);
         refresh_after_marking_words(chat_id, bot, database, state.dictionary_page[chat_id],
                                     state.dictionary_message_id[chat_id],
                                     state.learned_page[chat_id], state.learned_message_id[chat_id],
                                     state.last_action[chat_id]);
-        int confirmation_message_id = 0;
-        bot.send_message(chat_id,
-                         "Готово.\n\n Слово внесено в словарь выученных слов "
-                         "и было отмечено, как выученное.",
-                         "", &confirmation_message_id);
-        remember_broadcast_hint(chat_id, confirmation_message_id);
-        delete_messages_after_delay(bot, chat_id, {incoming_message_id, confirmation_message_id},
-                                    10);
     } else {
         remember_ai_input(chat_id, incoming_message_id);
         upsert_screen(chat_id, bot, "*Думаю...*", column_keyboard({{"Главное меню", "menu_main"}}));

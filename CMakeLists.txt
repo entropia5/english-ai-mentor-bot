@@ -18,6 +18,7 @@ option(ENGLISH_MENTOR_WARNINGS_AS_ERRORS "Treat compiler warnings as errors" OFF
 option(ENGLISH_MENTOR_ENABLE_SANITIZERS "Enable AddressSanitizer and UBSan" OFF)
 
 find_package(CURL REQUIRED)
+find_package(OpenSSL REQUIRED)
 find_package(Threads REQUIRED)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(PQXX REQUIRED IMPORTED_TARGET libpqxx)
@@ -47,6 +48,7 @@ add_library(english_mentor_core
     src/presentation/screen_presentation.cpp
     src/presentation/screen_transport.cpp
     src/presentation/word_presentation.cpp
+    src/rendering/cache_maintenance.cpp
     src/rendering/render_cache.cpp
     src/rendering/render_preview.cpp
     src/rendering/html_image_renderer.cpp
@@ -95,6 +97,7 @@ target_link_libraries(
     english_mentor_core
     PUBLIC
         CURL::libcurl
+        OpenSSL::Crypto
         PkgConfig::PQXX
         Threads::Threads
 )
@@ -174,6 +177,14 @@ if(ENGLISH_MENTOR_BUILD_TESTS)
     set_tests_properties(english_mentor_database_tests PROPERTIES
         WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}" SKIP_RETURN_CODE 77)
     add_test(NAME english_mentor_unit_tests COMMAND english_mentor_tests)
+    add_executable(english_mentor_photo_cache_tests tests/test_photo_cache.cpp
+        src/bot/telegram_client_media.cpp src/bot/telegram_client_support.cpp
+        src/bot/telegram_keyboard.cpp src/rendering/cache_maintenance.cpp
+        src/utils/file_utils.cpp src/utils/logger.cpp)
+    target_include_directories(english_mentor_photo_cache_tests PRIVATE include src/bot)
+    target_link_libraries(english_mentor_photo_cache_tests PRIVATE OpenSSL::Crypto Threads::Threads)
+    english_mentor_enable_warnings(english_mentor_photo_cache_tests)
+    add_test(NAME english_mentor_photo_cache_tests COMMAND english_mentor_photo_cache_tests)
     add_executable(english_mentor_reminder_transport_tests
         tests/test_reminder_transport.cpp src/presentation/screen_transport.cpp src/utils/logger.cpp)
     target_include_directories(english_mentor_reminder_transport_tests PRIVATE include)

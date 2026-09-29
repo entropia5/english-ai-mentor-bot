@@ -26,7 +26,8 @@ int main() {
         const auto small = render_html_image(
             base, "small", "<html><body style='margin:0;height:100px'>Small card</body></html>",
             "small regression", 1080);
-        if (small.empty() || fs::path(small).extension() != ".png" || fs::exists(first))
+        if (small.empty() || fs::path(small).extension() != ".jpg" ||
+            read_text_file(base.string() + ".hash").find("small") == std::string::npos)
             throw std::runtime_error("Changed content reused a stale JPEG");
         fs::remove_all(directory);
         std::cout << "Photo size fallback and cache checks passed\n";

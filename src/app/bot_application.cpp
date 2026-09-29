@@ -7,18 +7,43 @@
 #include "telegram_client.h"
 
 #include <chrono>
+#include <atomic>
 #include <nlohmann/json.hpp>
 #include <string>
 #include <thread>
 
+namespace {
+// Удаляем сообщения независимо от долгого опроса Telegram и отрисовки карточек.
+class MessageCleanupWorker {
+  public:
+    explicit MessageCleanupWorker(TelegramClient& bot) : worker_([this, &bot] {
+        while (!stopping_.load()) {
+            try {
+                process_deferred_message_deletions(bot);
+            } catch (const std::exception& error) {
+                LOG_ERROR(std::string("Message cleanup: ") + error.what());
+            }
+            std::this_thread::sleep_for(std::chrono::milliseconds(50));
+        }
+    }) {}
+    ~MessageCleanupWorker() {
+        stopping_.store(true);
+        worker_.join();
+    }
+  private:
+    std::atomic<bool> stopping_{false};
+    std::thread worker_;
+};
+}
+
 int run_bot_application(TelegramClient& bot, Database& database, GroqClient& ai) {
+    MessageCleanupWorker cleanup(bot);
     int last_id = load_update_offset();
     LOG("Starting Telegram polling from update offset " + std::to_string(last_id + 1));
     app::detail::SessionState session;
 
     while (true) {
         try {
-            process_deferred_message_deletions(bot);
             const std::string updates_text = bot.get_updates(last_id + 1, 10);
             if (updates_text.empty() || updates_text == "{}") {
                 continue;
