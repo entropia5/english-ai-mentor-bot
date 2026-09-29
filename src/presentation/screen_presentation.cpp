@@ -29,7 +29,7 @@ void send_main_menu(long long chat_id, TelegramClient& bot, Database& database, 
         return;
     }
 
-    upsert_screen(chat_id, bot, "*Главное меню*\n\nВыбери действие:", main_menu_keyboard(),
+    upsert_screen(chat_id, bot, "*Главное меню*\n\nВыберите действие:", main_menu_keyboard(),
                   message_id);
 }
 
@@ -44,7 +44,7 @@ void send_topic_menu(long long chat_id, TelegramClient& bot, int message_id) {
     }
 
     upsert_screen(chat_id, bot,
-                  "*Выбери тему для новых слов:*\n\nВыбери направление. Слова идут по порядку из "
+                  "*Выберите тему для новых слов:*\n\nВыберите направление. Слова идут по порядку из "
                   "учебного каталога.",
                   buttons, message_id);
 }
@@ -61,7 +61,7 @@ void show_ai_prompt(long long chat_id, TelegramClient& bot, int message_id) {
 
     upsert_screen(
         chat_id, bot,
-        "*Режим AI*\n\nЗадай любой вопрос по английскому.\n\nДля возврата нажми кнопку ниже.",
+        "*Режим AI*\n\nЗадайте любой вопрос по английскому.\n\nДля возврата нажмите кнопку ниже.",
         buttons, message_id);
 }
 

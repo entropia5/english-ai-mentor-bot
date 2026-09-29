@@ -7,6 +7,8 @@
       "english": "developer",
       "translation": "разработчик",
       "example": "I work as a software developer.",
+      "example_translation": "Я работаю разработчиком программного обеспечения.",
+      "example_pronunciation": "ай уёрк эз э со́фтуэр дивэ́лэпэр.",
       "lesson": "Работа в IT и команда",
       "transcription": "/dɪˈvɛləpɚ/",
       "pronunciation": "≈ дивэ́лэпёр"
@@ -15,6 +17,8 @@
       "english": "engineer",
       "translation": "инженер",
       "example": "The engineer investigated the issue.",
+      "example_translation": "Инженер исследовал проблему.",
+      "example_pronunciation": "зэ энджэни́р инвэ́стэгэйтэд зэ и́шу.",
       "lesson": "Работа в IT и команда",
       "transcription": "/ˈɛndʒəˈnɪɹ/",
       "pronunciation": "≈ э́нджэни́р"
@@ -23,6 +27,8 @@
       "english": "software",
       "translation": "программное обеспечение",
       "example": "We develop software for small businesses.",
+      "example_translation": "Мы разрабатываем программное обеспечение для малого бизнеса.",
+      "example_pronunciation": "уи дивэ́лэп со́фтуэр фор смол би́знэсэз.",
       "lesson": "Работа в IT и команда",
       "transcription": "/ˈsɔfˌtwɛɹ/",
       "pronunciation": "≈ со́фтуэр"
@@ -31,6 +37,8 @@
       "english": "hardware",
       "translation": "аппаратное обеспечение",
       "example": "This looks like a hardware problem.",
+      "example_translation": "Это выглядит как аппаратная проблема.",
+      "example_pronunciation": "зис лукс лайк э ха́рдуэр пра́блэм.",
       "lesson": "Работа в IT и команда",
       "transcription": "/ˈhɑɹˌdwɛɹ/",
       "pronunciation": "≈ ха́рдуэр"
@@ -39,6 +47,8 @@
       "english": "application",
       "translation": "приложение",
       "example": "The application is running slowly.",
+      "example_translation": "Приложение работает медленно.",
+      "example_pronunciation": "зэ эплэкэ́йшэн из ра́нинг сло́ули.",
       "lesson": "Работа в IT и команда",
       "transcription": "/ˌæpləˈkeɪʃən/",
       "pronunciation": "≈ эплэкэ́йшэн"
@@ -47,6 +57,8 @@
       "english": "service",
       "translation": "сервис; служба",
       "example": "The service is temporarily unavailable.",
+      "example_translation": "Сервис временно недоступен.",
+      "example_pronunciation": "зэ сё́рвэс из тэмпэрэ́рэли анэвэ́йлэбэл.",
       "lesson": "Работа в IT и команда",
       "transcription": "/ˈsɝvəs/",
       "pronunciation": "≈ сё́рвэс"
@@ -55,6 +67,8 @@
       "english": "platform",
       "translation": "платформа",
       "example": "Which platform does this application support?",
+      "example_translation": "Какие платформы поддерживает это приложение?",
+      "example_pronunciation": "уич плэ́тформ даз зис эплэкэ́йшэн сэпо́рт?",
       "lesson": "Работа в IT и команда",
       "transcription": "/ˈplætˌfɔɹm/",
       "pronunciation": "≈ плэ́тформ"
@@ -63,6 +77,8 @@
       "english": "product",
       "translation": "продукт",
       "example": "What problem does the product solve?",
+      "example_translation": "Какую проблему решает продукт?",
+      "example_pronunciation": "уат пра́блэм даз зэ пра́дэкт салв?",
       "lesson": "Работа в IT и команда",
       "transcription": "/ˈpɹɑdəkt/",
       "pronunciation": "≈ пра́дэкт"
@@ -71,6 +87,8 @@
       "english": "feature",
       "translation": "функция продукта; возможность",
       "example": "We are working on a new feature.",
+      "example_translation": "Мы работаем над новой функцией.",
+      "example_pronunciation": "уи ар уё́ркинг ан э ну фи́чэр.",
       "lesson": "Работа в IT и команда",
       "transcription": "/ˈfitʃɚ/",
       "pronunciation": "≈ фи́чёр"
@@ -79,6 +97,8 @@
       "english": "requirement",
       "translation": "требование",
       "example": "Could you clarify this requirement?",
+      "example_translation": "Не могли бы вы уточнить это требование?",
+      "example_pronunciation": "куд ю клэ́рэфай зис рикуа́йрмэнт?",
       "lesson": "Работа в IT и команда",
       "transcription": "/ɹɪˈkwaɪɹmənt/",
       "pronunciation": "≈ рикуа́йрмэнт"
@@ -87,6 +107,8 @@
       "english": "specification",
       "translation": "спецификация",
       "example": "The specification needs updating.",
+      "example_translation": "Спецификация требует обновления.",
+      "example_pronunciation": "зэ спэсификэ́йшэн нидз эпдэ́йтинг.",
       "lesson": "Работа в IT и команда",
       "transcription": "/ˌspɛsɪfɪˈkeɪʃən/",
       "pronunciation": "≈ спэсификэ́йшэн"
@@ -95,6 +117,8 @@
       "english": "stakeholder",
       "translation": "заинтересованная сторона",
       "example": "We need feedback from the stakeholders.",
+      "example_translation": "Нам нужен отзыв от заинтересованных сторон.",
+      "example_pronunciation": "уи нид фи́дбэк фрам зэ стэ́йкхоулдэрз.",
       "lesson": "Работа в IT и команда",
       "transcription": "/ˈsteɪkˌhoʊldɚ/",
       "pronunciation": "≈ стэ́йкхоулдёр"
@@ -103,6 +127,8 @@
       "english": "user",
       "translation": "пользователь",
       "example": "How will the user complete this task?",
+      "example_translation": "Как пользователь выполнит эту задачу?",
+      "example_pronunciation": "хау уил зэ ю́зэр кэмпли́т зис тэск?",
       "lesson": "Работа в IT и команда",
       "transcription": "/ˈjuzɚ/",
       "pronunciation": "≈ йу́зёр"
@@ -111,6 +137,8 @@
       "english": "customer",
       "translation": "заказчик; клиент",
       "example": "The customer reported a problem.",
+      "example_translation": "Клиент сообщил о проблеме.",
+      "example_pronunciation": "зэ ка́стэмэр рипо́ртид э пра́блэм.",
       "lesson": "Работа в IT и команда",
       "transcription": "/ˈkʌstəmɚ/",
       "pronunciation": "≈ ка́стэмёр"
@@ -119,6 +147,8 @@
       "english": "team",
       "translation": "команда",
       "example": "I will discuss it with the team.",
+      "example_translation": "Я обсудю это с командой.",
+      "example_pronunciation": "ай уил диска́с ит уиз зэ тим.",
       "lesson": "Работа в IT и команда",
       "transcription": "/tim/",
       "pronunciation": "≈ ти́м"
@@ -127,6 +157,8 @@
       "english": "colleague",
       "translation": "коллега",
       "example": "My colleague reviewed the change.",
+      "example_translation": "Мой коллега проверил изменение.",
+      "example_pronunciation": "май ка́лиг ривю́д зэ чэйндж.",
       "lesson": "Работа в IT и команда",
       "transcription": "/ˈkɑliɡ/",
       "pronunciation": "≈ ка́лиг"
@@ -135,6 +167,8 @@
       "english": "manager",
       "translation": "руководитель",
       "example": "I will check with my manager.",
+      "example_translation": "Я уточню у своего менеджера.",
+      "example_pronunciation": "ай уил чэк уиз май мэ́нэджэр.",
       "lesson": "Работа в IT и команда",
       "transcription": "/ˈmænədʒɚ/",
       "pronunciation": "≈ мэ́нэджёр"
@@ -143,6 +177,8 @@
       "english": "meeting",
       "translation": "встреча; совещание",
       "example": "Can we schedule a short meeting?",
+      "example_translation": "Можем ли мы запланировать короткую встречу?",
+      "example_pronunciation": "кэн уи скэ́джул э шорт ми́тинг?",
       "lesson": "Работа в IT и команда",
       "transcription": "/ˈmitɪŋ/",
       "pronunciation": "≈ ми́тинг"
@@ -151,6 +187,8 @@
       "english": "stand-up",
       "translation": "короткая регулярная встреча команды",
       "example": "I will mention the blocker at stand-up.",
+      "example_translation": "На стендапе я расскажу о том, что мешает продолжить работу.",
+      "example_pronunciation": "ай уил мэ́ншэн зэ бла́кэр эт стэнд-ап.",
       "lesson": "Работа в IT и команда",
       "transcription": "/ˈstænˌdʌp/",
       "pronunciation": "≈ стэ́ндап"
@@ -159,6 +197,8 @@
       "english": "sprint",
       "translation": "спринт; короткий цикл разработки",
       "example": "This task is planned for the next sprint.",
+      "example_translation": "Эта задача запланирована на следующий спринт.",
+      "example_pronunciation": "зис тэск из плэнд фор зэ нэкст спринт.",
       "lesson": "Работа в IT и команда",
       "transcription": "/spɹɪnt/",
       "pronunciation": "≈ спри́нт"
@@ -167,6 +207,8 @@
       "english": "backlog",
       "translation": "список запланированных задач",
       "example": "Add the request to the backlog.",
+      "example_translation": "Добавьте запрос в бэклог.",
+      "example_pronunciation": "эд зэ рикуэ́ст ту зэ бэ́клаг.",
       "lesson": "Работа в IT и команда",
       "transcription": "/ˈbæˌklɑɡ/",
       "pronunciation": "≈ бэ́клаг"
@@ -175,6 +217,8 @@
       "english": "ticket",
       "translation": "задача или обращение в системе учёта",
       "example": "Please create a ticket for this issue.",
+      "example_translation": "Пожалуйста, создайте тикет для этой проблемы.",
+      "example_pronunciation": "плиз криэ́йт э ти́кэт фор зис и́шу.",
       "lesson": "Работа в IT и команда",
       "transcription": "/ˈtɪkət/",
       "pronunciation": "≈ ти́кэт"
@@ -183,6 +227,8 @@
       "english": "task",
       "translation": "задача",
       "example": "The task is ready for review.",
+      "example_translation": "Задача готова к ревью.",
+      "example_pronunciation": "зэ тэск из рэ́ди фор ривю́.",
       "lesson": "Работа в IT и команда",
       "transcription": "/tæsk/",
       "pronunciation": "≈ тэ́ск"
@@ -191,6 +237,8 @@
       "english": "priority",
       "translation": "приоритет",
       "example": "What is the priority of this issue?",
+      "example_translation": "Каков приоритет этой проблемы?",
+      "example_pronunciation": "уат из зэ прайо́рэти эв зис и́шу?",
       "lesson": "Работа в IT и команда",
       "transcription": "/pɹaɪˈɔɹəti/",
       "pronunciation": "≈ прайо́рэти"
@@ -199,6 +247,8 @@
       "english": "deadline",
       "translation": "срок выполнения",
       "example": "Can we agree on a realistic deadline?",
+      "example_translation": "Можем ли мы согласовать реалистичный срок?",
+      "example_pronunciation": "кэн уи эгри́ ан э риэли́стик дэ́длайн?",
       "lesson": "Работа в IT и команда",
       "transcription": "/ˈdɛdˌlaɪn/",
       "pronunciation": "≈ дэ́длайн"
@@ -207,6 +257,8 @@
       "english": "estimate",
       "translation": "оценка трудозатрат",
       "example": "I need more details before giving an estimate.",
+      "example_translation": "Мне нужно больше деталей перед оценкой.",
+      "example_pronunciation": "ай нид мор дитэ́йлз бифо́р ги́винг эн э́стэмэт.",
       "lesson": "Работа в IT и команда",
       "transcription": "/ˈɛstəmət/",
       "pronunciation": "≈ э́стэмэт"
@@ -215,6 +267,8 @@
       "english": "scope",
       "translation": "объём работ; область",
       "example": "This request changes the scope.",
+      "example_translation": "Этот запрос меняет объём работ.",
+      "example_pronunciation": "зис рикуэ́ст чэ́йнджэз зэ скоуп.",
       "lesson": "Работа в IT и команда",
       "transcription": "/skoʊp/",
       "pronunciation": "≈ ско́уп"
@@ -223,6 +277,8 @@
       "english": "blocker",
       "translation": "препятствие, блокирующее работу",
       "example": "I have a blocker with the test environment.",
+      "example_translation": "У меня блокер с тестовой средой.",
+      "example_pronunciation": "ай хэв э бла́кэр уиз зэ тэст инва́йрэнмэнт.",
       "lesson": "Работа в IT и команда",
       "transcription": "/ˈblɑkɚ/",
       "pronunciation": "≈ бла́кёр"
@@ -231,6 +287,8 @@
       "english": "progress",
       "translation": "ход выполнения",
       "example": "Here is a quick progress update.",
+      "example_translation": "Вот краткое обновление прогресса.",
+      "example_pronunciation": "хир из э куик пра́грэс а́пдэйт.",
       "lesson": "Работа в IT и команда",
       "transcription": "/ˈpɹɑˌɡɹɛs/",
       "pronunciation": "≈ пра́грэс"
@@ -239,6 +297,8 @@
       "english": "feedback",
       "translation": "обратная связь",
       "example": "Thank you for the feedback.",
+      "example_translation": "Спасибо за отзыв.",
+      "example_pronunciation": "сэнгк ю фор зэ фи́дбэк.",
       "lesson": "Работа в IT и команда",
       "transcription": "/ˈfidˌbæk/",
       "pronunciation": "≈ фи́дбэк"
@@ -247,6 +307,8 @@
       "english": "code",
       "translation": "код",
       "example": "The code is ready for review.",
+      "example_translation": "Код готов к ревью.",
+      "example_pronunciation": "зэ коуд из рэ́ди фор ривю́.",
       "lesson": "Код и базовые понятия",
       "transcription": "/koʊd/",
       "pronunciation": "≈ ко́уд"
@@ -255,6 +317,8 @@
       "english": "source code",
       "translation": "исходный код",
       "example": "Where is the source code stored?",
+      "example_translation": "Где хранится исходный код?",
+      "example_pronunciation": "уэр из зэ сорс коуд сторд?",
       "lesson": "Код и базовые понятия",
       "transcription": "/sɔɹs koʊd/",
       "pronunciation": "≈ со́рс ко́уд"
@@ -263,6 +327,8 @@
       "english": "function",
       "translation": "функция",
       "example": "This function returns a value.",
+      "example_translation": "Эта функция возвращает значение.",
+      "example_pronunciation": "зис фа́нгкшэн ритё́рнз э вэ́лю.",
       "lesson": "Код и базовые понятия",
       "transcription": "/ˈfʌŋkʃən/",
       "pronunciation": "≈ фа́нгкшэн"
@@ -271,6 +337,8 @@
       "english": "method",
       "translation": "метод",
       "example": "This method updates the object.",
+      "example_translation": "Этот метод обновляет объект.",
+      "example_pronunciation": "зис мэ́сэд эпдэ́йтс зэ а́бджэкт.",
       "lesson": "Код и базовые понятия",
       "transcription": "/ˈmɛθəd/",
       "pronunciation": "≈ мэ́сэд"
@@ -279,6 +347,8 @@
       "english": "variable",
       "translation": "переменная",
       "example": "Use a clear variable name.",
+      "example_translation": "Используйте понятное имя переменной.",
+      "example_pronunciation": "юз э клир вэ́риэбэл нэйм.",
       "lesson": "Код и базовые понятия",
       "transcription": "/ˈvɛɹiəbəl/",
       "pronunciation": "≈ вэ́риэбэл"
@@ -287,6 +357,8 @@
       "english": "constant",
       "translation": "константа",
       "example": "This value should be a constant.",
+      "example_translation": "Это значение должно быть константой.",
+      "example_pronunciation": "зис вэ́лю шуд би э ка́нстэнт.",
       "lesson": "Код и базовые понятия",
       "transcription": "/ˈkɑnstənt/",
       "pronunciation": "≈ ка́нстэнт"
@@ -295,6 +367,8 @@
       "english": "type",
       "translation": "тип",
       "example": "What type does this function return?",
+      "example_translation": "Какой тип возвращает эта функция?",
+      "example_pronunciation": "уат тайп даз зис фа́нгкшэн ритё́рн?",
       "lesson": "Код и базовые понятия",
       "transcription": "/taɪp/",
       "pronunciation": "≈ та́йп"
@@ -303,6 +377,8 @@
       "english": "string",
       "translation": "строка",
       "example": "The input is an empty string.",
+      "example_translation": "Ввод — пустая строка.",
+      "example_pronunciation": "зэ и́нпут из эн э́мпти стринг.",
       "lesson": "Код и базовые понятия",
       "transcription": "/stɹɪŋ/",
       "pronunciation": "≈ стри́нг"
@@ -311,6 +387,8 @@
       "english": "integer",
       "translation": "целое число",
       "example": "The parameter must be an integer.",
+      "example_translation": "Параметр должен быть целым числом.",
+      "example_pronunciation": "зэ пэрэ́мэтэр маст би эн и́нтэджэр.",
       "lesson": "Код и базовые понятия",
       "transcription": "/ˈɪntədʒɚ/",
       "pronunciation": "≈ и́нтэджёр"
@@ -319,6 +397,8 @@
       "english": "boolean",
       "translation": "логическое значение",
       "example": "The function returns a boolean.",
+      "example_translation": "Функция возвращает логическое значение.",
+      "example_pronunciation": "зэ фа́нгкшэн ритё́рнз э були́эн.",
       "lesson": "Код и базовые понятия",
       "transcription": "/buˈliən/",
       "pronunciation": "≈ були́эн"
@@ -327,6 +407,8 @@
       "english": "array",
       "translation": "массив",
       "example": "The array contains ten elements.",
+      "example_translation": "Массив содержит десять элементов.",
+      "example_pronunciation": "зэ эрэ́й кэнтэ́йнз тэн э́лэмэнтс.",
       "lesson": "Код и базовые понятия",
       "transcription": "/ɚˈeɪ/",
       "pronunciation": "≈ ёрэ́й"
@@ -335,6 +417,8 @@
       "english": "list",
       "translation": "список",
       "example": "Add the item to the list.",
+      "example_translation": "Добавьте элемент в список.",
+      "example_pronunciation": "эд зэ а́йтэм ту зэ лист.",
       "lesson": "Код и базовые понятия",
       "transcription": "/lɪst/",
       "pronunciation": "≈ ли́ст"
@@ -343,6 +427,8 @@
       "english": "map",
       "translation": "ассоциативный контейнер; отображение",
       "example": "Store the values in a map.",
+      "example_translation": "Сохраните значения в карте.",
+      "example_pronunciation": "стор зэ вэ́люз ин э мэп.",
       "lesson": "Код и базовые понятия",
       "transcription": "/mæp/",
       "pronunciation": "≈ мэ́п"
@@ -351,6 +437,8 @@
       "english": "set",
       "translation": "множество",
       "example": "The set contains unique values.",
+      "example_translation": "Множество содержит уникальные значения.",
+      "example_pronunciation": "зэ сэт кэнтэ́йнз юни́к вэ́люз.",
       "lesson": "Код и базовые понятия",
       "transcription": "/sɛt/",
       "pronunciation": "≈ сэ́т"
@@ -359,6 +447,8 @@
       "english": "object",
       "translation": "объект",
       "example": "Create a new object.",
+      "example_translation": "Создайте новый объект.",
+      "example_pronunciation": "криэ́йт э ну а́бджэкт.",
       "lesson": "Код и базовые понятия",
       "transcription": "/ˈɑbdʒɛkt/",
       "pronunciation": "≈ а́бджэкт"
@@ -367,6 +457,8 @@
       "english": "class",
       "translation": "класс",
       "example": "This class handles file access.",
+      "example_translation": "Этот класс обрабатывает доступ к файлам.",
+      "example_pronunciation": "зис клэс хэ́ндэлз файл э́ксэс.",
       "lesson": "Код и базовые понятия",
       "transcription": "/klæs/",
       "pronunciation": "≈ клэ́с"
@@ -375,6 +467,8 @@
       "english": "interface",
       "translation": "интерфейс",
       "example": "The interface should remain stable.",
+      "example_translation": "Интерфейс должен оставаться стабильным.",
+      "example_pronunciation": "зэ и́нтэрфэйс шуд римэ́йн стэ́йбэл.",
       "lesson": "Код и базовые понятия",
       "transcription": "/ˈɪntɚˌfeɪs/",
       "pronunciation": "≈ и́нтёрфэйс"
@@ -383,6 +477,8 @@
       "english": "module",
       "translation": "модуль",
       "example": "The module has no external dependencies.",
+      "example_translation": "Модуль не имеет внешних зависимостей.",
+      "example_pronunciation": "зэ ма́джул хэз ноу икстё́рнэл дипэ́ндэнсиз.",
       "lesson": "Код и базовые понятия",
       "transcription": "/ˈmɑdʒul/",
       "pronunciation": "≈ ма́джул"
@@ -391,6 +487,8 @@
       "english": "library",
       "translation": "библиотека",
       "example": "We use a standard library function.",
+      "example_translation": "Мы используем функцию стандартной библиотеки.",
+      "example_pronunciation": "уи юз э стэ́ндэрд ла́йбрэри фа́нгкшэн.",
       "lesson": "Код и базовые понятия",
       "transcription": "/ˈlaɪbɹɛˌɹi/",
       "pronunciation": "≈ ла́йбрэри"
@@ -399,6 +497,8 @@
       "english": "framework",
       "translation": "программный каркас; фреймворк",
       "example": "Which framework does the project use?",
+      "example_translation": "Какой фреймворк используется в проекте?",
+      "example_pronunciation": "уич фрэ́ймуёрк даз зэ пра́джэкт юз?",
       "lesson": "Код и базовые понятия",
       "transcription": "/ˈfɹeɪmˌwɝk/",
       "pronunciation": "≈ фрэ́ймуёрк"
@@ -407,6 +507,8 @@
       "english": "package",
       "translation": "пакет",
       "example": "Install the required package.",
+      "example_translation": "Установите требуемый пакет.",
+      "example_pronunciation": "инсто́л зэ рикуа́йэрд пэ́кэдж.",
       "lesson": "Код и базовые понятия",
       "transcription": "/ˈpækədʒ/",
       "pronunciation": "≈ пэ́кэдж"
@@ -415,6 +517,8 @@
       "english": "dependency",
       "translation": "зависимость",
       "example": "We need to update this dependency.",
+      "example_translation": "Нужно обновить эту зависимость.",
+      "example_pronunciation": "уи нид ту эпдэ́йт зис дипэ́ндэнси.",
       "lesson": "Код и базовые понятия",
       "transcription": "/dɪˈpɛndənsi/",
       "pronunciation": "≈ дипэ́ндэнси"
@@ -423,6 +527,8 @@
       "english": "parameter",
       "translation": "параметр",
       "example": "This parameter is optional.",
+      "example_translation": "Этот параметр необязателен.",
+      "example_pronunciation": "зис пэрэ́мэтэр из а́пшэнэл.",
       "lesson": "Код и базовые понятия",
       "transcription": "/pɚˈæmətɚ/",
       "pronunciation": "≈ пёрэ́мэтёр"
@@ -431,6 +537,8 @@
       "english": "argument",
       "translation": "аргумент вызова",
       "example": "Pass the file name as an argument.",
+      "example_translation": "Передайте имя файла в качестве аргумента.",
+      "example_pronunciation": "пэс зэ файл нэйм эз эн а́ргйэмэнт.",
       "lesson": "Код и базовые понятия",
       "transcription": "/ˈɑɹɡjəmənt/",
       "pronunciation": "≈ а́ргйэмэнт"
@@ -439,6 +547,8 @@
       "english": "return value",
       "translation": "возвращаемое значение",
       "example": "Check the return value.",
+      "example_translation": "Проверьте возвращаемое значение.",
+      "example_pronunciation": "чэк зэ ритё́рн вэ́лю.",
       "lesson": "Код и базовые понятия",
       "transcription": "/ɹɪˈtɝn ˈvælju/",
       "pronunciation": "≈ ритё́рн вэ́лйу"
@@ -447,6 +557,8 @@
       "english": "condition",
       "translation": "условие",
       "example": "The condition is always false.",
+      "example_translation": "Условие всегда ложно.",
+      "example_pronunciation": "зэ кэнди́шэн из о́луэйз фолс.",
       "lesson": "Код и базовые понятия",
       "transcription": "/kənˈdɪʃən/",
       "pronunciation": "≈ кэнди́шэн"
@@ -455,6 +567,8 @@
       "english": "loop",
       "translation": "цикл",
       "example": "The loop processes each item.",
+      "example_translation": "Цикл обрабатывает каждый элемент.",
+      "example_pronunciation": "зэ луп пра́сэсэз ич а́йтэм.",
       "lesson": "Код и базовые понятия",
       "transcription": "/lup/",
       "pronunciation": "≈ лу́п"
@@ -463,6 +577,8 @@
       "english": "iteration",
       "translation": "итерация",
       "example": "The error occurs on the second iteration.",
+      "example_translation": "Ошибка возникает на второй итерации.",
+      "example_pronunciation": "зэ э́рэр экё́рз ан зэ сэ́кэнд итэрэ́йшэн.",
       "lesson": "Код и базовые понятия",
       "transcription": "/ˌɪtɚˈeɪʃən/",
       "pronunciation": "≈ итёрэ́йшэн"
@@ -471,6 +587,8 @@
       "english": "branch",
       "translation": "ветка кода или репозитория",
       "example": "Create a branch for this change.",
+      "example_translation": "Создайте ветку для этого изменения.",
+      "example_pronunciation": "криэ́йт э брэнч фор зис чэйндж.",
       "lesson": "Код и базовые понятия",
       "transcription": "/bɹæntʃ/",
       "pronunciation": "≈ брэ́нч"
@@ -479,6 +597,8 @@
       "english": "exception",
       "translation": "исключение",
       "example": "The function throws an exception.",
+      "example_translation": "Функция бросает исключение.",
+      "example_pronunciation": "зэ фа́нгкшэн сроуз эн иксэ́пшэн.",
       "lesson": "Код и базовые понятия",
       "transcription": "/ɪkˈsɛpʃən/",
       "pronunciation": "≈ иксэ́пшэн"
@@ -487,6 +607,8 @@
       "english": "repository",
       "translation": "репозиторий",
       "example": "Clone the repository first.",
+      "example_translation": "Сначала клонируйте репозиторий.",
+      "example_pronunciation": "клоун зэ рипа́зэтори фёрст.",
       "lesson": "Репозиторий и совместная работа",
       "transcription": "/ɹiˈpɑzəˌtɔɹi/",
       "pronunciation": "≈ рипа́зэтори"
@@ -495,6 +617,8 @@
       "english": "version control",
       "translation": "контроль версий",
       "example": "We use version control for all changes.",
+      "example_translation": "Мы используем систему контроля версий для всех изменений.",
+      "example_pronunciation": "уи юз вё́ржэн кэнтро́ул фор ол чэ́йнджэз.",
       "lesson": "Репозиторий и совместная работа",
       "transcription": "/ˈvɝʒən kənˈtɹoʊl/",
       "pronunciation": "≈ вё́ржэн кэнтро́ул"
@@ -503,6 +627,8 @@
       "english": "commit",
       "translation": "коммит; зафиксировать изменение",
       "example": "Keep the commit message clear.",
+      "example_translation": "Сделайте сообщение коммита понятным.",
+      "example_pronunciation": "кип зэ кэми́т мэ́сэдж клир.",
       "lesson": "Репозиторий и совместная работа",
       "transcription": "/kəˈmɪt/",
       "pronunciation": "≈ кэми́т"
@@ -511,6 +637,8 @@
       "english": "merge",
       "translation": "слияние; объединять",
       "example": "Merge the branch after review.",
+      "example_translation": "Слейте ветку после ревью.",
+      "example_pronunciation": "мёрдж зэ брэнч э́фтэр ривю́.",
       "lesson": "Репозиторий и совместная работа",
       "transcription": "/mɝdʒ/",
       "pronunciation": "≈ мё́рдж"
@@ -519,6 +647,8 @@
       "english": "pull request",
       "translation": "запрос на включение изменений",
       "example": "I opened a pull request.",
+      "example_translation": "Я открыл запрос на слияние.",
+      "example_pronunciation": "ай о́упэнд э пул рикуэ́ст.",
       "lesson": "Репозиторий и совместная работа",
       "transcription": "/pʊl ɹɪˈkwɛst/",
       "pronunciation": "≈ пу́л рикуэ́ст"
@@ -527,6 +657,8 @@
       "english": "review",
       "translation": "проверка изменений; ревью",
       "example": "Could you review my change?",
+      "example_translation": "Не могли бы вы проверить моё изменение?",
+      "example_pronunciation": "куд ю ривю́ май чэйндж?",
       "lesson": "Репозиторий и совместная работа",
       "transcription": "/ˌɹiˈvju/",
       "pronunciation": "≈ ривйу́"
@@ -535,6 +667,8 @@
       "english": "approval",
       "translation": "одобрение",
       "example": "The change needs approval before merging.",
+      "example_translation": "Изменение требует одобрения перед слиянием.",
+      "example_pronunciation": "зэ чэйндж нидз эпру́вэл бифо́р мё́рджинг.",
       "lesson": "Репозиторий и совместная работа",
       "transcription": "/əˈpɹuvəl/",
       "pronunciation": "≈ эпру́вэл"
@@ -543,6 +677,8 @@
       "english": "conflict",
       "translation": "конфликт изменений",
       "example": "I resolved the merge conflict.",
+      "example_translation": "Я разрешил конфликт слияния.",
+      "example_pronunciation": "ай риза́лвд зэ мёрдж ка́нфликт.",
       "lesson": "Репозиторий и совместная работа",
       "transcription": "/ˈkɑnflɪkt/",
       "pronunciation": "≈ ка́нфликт"
@@ -551,6 +687,8 @@
       "english": "rebase",
       "translation": "перенос коммитов на другую базу",
       "example": "Rebase the branch on the latest main.",
+      "example_translation": "Перебазируйте ветку на последнюю главную ветку.",
+      "example_pronunciation": "рибэ́йс зэ брэнч ан зэ лэ́йтэст мэйн.",
       "lesson": "Репозиторий и совместная работа",
       "transcription": "/ɹiˈbeɪs/",
       "pronunciation": "≈ рибэ́йс"
@@ -559,6 +697,8 @@
       "english": "rollback",
       "translation": "откат",
       "example": "We prepared a rollback plan.",
+      "example_translation": "Мы подготовили план отката.",
+      "example_pronunciation": "уи припэ́рд э ро́улбэк плэн.",
       "lesson": "Репозиторий и совместная работа",
       "transcription": "/ˈɹoʊlˌbæk/",
       "pronunciation": "≈ ро́улбэк"
@@ -567,6 +707,8 @@
       "english": "revert",
       "translation": "отменять изменение обратным коммитом",
       "example": "We need to revert this commit.",
+      "example_translation": "Нужно откатить этот коммит.",
+      "example_pronunciation": "уи нид ту ривё́рт зис кэми́т.",
       "lesson": "Репозиторий и совместная работа",
       "transcription": "/ɹɪˈvɝt/",
       "pronunciation": "≈ ривё́рт"
@@ -575,6 +717,8 @@
       "english": "patch",
       "translation": "исправление; набор изменений",
       "example": "The patch fixes the reported issue.",
+      "example_translation": "Патч исправляет сообщённую проблему.",
+      "example_pronunciation": "зэ пэч фи́ксиз зэ рипо́ртид и́шу.",
       "lesson": "Репозиторий и совместная работа",
       "transcription": "/pætʃ/",
       "pronunciation": "≈ пэ́ч"
@@ -583,6 +727,8 @@
       "english": "diff",
       "translation": "разница между версиями",
       "example": "The diff contains a small change.",
+      "example_translation": "Diff содержит небольшое изменение.",
+      "example_pronunciation": "зэ диф кэнтэ́йнз э смол чэйндж.",
       "lesson": "Репозиторий и совместная работа",
       "transcription": "/dɪf/",
       "pronunciation": "≈ ди́ф"
@@ -591,6 +737,8 @@
       "english": "changelog",
       "translation": "журнал изменений",
       "example": "Update the changelog before release.",
+      "example_translation": "Обновите журнал изменений перед релизом.",
+      "example_pronunciation": "эпдэ́йт зэ чэ́йнджлог бифо́р рили́с.",
       "lesson": "Репозиторий и совместная работа",
       "transcription": "/ˈtʃeɪndʒˌlɔɡ/",
       "pronunciation": "≈ чэ́йнджлог"
@@ -599,6 +747,8 @@
       "english": "tag",
       "translation": "метка версии",
       "example": "Create a tag for the release.",
+      "example_translation": "Создайте тег для релиза.",
+      "example_pronunciation": "криэ́йт э тэг фор зэ рили́с.",
       "lesson": "Репозиторий и совместная работа",
       "transcription": "/tæɡ/",
       "pronunciation": "≈ тэ́г"
@@ -607,6 +757,8 @@
       "english": "release",
       "translation": "выпуск; версия",
       "example": "The release is scheduled for Friday.",
+      "example_translation": "Релиз запланирован на пятницу.",
+      "example_pronunciation": "зэ рили́с из скэ́джулд фор фра́йди.",
       "lesson": "Репозиторий и совместная работа",
       "transcription": "/ɹiˈlis/",
       "pronunciation": "≈ рили́с"
@@ -615,6 +767,8 @@
       "english": "version",
       "translation": "версия",
       "example": "Which version are you using?",
+      "example_translation": "Какую версию вы используете?",
+      "example_pronunciation": "уич вё́ржэн ар ю ю́зинг?",
       "lesson": "Репозиторий и совместная работа",
       "transcription": "/ˈvɝʒən/",
       "pronunciation": "≈ вё́ржэн"
@@ -623,6 +777,8 @@
       "english": "upgrade",
       "translation": "обновление до новой версии",
       "example": "Test the upgrade in staging.",
+      "example_translation": "Протестируйте обновление в стейджинге.",
+      "example_pronunciation": "тэст зэ эпгрэ́йд ин стэ́йджинг.",
       "lesson": "Репозиторий и совместная работа",
       "transcription": "/əpˈɡɹeɪd/",
       "pronunciation": "≈ эпгрэ́йд"
@@ -631,6 +787,8 @@
       "english": "compatibility",
       "translation": "совместимость",
       "example": "We need to preserve compatibility.",
+      "example_translation": "Нужно сохранить совместимость.",
+      "example_pronunciation": "уи нид ту прэзё́рв кэмпэтэби́лэти.",
       "lesson": "Репозиторий и совместная работа",
       "transcription": "/kəmˌpætəˈbɪləˌti/",
       "pronunciation": "≈ кэмпэтэби́лэти"
@@ -639,6 +797,8 @@
       "english": "breaking change",
       "translation": "изменение, нарушающее совместимость",
       "example": "This is a breaking change.",
+      "example_translation": "Это критическое изменение.",
+      "example_pronunciation": "зис из э брэ́йкинг чэйндж.",
       "lesson": "Репозиторий и совместная работа",
       "transcription": "/ˈbɹeɪkɪŋ tʃeɪndʒ/",
       "pronunciation": "≈ брэ́йкинг чэ́йндж"
@@ -647,6 +807,8 @@
       "english": "backward compatibility",
       "translation": "обратная совместимость",
       "example": "The update preserves backward compatibility.",
+      "example_translation": "Обновление сохраняет обратную совместимость.",
+      "example_pronunciation": "зэ эпдэ́йт прэзё́рвз бэ́куэрд кэмпэтэби́лэти.",
       "lesson": "Репозиторий и совместная работа",
       "transcription": "/ˈbækwɚd kəmˌpætəˈbɪləˌti/",
       "pronunciation": "≈ бэ́куёрд кэмпэтэби́лэти"
@@ -655,6 +817,8 @@
       "english": "deprecation",
       "translation": "объявление устаревшим",
       "example": "The documentation includes a deprecation notice.",
+      "example_translation": "В документации есть уведомление об устаревании.",
+      "example_pronunciation": "зэ дакйэмэнтэ́йшэн инклу́дз э дэпрэкэ́йшэн но́утэс.",
       "lesson": "Репозиторий и совместная работа",
       "transcription": "/ˌdɛpɹəˈkeɪʃən/",
       "pronunciation": "≈ дэпрэкэ́йшэн"
@@ -663,6 +827,8 @@
       "english": "documentation",
       "translation": "документация",
       "example": "The documentation explains the setup.",
+      "example_translation": "В документации объяснена настройка.",
+      "example_pronunciation": "зэ дакйэмэнтэ́йшэн иксплэ́йнз зэ сэ́тап.",
       "lesson": "Репозиторий и совместная работа",
       "transcription": "/ˌdɑkjəmɛnˈteɪʃən/",
       "pronunciation": "≈ дакйэмэнтэ́йшэн"
@@ -671,6 +837,8 @@
       "english": "README",
       "translation": "файл с основной информацией о проекте",
       "example": "Follow the instructions in the README.",
+      "example_translation": "Следуйте инструкциям в README.",
+      "example_pronunciation": "фа́лоу зэ инстра́кшэнз ин зэ ри́дми.",
       "lesson": "Репозиторий и совместная работа",
       "transcription": "/ˈɹidˌmi/",
       "pronunciation": "≈ ри́дми"
@@ -679,6 +847,8 @@
       "english": "comment",
       "translation": "комментарий",
       "example": "This comment explains the reason for the check.",
+      "example_translation": "Этот комментарий объясняет причину проверки.",
+      "example_pronunciation": "зис ка́мэнт иксплэ́йнз зэ ри́зэн фор зэ чэк.",
       "lesson": "Репозиторий и совместная работа",
       "transcription": "/ˈkɑmɛnt/",
       "pronunciation": "≈ ка́мэнт"
@@ -687,6 +857,8 @@
       "english": "convention",
       "translation": "соглашение; принятый стиль",
       "example": "Follow the project's naming conventions.",
+      "example_translation": "Следуйте принятым в проекте правилам именования.",
+      "example_pronunciation": "фа́лоу зэ пра́джэктс нэ́йминг кэнвэ́ншэнз.",
       "lesson": "Репозиторий и совместная работа",
       "transcription": "/kənˈvɛnʃən/",
       "pronunciation": "≈ кэнвэ́ншэн"
@@ -695,6 +867,8 @@
       "english": "refactor",
       "translation": "реорганизовать код без изменения поведения",
       "example": "I want to refactor this function.",
+      "example_translation": "Я хочу рефакторить эту функцию.",
+      "example_pronunciation": "ай уант ту рифэ́ктэр зис фа́нгкшэн.",
       "lesson": "Репозиторий и совместная работа",
       "transcription": "/ɹiˈfæktɚ/",
       "pronunciation": "≈ рифэ́ктёр"
@@ -703,6 +877,8 @@
       "english": "cleanup",
       "translation": "упорядочивание; очистка",
       "example": "This is a small code cleanup.",
+      "example_translation": "Это небольшая очистка кода.",
+      "example_pronunciation": "зис из э смол коуд кли́нап.",
       "lesson": "Репозиторий и совместная работа",
       "transcription": "/ˈkliˌnʌp/",
       "pronunciation": "≈ кли́нап"
@@ -711,6 +887,8 @@
       "english": "maintainer",
       "translation": "сопровождающий проекта",
       "example": "Ask the maintainer before changing the public interface.",
+      "example_translation": "Спросите у сопровождающего перед изменением публичного интерфейса.",
+      "example_pronunciation": "эск зэ мэйнтэ́йнэр бифо́р чэ́йнджинг зэ па́блик и́нтэрфэйс.",
       "lesson": "Репозиторий и совместная работа",
       "transcription": "/meɪnˈteɪnɚ/",
       "pronunciation": "≈ мэйнтэ́йнёр"
@@ -719,6 +897,8 @@
       "english": "contributor",
       "translation": "участник проекта",
       "example": "The contributor added a useful test.",
+      "example_translation": "Участник добавил полезный тест.",
+      "example_pronunciation": "зэ кэнтри́бйэтэр э́дэд э ю́сфэл тэст.",
       "lesson": "Репозиторий и совместная работа",
       "transcription": "/kənˈtɹɪbjətɚ/",
       "pronunciation": "≈ кэнтри́бйэтёр"
@@ -727,6 +907,8 @@
       "english": "bug",
       "translation": "ошибка в программе",
       "example": "I found a bug in the login flow.",
+      "example_translation": "Я нашёл ошибку в процессе входа в систему.",
+      "example_pronunciation": "ай фаунд э баг ин зэ ло́гин флоу.",
       "lesson": "Ошибки и тестирование",
       "transcription": "/bʌɡ/",
       "pronunciation": "≈ ба́г"
@@ -735,6 +917,8 @@
       "english": "defect",
       "translation": "дефект",
       "example": "The defect affects older versions.",
+      "example_translation": "Дефект затрагивает более старые версии.",
+      "example_pronunciation": "зэ ди́фэкт эфэ́ктс о́улдэр вё́ржэнз.",
       "lesson": "Ошибки и тестирование",
       "transcription": "/ˈdifɛkt/",
       "pronunciation": "≈ ди́фэкт"
@@ -743,6 +927,8 @@
       "english": "issue",
       "translation": "проблема; задача",
       "example": "Can you reproduce the issue?",
+      "example_translation": "Можете воспроизвести проблему?",
+      "example_pronunciation": "кэн ю рипрэду́с зэ и́шу?",
       "lesson": "Ошибки и тестирование",
       "transcription": "/ˈɪʃu/",
       "pronunciation": "≈ и́шу"
@@ -751,6 +937,8 @@
       "english": "error",
       "translation": "ошибка",
       "example": "What error message do you see?",
+      "example_translation": "Какое сообщение об ошибке вы видите?",
+      "example_pronunciation": "уат э́рэр мэ́сэдж ду ю си?",
       "lesson": "Ошибки и тестирование",
       "transcription": "/ˈɛɹɚ/",
       "pronunciation": "≈ э́рёр"
@@ -759,6 +947,8 @@
       "english": "failure",
       "translation": "сбой; неуспех",
       "example": "The test failure is reproducible.",
+      "example_translation": "Сбой теста воспроизводим.",
+      "example_pronunciation": "зэ тэст фэ́йлйэр из рипрэду́сэбэл.",
       "lesson": "Ошибки и тестирование",
       "transcription": "/ˈfeɪljɚ/",
       "pronunciation": "≈ фэ́йлйёр"
@@ -767,6 +957,8 @@
       "english": "crash",
       "translation": "аварийное завершение",
       "example": "The application crashes on startup.",
+      "example_translation": "Приложение падает при запуске.",
+      "example_pronunciation": "зэ эплэкэ́йшэн крэ́шиз ан ста́ртап.",
       "lesson": "Ошибки и тестирование",
       "transcription": "/kɹæʃ/",
       "pronunciation": "≈ крэ́ш"
@@ -775,6 +967,8 @@
       "english": "hang",
       "translation": "зависание; зависать",
       "example": "The process hangs after the request.",
+      "example_translation": "Процесс зависает после запроса.",
+      "example_pronunciation": "зэ пра́сэс хэнгз э́фтэр зэ рикуэ́ст.",
       "lesson": "Ошибки и тестирование",
       "transcription": "/hæŋ/",
       "pronunciation": "≈ хэ́нг"
@@ -783,6 +977,8 @@
       "english": "freeze",
       "translation": "зависать; замораживать",
       "example": "The screen freezes when I click this.",
+      "example_translation": "Экран зависает, когда я нажимаю сюда.",
+      "example_pronunciation": "зэ скрин фри́зиз уэн ай клик зис.",
       "lesson": "Ошибки и тестирование",
       "transcription": "/fɹiz/",
       "pronunciation": "≈ фри́з"
@@ -791,6 +987,8 @@
       "english": "reproduce",
       "translation": "воспроизводить",
       "example": "I cannot reproduce it locally.",
+      "example_translation": "Мне не удаётся воспроизвести это локально.",
+      "example_pronunciation": "ай кэ́нат рипрэду́с ит ло́укэли.",
       "lesson": "Ошибки и тестирование",
       "transcription": "/ˌɹipɹəˈdus/",
       "pronunciation": "≈ рипрэду́с"
@@ -799,6 +997,8 @@
       "english": "reproduction steps",
       "translation": "шаги воспроизведения",
       "example": "Please include the reproduction steps.",
+      "example_translation": "Пожалуйста, укажите шаги воспроизведения.",
+      "example_pronunciation": "плиз инклу́д зэ рипрэда́кшэн стэпс.",
       "lesson": "Ошибки и тестирование",
       "transcription": "/ˌɹipɹəˈdʌkʃən stɛps/",
       "pronunciation": "≈ рипрэда́кшэн стэ́пс"
@@ -807,6 +1007,8 @@
       "english": "expected behavior",
       "translation": "ожидаемое поведение",
       "example": "Describe the expected behavior.",
+      "example_translation": "Опишите ожидаемое поведение.",
+      "example_pronunciation": "дискра́йб зэ икспэ́ктэд бихэ́йвйэр.",
       "lesson": "Ошибки и тестирование",
       "transcription": "/ɪkˈspɛktəd bɪˈheɪvjɚ/",
       "pronunciation": "≈ икспэ́ктэд бихэ́йвйёр"
@@ -815,6 +1017,8 @@
       "english": "actual behavior",
       "translation": "фактическое поведение",
       "example": "What is the actual behavior?",
+      "example_translation": "Каково фактическое поведение?",
+      "example_pronunciation": "уат из зэ э́кчэуэл бихэ́йвйэр?",
       "lesson": "Ошибки и тестирование",
       "transcription": "/ˈæktʃəwəl bɪˈheɪvjɚ/",
       "pronunciation": "≈ э́кчэуэл бихэ́йвйёр"
@@ -823,6 +1027,8 @@
       "english": "root cause",
       "translation": "первопричина",
       "example": "We found the root cause.",
+      "example_translation": "Мы нашли коренную причину.",
+      "example_pronunciation": "уи фаунд зэ рут каз.",
       "lesson": "Ошибки и тестирование",
       "transcription": "/ɹut kɑz/",
       "pronunciation": "≈ ру́т ка́з"
@@ -831,6 +1037,8 @@
       "english": "workaround",
       "translation": "временный обходной путь",
       "example": "There is a temporary workaround.",
+      "example_translation": "Есть временное обходное решение.",
+      "example_pronunciation": "зэр из э тэ́мпэрэри уёркэра́унд.",
       "lesson": "Ошибки и тестирование",
       "transcription": "/ˈwɝkɚˈaʊnd/",
       "pronunciation": "≈ уё́ркёра́унд"
@@ -839,6 +1047,8 @@
       "english": "fix",
       "translation": "исправление; исправлять",
       "example": "The fix is included in this release.",
+      "example_translation": "Исправление включено в этот релиз.",
+      "example_pronunciation": "зэ фикс из инклу́дэд ин зис рили́с.",
       "lesson": "Ошибки и тестирование",
       "transcription": "/fɪks/",
       "pronunciation": "≈ фи́кс"
@@ -847,6 +1057,8 @@
       "english": "regression",
       "translation": "повторное нарушение работоспособности",
       "example": "We added a test for the regression.",
+      "example_translation": "Мы добавили тест для регрессии.",
+      "example_pronunciation": "уи э́дэд э тэст фор зэ рэгрэ́шэн.",
       "lesson": "Ошибки и тестирование",
       "transcription": "/ɹəˈɡɹɛʃən/",
       "pronunciation": "≈ рэгрэ́шэн"
@@ -855,6 +1067,8 @@
       "english": "test case",
       "translation": "тестовый сценарий",
       "example": "Add a test case for an empty input.",
+      "example_translation": "Добавьте тестовый случай для пустого ввода.",
+      "example_pronunciation": "эд э тэст кэйс фор эн э́мпти и́нпут.",
       "lesson": "Ошибки и тестирование",
       "transcription": "/tɛst keɪs/",
       "pronunciation": "≈ тэ́ст кэ́йс"
@@ -863,6 +1077,8 @@
       "english": "unit test",
       "translation": "модульный тест",
       "example": "The unit test checks the calculation.",
+      "example_translation": "Юнит‑тест проверяет вычисление.",
+      "example_pronunciation": "зэ ю́нэт тэст чэкс зэ кэлкйэлэ́йшэн.",
       "lesson": "Ошибки и тестирование",
       "transcription": "/ˈjunət tɛst/",
       "pronunciation": "≈ йу́нэт тэ́ст"
@@ -871,6 +1087,8 @@
       "english": "integration test",
       "translation": "интеграционный тест",
       "example": "The integration test uses a temporary database.",
+      "example_translation": "Интеграционный тест использует временную базу данных.",
+      "example_pronunciation": "зэ интэгрэ́йшэн тэст ю́зиз э тэ́мпэрэри дэ́йтэбэйс.",
       "lesson": "Ошибки и тестирование",
       "transcription": "/ˌɪntəˈɡɹeɪʃən tɛst/",
       "pronunciation": "≈ интэгрэ́йшэн тэ́ст"
@@ -879,6 +1097,8 @@
       "english": "end-to-end test",
       "translation": "сквозной тест",
       "example": "The end-to-end test covers the checkout flow.",
+      "example_translation": "End‑to‑end тест покрывает процесс оформления заказа.",
+      "example_pronunciation": "зэ энд-ту-энд тэст ка́вэрз зэ чэ́каут флоу.",
       "lesson": "Ошибки и тестирование",
       "transcription": "/ɛnd tu ɛnd tɛst/",
       "pronunciation": "≈ э́нд ту́ э́нд тэ́ст"
@@ -887,6 +1107,8 @@
       "english": "assertion",
       "translation": "проверочное утверждение",
       "example": "The assertion failed.",
+      "example_translation": "Утверждение не выполнено.",
+      "example_pronunciation": "зэ эсё́ршэн фэйлд.",
       "lesson": "Ошибки и тестирование",
       "transcription": "/əˈsɝʃən/",
       "pronunciation": "≈ эсё́ршэн"
@@ -895,6 +1117,8 @@
       "english": "fixture",
       "translation": "подготовленные данные или окружение теста",
       "example": "The fixture creates a test user.",
+      "example_translation": "Фикстура создаёт тестового пользователя.",
+      "example_pronunciation": "зэ фи́ксчэр криэ́йтс э тэст ю́зэр.",
       "lesson": "Ошибки и тестирование",
       "transcription": "/ˈfɪkstʃɚ/",
       "pronunciation": "≈ фи́ксчёр"
@@ -903,6 +1127,8 @@
       "english": "mock",
       "translation": "подмена зависимости для теста",
       "example": "Use a mock for the external service.",
+      "example_translation": "Используйте mock для внешнего сервиса.",
+      "example_pronunciation": "юз э мак фор зэ икстё́рнэл сё́рвэс.",
       "lesson": "Ошибки и тестирование",
       "transcription": "/mɑk/",
       "pronunciation": "≈ ма́к"
@@ -911,6 +1137,8 @@
       "english": "coverage",
       "translation": "покрытие тестами",
       "example": "Coverage alone does not prove correctness.",
+      "example_translation": "Один лишь охват кода не доказывает правильность.",
+      "example_pronunciation": "ка́вэрэдж эло́ун даз нат прув кэрэ́ктнэс.",
       "lesson": "Ошибки и тестирование",
       "transcription": "/ˈkʌvɚədʒ/",
       "pronunciation": "≈ ка́вёрэдж"
@@ -919,6 +1147,8 @@
       "english": "edge case",
       "translation": "пограничный случай",
       "example": "We missed an edge case.",
+      "example_translation": "Мы упустили граничный случай.",
+      "example_pronunciation": "уи мист эн эдж кэйс.",
       "lesson": "Ошибки и тестирование",
       "transcription": "/ɛdʒ keɪs/",
       "pronunciation": "≈ э́дж кэ́йс"
@@ -927,6 +1157,8 @@
       "english": "boundary",
       "translation": "граница",
       "example": "Test the boundary values.",
+      "example_translation": "Протестируйте граничные значения.",
+      "example_pronunciation": "тэст зэ ба́ундэри вэ́люз.",
       "lesson": "Ошибки и тестирование",
       "transcription": "/ˈbaʊndɚi/",
       "pronunciation": "≈ ба́ундёри"
@@ -935,6 +1167,8 @@
       "english": "validation",
       "translation": "проверка допустимости",
       "example": "Input validation happens before saving.",
+      "example_translation": "Валидация ввода происходит перед сохранением.",
+      "example_pronunciation": "и́нпут вэлэдэ́йшэн хэ́пэнз бифо́р сэ́йвинг.",
       "lesson": "Ошибки и тестирование",
       "transcription": "/ˌvæləˈdeɪʃən/",
       "pronunciation": "≈ вэлэдэ́йшэн"
@@ -943,6 +1177,8 @@
       "english": "debug",
       "translation": "отлаживать",
       "example": "I need to debug this request.",
+      "example_translation": "Мне нужно отладить этот запрос.",
+      "example_pronunciation": "ай нид ту диба́г зис рикуэ́ст.",
       "lesson": "Ошибки и тестирование",
       "transcription": "/diˈbʌɡ/",
       "pronunciation": "≈ диба́г"
@@ -951,6 +1187,8 @@
       "english": "breakpoint",
       "translation": "точка останова",
       "example": "Set a breakpoint before the call.",
+      "example_translation": "Установите точку останова перед вызовом.",
+      "example_pronunciation": "сэт э брэ́йкпойнт бифо́р зэ кол.",
       "lesson": "Ошибки и тестирование",
       "transcription": "/ˈbɹeɪkˌpɔɪnt/",
       "pronunciation": "≈ брэ́йкпойнт"
@@ -959,6 +1197,8 @@
       "english": "stack trace",
       "translation": "стек вызовов в момент ошибки",
       "example": "Can you share the stack trace?",
+      "example_translation": "Можете поделиться трассировкой стека?",
+      "example_pronunciation": "кэн ю шэр зэ стэк трэйс?",
       "lesson": "Ошибки и тестирование",
       "transcription": "/stæk tɹeɪs/",
       "pronunciation": "≈ стэ́к трэ́йс"
@@ -967,6 +1207,8 @@
       "english": "build",
       "translation": "сборка; собирать",
       "example": "The build failed.",
+      "example_translation": "Сборка не удалась.",
+      "example_pronunciation": "зэ билд фэйлд.",
       "lesson": "Сборка, процессы и память",
       "transcription": "/bɪld/",
       "pronunciation": "≈ би́лд"
@@ -975,6 +1217,8 @@
       "english": "compile",
       "translation": "компилировать",
       "example": "The code does not compile.",
+      "example_translation": "Код не компилируется.",
+      "example_pronunciation": "зэ коуд даз нат кэмпа́йл.",
       "lesson": "Сборка, процессы и память",
       "transcription": "/kəmˈpaɪl/",
       "pronunciation": "≈ кэмпа́йл"
@@ -983,6 +1227,8 @@
       "english": "compiler",
       "translation": "компилятор",
       "example": "The compiler reported a warning.",
+      "example_translation": "Компилятор выдал предупреждение.",
+      "example_pronunciation": "зэ кэмпа́йлэр рипо́ртид э уо́рнинг.",
       "lesson": "Сборка, процессы и память",
       "transcription": "/kəmˈpaɪlɚ/",
       "pronunciation": "≈ кэмпа́йлёр"
@@ -991,6 +1237,8 @@
       "english": "linker",
       "translation": "компоновщик",
       "example": "The linker cannot find the symbol.",
+      "example_translation": "Компоновщик не может найти символ.",
+      "example_pronunciation": "зэ ли́нгкэр кэ́нат файнд зэ си́мбэл.",
       "lesson": "Сборка, процессы и память",
       "transcription": "/ˈlɪŋkɚ/",
       "pronunciation": "≈ ли́нгкёр"
@@ -999,6 +1247,8 @@
       "english": "warning",
       "translation": "предупреждение",
       "example": "Please fix the compiler warning.",
+      "example_translation": "Пожалуйста, исправьте предупреждение компилятора.",
+      "example_pronunciation": "плиз фикс зэ кэмпа́йлэр уо́рнинг.",
       "lesson": "Сборка, процессы и память",
       "transcription": "/ˈwɔɹnɪŋ/",
       "pronunciation": "≈ уо́рнинг"
@@ -1007,6 +1257,8 @@
       "english": "binary",
       "translation": "двоичный файл; исполняемый файл",
       "example": "Run the newly built binary.",
+      "example_translation": "Запустите только что построенный бинарный файл.",
+      "example_pronunciation": "ран зэ ну́ли билт ба́йнэри.",
       "lesson": "Сборка, процессы и память",
       "transcription": "/ˈbaɪnɚi/",
       "pronunciation": "≈ ба́йнёри"
@@ -1015,6 +1267,8 @@
       "english": "executable",
       "translation": "исполняемый файл",
       "example": "Where is the executable installed?",
+      "example_translation": "Где установлен исполняемый файл?",
+      "example_pronunciation": "уэр из зэ эгзэ́кйэтэбэл инсто́лд?",
       "lesson": "Сборка, процессы и память",
       "transcription": "/ɛɡˈzɛkjətəbəl/",
       "pronunciation": "≈ эгзэ́кйэтэбэл"
@@ -1023,6 +1277,8 @@
       "english": "runtime",
       "translation": "время выполнения; среда выполнения",
       "example": "The error occurs at runtime.",
+      "example_translation": "Ошибка возникает во время выполнения.",
+      "example_pronunciation": "зэ э́рэр экё́рз эт ра́нтайм.",
       "lesson": "Сборка, процессы и память",
       "transcription": "/ˈɹʌnˌtaɪm/",
       "pronunciation": "≈ ра́нтайм"
@@ -1031,6 +1287,8 @@
       "english": "process",
       "translation": "процесс",
       "example": "The process is still running.",
+      "example_translation": "Процесс всё ещё работает.",
+      "example_pronunciation": "зэ пра́сэс из стил ра́нинг.",
       "lesson": "Сборка, процессы и память",
       "transcription": "/ˈpɹɑˌsɛs/",
       "pronunciation": "≈ пра́сэс"
@@ -1039,6 +1297,8 @@
       "english": "thread",
       "translation": "поток выполнения",
       "example": "This code runs on another thread.",
+      "example_translation": "Этот код выполняется в другом потоке.",
+      "example_pronunciation": "зис коуд ранз ан эна́зэр срэд.",
       "lesson": "Сборка, процессы и память",
       "transcription": "/θɹɛd/",
       "pronunciation": "≈ срэ́д"
@@ -1047,6 +1307,8 @@
       "english": "concurrency",
       "translation": "конкурентное выполнение",
       "example": "The bug only appears under concurrency.",
+      "example_translation": "Ошибка проявляется только при параллельном выполнении.",
+      "example_pronunciation": "зэ баг о́унли эпи́рз а́ндэр кэнкё́рэнси.",
       "lesson": "Сборка, процессы и память",
       "transcription": "/kənˈkɝənsi/",
       "pronunciation": "≈ кэнкё́рэнси"
@@ -1055,6 +1317,8 @@
       "english": "parallelism",
       "translation": "параллельное выполнение",
       "example": "Parallelism can reduce processing time.",
+      "example_translation": "Параллелизм может сократить время обработки.",
+      "example_pronunciation": "пэ́рэлэлизэм кэн рэду́с пра́сэсинг тайм.",
       "lesson": "Сборка, процессы и память",
       "transcription": "/ˈpɛɹəˌlɛˌlɪzəm/",
       "pronunciation": "≈ пэ́рэлэлизэм"
@@ -1063,6 +1327,8 @@
       "english": "synchronization",
       "translation": "синхронизация",
       "example": "This shared state needs synchronization.",
+      "example_translation": "Это общее состояние требует синхронизации.",
+      "example_pronunciation": "зис шэрд стэйт нидз сингкрэнэзэ́йшэн.",
       "lesson": "Сборка, процессы и память",
       "transcription": "/ˌsɪŋkɹənəˈzeɪʃən/",
       "pronunciation": "≈ сингкрэнэзэ́йшэн"
@@ -1071,6 +1337,8 @@
       "english": "mutex",
       "translation": "мьютекс",
       "example": "The mutex protects the shared data.",
+      "example_translation": "Мьютекс защищает общие данные.",
+      "example_pronunciation": "зэ мю́тэкс прэтэ́ктс зэ шэрд дэ́йтэ.",
       "lesson": "Сборка, процессы и память",
       "transcription": "/ˈmjuˌtɛks/",
       "pronunciation": "≈ мйу́тэкс"
@@ -1079,6 +1347,8 @@
       "english": "lock",
       "translation": "блокировка",
       "example": "Release the lock before the network call.",
+      "example_translation": "Освободите блокировку перед сетевым вызовом.",
+      "example_pronunciation": "рили́с зэ лак бифо́р зэ нэ́туёрк кол.",
       "lesson": "Сборка, процессы и память",
       "transcription": "/lɑk/",
       "pronunciation": "≈ ла́к"
@@ -1087,6 +1357,8 @@
       "english": "deadlock",
       "translation": "взаимная блокировка",
       "example": "The threads are stuck in a deadlock.",
+      "example_translation": "Потоки оказались во взаимной блокировке.",
+      "example_pronunciation": "зэ срэдз ар стак ин э дэ́длак.",
       "lesson": "Сборка, процессы и память",
       "transcription": "/ˈdɛdˌlɑk/",
       "pronunciation": "≈ дэ́длак"
@@ -1095,6 +1367,8 @@
       "english": "race condition",
       "translation": "состояние гонки",
       "example": "There is a race condition in this code.",
+      "example_translation": "В этом коде есть состояние гонки.",
+      "example_pronunciation": "зэр из э рэйс кэнди́шэн ин зис коуд.",
       "lesson": "Сборка, процессы и память",
       "transcription": "/ɹeɪs kənˈdɪʃən/",
       "pronunciation": "≈ рэ́йс кэнди́шэн"
@@ -1103,6 +1377,8 @@
       "english": "memory",
       "translation": "оперативная память",
       "example": "The process uses too much memory.",
+      "example_translation": "Процесс использует слишком много памяти.",
+      "example_pronunciation": "зэ пра́сэс ю́зиз ту мач мэ́мэри.",
       "lesson": "Сборка, процессы и память",
       "transcription": "/ˈmɛmɚi/",
       "pronunciation": "≈ мэ́мёри"
@@ -1111,6 +1387,8 @@
       "english": "allocation",
       "translation": "выделение памяти",
       "example": "This operation performs a memory allocation.",
+      "example_translation": "Эта операция выполняет выделение памяти.",
+      "example_pronunciation": "зис апэрэ́йшэн пэрфо́рмз э мэ́мэри элэкэ́йшэн.",
       "lesson": "Сборка, процессы и память",
       "transcription": "/ˌæləˈkeɪʃən/",
       "pronunciation": "≈ элэкэ́йшэн"
@@ -1119,6 +1397,8 @@
       "english": "leak",
       "translation": "утечка",
       "example": "We found a memory leak.",
+      "example_translation": "Мы обнаружили утечку памяти.",
+      "example_pronunciation": "уи фаунд э мэ́мэри лик.",
       "lesson": "Сборка, процессы и память",
       "transcription": "/lik/",
       "pronunciation": "≈ ли́к"
@@ -1127,6 +1407,8 @@
       "english": "stack",
       "translation": "стек",
       "example": "This object is stored on the stack.",
+      "example_translation": "Этот объект хранится в стеке.",
+      "example_pronunciation": "зис а́бджэкт из сторд ан зэ стэк.",
       "lesson": "Сборка, процессы и память",
       "transcription": "/stæk/",
       "pronunciation": "≈ стэ́к"
@@ -1135,6 +1417,8 @@
       "english": "heap",
       "translation": "куча; область динамической памяти",
       "example": "The data is allocated on the heap.",
+      "example_translation": "Данные выделяются в куче.",
+      "example_pronunciation": "зэ дэ́йтэ из э́лэкэйтид ан зэ хип.",
       "lesson": "Сборка, процессы и память",
       "transcription": "/hip/",
       "pronunciation": "≈ хи́п"
@@ -1143,6 +1427,8 @@
       "english": "pointer",
       "translation": "указатель",
       "example": "Check whether the pointer is null.",
+      "example_translation": "Проверьте, что указатель не равен null.",
+      "example_pronunciation": "чэк уэ́зэр зэ по́йнтэр из нал.",
       "lesson": "Сборка, процессы и память",
       "transcription": "/ˈpɔɪntɚ/",
       "pronunciation": "≈ по́йнтёр"
@@ -1151,6 +1437,8 @@
       "english": "reference",
       "translation": "ссылка",
       "example": "The function accepts a reference.",
+      "example_translation": "Функция принимает ссылку.",
+      "example_pronunciation": "зэ фа́нгкшэн эксэ́птс э рэ́фэрэнс.",
       "lesson": "Сборка, процессы и память",
       "transcription": "/ˈɹɛfɚəns/",
       "pronunciation": "≈ рэ́фёрэнс"
@@ -1159,6 +1447,8 @@
       "english": "ownership",
       "translation": "владение ресурсом",
       "example": "Resource ownership should be explicit.",
+      "example_translation": "Владение ресурсом должно быть явным.",
+      "example_pronunciation": "ри́сорс о́унэршип шуд би икспли́сэт.",
       "lesson": "Сборка, процессы и память",
       "transcription": "/ˈoʊnɚˌʃɪp/",
       "pronunciation": "≈ о́унёршип"
@@ -1167,6 +1457,8 @@
       "english": "lifetime",
       "translation": "время жизни",
       "example": "The reference must not outlive the object's lifetime.",
+      "example_translation": "Ссылка не должна превышать время жизни объекта.",
+      "example_pronunciation": "зэ рэ́фэрэнс маст нат аутли́в зэ а́бджэктс ла́йфтайм.",
       "lesson": "Сборка, процессы и память",
       "transcription": "/ˈlaɪfˌtaɪm/",
       "pronunciation": "≈ ла́йфтайм"
@@ -1175,6 +1467,8 @@
       "english": "resource",
       "translation": "ресурс",
       "example": "Release the resource after use.",
+      "example_translation": "Освободите ресурс после использования.",
+      "example_pronunciation": "рили́с зэ ри́сорс э́фтэр юс.",
       "lesson": "Сборка, процессы и память",
       "transcription": "/ˈɹisɔɹs/",
       "pronunciation": "≈ ри́сорс"
@@ -1183,6 +1477,8 @@
       "english": "buffer",
       "translation": "буфер",
       "example": "Check the buffer size.",
+      "example_translation": "Проверьте размер буфера.",
+      "example_pronunciation": "чэк зэ ба́фэр сайз.",
       "lesson": "Сборка, процессы и память",
       "transcription": "/ˈbʌfɚ/",
       "pronunciation": "≈ ба́фёр"
@@ -1191,6 +1487,8 @@
       "english": "overflow",
       "translation": "переполнение",
       "example": "The check prevents an integer overflow.",
+      "example_translation": "Проверка предотвращает переполнение целого числа.",
+      "example_pronunciation": "зэ чэк привэ́нтс эн и́нтэджэр о́увэрфлоу.",
       "lesson": "Сборка, процессы и память",
       "transcription": "/ˈoʊvɚˌfloʊ/",
       "pronunciation": "≈ о́увёрфлоу"
@@ -1199,6 +1497,8 @@
       "english": "undefined behavior",
       "translation": "неопределённое поведение",
       "example": "This code may cause undefined behavior.",
+      "example_translation": "Этот код может вызвать неопределённое поведение.",
+      "example_pronunciation": "зис коуд мэй каз андифа́йнд бихэ́йвйэр.",
       "lesson": "Сборка, процессы и память",
       "transcription": "/ˌʌndɪˈfaɪnd bɪˈheɪvjɚ/",
       "pronunciation": "≈ андифа́йнд бихэ́йвйёр"
@@ -1207,6 +1507,8 @@
       "english": "network",
       "translation": "сеть",
       "example": "The network connection is unstable.",
+      "example_translation": "Сетевое соединение нестабильно.",
+      "example_pronunciation": "зэ нэ́туёрк кэнэ́кшэн из энстэ́йбэл.",
       "lesson": "Сети и веб",
       "transcription": "/ˈnɛˌtwɝk/",
       "pronunciation": "≈ нэ́туёрк"
@@ -1215,6 +1517,8 @@
       "english": "server",
       "translation": "сервер",
       "example": "The server is not responding.",
+      "example_translation": "Сервер не отвечает.",
+      "example_pronunciation": "зэ сё́рвэр из нат риспа́ндинг.",
       "lesson": "Сети и веб",
       "transcription": "/ˈsɝvɚ/",
       "pronunciation": "≈ сё́рвёр"
@@ -1223,6 +1527,8 @@
       "english": "client",
       "translation": "клиентское приложение",
       "example": "The client sends a request.",
+      "example_translation": "Клиент отправляет запрос.",
+      "example_pronunciation": "зэ кла́йэнт сэндз э рикуэ́ст.",
       "lesson": "Сети и веб",
       "transcription": "/ˈklaɪənt/",
       "pronunciation": "≈ кла́йэнт"
@@ -1231,6 +1537,8 @@
       "english": "request",
       "translation": "запрос",
       "example": "The request timed out.",
+      "example_translation": "Время ожидания запроса истекло.",
+      "example_pronunciation": "зэ рикуэ́ст таймд аут.",
       "lesson": "Сети и веб",
       "transcription": "/ɹɪˈkwɛst/",
       "pronunciation": "≈ рикуэ́ст"
@@ -1239,6 +1547,8 @@
       "english": "response",
       "translation": "ответ",
       "example": "Check the response status.",
+      "example_translation": "Проверьте статус ответа.",
+      "example_pronunciation": "чэк зэ риспа́нс стэ́тэс.",
       "lesson": "Сети и веб",
       "transcription": "/ɹɪˈspɑns/",
       "pronunciation": "≈ риспа́нс"
@@ -1247,6 +1557,8 @@
       "english": "endpoint",
       "translation": "адрес операции API",
       "example": "Which endpoint handles this request?",
+      "example_translation": "Какой конечный пункт обрабатывает этот запрос?",
+      "example_pronunciation": "уич э́ндпойнт хэ́ндэлз зис рикуэ́ст?",
       "lesson": "Сети и веб",
       "transcription": "/ˈɛndˌpɔɪnt/",
       "pronunciation": "≈ э́ндпойнт"
@@ -1255,6 +1567,8 @@
       "english": "API",
       "translation": "программный интерфейс",
       "example": "The API returns JSON.",
+      "example_translation": "API возвращает JSON.",
+      "example_pronunciation": "зэ эй пи ай ритё́рнз джэ́йсэн.",
       "lesson": "Сети и веб",
       "transcription": "/ˌeɪ pi ˈaɪ/",
       "pronunciation": "≈ эй пи ай"
@@ -1263,6 +1577,8 @@
       "english": "HTTP",
       "translation": "протокол передачи веб-данных",
       "example": "The service uses HTTP.",
+      "example_translation": "Сервис использует HTTP.",
+      "example_pronunciation": "зэ сё́рвэс ю́зиз эйч ти ти пи.",
       "lesson": "Сети и веб",
       "transcription": "/ˌeɪtʃ ti ti ˈpi/",
       "pronunciation": "≈ эйч ти ти пи"
@@ -1271,6 +1587,8 @@
       "english": "URL",
       "translation": "адрес ресурса",
       "example": "Check the URL for typos.",
+      "example_translation": "Проверьте URL на опечатки.",
+      "example_pronunciation": "чэк зэ ю ар эл фор та́йпоуз.",
       "lesson": "Сети и веб",
       "transcription": "/ˌju ɑɹ ˈɛl/",
       "pronunciation": "≈ ю ар эл"
@@ -1279,6 +1597,8 @@
       "english": "header",
       "translation": "заголовок",
       "example": "The authorization header is missing.",
+      "example_translation": "Отсутствует заголовок авторизации.",
+      "example_pronunciation": "зэ осэрэзэ́йшэн хэ́дэр из ми́синг.",
       "lesson": "Сети и веб",
       "transcription": "/ˈhɛdɚ/",
       "pronunciation": "≈ хэ́дёр"
@@ -1287,6 +1607,8 @@
       "english": "payload",
       "translation": "полезные данные запроса",
       "example": "The payload contains the user name.",
+      "example_translation": "В полезной нагрузке содержится имя пользователя.",
+      "example_pronunciation": "зэ пэ́йлоуд кэнтэ́йнз зэ ю́зэр нэйм.",
       "lesson": "Сети и веб",
       "transcription": "/ˈpeɪˌloʊd/",
       "pronunciation": "≈ пэ́йлоуд"
@@ -1295,6 +1617,8 @@
       "english": "status code",
       "translation": "код состояния",
       "example": "What status code did the server return?",
+      "example_translation": "Какой код состояния вернул сервер?",
+      "example_pronunciation": "уат стэ́тэс коуд дид зэ сё́рвэр ритё́рн?",
       "lesson": "Сети и веб",
       "transcription": "/ˈstætəs koʊd/",
       "pronunciation": "≈ стэ́тэс ко́уд"
@@ -1303,6 +1627,8 @@
       "english": "timeout",
       "translation": "истечение времени ожидания",
       "example": "Increase the timeout only if necessary.",
+      "example_translation": "Увеличивайте тайм‑аут только при необходимости.",
+      "example_pronunciation": "инкри́с зэ та́ймаут о́унли иф нэ́сэсэри.",
       "lesson": "Сети и веб",
       "transcription": "/ˈtaɪˌmaʊt/",
       "pronunciation": "≈ та́ймаут"
@@ -1311,6 +1637,8 @@
       "english": "retry",
       "translation": "повторная попытка",
       "example": "The client will retry the request.",
+      "example_translation": "Клиент повторит запрос.",
+      "example_pronunciation": "зэ кла́йэнт уил ритра́й зэ рикуэ́ст.",
       "lesson": "Сети и веб",
       "transcription": "/ɹiˈtɹaɪ/",
       "pronunciation": "≈ ритра́й"
@@ -1319,6 +1647,8 @@
       "english": "latency",
       "translation": "задержка",
       "example": "We need to reduce latency.",
+      "example_translation": "Нужно уменьшить задержку.",
+      "example_pronunciation": "уи нид ту рэду́с лэ́йтэнси.",
       "lesson": "Сети и веб",
       "transcription": "/ˈleɪtənsi/",
       "pronunciation": "≈ лэ́йтэнси"
@@ -1327,6 +1657,8 @@
       "english": "bandwidth",
       "translation": "пропускная способность канала",
       "example": "The upload uses a lot of bandwidth.",
+      "example_translation": "Загрузка использует много пропускной способности.",
+      "example_pronunciation": "зэ а́плоуд ю́зиз э лат эв бэ́ндуидс.",
       "lesson": "Сети и веб",
       "transcription": "/ˈbændwɪdθ/",
       "pronunciation": "≈ бэ́ндуидс"
@@ -1335,6 +1667,8 @@
       "english": "throughput",
       "translation": "производительность по объёму операций",
       "example": "Measure throughput under load.",
+      "example_translation": "Измерьте пропускную способность под нагрузкой.",
+      "example_pronunciation": "мэ́жэр сру́пут а́ндэр лоуд.",
       "lesson": "Сети и веб",
       "transcription": "/ˈθɹuˌpʊt/",
       "pronunciation": "≈ сру́пут"
@@ -1343,6 +1677,8 @@
       "english": "connection",
       "translation": "соединение",
       "example": "The connection was closed.",
+      "example_translation": "Соединение было закрыто.",
+      "example_pronunciation": "зэ кэнэ́кшэн уаз клоузд.",
       "lesson": "Сети и веб",
       "transcription": "/kəˈnɛkʃən/",
       "pronunciation": "≈ кэнэ́кшэн"
@@ -1351,6 +1687,8 @@
       "english": "socket",
       "translation": "сетевой сокет",
       "example": "The socket is ready for reading.",
+      "example_translation": "Сокет готов к чтению.",
+      "example_pronunciation": "зэ са́кэт из рэ́ди фор ри́динг.",
       "lesson": "Сети и веб",
       "transcription": "/ˈsɑkət/",
       "pronunciation": "≈ са́кэт"
@@ -1359,6 +1697,8 @@
       "english": "port",
       "translation": "сетевой порт",
       "example": "Which port does the service use?",
+      "example_translation": "Какой порт использует сервис?",
+      "example_pronunciation": "уич порт даз зэ сё́рвэс юз?",
       "lesson": "Сети и веб",
       "transcription": "/pɔɹt/",
       "pronunciation": "≈ по́рт"
@@ -1367,6 +1707,8 @@
       "english": "protocol",
       "translation": "протокол",
       "example": "Both systems use the same protocol.",
+      "example_translation": "Обе системы используют один и тот же протокол.",
+      "example_pronunciation": "боус си́стэмз юз зэ сэйм про́утэкал.",
       "lesson": "Сети и веб",
       "transcription": "/ˈpɹoʊtəˌkɑl/",
       "pronunciation": "≈ про́утэкал"
@@ -1375,6 +1717,8 @@
       "english": "DNS",
       "translation": "система доменных имён",
       "example": "Check the DNS configuration.",
+      "example_translation": "Проверьте конфигурацию DNS.",
+      "example_pronunciation": "чэк зэ ди эн эс кэнфигйэрэ́йшэн.",
       "lesson": "Сети и веб",
       "transcription": "/ˌdi ɛn ˈɛs/",
       "pronunciation": "≈ ди эн эс"
@@ -1383,6 +1727,8 @@
       "english": "domain",
       "translation": "домен; предметная область",
       "example": "The domain name has changed.",
+      "example_translation": "Имя домена изменилось.",
+      "example_pronunciation": "зэ доумэ́йн нэйм хэз чэйнджд.",
       "lesson": "Сети и веб",
       "transcription": "/doʊˈmeɪn/",
       "pronunciation": "≈ доумэ́йн"
@@ -1391,6 +1737,8 @@
       "english": "proxy",
       "translation": "прокси-сервер",
       "example": "The request passes through a proxy.",
+      "example_translation": "Запрос проходит через прокси.",
+      "example_pronunciation": "зэ рикуэ́ст пэ́сэз сру э пра́кси.",
       "lesson": "Сети и веб",
       "transcription": "/ˈpɹɑksi/",
       "pronunciation": "≈ пра́кси"
@@ -1399,6 +1747,8 @@
       "english": "firewall",
       "translation": "межсетевой экран",
       "example": "The firewall blocks this connection.",
+      "example_translation": "Брандмауэр блокирует это соединение.",
+      "example_pronunciation": "зэ фа́йруал блакс зис кэнэ́кшэн.",
       "lesson": "Сети и веб",
       "transcription": "/ˈfaɪɹwɑl/",
       "pronunciation": "≈ фа́йруал"
@@ -1407,6 +1757,8 @@
       "english": "TLS",
       "translation": "протокол защиты транспортного соединения",
       "example": "The connection uses TLS.",
+      "example_translation": "Соединение использует TLS.",
+      "example_pronunciation": "зэ кэнэ́кшэн ю́зиз ти эл эс.",
       "lesson": "Сети и веб",
       "transcription": "/ˌti ɛl ˈɛs/",
       "pronunciation": "≈ ти эл эс"
@@ -1415,6 +1767,8 @@
       "english": "certificate",
       "translation": "цифровой сертификат",
       "example": "The certificate has expired.",
+      "example_translation": "Сертификат истёк.",
+      "example_pronunciation": "зэ сэрти́фикэт хэз икспа́йрд.",
       "lesson": "Сети и веб",
       "transcription": "/sɚˈtɪfɪkət/",
       "pronunciation": "≈ сёрти́фикэт"
@@ -1423,6 +1777,8 @@
       "english": "webhook",
       "translation": "обратный HTTP-вызов по событию",
       "example": "The payment service sends a webhook.",
+      "example_translation": "Сервис оплаты отправляет веб‑хук.",
+      "example_pronunciation": "зэ пэ́ймэнт сё́рвэс сэндз э уэ́бхук.",
       "lesson": "Сети и веб",
       "transcription": "/ˈwɛbˌhʊk/",
       "pronunciation": "≈ уэ́бхук"
@@ -1431,6 +1787,8 @@
       "english": "cache",
       "translation": "кеш",
       "example": "The response was served from the cache.",
+      "example_translation": "Ответ был получен из кэша.",
+      "example_pronunciation": "зэ риспа́нс уаз сёрвд фрам зэ кэш.",
       "lesson": "Сети и веб",
       "transcription": "/kæʃ/",
       "pronunciation": "≈ кэ́ш"
@@ -1439,6 +1797,8 @@
       "english": "cookie",
       "translation": "данные браузера для сайта",
       "example": "The session cookie has expired.",
+      "example_translation": "Сессионный cookie истёк.",
+      "example_pronunciation": "зэ сэ́шэн ку́ки хэз икспа́йрд.",
       "lesson": "Сети и веб",
       "transcription": "/ˈkʊki/",
       "pronunciation": "≈ ку́ки"
@@ -1447,6 +1807,8 @@
       "english": "database",
       "translation": "база данных",
       "example": "The database is unavailable.",
+      "example_translation": "База данных недоступна.",
+      "example_pronunciation": "зэ дэ́йтэбэйс из анэвэ́йлэбэл.",
       "lesson": "Базы данных и данные",
       "transcription": "/ˈdeɪtəˌbeɪs/",
       "pronunciation": "≈ дэ́йтэбэйс"
@@ -1455,6 +1817,8 @@
       "english": "table",
       "translation": "таблица",
       "example": "The table stores user accounts.",
+      "example_translation": "Таблица хранит учётные записи пользователей.",
+      "example_pronunciation": "зэ тэ́йбэл сторз ю́зэр эка́унтс.",
       "lesson": "Базы данных и данные",
       "transcription": "/ˈteɪbəl/",
       "pronunciation": "≈ тэ́йбэл"
@@ -1463,6 +1827,8 @@
       "english": "row",
       "translation": "строка таблицы",
       "example": "The query returned one row.",
+      "example_translation": "Запрос вернул одну строку.",
+      "example_pronunciation": "зэ куи́ри ритё́рнд уан роу.",
       "lesson": "Базы данных и данные",
       "transcription": "/ɹoʊ/",
       "pronunciation": "≈ ро́у"
@@ -1471,6 +1837,8 @@
       "english": "column",
       "translation": "столбец",
       "example": "Add a column for the timestamp.",
+      "example_translation": "Добавьте столбец для метки времени.",
+      "example_pronunciation": "эд э ка́лэм фор зэ та́ймстэмп.",
       "lesson": "Базы данных и данные",
       "transcription": "/ˈkɑləm/",
       "pronunciation": "≈ ка́лэм"
@@ -1479,6 +1847,8 @@
       "english": "schema",
       "translation": "схема базы или данных",
       "example": "The migration changes the schema.",
+      "example_translation": "Миграция изменяет схему.",
+      "example_pronunciation": "зэ майгрэ́йшэн чэ́йнджэз зэ ски́мэ.",
       "lesson": "Базы данных и данные",
       "transcription": "/ˈskimə/",
       "pronunciation": "≈ ски́мэ"
@@ -1487,6 +1857,8 @@
       "english": "query",
       "translation": "запрос к базе данных",
       "example": "This query is slow.",
+      "example_translation": "Этот запрос работает медленно.",
+      "example_pronunciation": "зис куи́ри из слоу.",
       "lesson": "Базы данных и данные",
       "transcription": "/ˈkwiɹi/",
       "pronunciation": "≈ куи́ри"
@@ -1495,6 +1867,8 @@
       "english": "index",
       "translation": "индекс",
       "example": "The index improves lookup speed.",
+      "example_translation": "Индекс ускоряет поиск.",
+      "example_pronunciation": "зэ и́ндэкс импру́вз лу́кэп спид.",
       "lesson": "Базы данных и данные",
       "transcription": "/ˈɪndɛks/",
       "pronunciation": "≈ и́ндэкс"
@@ -1503,6 +1877,8 @@
       "english": "primary key",
       "translation": "первичный ключ",
       "example": "Each row has a primary key.",
+      "example_translation": "Каждая строка имеет первичный ключ.",
+      "example_pronunciation": "ич роу хэз э пра́ймэри ки.",
       "lesson": "Базы данных и данные",
       "transcription": "/ˈpɹaɪˌmɛɹi ki/",
       "pronunciation": "≈ пра́ймэри ки́"
@@ -1511,6 +1887,8 @@
       "english": "foreign key",
       "translation": "внешний ключ",
       "example": "The foreign key references the users table.",
+      "example_translation": "Внешний ключ ссылается на таблицу users.",
+      "example_pronunciation": "зэ фо́рэн ки рэ́фэрэнсиз зэ ю́зэрз тэ́йбэл.",
       "lesson": "Базы данных и данные",
       "transcription": "/ˈfɔɹən ki/",
       "pronunciation": "≈ фо́рэн ки́"
@@ -1519,6 +1897,8 @@
       "english": "constraint",
       "translation": "ограничение целостности",
       "example": "The insert violated a constraint.",
+      "example_translation": "Вставка нарушила ограничение.",
+      "example_pronunciation": "зэ инсё́рт ва́йэлэйтид э кэнстрэ́йнт.",
       "lesson": "Базы данных и данные",
       "transcription": "/kənˈstɹeɪnt/",
       "pronunciation": "≈ кэнстрэ́йнт"
@@ -1527,6 +1907,8 @@
       "english": "transaction",
       "translation": "транзакция",
       "example": "Save both changes in one transaction.",
+      "example_translation": "Сохраните оба изменения в одной транзакции.",
+      "example_pronunciation": "сэйв боус чэ́йнджэз ин уан трэнзэ́кшэн.",
       "lesson": "Базы данных и данные",
       "transcription": "/tɹænˈzækʃən/",
       "pronunciation": "≈ трэнзэ́кшэн"
@@ -1535,6 +1917,8 @@
       "english": "migration",
       "translation": "миграция схемы или данных",
       "example": "Back up the database before the migration.",
+      "example_translation": "Создайте резервную копию базы данных перед миграцией.",
+      "example_pronunciation": "бэк ап зэ дэ́йтэбэйс бифо́р зэ майгрэ́йшэн.",
       "lesson": "Базы данных и данные",
       "transcription": "/maɪˈɡɹeɪʃən/",
       "pronunciation": "≈ майгрэ́йшэн"
@@ -1543,6 +1927,8 @@
       "english": "backup",
       "translation": "резервная копия",
       "example": "We have a verified backup.",
+      "example_translation": "У нас есть проверенная резервная копия.",
+      "example_pronunciation": "уи хэв э вэ́рэфайд бэ́кап.",
       "lesson": "Базы данных и данные",
       "transcription": "/ˈbæˌkʌp/",
       "pronunciation": "≈ бэ́кап"
@@ -1551,6 +1937,8 @@
       "english": "restore",
       "translation": "восстанавливать",
       "example": "Restore the backup into a test database.",
+      "example_translation": "Восстановите резервную копию в тестовой базе данных.",
+      "example_pronunciation": "ристо́р зэ бэ́кап и́нту э тэст дэ́йтэбэйс.",
       "lesson": "Базы данных и данные",
       "transcription": "/ɹɪˈstɔɹ/",
       "pronunciation": "≈ ристо́р"
@@ -1559,6 +1947,8 @@
       "english": "insert",
       "translation": "вставлять",
       "example": "Insert a new row.",
+      "example_translation": "Вставьте новую строку.",
+      "example_pronunciation": "инсё́рт э ну роу.",
       "lesson": "Базы данных и данные",
       "transcription": "/ˌɪnˈsɝt/",
       "pronunciation": "≈ инсё́рт"
@@ -1567,6 +1957,8 @@
       "english": "update",
       "translation": "обновлять",
       "example": "Update the user's settings.",
+      "example_translation": "Обновите настройки пользователя.",
+      "example_pronunciation": "эпдэ́йт зэ ю́зэрз сэ́тингз.",
       "lesson": "Базы данных и данные",
       "transcription": "/əpˈdeɪt/",
       "pronunciation": "≈ эпдэ́йт"
@@ -1575,6 +1967,8 @@
       "english": "delete",
       "translation": "удалять",
       "example": "Delete only the selected records.",
+      "example_translation": "Удалите только выбранные записи.",
+      "example_pronunciation": "дили́т о́унли зэ сэлэ́ктид рэ́кэрдз.",
       "lesson": "Базы данных и данные",
       "transcription": "/dɪˈlit/",
       "pronunciation": "≈ дили́т"
@@ -1583,6 +1977,8 @@
       "english": "record",
       "translation": "запись",
       "example": "The record already exists.",
+      "example_translation": "Запись уже существует.",
+      "example_pronunciation": "зэ рэ́кэрд олрэ́ди игзи́стс.",
       "lesson": "Базы данных и данные",
       "transcription": "/ˈɹɛkɚd/",
       "pronunciation": "≈ рэ́кёрд"
@@ -1591,6 +1987,8 @@
       "english": "duplicate",
       "translation": "дубликат",
       "example": "The unique constraint prevents duplicates.",
+      "example_translation": "Уникальное ограничение предотвращает дублирование.",
+      "example_pronunciation": "зэ юни́к кэнстрэ́йнт привэ́нтс дю́плэкэйтс.",
       "lesson": "Базы данных и данные",
       "transcription": "/ˈdupləkət/",
       "pronunciation": "≈ ду́плэкэт"
@@ -1599,6 +1997,8 @@
       "english": "null",
       "translation": "отсутствующее значение NULL",
       "example": "null is different from an empty string.",
+      "example_translation": "null отличается от пустой строки.",
+      "example_pronunciation": "нал из ди́фэрэнт фрам эн э́мпти стринг.",
       "lesson": "Базы данных и данные",
       "transcription": "/nʌl/",
       "pronunciation": "≈ на́л"
@@ -1607,6 +2007,8 @@
       "english": "join",
       "translation": "соединение таблиц",
       "example": "The query uses a join.",
+      "example_translation": "Запрос использует соединение (JOIN).",
+      "example_pronunciation": "зэ куи́ри ю́зиз э джойн.",
       "lesson": "Базы данных и данные",
       "transcription": "/dʒɔɪn/",
       "pronunciation": "≈ джо́йн"
@@ -1615,6 +2017,8 @@
       "english": "filter",
       "translation": "фильтр; фильтровать",
       "example": "Filter the results by date.",
+      "example_translation": "Отфильтруйте результаты по дате.",
+      "example_pronunciation": "фи́лтэр зэ риза́лтс бай дэйт.",
       "lesson": "Базы данных и данные",
       "transcription": "/ˈfɪltɚ/",
       "pronunciation": "≈ фи́лтёр"
@@ -1623,6 +2027,8 @@
       "english": "sort",
       "translation": "сортировать",
       "example": "Sort the rows by creation time.",
+      "example_translation": "Отсортируйте строки по времени создания.",
+      "example_pronunciation": "сорт зэ роуз бай криэ́йшэн тайм.",
       "lesson": "Базы данных и данные",
       "transcription": "/sɔɹt/",
       "pronunciation": "≈ со́рт"
@@ -1631,6 +2037,8 @@
       "english": "aggregate",
       "translation": "агрегировать; объединять показатели",
       "example": "Aggregate the results by user.",
+      "example_translation": "Сгруппируйте результаты по пользователю.",
+      "example_pronunciation": "э́грэгэт зэ риза́лтс бай ю́зэр.",
       "lesson": "Базы данных и данные",
       "transcription": "/ˈæɡɹəɡət/",
       "pronunciation": "≈ э́грэгэт"
@@ -1639,6 +2047,8 @@
       "english": "consistency",
       "translation": "согласованность",
       "example": "The transaction preserves consistency.",
+      "example_translation": "Транзакция сохраняет согласованность данных.",
+      "example_pronunciation": "зэ трэнзэ́кшэн прэзё́рвз кэнси́стэнси.",
       "lesson": "Базы данных и данные",
       "transcription": "/kənˈsɪstənsi/",
       "pronunciation": "≈ кэнси́стэнси"
@@ -1647,6 +2057,8 @@
       "english": "isolation",
       "translation": "изоляция",
       "example": "Check the transaction isolation level.",
+      "example_translation": "Проверьте уровень изоляции транзакции.",
+      "example_pronunciation": "чэк зэ трэнзэ́кшэн айсэлэ́йшэн лэ́вэл.",
       "lesson": "Базы данных и данные",
       "transcription": "/ˌaɪsəˈleɪʃən/",
       "pronunciation": "≈ айсэлэ́йшэн"
@@ -1655,6 +2067,8 @@
       "english": "serialization",
       "translation": "сериализация",
       "example": "Serialization converts the object into a message.",
+      "example_translation": "Сериализация преобразует объект в сообщение.",
+      "example_pronunciation": "сириэлэзэ́йшэн ка́нвэртс зэ а́бджэкт и́нту э мэ́сэдж.",
       "lesson": "Базы данных и данные",
       "transcription": "/ˌsɪɹiələˈzeɪʃən/",
       "pronunciation": "≈ сириэлэзэ́йшэн"
@@ -1663,6 +2077,8 @@
       "english": "encoding",
       "translation": "кодирование; кодировка",
       "example": "Use UTF-8 encoding.",
+      "example_translation": "Используйте кодировку UTF‑8.",
+      "example_pronunciation": "юз ю ти эф-эйт энко́удинг.",
       "lesson": "Базы данных и данные",
       "transcription": "/ɛnˈkoʊdɪŋ/",
       "pronunciation": "≈ энко́удинг"
@@ -1671,6 +2087,8 @@
       "english": "deploy",
       "translation": "развёртывать",
       "example": "We will deploy after the checks pass.",
+      "example_translation": "Мы развернём приложение после успешного прохождения проверок.",
+      "example_pronunciation": "уи уил дипло́й э́фтэр зэ чэкс пэс.",
       "lesson": "Развёртывание и эксплуатация",
       "transcription": "/dɪˈplɔɪ/",
       "pronunciation": "≈ дипло́й"
@@ -1679,6 +2097,8 @@
       "english": "deployment",
       "translation": "развёртывание",
       "example": "The deployment completed successfully.",
+      "example_translation": "Развёртывание завершилось успешно.",
+      "example_pronunciation": "зэ дипло́ймэнт кэмпли́тэд сэксэ́сфэли.",
       "lesson": "Развёртывание и эксплуатация",
       "transcription": "/dɪˈplɔɪmənt/",
       "pronunciation": "≈ дипло́ймэнт"
@@ -1687,6 +2107,8 @@
       "english": "environment",
       "translation": "окружение",
       "example": "Which environment has the problem?",
+      "example_translation": "В какой среде возникла проблема?",
+      "example_pronunciation": "уич инва́йрэнмэнт хэз зэ пра́блэм?",
       "lesson": "Развёртывание и эксплуатация",
       "transcription": "/ɪnˈvaɪɹənmənt/",
       "pronunciation": "≈ инва́йрэнмэнт"
@@ -1695,6 +2117,8 @@
       "english": "production",
       "translation": "рабочая среда",
       "example": "Do not use test credentials in production.",
+      "example_translation": "Не используйте тестовые учётные данные в продакшене.",
+      "example_pronunciation": "ду нат юз тэст крэдэ́ншэлз ин прэда́кшэн.",
       "lesson": "Развёртывание и эксплуатация",
       "transcription": "/pɹəˈdʌkʃən/",
       "pronunciation": "≈ прэда́кшэн"
@@ -1703,6 +2127,8 @@
       "english": "staging",
       "translation": "предпродакшен; проверочное окружение",
       "example": "Test the migration in staging.",
+      "example_translation": "Протестируйте миграцию в стейджинге.",
+      "example_pronunciation": "тэст зэ майгрэ́йшэн ин стэ́йджинг.",
       "lesson": "Развёртывание и эксплуатация",
       "transcription": "/ˈsteɪdʒɪŋ/",
       "pronunciation": "≈ стэ́йджинг"
@@ -1711,6 +2137,8 @@
       "english": "configuration",
       "translation": "конфигурация",
       "example": "Check the service configuration.",
+      "example_translation": "Проверьте конфигурацию сервиса.",
+      "example_pronunciation": "чэк зэ сё́рвэс кэнфигйэрэ́йшэн.",
       "lesson": "Развёртывание и эксплуатация",
       "transcription": "/kənˌfɪɡjɚˈeɪʃən/",
       "pronunciation": "≈ кэнфигйёрэ́йшэн"
@@ -1719,6 +2147,8 @@
       "english": "environment variable",
       "translation": "переменная окружения",
       "example": "Store the setting in an environment variable.",
+      "example_translation": "Сохраните настройку в переменной окружения.",
+      "example_pronunciation": "стор зэ сэ́тинг ин эн инва́йрэнмэнт вэ́риэбэл.",
       "lesson": "Развёртывание и эксплуатация",
       "transcription": "/ɪnˈvaɪɹənmənt ˈvɛɹiəbəl/",
       "pronunciation": "≈ инва́йрэнмэнт вэ́риэбэл"
@@ -1727,6 +2157,8 @@
       "english": "secret",
       "translation": "секрет; чувствительное значение",
       "example": "Do not put secrets in the repository.",
+      "example_translation": "Не помещайте секреты в репозиторий.",
+      "example_pronunciation": "ду нат пут си́крэтс ин зэ рипа́зэтори.",
       "lesson": "Развёртывание и эксплуатация",
       "transcription": "/ˈsikɹət/",
       "pronunciation": "≈ си́крэт"
@@ -1735,6 +2167,8 @@
       "english": "credential",
       "translation": "учётные данные",
       "example": "The credentials are stored securely.",
+      "example_translation": "Учётные данные хранятся безопасно.",
+      "example_pronunciation": "зэ крэдэ́ншэлз ар сторд сикю́рли.",
       "lesson": "Развёртывание и эксплуатация",
       "transcription": "/kɹɪˈdɛnʃəl/",
       "pronunciation": "≈ кридэ́ншэл"
@@ -1743,6 +2177,8 @@
       "english": "container",
       "translation": "контейнер",
       "example": "Restart the container after updating the image.",
+      "example_translation": "Перезапустите контейнер после обновления образа.",
+      "example_pronunciation": "риста́рт зэ кэнтэ́йнэр э́фтэр эпдэ́йтинг зэ и́мэдж.",
       "lesson": "Развёртывание и эксплуатация",
       "transcription": "/kənˈteɪnɚ/",
       "pronunciation": "≈ кэнтэ́йнёр"
@@ -1751,6 +2187,8 @@
       "english": "image",
       "translation": "образ контейнера или диска",
       "example": "Build the image from the new source.",
+      "example_translation": "Соберите образ из нового исходного кода.",
+      "example_pronunciation": "билд зэ и́мэдж фрам зэ ну сорс.",
       "lesson": "Развёртывание и эксплуатация",
       "transcription": "/ˈɪmədʒ/",
       "pronunciation": "≈ и́мэдж"
@@ -1759,6 +2197,8 @@
       "english": "volume",
       "translation": "том хранения",
       "example": "The database files are stored on a volume.",
+      "example_translation": "Файлы базы данных хранятся на томе.",
+      "example_pronunciation": "зэ дэ́йтэбэйс файлз ар сторд ан э ва́люм.",
       "lesson": "Развёртывание и эксплуатация",
       "transcription": "/ˈvɑljum/",
       "pronunciation": "≈ ва́лйум"
@@ -1767,6 +2207,8 @@
       "english": "log",
       "translation": "журнал; записывать в журнал",
       "example": "Check the logs for errors.",
+      "example_translation": "Проверьте логи на наличие ошибок.",
+      "example_pronunciation": "чэк зэ логз фор э́рэрз.",
       "lesson": "Развёртывание и эксплуатация",
       "transcription": "/lɔɡ/",
       "pronunciation": "≈ ло́г"
@@ -1775,6 +2217,8 @@
       "english": "metric",
       "translation": "метрика",
       "example": "This metric measures request latency.",
+      "example_translation": "Эта метрика измеряет задержку запросов.",
+      "example_pronunciation": "зис мэ́трик мэ́жэрз рикуэ́ст лэ́йтэнси.",
       "lesson": "Развёртывание и эксплуатация",
       "transcription": "/ˈmɛtɹɪk/",
       "pronunciation": "≈ мэ́трик"
@@ -1783,6 +2227,8 @@
       "english": "monitoring",
       "translation": "мониторинг",
       "example": "Monitoring detected the outage.",
+      "example_translation": "Мониторинг обнаружил сбой.",
+      "example_pronunciation": "ма́нэтэринг дитэ́ктэд зэ а́утэдж.",
       "lesson": "Развёртывание и эксплуатация",
       "transcription": "/ˈmɑnətɚɪŋ/",
       "pronunciation": "≈ ма́нэтёринг"
@@ -1791,6 +2237,8 @@
       "english": "alert",
       "translation": "оповещение",
       "example": "The alert fired after repeated failures.",
+      "example_translation": "Тревога сработала после повторных неудач.",
+      "example_pronunciation": "зэ элё́рт фа́йэрд э́фтэр рипи́тид фэ́йлйэрз.",
       "lesson": "Развёртывание и эксплуатация",
       "transcription": "/əˈlɝt/",
       "pronunciation": "≈ элё́рт"
@@ -1799,6 +2247,8 @@
       "english": "outage",
       "translation": "период недоступности",
       "example": "The outage lasted ten minutes.",
+      "example_translation": "Сбой длился десять минут.",
+      "example_pronunciation": "зэ а́утэдж лэ́стэд тэн ми́нэтс.",
       "lesson": "Развёртывание и эксплуатация",
       "transcription": "/ˈaʊtədʒ/",
       "pronunciation": "≈ а́утэдж"
@@ -1807,6 +2257,8 @@
       "english": "incident",
       "translation": "инцидент",
       "example": "We are investigating the incident.",
+      "example_translation": "Мы расследуем инцидент.",
+      "example_pronunciation": "уи ар инвэ́стэгэйтинг зэ и́нсэдэнт.",
       "lesson": "Развёртывание и эксплуатация",
       "transcription": "/ˈɪnsədənt/",
       "pronunciation": "≈ и́нсэдэнт"
@@ -1815,6 +2267,8 @@
       "english": "uptime",
       "translation": "время доступности",
       "example": "We track service uptime.",
+      "example_translation": "Мы отслеживаем время безотказной работы сервиса.",
+      "example_pronunciation": "уи трэк сё́рвэс а́птайм.",
       "lesson": "Развёртывание и эксплуатация",
       "transcription": "/ˈʌpˌtaɪm/",
       "pronunciation": "≈ а́птайм"
@@ -1823,6 +2277,8 @@
       "english": "health check",
       "translation": "проверка работоспособности",
       "example": "The health check is failing.",
+      "example_translation": "Проверка состояния не проходит.",
+      "example_pronunciation": "зэ хэлс чэк из фэ́йлинг.",
       "lesson": "Развёртывание и эксплуатация",
       "transcription": "/hɛlθ tʃɛk/",
       "pronunciation": "≈ хэ́лс чэ́к"
@@ -1831,6 +2287,8 @@
       "english": "load",
       "translation": "нагрузка",
       "example": "Test the service under load.",
+      "example_translation": "Протестируйте сервис под нагрузкой.",
+      "example_pronunciation": "тэст зэ сё́рвэс а́ндэр лоуд.",
       "lesson": "Развёртывание и эксплуатация",
       "transcription": "/loʊd/",
       "pronunciation": "≈ ло́уд"
@@ -1839,6 +2297,8 @@
       "english": "scaling",
       "translation": "масштабирование",
       "example": "We need to plan for scaling.",
+      "example_translation": "Нужно планировать масштабирование.",
+      "example_pronunciation": "уи нид ту плэн фор скэ́йлинг.",
       "lesson": "Развёртывание и эксплуатация",
       "transcription": "/ˈskeɪlɪŋ/",
       "pronunciation": "≈ скэ́йлинг"
@@ -1847,6 +2307,8 @@
       "english": "replica",
       "translation": "реплика",
       "example": "The read replica is behind the primary.",
+      "example_translation": "Реплика чтения отстаёт от основной.",
+      "example_pronunciation": "зэ рид рэ́пликэ из биха́йнд зэ пра́ймэри.",
       "lesson": "Развёртывание и эксплуатация",
       "transcription": "/ˈɹɛplɪkə/",
       "pronunciation": "≈ рэ́пликэ"
@@ -1855,6 +2317,8 @@
       "english": "queue",
       "translation": "очередь",
       "example": "The worker reads from the queue.",
+      "example_translation": "Рабочий процесс читает из очереди.",
+      "example_pronunciation": "зэ уё́ркэр ридз фрам зэ кю.",
       "lesson": "Развёртывание и эксплуатация",
       "transcription": "/kju/",
       "pronunciation": "≈ кйу́"
@@ -1863,6 +2327,8 @@
       "english": "worker",
       "translation": "фоновый обработчик",
       "example": "The worker processes incoming jobs.",
+      "example_translation": "Рабочий процесс обрабатывает входящие задачи.",
+      "example_pronunciation": "зэ уё́ркэр пра́сэсэз и́нкаминг джабз.",
       "lesson": "Развёртывание и эксплуатация",
       "transcription": "/ˈwɝkɚ/",
       "pronunciation": "≈ уё́ркёр"
@@ -1871,6 +2337,8 @@
       "english": "scheduler",
       "translation": "планировщик",
       "example": "The scheduler runs the task daily.",
+      "example_translation": "Планировщик запускает задачу ежедневно.",
+      "example_pronunciation": "зэ скэ́джулэр ранз зэ тэск дэ́йли.",
       "lesson": "Развёртывание и эксплуатация",
       "transcription": "/ˈskɛdʒʊlɚ/",
       "pronunciation": "≈ скэ́джулёр"
@@ -1879,6 +2347,8 @@
       "english": "job",
       "translation": "фоновая задача",
       "example": "The job failed and will be retried.",
+      "example_translation": "Задача завершилась с ошибкой и будет повторена.",
+      "example_pronunciation": "зэ джаб фэйлд энд уил би ритра́йд.",
       "lesson": "Развёртывание и эксплуатация",
       "transcription": "/dʒɑb/",
       "pronunciation": "≈ джа́б"
@@ -1887,6 +2357,8 @@
       "english": "pipeline",
       "translation": "конвейер обработки или проверки",
       "example": "The pipeline runs the tests automatically.",
+      "example_translation": "Конвейер автоматически запускает тесты.",
+      "example_pronunciation": "зэ па́йплайн ранз зэ тэстс отэмэ́тикли.",
       "lesson": "Развёртывание и эксплуатация",
       "transcription": "/ˈpaɪˌplaɪn/",
       "pronunciation": "≈ па́йплайн"
@@ -1895,6 +2367,8 @@
       "english": "continuous integration",
       "translation": "непрерывная интеграция",
       "example": "Continuous integration checks each change.",
+      "example_translation": "Непрерывная интеграция проверяет каждое изменение.",
+      "example_pronunciation": "кэнти́нюэс интэгрэ́йшэн чэкс ич чэйндж.",
       "lesson": "Развёртывание и эксплуатация",
       "transcription": "/kənˈtɪnjuəs ˌɪntəˈɡɹeɪʃən/",
       "pronunciation": "≈ кэнти́нйуэс интэгрэ́йшэн"
@@ -1903,6 +2377,8 @@
       "english": "release notes",
       "translation": "примечания к выпуску",
       "example": "Read the release notes before upgrading.",
+      "example_translation": "Прочитайте примечания к выпуску перед обновлением.",
+      "example_pronunciation": "рид зэ рили́с ноутс бифо́р эпгрэ́йдинг.",
       "lesson": "Развёртывание и эксплуатация",
       "transcription": "/ɹiˈlis noʊts/",
       "pronunciation": "≈ рили́с но́утс"
@@ -1911,6 +2387,8 @@
       "english": "authentication",
       "translation": "проверка личности",
       "example": "Authentication failed.",
+      "example_translation": "Ошибка аутентификации.",
+      "example_pronunciation": "осэнтэкэ́йшэн фэйлд.",
       "lesson": "Безопасность и качество решений",
       "transcription": "/ɔˌθɛntəˈkeɪʃən/",
       "pronunciation": "≈ осэнтэкэ́йшэн"
@@ -1919,6 +2397,8 @@
       "english": "authorization",
       "translation": "проверка прав доступа",
       "example": "Authorization is checked on the server.",
+      "example_translation": "Авторизация проверяется на сервере.",
+      "example_pronunciation": "осэрэзэ́йшэн из чэкт ан зэ сё́рвэр.",
       "lesson": "Безопасность и качество решений",
       "transcription": "/ˌɔθɚəˈzeɪʃən/",
       "pronunciation": "≈ осёрэзэ́йшэн"
@@ -1927,6 +2407,8 @@
       "english": "permission",
       "translation": "право доступа",
       "example": "The user lacks permission to edit this.",
+      "example_translation": "У пользователя нет прав на редактирование.",
+      "example_pronunciation": "зэ ю́зэр лэкс пэрми́шэн ту э́дэт зис.",
       "lesson": "Безопасность и качество решений",
       "transcription": "/pɚˈmɪʃən/",
       "pronunciation": "≈ пёрми́шэн"
@@ -1935,6 +2417,8 @@
       "english": "role",
       "translation": "роль",
       "example": "Assign the correct role to the account.",
+      "example_translation": "Назначьте правильную роль учетной записи.",
+      "example_pronunciation": "эса́йн зэ кэрэ́кт роул ту зэ эка́унт.",
       "lesson": "Безопасность и качество решений",
       "transcription": "/ɹoʊl/",
       "pronunciation": "≈ ро́ул"
@@ -1943,6 +2427,8 @@
       "english": "token",
       "translation": "токен",
       "example": "The access token has expired.",
+      "example_translation": "Срок действия токена доступа истёк.",
+      "example_pronunciation": "зэ э́ксэс то́укэн хэз икспа́йрд.",
       "lesson": "Безопасность и качество решений",
       "transcription": "/ˈtoʊkən/",
       "pronunciation": "≈ то́укэн"
@@ -1951,6 +2437,8 @@
       "english": "encryption",
       "translation": "шифрование",
       "example": "The connection uses encryption.",
+      "example_translation": "Соединение использует шифрование.",
+      "example_pronunciation": "зэ кэнэ́кшэн ю́зиз энкри́пшэн.",
       "lesson": "Безопасность и качество решений",
       "transcription": "/ɛnˈkɹɪpʃən/",
       "pronunciation": "≈ энкри́пшэн"
@@ -1959,6 +2447,8 @@
       "english": "hash",
       "translation": "хеш",
       "example": "Compare the file hash.",
+      "example_translation": "Сравните хеш файла.",
+      "example_pronunciation": "кэмпэ́р зэ файл хэш.",
       "lesson": "Безопасность и качество решений",
       "transcription": "/hæʃ/",
       "pronunciation": "≈ хэ́ш"
@@ -1967,6 +2457,8 @@
       "english": "salt",
       "translation": "соль для хеширования",
       "example": "Use a unique salt for each password.",
+      "example_translation": "Используйте уникальную соль для каждого пароля.",
+      "example_pronunciation": "юз э юни́к солт фор ич пэ́суёрд.",
       "lesson": "Безопасность и качество решений",
       "transcription": "/sɔlt/",
       "pronunciation": "≈ со́лт"
@@ -1975,6 +2467,8 @@
       "english": "vulnerability",
       "translation": "уязвимость",
       "example": "The update fixes a vulnerability.",
+      "example_translation": "Обновление исправляет уязвимость.",
+      "example_pronunciation": "зэ эпдэ́йт фи́ксиз э валнэрэби́лити.",
       "lesson": "Безопасность и качество решений",
       "transcription": "/ˌvʌlnɚəˈbɪlɪti/",
       "pronunciation": "≈ валнёрэби́лити"
@@ -1983,6 +2477,8 @@
       "english": "exploit",
       "translation": "эксплуатация уязвимости; эксплойт",
       "example": "The report describes a possible exploit.",
+      "example_translation": "Отчёт описывает возможный эксплойт.",
+      "example_pronunciation": "зэ рипо́рт дискра́йбз э па́сэбэл э́ксплойт.",
       "lesson": "Безопасность и качество решений",
       "transcription": "/ˈɛkˌsplɔɪt/",
       "pronunciation": "≈ э́ксплойт"
@@ -1991,6 +2487,8 @@
       "english": "sanitize",
       "translation": "очищать данные от опасных элементов",
       "example": "Sanitize untrusted HTML before rendering.",
+      "example_translation": "Очистите недоверенный HTML перед отображением.",
+      "example_pronunciation": "сэ́нитайз энтра́стид эйч ти эм эл бифо́р рэ́ндэринг.",
       "lesson": "Безопасность и качество решений",
       "transcription": "/ˈsænɪˌtaɪz/",
       "pronunciation": "≈ сэ́нитайз"
@@ -1999,6 +2497,8 @@
       "english": "escape",
       "translation": "экранировать",
       "example": "Escape text before inserting it into HTML.",
+      "example_translation": "Экранируйте текст перед вставкой в HTML.",
+      "example_pronunciation": "искэ́йп тэкст бифо́р инсё́ртинг ит и́нту эйч ти эм эл.",
       "lesson": "Безопасность и качество решений",
       "transcription": "/ɪˈskeɪp/",
       "pronunciation": "≈ искэ́йп"
@@ -2007,6 +2507,8 @@
       "english": "access control",
       "translation": "контроль доступа",
       "example": "Review the access control rules.",
+      "example_translation": "Проверьте правила контроля доступа.",
+      "example_pronunciation": "ривю́ зэ э́ксэс кэнтро́ул рулз.",
       "lesson": "Безопасность и качество решений",
       "transcription": "/ˈækˌsɛs kənˈtɹoʊl/",
       "pronunciation": "≈ э́ксэс кэнтро́ул"
@@ -2015,6 +2517,8 @@
       "english": "least privilege",
       "translation": "минимально необходимые права",
       "example": "Follow the principle of least privilege.",
+      "example_translation": "Следуйте принципу наименьших привилегий.",
+      "example_pronunciation": "фа́лоу зэ при́нсэпэл эв лист при́влэдж.",
       "lesson": "Безопасность и качество решений",
       "transcription": "/list ˈpɹɪvlədʒ/",
       "pronunciation": "≈ ли́ст при́влэдж"
@@ -2023,6 +2527,8 @@
       "english": "audit",
       "translation": "аудит; проверка",
       "example": "Keep an audit log of sensitive changes.",
+      "example_translation": "Ведите журнал аудита чувствительных изменений.",
+      "example_pronunciation": "кип эн о́дит лог эв сэ́нсэтив чэ́йнджэз.",
       "lesson": "Безопасность и качество решений",
       "transcription": "/ˈɔdɪt/",
       "pronunciation": "≈ о́дит"
@@ -2031,6 +2537,8 @@
       "english": "privacy",
       "translation": "конфиденциальность",
       "example": "Consider user privacy when logging data.",
+      "example_translation": "Учитывайте конфиденциальность пользователей при логировании данных.",
+      "example_pronunciation": "кэнси́дэр ю́зэр пра́йвэси уэн ло́гинг дэ́йтэ.",
       "lesson": "Безопасность и качество решений",
       "transcription": "/ˈpɹaɪvəsi/",
       "pronunciation": "≈ пра́йвэси"
@@ -2039,6 +2547,8 @@
       "english": "performance",
       "translation": "производительность",
       "example": "Measure performance before optimizing.",
+      "example_translation": "Измерьте производительность перед оптимизацией.",
+      "example_pronunciation": "мэ́жэр пэрфо́рмэнс бифо́р а́птэмайзинг.",
       "lesson": "Безопасность и качество решений",
       "transcription": "/pɚˈfɔɹməns/",
       "pronunciation": "≈ пёрфо́рмэнс"
@@ -2047,6 +2557,8 @@
       "english": "benchmark",
       "translation": "измерительный тест производительности",
       "example": "Run the benchmark on the same machine.",
+      "example_translation": "Запускайте бенчмарк на той же машине.",
+      "example_pronunciation": "ран зэ бэ́нчмарк ан зэ сэйм мэши́н.",
       "lesson": "Безопасность и качество решений",
       "transcription": "/ˈbɛntʃˌmɑɹk/",
       "pronunciation": "≈ бэ́нчмарк"
@@ -2055,6 +2567,8 @@
       "english": "bottleneck",
       "translation": "узкое место",
       "example": "The database is the bottleneck.",
+      "example_translation": "База данных является узким местом.",
+      "example_pronunciation": "зэ дэ́йтэбэйс из зэ ба́тэлнэк.",
       "lesson": "Безопасность и качество решений",
       "transcription": "/ˈbɑtəlˌnɛk/",
       "pronunciation": "≈ ба́тэлнэк"
@@ -2063,6 +2577,8 @@
       "english": "optimization",
       "translation": "оптимизация",
       "example": "This optimization reduces allocations.",
+      "example_translation": "Эта оптимизация уменьшает количество выделений памяти.",
+      "example_pronunciation": "зис аптэмэзэ́йшэн рэду́сэз элэкэ́йшэнз.",
       "lesson": "Безопасность и качество решений",
       "transcription": "/ɑptəməˈzeɪʃən/",
       "pronunciation": "≈ аптэмэзэ́йшэн"
@@ -2071,6 +2587,8 @@
       "english": "trade-off",
       "translation": "компромисс между свойствами",
       "example": "There is a trade-off between speed and memory use.",
+      "example_translation": "Существует компромисс между скоростью и использованием памяти.",
+      "example_pronunciation": "зэр из э трэйд-оф битуи́н спид энд мэ́мэри юс.",
       "lesson": "Безопасность и качество решений",
       "transcription": "/ˈtɹeɪˌdɔf/",
       "pronunciation": "≈ трэ́йдоф"
@@ -2079,6 +2597,8 @@
       "english": "maintainability",
       "translation": "удобство сопровождения",
       "example": "Clear names improve maintainability.",
+      "example_translation": "Понятные имена повышают поддерживаемость.",
+      "example_pronunciation": "клир нэймз импру́в мэйнтэйнэби́лэти.",
       "lesson": "Безопасность и качество решений",
       "transcription": "/meɪnˌteɪnəˈbɪləti/",
       "pronunciation": "≈ мэйнтэйнэби́лэти"
@@ -2087,6 +2607,8 @@
       "english": "readability",
       "translation": "читаемость",
       "example": "This change improves readability.",
+      "example_translation": "Это изменение улучшает читаемость кода.",
+      "example_pronunciation": "зис чэйндж импру́вз ридэби́лити.",
       "lesson": "Безопасность и качество решений",
       "transcription": "/ˌɹidəˈbɪlɪti/",
       "pronunciation": "≈ ридэби́лити"
@@ -2095,6 +2617,8 @@
       "english": "reliability",
       "translation": "надёжность",
       "example": "Retries can improve reliability.",
+      "example_translation": "Повторы могут повысить надёжность.",
+      "example_pronunciation": "ритра́йз кэн импру́в рилайэби́лэти.",
       "lesson": "Безопасность и качество решений",
       "transcription": "/ɹiˌlaɪəˈbɪləti/",
       "pronunciation": "≈ рилайэби́лэти"
@@ -2103,6 +2627,8 @@
       "english": "scalability",
       "translation": "масштабируемость",
       "example": "We need to test scalability.",
+      "example_translation": "Нужно протестировать масштабируемость.",
+      "example_pronunciation": "уи нид ту тэст скэйлэби́лити.",
       "lesson": "Безопасность и качество решений",
       "transcription": "/ˈskeɪləˈbɪlɪti/",
       "pronunciation": "≈ скэ́йлэби́лити"
@@ -2111,6 +2637,8 @@
       "english": "robustness",
       "translation": "устойчивость к ошибкам",
       "example": "Input checks improve robustness.",
+      "example_translation": "Проверка входных данных повышает надёжность.",
+      "example_pronunciation": "и́нпут чэкс импру́в роуба́стнэс.",
       "lesson": "Безопасность и качество решений",
       "transcription": "/ɹoʊˈbʌstnəs/",
       "pronunciation": "≈ роуба́стнэс"
@@ -2119,6 +2647,8 @@
       "english": "idempotent",
       "translation": "идемпотентный; повтор не меняет итог",
       "example": "The operation should be idempotent.",
+      "example_translation": "Операция должна быть идемпотентной.",
+      "example_pronunciation": "зэ апэрэ́йшэн шуд би айдэмпо́утэнт.",
       "lesson": "Безопасность и качество решений",
       "transcription": "/ˌaɪdəmˈpoʊtənt/",
       "pronunciation": "≈ айдэмпо́утэнт"
@@ -2127,6 +2657,8 @@
       "english": "atomic",
       "translation": "атомарный; неделимый",
       "example": "The update must be atomic.",
+      "example_translation": "Обновление должно быть атомарным.",
+      "example_pronunciation": "зэ эпдэ́йт маст би эта́мик.",
       "lesson": "Безопасность и качество решений",
       "transcription": "/əˈtɑmɪk/",
       "pronunciation": "≈ эта́мик"
@@ -2135,6 +2667,8 @@
       "english": "deterministic",
       "translation": "детерминированный",
       "example": "The test should be deterministic.",
+      "example_translation": "Тест должен быть детерминированным.",
+      "example_pronunciation": "зэ тэст шуд би дитёрмэни́стик.",
       "lesson": "Безопасность и качество решений",
       "transcription": "/dɪˌtɝməˈnɪstɪk/",
       "pronunciation": "≈ дитёрмэни́стик"
@@ -2143,6 +2677,8 @@
       "english": "Could you clarify the requirement?",
       "translation": "Не могли бы вы уточнить требование?",
       "example": "Could you clarify the requirement?",
+      "example_translation": "Не могли бы вы уточнить требование?",
+      "example_pronunciation": "куд ю клэ́рэфай зэ рикуа́йрмэнт?",
       "lesson": "Фразы для рабочего общения",
       "transcription": "/kʊd ju ˈklɛɹəˌfaɪ ðə ɹɪˈkwaɪɹmənt/",
       "pronunciation": "≈ ку́д йу́ клэ́рэфай зэ рикуа́йрмэнт"
@@ -2151,6 +2687,8 @@
       "english": "I can reproduce the issue.",
       "translation": "Я могу воспроизвести проблему.",
       "example": "I can reproduce the issue.",
+      "example_translation": "Я могу воспроизвести проблему.",
+      "example_pronunciation": "ай кэн рипрэду́с зэ и́шу.",
       "lesson": "Фразы для рабочего общения",
       "transcription": "/aɪ kæn ˌɹipɹəˈdus ðə ˈɪʃu/",
       "pronunciation": "≈ а́й кэ́н рипрэду́с зэ и́шу"
@@ -2159,6 +2697,8 @@
       "english": "I cannot reproduce it locally.",
       "translation": "У меня локально не получается воспроизвести.",
       "example": "I cannot reproduce it locally.",
+      "example_translation": "Мне не удаётся воспроизвести это локально.",
+      "example_pronunciation": "ай кэ́нат рипрэду́с ит ло́укэли.",
       "lesson": "Фразы для рабочего общения",
       "transcription": "/aɪ ˈkænɑt ˌɹipɹəˈdus ɪt ˈloʊkəli/",
       "pronunciation": "≈ а́й кэ́нат рипрэду́с и́т ло́укэли"
@@ -2167,6 +2707,8 @@
       "english": "What is the expected behavior?",
       "translation": "Какое поведение ожидается?",
       "example": "What is the expected behavior?",
+      "example_translation": "Каково ожидаемое поведение?",
+      "example_pronunciation": "уат из зэ икспэ́ктэд бихэ́йвйэр?",
       "lesson": "Фразы для рабочего общения",
       "transcription": "/wʌt ɪz ðə ɪkˈspɛktəd bɪˈheɪvjɚ/",
       "pronunciation": "≈ уа́т и́з зэ икспэ́ктэд бихэ́йвйёр"
@@ -2175,6 +2717,8 @@
       "english": "This change is ready for review.",
       "translation": "Это изменение готово к проверке.",
       "example": "This change is ready for review.",
+      "example_translation": "Это изменение готово к проверке.",
+      "example_pronunciation": "зис чэйндж из рэ́ди фор ривю́.",
       "lesson": "Фразы для рабочего общения",
       "transcription": "/ðɪs tʃeɪndʒ ɪz ˈɹɛdi fɔɹ ˌɹiˈvju/",
       "pronunciation": "≈ зи́с чэ́йндж и́з рэ́ди фо́р ривйу́"
@@ -2183,6 +2727,8 @@
       "english": "I need more time to investigate.",
       "translation": "Мне нужно больше времени на исследование.",
       "example": "I need more time to investigate.",
+      "example_translation": "Мне нужно больше времени для расследования.",
+      "example_pronunciation": "ай нид мор тайм ту инвэ́стэгэйт.",
       "lesson": "Фразы для рабочего общения",
       "transcription": "/aɪ nid mɔɹ taɪm tu ˌɪnˈvɛstəˌɡeɪt/",
       "pronunciation": "≈ а́й ни́д мо́р та́йм ту́ инвэ́стэгэйт"
@@ -2191,6 +2737,8 @@
       "english": "I am blocked by this issue.",
       "translation": "Эта проблема блокирует мою работу.",
       "example": "I am blocked by this issue.",
+      "example_translation": "Я заблокирован этой проблемой.",
+      "example_pronunciation": "ай эм блакт бай зис и́шу.",
       "lesson": "Фразы для рабочего общения",
       "transcription": "/aɪ æm blɑkt baɪ ðɪs ˈɪʃu/",
       "pronunciation": "≈ а́й э́м бла́кт ба́й зи́с и́шу"
@@ -2199,6 +2747,8 @@
       "english": "Could you share the logs?",
       "translation": "Не могли бы вы прислать журналы?",
       "example": "Could you share the logs?",
+      "example_translation": "Не могли бы вы предоставить логи?",
+      "example_pronunciation": "куд ю шэр зэ логз?",
       "lesson": "Фразы для рабочего общения",
       "transcription": "/kʊd ju ʃɛɹ ðə lɔɡz/",
       "pronunciation": "≈ ку́д йу́ шэ́р зэ ло́гз"
@@ -2207,6 +2757,8 @@
       "english": "The tests pass locally.",
       "translation": "Локально тесты проходят.",
       "example": "The tests pass locally.",
+      "example_translation": "Тесты проходят локально.",
+      "example_pronunciation": "зэ тэстс пэс ло́укэли.",
       "lesson": "Фразы для рабочего общения",
       "transcription": "/ðə tɛsts pæs ˈloʊkəli/",
       "pronunciation": "≈ зэ тэ́стс пэ́с ло́укэли"
@@ -2215,6 +2767,8 @@
       "english": "This is outside the current scope.",
       "translation": "Это вне текущего объёма работ.",
       "example": "This is outside the current scope.",
+      "example_translation": "Это выходит за рамки текущего объёма работ.",
+      "example_pronunciation": "зис из аутса́йд зэ кё́рэнт скоуп.",
       "lesson": "Фразы для рабочего общения",
       "transcription": "/ðɪs ɪz ˈaʊtˈsaɪd ðə ˈkɝənt skoʊp/",
       "pronunciation": "≈ зи́с и́з а́утса́йд зэ кё́рэнт ско́уп"
@@ -2223,6 +2777,8 @@
       "english": "What are the trade-offs?",
       "translation": "Какие здесь компромиссы?",
       "example": "What are the trade-offs?",
+      "example_translation": "Каковы компромиссы?",
+      "example_pronunciation": "уат ар зэ трэйд-офс?",
       "lesson": "Фразы для рабочего общения",
       "transcription": "/wʌt ɑɹ ðə tɹeɪd ɔfs/",
       "pronunciation": "≈ уа́т а́р зэ трэ́йд о́фс"
@@ -2231,6 +2787,8 @@
       "english": "Let us verify the assumption.",
       "translation": "Давайте проверим предположение.",
       "example": "Let us verify the assumption.",
+      "example_translation": "Давайте проверим предположение.",
+      "example_pronunciation": "лэт ас вэ́рэфай зэ эса́мпшэн.",
       "lesson": "Фразы для рабочего общения",
       "transcription": "/lɛt ʌs ˈvɛɹəˌfaɪ ðə əˈsʌmpʃən/",
       "pronunciation": "≈ лэ́т а́с вэ́рэфай зэ эса́мпшэн"
@@ -2239,6 +2797,8 @@
       "english": "We need a rollback plan.",
       "translation": "Нам нужен план отката.",
       "example": "We need a rollback plan.",
+      "example_translation": "Нужен план отката.",
+      "example_pronunciation": "уи нид э ро́улбэк плэн.",
       "lesson": "Фразы для рабочего общения",
       "transcription": "/wi nid eɪ ˈɹoʊlˌbæk plæn/",
       "pronunciation": "≈ уи́ ни́д э́й ро́улбэк плэ́н"
@@ -2247,6 +2807,8 @@
       "english": "I will update the documentation.",
       "translation": "Я обновлю документацию.",
       "example": "I will update the documentation.",
+      "example_translation": "Я обновлю документацию.",
+      "example_pronunciation": "ай уил эпдэ́йт зэ дакйэмэнтэ́йшэн.",
       "lesson": "Фразы для рабочего общения",
       "transcription": "/aɪ wɪl əpˈdeɪt ðə ˌdɑkjəmɛnˈteɪʃən/",
       "pronunciation": "≈ а́й уи́л эпдэ́йт зэ дакйэмэнтэ́йшэн"
@@ -2255,6 +2817,8 @@
       "english": "Thanks for catching that.",
       "translation": "Спасибо, что заметили это.",
       "example": "Thanks for catching that.",
+      "example_translation": "Спасибо, что заметили это.",
+      "example_pronunciation": "сэнгкс фор кэ́чинг зэт.",
       "lesson": "Фразы для рабочего общения",
       "transcription": "/θæŋks fɔɹ ˈkætʃɪŋ ðæt/",
       "pronunciation": "≈ сэ́нгкс фо́р кэ́чинг зэ́т"

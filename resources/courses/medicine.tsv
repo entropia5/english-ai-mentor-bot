@@ -1,310 +1,310 @@
 # Приём: установить контакт и уточнить жалобу
-consultation|консультация; приём|The consultation will take about twenty minutes.
-patient|пациент|How would the patient like to be addressed?
-clinician|клинический специалист|The clinician will review the results.
-physician|врач|Please contact the referring physician.
-general practitioner|врач общей практики (GP)|Your general practitioner can arrange follow-up.
-specialist|врач-специалист|I would like to refer you to a specialist.
-referral|направление к специалисту|We have received your referral.
-appointment|запись на приём|Is this your first appointment here?
-chief complaint|основная жалоба|What is the patient's chief complaint?
-presenting complaint|жалоба, с которой обратился пациент|Document the presenting complaint in the patient's words.
-concern|беспокойство; вопрос пациента|What concerns you most about this?
-onset|начало симптомов|Was the onset sudden or gradual?
-duration|продолжительность|What is the duration of the pain?
-frequency|частота|How often does this happen?
-severity|выраженность; тяжесть|How would you describe the severity?
-location|локализация|Can you point to the location of the pain?
-radiation|иррадиация боли; излучение|Is there any radiation of the pain?
-trigger|провоцирующий фактор|Have you noticed any triggers?
-aggravating factor|фактор, усиливающий симптом|What aggravating factors have you noticed?
-relieving factor|фактор, облегчающий симптом|Are there any relieving factors?
-intermittent|периодический; возникающий временами|Is the pain intermittent or constant?
-constant|постоянный|Has the pain been constant?
-acute|острый по началу или течению|The patient reports acute abdominal pain.
-chronic|хронический|How does chronic pain affect your daily life?
-progressive|постепенно нарастающий|The patient describes progressive weakness.
-recurrent|повторяющийся; рецидивирующий|Have you had recurrent infections?
-sudden|внезапный|Was there a sudden change?
-gradual|постепенный|Was the onset gradual?
-persistent|стойкий; длительно сохраняющийся|How long has the persistent cough lasted?
-associated symptom|сопутствующий симптом|Are there any associated symptoms?
+consultation|консультация; приём|The consultation will take about twenty minutes.|Консультация займет около двадцати минут.
+patient|пациент|How would the patient like to be addressed?|Как пациент предпочитает, чтобы к нему обращались?
+clinician|клинический специалист|The clinician will review the results.|Врач ознакомится с результатами.
+physician|врач|Please contact the referring physician.|Пожалуйста, свяжитесь с врачом, выдавшим направление.
+general practitioner|врач общей практики (GP)|Your general practitioner can arrange follow-up.|Ваш терапевт может организовать последующее наблюдение.
+specialist|врач-специалист|I would like to refer you to a specialist.|Я хотел бы направить вас к специалисту.
+referral|направление к специалисту|We have received your referral.|Мы получили ваше направление.
+appointment|запись на приём|Is this your first appointment here?|Это ваш первый приём здесь?
+chief complaint|основная жалоба|What is the patient's chief complaint?|Какова главная жалоба пациента?
+presenting complaint|жалоба, с которой обратился пациент|Document the presenting complaint in the patient's words.|Запишите основную жалобу словами пациента.
+concern|беспокойство; вопрос пациента|What concerns you most about this?|Что вас больше всего беспокоит в этом?
+onset|начало симптомов|Was the onset sudden or gradual?|Симптомы появились внезапно или постепенно?
+duration|продолжительность|What is the duration of the pain?|Какова продолжительность боли?
+frequency|частота|How often does this happen?|Как часто это происходит?
+severity|выраженность; тяжесть|How would you describe the severity?|Как бы вы оценили тяжесть?
+location|локализация|Can you point to the location of the pain?|Укажите, где именно болит.
+radiation|иррадиация боли; излучение|Is there any radiation of the pain?|Есть ли радиация боли?
+trigger|провоцирующий фактор|Have you noticed any triggers?|Вы заметили какие‑либо провоцирующие факторы?
+aggravating factor|фактор, усиливающий симптом|What aggravating factors have you noticed?|Какие факторы усиливают боль?
+relieving factor|фактор, облегчающий симптом|Are there any relieving factors?|Есть ли факторы, облегчающие боль?
+intermittent|периодический; возникающий временами|Is the pain intermittent or constant?|Боль прерывистая или постоянная?
+constant|постоянный|Has the pain been constant?|Была ли боль постоянной?
+acute|острый по началу или течению|The patient reports acute abdominal pain.|Пациент сообщает об острой боли в животе.
+chronic|хронический|How does chronic pain affect your daily life?|Как хроническая боль влияет на вашу повседневную жизнь?
+progressive|постепенно нарастающий|The patient describes progressive weakness.|Пациент описывает прогрессирующую слабость.
+recurrent|повторяющийся; рецидивирующий|Have you had recurrent infections?|Были ли у вас повторяющиеся инфекции?
+sudden|внезапный|Was there a sudden change?|Было ли резкое изменение?
+gradual|постепенный|Was the onset gradual?|Симптомы появлялись постепенно?
+persistent|стойкий; длительно сохраняющийся|How long has the persistent cough lasted?|Как долго продолжается стойкий кашель?
+associated symptom|сопутствующий симптом|Are there any associated symptoms?|Есть ли сопутствующие симптомы?
 # Анамнез и лекарства
-medical history|медицинский анамнез|Could you tell me about your medical history?
-past medical history|анамнез перенесённых и хронических заболеваний|Let us review your past medical history.
-surgical history|сведения о перенесённых операциях|What is your surgical history?
-family history|семейный анамнез|Is there a family history of diabetes?
-social history|социальный анамнез|The social history includes occupation and living conditions.
-medication history|сведения о принимаемых лекарствах|Please confirm the medication history.
-allergy|аллергия|Do you have any known allergies?
-adverse reaction|нежелательная реакция|Have you had an adverse reaction to a medicine?
-side effect|побочный эффект|Have you noticed any side effects?
-medication|лекарственный препарат; лекарства|What medications are you taking?
-prescription|рецепт на лекарство|Do you have a copy of your prescription?
-over-the-counter|безрецептурный|Do you take any over-the-counter medicines?
-supplement|пищевая добавка; дополнительное средство|Do you take any supplements?
-dose|доза на один приём или введение|What dose are you currently taking?
-dosage|режим дозирования|Let us check the prescribed dosage.
-route|путь введения|Please confirm the route of administration.
-oral|пероральный; относящийся ко рту|Is this medication for oral use?
-topical|местный; для нанесения на поверхность|This is listed as a topical medication.
-intravenous|внутривенный|The chart records intravenous administration.
-intramuscular|внутримышечный|Please check the documented intramuscular route.
-subcutaneous|подкожный|The prescription specifies subcutaneous administration.
-inhaler|ингалятор|Could you show me how you use your inhaler?
-adherence|соблюдение согласованного лечения|Are there any difficulties with medication adherence?
-missed dose|пропущенная доза|Have you had any missed doses?
-contraindication|противопоказание|Check the documented contraindications.
-interaction|взаимодействие лекарств|The pharmacist will check for interactions.
-reconciliation|сверка лекарственных назначений|Medication reconciliation is part of admission.
-anticoagulant|антикоагулянт|Are you taking an anticoagulant?
-antibiotic|антибиотик|Have you recently taken any antibiotics?
-analgesic|обезболивающий препарат|Which analgesic have you used?
+medical history|медицинский анамнез|Could you tell me about your medical history?|Расскажите, пожалуйста, о своей медицинской истории.
+past medical history|анамнез перенесённых и хронических заболеваний|Let us review your past medical history.|Давайте рассмотрим вашу анамнез заболевания.
+surgical history|сведения о перенесённых операциях|What is your surgical history?|Какова ваша хирургическая история?
+family history|семейный анамнез|Is there a family history of diabetes?|Есть ли в семье случаи диабета?
+social history|социальный анамнез|The social history includes occupation and living conditions.|Социальный анамнез включает профессию и условия проживания.
+medication history|сведения о принимаемых лекарствах|Please confirm the medication history.|Подтвердите, пожалуйста, историю приёма лекарств.
+allergy|аллергия|Do you have any known allergies?|Есть ли у вас известные аллергии?
+adverse reaction|нежелательная реакция|Have you had an adverse reaction to a medicine?|Была ли у вас реакция на лекарство?
+side effect|побочный эффект|Have you noticed any side effects?|Вы заметили какие‑либо побочные эффекты?
+medication|лекарственный препарат; лекарства|What medications are you taking?|Какие лекарства вы принимаете?
+prescription|рецепт на лекарство|Do you have a copy of your prescription?|У вас есть копия вашего рецепта?
+over-the-counter|безрецептурный|Do you take any over-the-counter medicines?|Вы принимаете какие‑либо безрецептурные препараты?
+supplement|пищевая добавка; дополнительное средство|Do you take any supplements?|Вы принимаете какие‑либо добавки?
+dose|доза на один приём или введение|What dose are you currently taking?|Какую дозу вы сейчас принимаете?
+dosage|режим дозирования|Let us check the prescribed dosage.|Давайте проверим назначенную дозу.
+route|путь введения|Please confirm the route of administration.|Пожалуйста, подтвердите путь введения препарата.
+oral|пероральный; относящийся ко рту|Is this medication for oral use?|Этот препарат предназначен для приёма внутрь?
+topical|местный; для нанесения на поверхность|This is listed as a topical medication.|Это указано как местный препарат.
+intravenous|внутривенный|The chart records intravenous administration.|Медицинская карта фиксирует внутривенное введение.
+intramuscular|внутримышечный|Please check the documented intramuscular route.|Проверьте задокументированный внутримышечный путь.
+subcutaneous|подкожный|The prescription specifies subcutaneous administration.|В рецепте указано подкожное введение.
+inhaler|ингалятор|Could you show me how you use your inhaler?|Можете показать, как вы используете ингалятор?
+adherence|соблюдение согласованного лечения|Are there any difficulties with medication adherence?|Есть ли трудности с соблюдением режима приёма?
+missed dose|пропущенная доза|Have you had any missed doses?|Были ли пропущенные дозы?
+contraindication|противопоказание|Check the documented contraindications.|Проверьте задокументированные противопоказания.
+interaction|взаимодействие лекарств|The pharmacist will check for interactions.|Фармацевт проверит возможные взаимодействия.
+reconciliation|сверка лекарственных назначений|Medication reconciliation is part of admission.|Согласование лекарств является частью госпитализации.
+anticoagulant|антикоагулянт|Are you taking an anticoagulant?|Вы принимаете антикоагулянт?
+antibiotic|антибиотик|Have you recently taken any antibiotics?|Вы недавно принимали антибиотики?
+analgesic|обезболивающий препарат|Which analgesic have you used?|Какой обезболивающий препарат вы использовали?
 # Боль и общие симптомы
-pain|боль|Can you describe the pain in your own words?
-ache|ноющая боль; болеть|Is it a dull ache?
-sharp|острый; колющий (о боли)|Is the pain sharp?
-dull|тупой (о боли)|Would you describe it as a dull pain?
-burning|жгучий|Do you feel a burning sensation?
-throbbing|пульсирующий|Is the headache throbbing?
-cramping|схваткообразный; спастический|Is the pain cramping?
-stabbing|колющий; кинжальный|Does the pain feel stabbing?
-tenderness|болезненность при пальпации|There is tenderness on palpation.
-swelling|припухлость; отёк|When did you first notice the swelling?
-edema|отёк (BrE: oedema)|The examination notes bilateral leg edema.
-fatigue|утомляемость; усталость|How has fatigue affected your activities?
-malaise|общее недомогание|The patient describes general malaise.
-fever|лихорадка; повышенная температура|Have you measured your temperature during the fever?
-chills|озноб|Have you had chills?
-night sweats|ночная потливость|Have you noticed night sweats?
-weight loss|снижение массы тела|Has the weight loss been intentional?
-loss of appetite|снижение или отсутствие аппетита|When did the loss of appetite begin?
-nausea|тошнота|Do you feel nausea now?
-vomiting|рвота|How many episodes of vomiting have you had?
-dizziness|головокружение; ощущение неустойчивости|What do you mean by dizziness?
-vertigo|ощущение вращения; системное головокружение|Does the vertigo feel like the room is spinning?
-syncope|кратковременная потеря сознания; обморок|Was the episode of syncope witnessed?
-fainting|обморок (обычная речь)|Have you had any fainting episodes?
-numbness|онемение|Where do you feel numbness?
-tingling|покалывание|Is there tingling in your fingers?
-weakness|слабость|Is the weakness on one side or both?
-rash|сыпь|When did the rash appear?
-itching|зуд|Does the itching keep you awake?
-bleeding|кровотечение|When did the bleeding start?
+pain|боль|Can you describe the pain in your own words?|Опишите боль своими словами, пожалуйста.
+ache|ноющая боль; болеть|Is it a dull ache?|Это тупая ноющая боль?
+sharp|острый; колющий (о боли)|Is the pain sharp?|Боль острая?
+dull|тупой (о боли)|Would you describe it as a dull pain?|Вы бы назвали её тупой болью?
+burning|жгучий|Do you feel a burning sensation?|Вы чувствуете жжение?
+throbbing|пульсирующий|Is the headache throbbing?|Головная боль пульсирующая?
+cramping|схваткообразный; спастический|Is the pain cramping?|Боль схваткообразная?
+stabbing|колющий; кинжальный|Does the pain feel stabbing?|Боль ощущается как колющая?
+tenderness|болезненность при пальпации|There is tenderness on palpation.|При пальпации ощущается болезненность.
+swelling|припухлость; отёк|When did you first notice the swelling?|Когда вы впервые заметили отёк?
+edema|отёк (BrE: oedema)|The examination notes bilateral leg edema.|В осмотре отмечён двусторонний отёк ног.
+fatigue|утомляемость; усталость|How has fatigue affected your activities?|Как усталость влияет на вашу активность?
+malaise|общее недомогание|The patient describes general malaise.|Пациент описывает общее недомогание.
+fever|лихорадка; повышенная температура|Have you measured your temperature during the fever?|Вы измеряли температуру во время лихорадки?
+chills|озноб|Have you had chills?|У вас были озноб?
+night sweats|ночная потливость|Have you noticed night sweats?|Вы замечали ночные поты?
+weight loss|снижение массы тела|Has the weight loss been intentional?|Потеря веса была намеренной?
+loss of appetite|снижение или отсутствие аппетита|When did the loss of appetite begin?|Когда начался отказ от еды?
+nausea|тошнота|Do you feel nausea now?|Сейчас чувствуете тошноту?
+vomiting|рвота|How many episodes of vomiting have you had?|Сколько раз вы рвали?
+dizziness|головокружение; ощущение неустойчивости|What do you mean by dizziness?|Что вы имеете в виду под головокружением?
+vertigo|ощущение вращения; системное головокружение|Does the vertigo feel like the room is spinning?|При головокружении кажется, что комната вращается?
+syncope|кратковременная потеря сознания; обморок|Was the episode of syncope witnessed?|Был ли эпизод обморока наблюдаемым?
+fainting|обморок (обычная речь)|Have you had any fainting episodes?|Бывали ли у вас случаи обмороков?
+numbness|онемение|Where do you feel numbness?|Где вы чувствуете онемение?
+tingling|покалывание|Is there tingling in your fingers?|Есть ли покалывание в пальцах?
+weakness|слабость|Is the weakness on one side or both?|Слабость проявляется с одной стороны или с обеих?
+rash|сыпь|When did the rash appear?|Когда появилось сыпь?
+itching|зуд|Does the itching keep you awake?|Зуд мешает вам спать?
+bleeding|кровотечение|When did the bleeding start?|Когда началось кровотечение?
 # Сердце и дыхание
-chest pain|боль в грудной клетке|When did the chest pain start?
-shortness of breath|одышка (понятно пациенту)|Do you have shortness of breath at rest?
-dyspnea|одышка (BrE: dyspnoea)|Document whether the dyspnea occurs on exertion.
-exertion|физическое усилие; нагрузка|Do symptoms occur with exertion?
-orthopnea|одышка в положении лёжа|Ask about orthopnea when taking the history.
-palpitations|ощущение сердцебиения|How long do the palpitations last?
-cough|кашель|Is the cough dry or productive?
-productive cough|кашель с мокротой|How long have you had a productive cough?
-sputum|мокрота|Have you noticed a change in the sputum?
-hemoptysis|кровохарканье|The history includes an episode of hemoptysis.
-wheeze|свистящее дыхание; хрип|Have you noticed any wheeze?
-stridor|стридор; шумное дыхание при сужении верхних дыхательных путей|Document the presence of stridor.
-respiratory rate|частота дыхания|Record the respiratory rate.
-oxygen saturation|насыщение крови кислородом|Record the oxygen saturation and oxygen support.
-blood pressure|артериальное давление|May I check your blood pressure?
-heart rate|частота сердечных сокращений|Record the heart rate.
-pulse|пульс|I am going to check your pulse.
-rhythm|ритм|The report describes an irregular rhythm.
-arrhythmia|аритмия|Is there a history of arrhythmia?
-hypertension|артериальная гипертензия|Have you been diagnosed with hypertension?
-high blood pressure|повышенное артериальное давление (обычная речь)|Have you ever been told you have high blood pressure?
-hypotension|пониженное артериальное давление|The handover mentions hypotension.
-heart failure|сердечная недостаточность|The referral notes a history of heart failure.
-myocardial infarction|инфаркт миокарда|The discharge summary records a previous myocardial infarction.
-heart attack|инфаркт; сердечный приступ (обычная речь)|Have you ever had a heart attack?
-stroke|инсульт|Is there a family history of stroke?
-asthma|астма|How does asthma affect your daily activities?
-pneumonia|пневмония|The referral lists pneumonia as a possible diagnosis.
-pulmonary embolism|тромбоэмболия лёгочной артерии|Pulmonary embolism is included in the differential diagnosis.
-electrocardiogram|электрокардиограмма; ЭКГ|I will explain what an electrocardiogram involves.
+chest pain|боль в грудной клетке|When did the chest pain start?|Когда началась боль в груди?
+shortness of breath|одышка (понятно пациенту)|Do you have shortness of breath at rest?|Есть ли одышка в покое?
+dyspnea|одышка (BrE: dyspnoea)|Document whether the dyspnea occurs on exertion.|Задокументируйте, возникает ли одышка при нагрузке.
+exertion|физическое усилие; нагрузка|Do symptoms occur with exertion?|Возникают ли симптомы при нагрузке?
+orthopnea|одышка в положении лёжа|Ask about orthopnea when taking the history.|Спросите о ортостатическом дыхании при сборе анамнеза.
+palpitations|ощущение сердцебиения|How long do the palpitations last?|Как долго продолжаются палпитации?
+cough|кашель|Is the cough dry or productive?|Кашель сухой или продуктивный?
+productive cough|кашель с мокротой|How long have you had a productive cough?|Как долго у вас продуктивный кашель?
+sputum|мокрота|Have you noticed a change in the sputum?|Заметили ли вы изменения в мокроте?
+hemoptysis|кровохарканье|The history includes an episode of hemoptysis.|В анамнезе отмечен эпизод гемоптизиса.
+wheeze|свистящее дыхание; хрип|Have you noticed any wheeze?|Заметили ли вы хрипы?
+stridor|стридор; шумное дыхание при сужении верхних дыхательных путей|Document the presence of stridor.|Отметьте наличие стридора.
+respiratory rate|частота дыхания|Record the respiratory rate.|Запишите частоту дыхания.
+oxygen saturation|насыщение крови кислородом|Record the oxygen saturation and oxygen support.|Запишите сатурацию кислорода и поддержку кислородом.
+blood pressure|артериальное давление|May I check your blood pressure?|Можно измерить ваше артериальное давление?
+heart rate|частота сердечных сокращений|Record the heart rate.|Запишите частоту сердечных сокращений.
+pulse|пульс|I am going to check your pulse.|Я собираюсь проверить ваш пульс.
+rhythm|ритм|The report describes an irregular rhythm.|В отчёте описан нерегулярный ритм.
+arrhythmia|аритмия|Is there a history of arrhythmia?|Есть ли в анамнезе аритмия?
+hypertension|артериальная гипертензия|Have you been diagnosed with hypertension?|Был ли вам поставлен диагноз гипертония?
+high blood pressure|повышенное артериальное давление (обычная речь)|Have you ever been told you have high blood pressure?|Говорили ли вам когда‑нибудь, что у вас повышенное давление?
+hypotension|пониженное артериальное давление|The handover mentions hypotension.|В передаче упомянута гипотензия.
+heart failure|сердечная недостаточность|The referral notes a history of heart failure.|В направлении указана история сердечной недостаточности.
+myocardial infarction|инфаркт миокарда|The discharge summary records a previous myocardial infarction.|В выписном эпикризе зафиксирован предыдущий инфаркт миокарда.
+heart attack|инфаркт; сердечный приступ (обычная речь)|Have you ever had a heart attack?|Был ли у вас когда‑нибудь инфаркт?
+stroke|инсульт|Is there a family history of stroke?|Есть ли в семье случаи инсульта?
+asthma|астма|How does asthma affect your daily activities?|Как астма влияет на вашу повседневную активность?
+pneumonia|пневмония|The referral lists pneumonia as a possible diagnosis.|В направлении указана пневмония как возможный диагноз.
+pulmonary embolism|тромбоэмболия лёгочной артерии|Pulmonary embolism is included in the differential diagnosis.|Тромбоэмболия лёгочной артерии включена в дифференциальный диагноз.
+electrocardiogram|электрокардиограмма; ЭКГ|I will explain what an electrocardiogram involves.|Я объясню, что включает в себя электрокардиограмма.
 # Живот, мочеиспускание и обмен веществ
-abdomen|живот (анатомическая область)|May I examine your abdomen?
-abdominal pain|боль в животе|Can you point to the abdominal pain?
-bloating|вздутие живота|When do you notice the bloating?
-heartburn|изжога|How often do you get heartburn?
-dysphagia|затруднение глотания|Is the dysphagia associated with solids or liquids?
-diarrhea|диарея (BrE: diarrhoea)|When did the diarrhea begin?
-constipation|запор|How long have you had constipation?
-bowel movement|дефекация; стул|When was your last bowel movement?
-stool|кал; стул|Have you noticed blood in your stool?
-melena|мелена; чёрный дегтеобразный стул|Ask whether the patient has noticed melena.
-hematemesis|рвота кровью|Document any reported hematemesis.
-jaundice|желтуха|Has anyone noticed jaundice or yellowing of your eyes?
-liver|печень|The report mentions the liver.
-gallbladder|желчный пузырь|The scan includes the gallbladder.
-pancreas|поджелудочная железа|The pancreas is described in the imaging report.
-kidney|почка|Have you had kidney problems before?
-urine|моча|We need a urine sample.
-urination|мочеиспускание|Have you noticed pain during urination?
-dysuria|болезненное или затруднённое мочеиспускание|Ask about dysuria and urinary frequency.
-hematuria|кровь в моче (BrE: haematuria)|Has the patient noticed visible hematuria?
-incontinence|недержание|Would you like to discuss the incontinence?
-retention|задержка; удержание|The referral mentions urinary retention.
-urinary tract infection|инфекция мочевых путей|Have you had a urinary tract infection before?
-diabetes|диабет|How long have you had diabetes?
-blood glucose|уровень глюкозы крови|When was your blood glucose last checked?
-hypoglycemia|пониженный уровень глюкозы крови|Have you had episodes of hypoglycemia?
-hyperglycemia|повышенный уровень глюкозы крови|The notes mention hyperglycemia.
-thyroid|щитовидная железа|Have you had thyroid problems?
-dehydration|обезвоживание|The examination will assess for dehydration.
-fluid intake|потребление жидкости|How has your fluid intake been today?
+abdomen|живот (анатомическая область)|May I examine your abdomen?|Можно осмотреть ваш живот?
+abdominal pain|боль в животе|Can you point to the abdominal pain?|Укажите, пожалуйста, место болей в животе.
+bloating|вздутие живота|When do you notice the bloating?|Когда вы замечаете вздутие?
+heartburn|изжога|How often do you get heartburn?|Как часто у вас появляется изжога?
+dysphagia|затруднение глотания|Is the dysphagia associated with solids or liquids?|Дисфагия возникает при приёме твёрдой пищи или жидкостей?
+diarrhea|диарея (BrE: diarrhoea)|When did the diarrhea begin?|Когда началась диарея?
+constipation|запор|How long have you had constipation?|Как долго у вас запор?
+bowel movement|дефекация; стул|When was your last bowel movement?|Когда был ваш последний стул?
+stool|кал; стул|Have you noticed blood in your stool?|Вы замечали кровь в стуле?
+melena|мелена; чёрный дегтеобразный стул|Ask whether the patient has noticed melena.|Спросите, замечал ли пациент мелена.
+hematemesis|рвота кровью|Document any reported hematemesis.|Задокументируйте любой сообщённый гематемезис.
+jaundice|желтуха|Has anyone noticed jaundice or yellowing of your eyes?|Кто‑то замечал желтушность или пожелтение глаз?
+liver|печень|The report mentions the liver.|В отчёте упоминается печень.
+gallbladder|желчный пузырь|The scan includes the gallbladder.|В сканировании включён желчный пузырь.
+pancreas|поджелудочная железа|The pancreas is described in the imaging report.|Поджелудочная железа описана в рентгеновском отчёте.
+kidney|почка|Have you had kidney problems before?|Были ли у вас ранее проблемы с почками?
+urine|моча|We need a urine sample.|Нужен образец мочи.
+urination|мочеиспускание|Have you noticed pain during urination?|Вы замечали боль при мочеиспускании?
+dysuria|болезненное или затруднённое мочеиспускание|Ask about dysuria and urinary frequency.|Спросите о дизурии и частоте мочеиспускания.
+hematuria|кровь в моче (BrE: haematuria)|Has the patient noticed visible hematuria?|Пациент замечал видимую гематурию?
+incontinence|недержание|Would you like to discuss the incontinence?|Хотите обсудить проблему недержания?
+retention|задержка; удержание|The referral mentions urinary retention.|В направлении указано задержка мочи.
+urinary tract infection|инфекция мочевых путей|Have you had a urinary tract infection before?|Были ли у вас ранее инфекции мочевых путей?
+diabetes|диабет|How long have you had diabetes?|Как давно у вас диабет?
+blood glucose|уровень глюкозы крови|When was your blood glucose last checked?|Когда в последний раз проверяли уровень глюкозы в крови?
+hypoglycemia|пониженный уровень глюкозы крови|Have you had episodes of hypoglycemia?|Бывали ли у вас эпизоды гипогликемии?
+hyperglycemia|повышенный уровень глюкозы крови|The notes mention hyperglycemia.|В записях упоминается гипергликемия.
+thyroid|щитовидная железа|Have you had thyroid problems?|Были ли у вас проблемы с щитовидной железой?
+dehydration|обезвоживание|The examination will assess for dehydration.|Осмотр будет включать оценку обезвоживания.
+fluid intake|потребление жидкости|How has your fluid intake been today?|Каково было ваше потребление жидкости сегодня?
 # Осмотр и обследования
-physical examination|физикальный осмотр|I would like to perform a physical examination.
-consent|согласие|May I ask for your consent to examine you?
-chaperone|сопровождающий медицинский работник при осмотре|Would you like a chaperone present?
-privacy|приватность; конфиденциальность|We will protect your privacy during the examination.
-inspection|осмотр (визуальная оценка)|Inspection is the first part of the examination.
-palpation|пальпация|Tell me if palpation causes discomfort.
-percussion|перкуссия; выстукивание|I will explain the percussion part of the examination.
-auscultation|аускультация; выслушивание|Auscultation was performed with a stethoscope.
-stethoscope|стетоскоп|The stethoscope may feel cold.
-blood test|анализ крови|I will explain why we are considering a blood test.
-sample|образец биоматериала|Please label the sample correctly.
-specimen|образец биоматериала|Check the specimen label before sending it.
-full blood count|общий анализ крови (BrE: FBC)|The full blood count is pending.
-complete blood count|общий анализ крови (AmE: CBC)|The complete blood count has been reviewed.
-hemoglobin|гемоглобин (BrE: haemoglobin)|Check the hemoglobin result.
-platelet|тромбоцит|The report includes the platelet count.
-white blood cell|лейкоцит|The white blood cell count is recorded here.
-creatinine|креатинин|The creatinine result is available.
-electrolyte|электролит|The electrolyte results are pending.
-reference range|референсный диапазон|Compare the result with the laboratory reference range.
-imaging|лучевая диагностика; визуализация|The imaging report is not yet available.
-X-ray|рентгеновский снимок; рентгенография|Have you had an X-ray before?
-ultrasound|ультразвуковое исследование|I will explain what the ultrasound involves.
-CT scan|компьютерная томография; КТ|The CT scan report has been reviewed.
-MRI scan|магнитно-резонансная томография; МРТ|Do you have any questions about the MRI scan?
-biopsy|биопсия|The clinician will explain the biopsy procedure.
-culture|посев (микробиологическое исследование)|The sample has been sent for culture.
-pending|ожидающий выполнения или результата|The blood test results are pending.
-finding|результат наблюдения; находка|Explain the findings in plain language.
-incidental finding|случайная находка при обследовании|The report mentions an incidental finding.
+physical examination|физикальный осмотр|I would like to perform a physical examination.|Я хотел бы провести физический осмотр.
+consent|согласие|May I ask for your consent to examine you?|Можно получить ваше согласие на осмотр?
+chaperone|сопровождающий медицинский работник при осмотре|Would you like a chaperone present?|Хотите, чтобы рядом был сопровождающий?
+privacy|приватность; конфиденциальность|We will protect your privacy during the examination.|Мы обеспечим вашу конфиденциальность во время осмотра.
+inspection|осмотр (визуальная оценка)|Inspection is the first part of the examination.|Осмотр – первая часть обследования.
+palpation|пальпация|Tell me if palpation causes discomfort.|Скажите, если пальпация вызывает дискомфорт.
+percussion|перкуссия; выстукивание|I will explain the percussion part of the examination.|Я объясню часть обследования, связанную с перкуссией.
+auscultation|аускультация; выслушивание|Auscultation was performed with a stethoscope.|Аускультация проводилась со стетоскопом.
+stethoscope|стетоскоп|The stethoscope may feel cold.|Стетоскоп может ощущаться холодным.
+blood test|анализ крови|I will explain why we are considering a blood test.|Я объясню, почему мы рассматриваем анализ крови.
+sample|образец биоматериала|Please label the sample correctly.|Пожалуйста, правильно подпишите образец.
+specimen|образец биоматериала|Check the specimen label before sending it.|Проверьте маркировку образца перед отправкой.
+full blood count|общий анализ крови (BrE: FBC)|The full blood count is pending.|Результат общего анализа крови ещё не готов.
+complete blood count|общий анализ крови (AmE: CBC)|The complete blood count has been reviewed.|Полный анализ крови рассмотрен.
+hemoglobin|гемоглобин (BrE: haemoglobin)|Check the hemoglobin result.|Проверьте результат гемоглобина.
+platelet|тромбоцит|The report includes the platelet count.|В отчёте указано количество тромбоцитов.
+white blood cell|лейкоцит|The white blood cell count is recorded here.|Здесь записано количество лейкоцитов.
+creatinine|креатинин|The creatinine result is available.|Результат креатинина доступен.
+electrolyte|электролит|The electrolyte results are pending.|Результаты анализа на электролиты ещё не готовы.
+reference range|референсный диапазон|Compare the result with the laboratory reference range.|Сравните результат с референсным диапазоном лаборатории.
+imaging|лучевая диагностика; визуализация|The imaging report is not yet available.|Отчёт по визуализации ещё недоступен.
+X-ray|рентгеновский снимок; рентгенография|Have you had an X-ray before?|У вас уже был рентген?
+ultrasound|ультразвуковое исследование|I will explain what the ultrasound involves.|Я объясню, что включает ультразвуковое исследование.
+CT scan|компьютерная томография; КТ|The CT scan report has been reviewed.|Отчёт КТ рассмотрен.
+MRI scan|магнитно-резонансная томография; МРТ|Do you have any questions about the MRI scan?|Есть ли у вас вопросы по МРТ?
+biopsy|биопсия|The clinician will explain the biopsy procedure.|Клинический специалист объяснит процедуру биопсии.
+culture|посев (микробиологическое исследование)|The sample has been sent for culture.|Образец отправлен на посев.
+pending|ожидающий выполнения или результата|The blood test results are pending.|Результаты анализа крови в ожидании.
+finding|результат наблюдения; находка|Explain the findings in plain language.|Объясните результаты простыми словами.
+incidental finding|случайная находка при обследовании|The report mentions an incidental finding.|В отчёте упомянуто случайное обнаружение.
 # Диагноз, план и документация
-diagnosis|диагноз|We need more information before confirming the diagnosis.
-differential diagnosis|дифференциальный диагноз|Discuss the differential diagnosis with the team.
-provisional diagnosis|предварительный диагноз|Record the provisional diagnosis clearly.
-assessment|оценка состояния|The assessment is documented in the notes.
-management plan|план ведения пациента|Let us discuss the management plan together.
-prognosis|прогноз|The patient has questions about the prognosis.
-follow-up|последующее наблюдение; повторный приём|How will the follow-up be arranged?
-review|повторная оценка; пересмотр|We will arrange a review of the results.
-monitoring|наблюдение; мониторинг|Explain the purpose of monitoring.
-observation|наблюдение; измерение показателей|Record the observations in the chart.
-admission|госпитализация; поступление|The admission note is complete.
-discharge|выписка; выделения (по контексту)|The discharge summary is ready.
-discharge summary|выписной эпикриз|Send the discharge summary to the general practitioner.
-inpatient|стационарный пациент|The inpatient team will review the case.
-outpatient|амбулаторный пациент; амбулаторный|The outpatient appointment is next week.
-ward|больничное отделение; палата|Which ward is the patient on?
-emergency department|отделение неотложной помощи|The patient was seen in the emergency department.
-intensive care unit|отделение интенсивной терапии|The handover is for the intensive care unit.
-handover|передача информации о пациенте между сотрудниками|Give a structured handover to the next team.
-medical record|медицинская документация|Please update the medical record.
-chart|медицинская карта; лист наблюдений|Check the medication chart.
-clinical note|клиническая запись|Write a clear clinical note.
-confidentiality|конфиденциальность|Patient confidentiality must be respected.
-capacity|способность принимать конкретное решение|Document the assessment of decision-making capacity.
-shared decision-making|совместное принятие решений врачом и пациентом|Shared decision-making includes the patient's preferences.
-safety-netting|объяснение, когда и как обратиться за помощью при изменении состояния|Document the safety-netting discussion.
-red flag|настораживающий признак|Discuss any red flags with the supervising clinician.
-escalation|привлечение помощи более высокого уровня|Follow the local escalation procedure.
-clinical guideline|клиническое руководство|Consult the relevant clinical guideline.
-evidence-based|основанный на научных доказательствах|The team discussed evidence-based practice.
+diagnosis|диагноз|We need more information before confirming the diagnosis.|Нужна дополнительная информация для подтверждения диагноза.
+differential diagnosis|дифференциальный диагноз|Discuss the differential diagnosis with the team.|Обсудите дифференциальный диагноз с командой.
+provisional diagnosis|предварительный диагноз|Record the provisional diagnosis clearly.|Запишите предварительный диагноз чётко.
+assessment|оценка состояния|The assessment is documented in the notes.|Оценка задокументирована в примечаниях.
+management plan|план ведения пациента|Let us discuss the management plan together.|Давайте обсудим план лечения вместе.
+prognosis|прогноз|The patient has questions about the prognosis.|У пациента есть вопросы о прогнозе.
+follow-up|последующее наблюдение; повторный приём|How will the follow-up be arranged?|Как будет организовано последующее наблюдение?
+review|повторная оценка; пересмотр|We will arrange a review of the results.|Мы организуем повторный просмотр результатов.
+monitoring|наблюдение; мониторинг|Explain the purpose of monitoring.|Объясните цель мониторинга.
+observation|наблюдение; измерение показателей|Record the observations in the chart.|Запишите результаты наблюдения в медицинскую карте.
+admission|госпитализация; поступление|The admission note is complete.|Записка о госпитализации завершена.
+discharge|выписка; выделения (по контексту)|The discharge summary is ready.|Выписка готова.
+discharge summary|выписной эпикриз|Send the discharge summary to the general practitioner.|Отправьте выписной эпикриз врачу общей практики.
+inpatient|стационарный пациент|The inpatient team will review the case.|Команда стационара рассмотрит этот клинический случай.
+outpatient|амбулаторный пациент; амбулаторный|The outpatient appointment is next week.|Амбулаторный приём запланирован на следующую неделю.
+ward|больничное отделение; палата|Which ward is the patient on?|В какой палате находится пациент?
+emergency department|отделение неотложной помощи|The patient was seen in the emergency department.|Пациент был осмотрен в отделении неотложной помощи.
+intensive care unit|отделение интенсивной терапии|The handover is for the intensive care unit.|Передача информации для отделения интенсивной терапии.
+handover|передача информации о пациенте между сотрудниками|Give a structured handover to the next team.|Сделайте структурированную передачу следующей команде.
+medical record|медицинская документация|Please update the medical record.|Пожалуйста, обновите медицинскую карту.
+chart|медицинская карта; лист наблюдений|Check the medication chart.|Проверьте медицинскую карту.
+clinical note|клиническая запись|Write a clear clinical note.|Составьте чёткую клиническую запись.
+confidentiality|конфиденциальность|Patient confidentiality must be respected.|Необходимо соблюдать конфиденциальность пациента.
+capacity|способность принимать конкретное решение|Document the assessment of decision-making capacity.|Задокументируйте оценку дееспособности для принятия решений.
+shared decision-making|совместное принятие решений врачом и пациентом|Shared decision-making includes the patient's preferences.|Совместное принятие решений учитывает предпочтения пациента.
+safety-netting|объяснение, когда и как обратиться за помощью при изменении состояния|Document the safety-netting discussion.|Задокументируйте обсуждение мер предосторожности (safety‑netting).
+red flag|настораживающий признак|Discuss any red flags with the supervising clinician.|Обсудите любые тревожные сигналы с руководящим врачом.
+escalation|привлечение помощи более высокого уровня|Follow the local escalation procedure.|Следуйте местной процедуре эскалации.
+clinical guideline|клиническое руководство|Consult the relevant clinical guideline.|Обратитесь к соответствующей клинической рекомендации.
+evidence-based|основанный на научных доказательствах|The team discussed evidence-based practice.|Команда обсудила практику, основанную на доказательствах.
 # Профессиональное общение с пациентом
-plain language|понятный неспециалисту язык|Explain the result in plain language.
-empathy|эмпатия|Show empathy when discussing the patient's concerns.
-reassurance|поддержка; обоснованное успокоение|Offer reassurance without dismissing concerns.
-expectation|ожидание|What are your expectations for this consultation?
-preference|предпочтение|What is your preference?
-understanding|понимание|I would like to check your understanding.
-teach-back|проверка понимания пересказом пациента|Use teach-back to check that the explanation was clear.
-interpreter|устный переводчик|Would you like a professional interpreter?
-next of kin|ближайший родственник; контактное лицо|Who is listed as your next of kin?
-caregiver|человек, осуществляющий уход|Does your caregiver help with daily activities?
-carer|человек, осуществляющий уход (BrE)|Would you like your carer to join us?
-sensitive question|деликатный вопрос|May I ask a sensitive question?
-informed consent|информированное согласие|Allow time for questions before seeking informed consent.
-benefit|польза|Let us discuss the potential benefits.
-risk|риск|What would you like to know about the risks?
-alternative|альтернативный вариант|We can discuss the available alternatives.
-uncertainty|неопределённость|Explain the uncertainty honestly.
-What brings you in today?|Что привело вас сегодня на приём?|What brings you in today?
-Could you tell me more?|Не могли бы вы рассказать подробнее?|Could you tell me more about the pain?
-When did it start?|Когда это началось?|When did it start?
-What makes it worse?|От чего становится хуже?|What makes it worse?
-What helps relieve it?|Что помогает облегчить это?|What helps relieve it?
-How is this affecting your daily life?|Как это влияет на вашу повседневную жизнь?|How is this affecting your daily life?
-I can see this is worrying you.|Я вижу, что это вас тревожит.|I can see this is worrying you.
-May I examine you?|Можно вас осмотреть?|May I examine you?
-Please let me know if it hurts.|Скажите, пожалуйста, если будет больно.|Please let me know if it hurts.
-What questions do you have?|Какие у вас есть вопросы?|What questions do you have?
-Let me check I have understood.|Позвольте уточнить, правильно ли я понял.|Let me check I have understood.
-Could you explain it back in your own words?|Можете повторить своими словами, как вы это поняли?|Could you explain it back in your own words?
-We will decide together.|Мы примем решение вместе.|We will decide together.
+plain language|понятный неспециалисту язык|Explain the result in plain language.|Объясните результат простыми словами.
+empathy|эмпатия|Show empathy when discussing the patient's concerns.|Проявляйте эмпатию, обсуждая беспокойства пациента.
+reassurance|поддержка; обоснованное успокоение|Offer reassurance without dismissing concerns.|Успокойте, не отбрасывая его опасения.
+expectation|ожидание|What are your expectations for this consultation?|Каковы ваши ожидания от этой консультации?
+preference|предпочтение|What is your preference?|Какой вариант вы предпочитаете?
+understanding|понимание|I would like to check your understanding.|Я хотел(а) бы проверить ваше понимание.
+teach-back|проверка понимания пересказом пациента|Use teach-back to check that the explanation was clear.|Используйте метод «teach‑back», чтобы убедиться, что объяснение было понятно.
+interpreter|устный переводчик|Would you like a professional interpreter?|Хотите ли вы профессионального переводчика?
+next of kin|ближайший родственник; контактное лицо|Who is listed as your next of kin?|Кто указан у вас в качестве ближайшего родственника?
+caregiver|человек, осуществляющий уход|Does your caregiver help with daily activities?|Помогает ли ваш ухаживающий человек в повседневных делах?
+carer|человек, осуществляющий уход (BrE)|Would you like your carer to join us?|Хотите, чтобы ваш ухаживающий присоединился к нам?
+sensitive question|деликатный вопрос|May I ask a sensitive question?|Можно задать деликатный вопрос?
+informed consent|информированное согласие|Allow time for questions before seeking informed consent.|Выделите время для вопросов перед получением информированного согласия.
+benefit|польза|Let us discuss the potential benefits.|Давайте обсудим потенциальные преимущества.
+risk|риск|What would you like to know about the risks?|Что бы вы хотели узнать о рисках?
+alternative|альтернативный вариант|We can discuss the available alternatives.|Мы можем обсудить доступные альтернативы.
+uncertainty|неопределённость|Explain the uncertainty honestly.|Честно объясните степень неопределённости.
+What brings you in today?|Что привело вас сегодня на приём?|What brings you in today?|Что привело вас к нам сегодня?
+Could you tell me more?|Не могли бы вы рассказать подробнее?|Could you tell me more about the pain?|Можете рассказать подробнее о боли?
+When did it start?|Когда это началось?|When did it start?|Когда она началась?
+What makes it worse?|От чего становится хуже?|What makes it worse?|Что усиливает её?
+What helps relieve it?|Что помогает облегчить это?|What helps relieve it?|Что помогает её облегчить?
+How is this affecting your daily life?|Как это влияет на вашу повседневную жизнь?|How is this affecting your daily life?|Как это влияет на вашу повседневную жизнь?
+I can see this is worrying you.|Я вижу, что это вас тревожит.|I can see this is worrying you.|Вижу, это вас тревожит.
+May I examine you?|Можно вас осмотреть?|May I examine you?|Можно вас осмотреть?
+Please let me know if it hurts.|Скажите, пожалуйста, если будет больно.|Please let me know if it hurts.|Сообщите, если будет больно.
+What questions do you have?|Какие у вас есть вопросы?|What questions do you have?|Какие у вас вопросы?
+Let me check I have understood.|Позвольте уточнить, правильно ли я понял.|Let me check I have understood.|Позвольте убедиться, что я правильно понял(а).
+Could you explain it back in your own words?|Можете повторить своими словами, как вы это поняли?|Could you explain it back in your own words?|Можете пересказать своими словами?
+We will decide together.|Мы примем решение вместе.|We will decide together.|Мы примем решение вместе.
 # Общая анатомия и неврология
-anatomy|анатомия|The course covers basic anatomy.
-tissue|ткань организма|The sample contains soft tissue.
-organ|орган|The report describes the affected organ.
-bone|кость|Can you point to the painful area over the bone?
-joint|сустав|Which joint is painful?
-muscle|мышца|Does the muscle feel weak?
-tendon|сухожилие|The examination includes the tendon.
-ligament|связка|The imaging report describes the ligament.
-nerve|нерв|The symptoms may follow a nerve distribution.
-artery|артерия|The report describes the artery.
-vein|вена|The sample is taken from a vein.
-spine|позвоночник|Have you had surgery on your spine?
-spinal cord|спинной мозг|The report describes the spinal cord.
-brain|головной мозг|The imaging report includes the brain.
-consciousness|сознание|Was there any loss of consciousness?
-alert|бодрствующий; реагирующий|The patient is alert and able to answer questions.
-orientation|ориентировка во времени, месте и собственной личности|Assess orientation during the examination.
-confusion|спутанность сознания|When did the confusion begin?
-seizure|судорожный или иной эпилептический приступ|Was the seizure witnessed?
-tremor|тремор; дрожание|When do you notice the tremor?
-gait|походка|The examination includes gait assessment.
-reflex|рефлекс|I am going to check your reflexes.
-sensation|чувствительность; ощущение|Tell me whether the sensation feels the same on both sides.
-range of motion|объём движений|We will assess the range of motion.
-fracture|перелом|The report describes a fracture.
-sprain|растяжение или повреждение связок|The referral mentions an ankle sprain.
-strain|растяжение или повреждение мышцы или сухожилия|The notes describe a muscle strain.
-concussion|сотрясение мозга|The clinician assessed the patient for concussion.
-loss of consciousness|потеря сознания|Was there any loss of consciousness?
-functional limitation|ограничение функции|Describe any functional limitations.
+anatomy|анатомия|The course covers basic anatomy.|Курс охватывает базовую анатомию.
+tissue|ткань организма|The sample contains soft tissue.|Образец содержит мягкие ткани.
+organ|орган|The report describes the affected organ.|В отчёте описывается поражённый орган.
+bone|кость|Can you point to the painful area over the bone?|Укажите, пожалуйста, болезненную область над костью.
+joint|сустав|Which joint is painful?|Какой сустав болит?
+muscle|мышца|Does the muscle feel weak?|Чувствуется ли слабость мышцы?
+tendon|сухожилие|The examination includes the tendon.|Осмотр включает сухожилие.
+ligament|связка|The imaging report describes the ligament.|В рентгенологическом отчёте описана связка.
+nerve|нерв|The symptoms may follow a nerve distribution.|Симптомы могут следовать по нервному распределению.
+artery|артерия|The report describes the artery.|В отчёте описана артерия.
+vein|вена|The sample is taken from a vein.|Образец взят из вены.
+spine|позвоночник|Have you had surgery on your spine?|Была ли у вас операция на позвоночнике?
+spinal cord|спинной мозг|The report describes the spinal cord.|В отчёте описан спинной мозг.
+brain|головной мозг|The imaging report includes the brain.|В рентгенологическом отчёте включён мозг.
+consciousness|сознание|Was there any loss of consciousness?|Было ли потеря сознания?
+alert|бодрствующий; реагирующий|The patient is alert and able to answer questions.|Пациент в ясном сознании и может отвечать на вопросы.
+orientation|ориентировка во времени, месте и собственной личности|Assess orientation during the examination.|Оцените ориентацию во время осмотра.
+confusion|спутанность сознания|When did the confusion begin?|Когда появилась спутанность сознания?
+seizure|судорожный или иной эпилептический приступ|Was the seizure witnessed?|Был ли эпилептический приступ наблюдаем?
+tremor|тремор; дрожание|When do you notice the tremor?|Когда вы замечаете дрожь?
+gait|походка|The examination includes gait assessment.|Осмотр включает оценку походки.
+reflex|рефлекс|I am going to check your reflexes.|Я проверю ваши рефлексы.
+sensation|чувствительность; ощущение|Tell me whether the sensation feels the same on both sides.|Скажите, одинаково ли ощущение с обеих сторон.
+range of motion|объём движений|We will assess the range of motion.|Мы оценим диапазон движений.
+fracture|перелом|The report describes a fracture.|В отчёте описан перелом.
+sprain|растяжение или повреждение связок|The referral mentions an ankle sprain.|В направлении указано растяжение связок голеностопного сустава.
+strain|растяжение или повреждение мышцы или сухожилия|The notes describe a muscle strain.|В записях описано растяжение мышцы.
+concussion|сотрясение мозга|The clinician assessed the patient for concussion.|Врач оценил пациента на предмет сотрясения мозга.
+loss of consciousness|потеря сознания|Was there any loss of consciousness?|Было ли потеря сознания?
+functional limitation|ограничение функции|Describe any functional limitations.|Опишите любые функциональные ограничения.
 # Инфекции, уход и дополнительные области
-infection|инфекция|Have you recently had an infection?
-inflammation|воспаление|The report describes signs of inflammation.
-contagious|заразный|The patient asks whether the condition is contagious.
-sterile|стерильный|Check that the equipment is sterile.
-aseptic|асептический|Follow the local aseptic technique protocol.
-wound|рана|When did the wound occur?
-dressing|повязка; перевязочный материал|When was the dressing last changed?
-suture|шов; шовный материал|The note records the number of sutures.
-healing|заживление|The appointment is to review wound healing.
-vaccination|вакцинация|Can we review your vaccination history?
-immunization|иммунизация|The immunization record is available.
-pregnancy|беременность|Is there any possibility of pregnancy?
-menstrual cycle|менструальный цикл|Has your menstrual cycle changed?
-last menstrual period|последняя менструация|When was your last menstrual period?
-breastfeeding|грудное вскармливание|Are you currently breastfeeding?
-antenatal|дородовой (BrE)|The antenatal appointment has been arranged.
-prenatal|дородовой (AmE)|The prenatal record has been reviewed.
-pediatric|педиатрический (BrE: paediatric)|The pediatric team will review the referral.
-developmental milestone|этап развития ребёнка|Ask about developmental milestones.
-mental health|психическое здоровье|Would you like to discuss your mental health?
-anxiety|тревога; тревожность|How has anxiety affected your sleep?
-depression|депрессия|Have you previously received care for depression?
-sleep disturbance|нарушение сна|When did the sleep disturbance begin?
-screening|скрининг|I will explain the purpose of screening.
-rehabilitation|реабилитация|The team will discuss rehabilitation goals.
-physiotherapy|физиотерапия и двигательная реабилитация (BrE)|The referral is for physiotherapy.
-occupational therapy|эрготерапия|Occupational therapy focuses on everyday activities.
-palliative care|паллиативная помощь|The team discussed palliative care needs.
-advance care planning|предварительное планирование медицинской помощи|The patient would like to discuss advance care planning.
-quality of life|качество жизни|What matters most to your quality of life?
+infection|инфекция|Have you recently had an infection?|Были ли у вас недавно инфекции?
+inflammation|воспаление|The report describes signs of inflammation.|В отчёте описаны признаки воспаления.
+contagious|заразный|The patient asks whether the condition is contagious.|Пациент спрашивает, заразно ли состояние.
+sterile|стерильный|Check that the equipment is sterile.|Проверьте, стерильно ли оборудование.
+aseptic|асептический|Follow the local aseptic technique protocol.|Следуйте местному протоколу асептической техники.
+wound|рана|When did the wound occur?|Когда произошла рана?
+dressing|повязка; перевязочный материал|When was the dressing last changed?|Когда в последний раз менялась повязка?
+suture|шов; шовный материал|The note records the number of sutures.|В записи указано количество швов.
+healing|заживление|The appointment is to review wound healing.|Приём назначен для контроля за заживлением раны.
+vaccination|вакцинация|Can we review your vaccination history?|Можем ли мы просмотреть вашу историю вакцинаций?
+immunization|иммунизация|The immunization record is available.|Запись о прививках доступна.
+pregnancy|беременность|Is there any possibility of pregnancy?|Есть ли вероятность беременности?
+menstrual cycle|менструальный цикл|Has your menstrual cycle changed?|Изменился ли ваш менструальный цикл?
+last menstrual period|последняя менструация|When was your last menstrual period?|Когда был ваш последний менструальный период?
+breastfeeding|грудное вскармливание|Are you currently breastfeeding?|Вы сейчас кормите грудью?
+antenatal|дородовой (BrE)|The antenatal appointment has been arranged.|Назначена предродовая консультация.
+prenatal|дородовой (AmE)|The prenatal record has been reviewed.|Пройдена проверка пренатальной карты.
+pediatric|педиатрический (BrE: paediatric)|The pediatric team will review the referral.|Педиатрическая команда рассмотрит направление.
+developmental milestone|этап развития ребёнка|Ask about developmental milestones.|Спросите о достижении возрастных вех развития.
+mental health|психическое здоровье|Would you like to discuss your mental health?|Хотите обсудить ваше психическое здоровье?
+anxiety|тревога; тревожность|How has anxiety affected your sleep?|Как тревога влияет на ваш сон?
+depression|депрессия|Have you previously received care for depression?|Получали ли вы ранее лечение от депрессии?
+sleep disturbance|нарушение сна|When did the sleep disturbance begin?|Когда начались нарушения сна?
+screening|скрининг|I will explain the purpose of screening.|Я объясню цель скрининга.
+rehabilitation|реабилитация|The team will discuss rehabilitation goals.|Команда обсудит цели реабилитации.
+physiotherapy|физиотерапия и двигательная реабилитация (BrE)|The referral is for physiotherapy.|Направление на физиотерапию.
+occupational therapy|эрготерапия|Occupational therapy focuses on everyday activities.|Эрготерапия ориентирована на повседневные действия.
+palliative care|паллиативная помощь|The team discussed palliative care needs.|Команда обсудила потребности паллиативного ухода.
+advance care planning|предварительное планирование медицинской помощи|The patient would like to discuss advance care planning.|Пациент хочет обсудить планирование завещания о лечении.
+quality of life|качество жизни|What matters most to your quality of life?|Что для вас наиболее важно в качестве жизни?

@@ -28,7 +28,8 @@ bool show_daily_review_page(long long chat_id, TelegramClient& bot,
 bool show_evening_words_page(long long chat_id, TelegramClient& bot,
                              const std::vector<WordView>& words, int requested_page,
                              int message_id = 0, bool force_new = true,
-                             std::string* last_action = nullptr, const std::string& filter = "all");
+                             std::string* last_action = nullptr, const std::string& filter = "all",
+                             bool new_words = false);
 void show_stats(long long chat_id, TelegramClient& bot, Database& database, int message_id = 0);
 
 void show_reminder_settings(long long chat_id, TelegramClient& bot, Database& database,

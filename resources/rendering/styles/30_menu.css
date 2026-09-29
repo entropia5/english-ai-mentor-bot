@@ -3,6 +3,12 @@ body.menu .panel { padding: 58px; position: relative; }
 body.menu .title-row { margin-top: 72px; max-width: 640px; }
 body.menu .title { font-size: 86px; line-height: 1.03; }
 body.menu .subtitle { max-width: 760px; font-size: 34px; }
+body.menu, body.menu .canvas { height: auto; min-height: 760px; }
+body.menu .panel { height: auto; }
+body.menu .menu-guide { margin-top: 40px; font-size: 28px; line-height: 1.4; color: #c7d0d8; }
+body.menu .menu-description { margin-top: 24px; }
+body.menu .menu-description strong { color: #f1f5f8; font-size: 30px; }
+body.menu .menu-tip { margin-top: 28px; color: #8dd7c1; font-size: 26px; }
 
 .level-card {
   position: absolute;

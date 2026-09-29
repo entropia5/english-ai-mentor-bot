@@ -20,16 +20,20 @@ InlineKeyboard reminder_settings_keyboard(const ReminderSettings& settings) {
     InlineKeyboard buttons = column_keyboard(
         {{settings.morning_enabled ? "Выключить утро" : "Включить утро",
           std::string("rem_morning_enabled_") + (settings.morning_enabled ? "0" : "1")}});
-    const auto morning = course_filter_keyboard("rem_morning_course_", settings.morning_course);
+    auto morning = course_filter_keyboard("rem_morning_course_", settings.morning_course);
+    morning.front().front().first =
+        std::string(settings.morning_course == "all" ? "✓ " : "") + "Повторять все слова";
+    // Длинную подпись показываем отдельной строкой.
+    const auto all_morning = morning.front().front();
+    morning.front().erase(morning.front().begin());
+    buttons.push_back({all_morning});
     buttons.insert(buttons.end(), morning.begin(), morning.end());
     buttons.push_back(
         {{settings.evening_enabled ? "Выключить вечер" : "Включить вечер",
           std::string("rem_evening_enabled_") + (settings.evening_enabled ? "0" : "1")}});
-    const auto evening = course_filter_keyboard("rem_evening_course_", settings.evening_course);
-    buttons.insert(buttons.end(), evening.begin(), evening.end());
-    buttons.push_back({{std::string(settings.evening_add_new ? "" : "✓ ") + "Повторять мои слова",
+    buttons.push_back({{std::string(settings.evening_add_new ? "" : "✓ ") + "Показывать ещё не выученные слова",
                         "rem_evening_add_new_0"}});
-    buttons.push_back({{std::string(settings.evening_add_new ? "✓ " : "") + "Добавлять 5 новых",
+    buttons.push_back({{std::string(settings.evening_add_new ? "✓ " : "") + "Добавлять ежедневно 5 новых слов",
                         "rem_evening_add_new_1"}});
     buttons.push_back({{"Главное меню", "menu_main"}});
     return buttons;
@@ -45,9 +49,9 @@ void show_reminder_settings(long long chat_id, TelegramClient& bot, Database& da
         course_filter_title(settings.morning_course) + "\n\n*Вечер · 21:00* — " +
         std::string(settings.evening_enabled ? "включено" : "выключено") + "\n" +
         (settings.evening_add_new
-             ? "Добавлять до 5 новых слов и показывать слова для изучения."
-             : "Повторять уже добавленные неизученные слова. Новые не добавляются.") +
-        "\nНаправление: " + course_filter_title(settings.evening_course);
+             ? "Ежедневно добавлять до 5 новых слов."
+             : "Показывать ещё не выученные слова. Новые не добавляются.") +
+        "\nНаправление из добавления слов: " + course_filter_title(settings.evening_course);
     const auto buttons = reminder_settings_keyboard(settings);
     const auto image = render_reminder_settings_image();
     if (image.empty()) {

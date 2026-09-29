@@ -68,6 +68,8 @@ class Database {
     bool set_active_course(long long user_id, const std::string& course);
     int add_course_words(long long user_id, const std::string& course,
                          const std::vector<CourseWord>& catalog, int count);
+    std::vector<Word> prepare_evening_batch(long long user_id, const std::string& filter,
+                                           const std::string& date);
 
     // work with users
     bool user_exists(long long user_id);

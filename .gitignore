@@ -30,5 +30,8 @@ coverage/
 *.gcda
 *.gcno
 
+# Python cache
+__pycache__/
+*.py[cod]
 
 

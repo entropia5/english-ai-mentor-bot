@@ -11,6 +11,8 @@ struct CourseWord {
     std::string lesson;
     std::string transcription;
     std::string pronunciation;
+    std::string example_translation = {};
+    std::string example_pronunciation = {};
 };
 
 std::string canonical_course(const std::string& name);
@@ -18,3 +20,5 @@ std::string course_title(const std::string& course);
 std::vector<CourseWord> load_course_catalog(const std::string& course);
 std::vector<CourseWord> select_course_words(const std::vector<CourseWord>& catalog,
                                             const std::set<std::string>& existing, int count);
+
+std::string format_course_word_definition(const CourseWord& word);

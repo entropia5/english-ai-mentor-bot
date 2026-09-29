@@ -174,6 +174,12 @@ if(ENGLISH_MENTOR_BUILD_TESTS)
     set_tests_properties(english_mentor_database_tests PROPERTIES
         WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}" SKIP_RETURN_CODE 77)
     add_test(NAME english_mentor_unit_tests COMMAND english_mentor_tests)
+    add_executable(english_mentor_reminder_transport_tests
+        tests/test_reminder_transport.cpp src/presentation/screen_transport.cpp src/utils/logger.cpp)
+    target_include_directories(english_mentor_reminder_transport_tests PRIVATE include)
+    english_mentor_enable_warnings(english_mentor_reminder_transport_tests)
+    english_mentor_enable_sanitizers(english_mentor_reminder_transport_tests)
+    add_test(NAME english_mentor_reminder_transport_tests COMMAND english_mentor_reminder_transport_tests)
     find_program(WKHTMLTOIMAGE_EXECUTABLE wkhtmltoimage)
     if(WKHTMLTOIMAGE_EXECUTABLE)
         add_executable(english_mentor_render_tests tests/test_render_photo_size.cpp)

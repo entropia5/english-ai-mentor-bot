@@ -27,9 +27,21 @@ body.with-footer .panel {
   justify-content: space-between;
 }
 
-body.topics { height: 820px; }
-body.topics .canvas { height: 820px; }
-body.topics .text { max-width: 800px; font-size: 32px; line-height: 1.34; }
+body.topics, body.topics .canvas { height: auto; }
+body.topics .panel { height: auto; padding: 46px 50px; }
+body.topics .title-row { margin-top: 28px; }
+body.topics .title { font-size: 64px; }
+body.topics .topics-intro { margin: 26px 0; color: #d5dde4; font-size: 30px; line-height: 1.35; }
+body.topics .course-description {
+  margin-top: 18px; padding: 24px 28px;
+  border: 1px solid var(--border-raised); border-radius: 22px;
+  background: var(--surface-raised);
+}
+body.topics .course-title { color: #f1f5f8; font-size: 34px; font-weight: 800; }
+body.topics .course-purpose { margin-top: 7px; color: #8dd7c1; font-size: 26px; line-height: 1.35; font-weight: 700; }
+body.topics .course-details { margin-top: 12px; color: #d5dde4; font-size: 28px; line-height: 1.4; }
+body.topics .topics-guide { margin-top: 28px; color: #d5dde4; font-size: 28px; line-height: 1.4; font-weight: 700; }
+body.topics .topics-footer { margin-top: 20px; color: #aab6c1; font-size: 25px; line-height: 1.4; }
 
 body.status, body.status .canvas { height: auto; min-height: 760px; }
 body.status .panel { height: auto; min-height: 680px; display: block; }

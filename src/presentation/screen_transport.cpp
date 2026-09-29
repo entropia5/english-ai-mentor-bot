@@ -5,9 +5,9 @@
 #include "telegram_client.h"
 
 bool upsert_screen(long long chat_id, TelegramClient& bot, const std::string& text,
-                   const InlineKeyboard& buttons, int preferred_message_id) {
+                   const InlineKeyboard& buttons, int preferred_message_id, bool force_new) {
     const int message_id =
-        preferred_message_id > 0 ? preferred_message_id : get_active_screen_message(chat_id);
+        force_new ? 0 : (preferred_message_id > 0 ? preferred_message_id : get_active_screen_message(chat_id));
     if (message_id > 0) {
         const ScreenMessageType current_type = get_active_screen_message_type(chat_id);
         if (current_type == ScreenMessageType::Text || current_type == ScreenMessageType::Unknown) {
@@ -44,9 +44,9 @@ bool upsert_screen(long long chat_id, TelegramClient& bot, const std::string& te
 
 bool upsert_photo_screen(long long chat_id, TelegramClient& bot, const std::string& photo_path,
                          const InlineKeyboard& buttons, int preferred_message_id,
-                         const std::string& caption, const std::string& parse_mode) {
+                         const std::string& caption, const std::string& parse_mode, bool force_new) {
     const int message_id =
-        preferred_message_id > 0 ? preferred_message_id : get_active_screen_message(chat_id);
+        force_new ? 0 : (preferred_message_id > 0 ? preferred_message_id : get_active_screen_message(chat_id));
     if (message_id > 0) {
         const ScreenMessageType current_type = get_active_screen_message_type(chat_id);
         if (current_type == ScreenMessageType::Photo ||

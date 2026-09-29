@@ -7,6 +7,7 @@ Russian hints are approximate sound guides, never a substitute for audio/IPA.
 import json
 import re
 from pathlib import Path
+from course_example_pronunciation import pronounce_example
 
 BASE = Path(__file__).resolve().parents[1] / 'resources' / 'courses'
 PHONES = json.loads((BASE / 'pronunciations.json').read_text())['phones']
@@ -110,15 +111,18 @@ def build(course):
         if line.startswith('# '): lesson=line[2:];continue
         if not line.strip():continue
         fields=line.split('|')
-        if len(fields)!=3 or any(not x.strip() for x in fields):
+        if len(fields)!=4 or any(not x.strip() for x in fields):
             raise ValueError(f'{course}:{n}: invalid record')
-        english,translation,example=fields
+        english,translation,example,example_translation=fields
+        if not re.search("[А-Яа-яЁё]", example_translation):
+            raise ValueError(f'{course}:{n}: example translation must be Russian')
         key=english.casefold()
         if key in seen:raise ValueError(f'{course}:{n}: duplicate {english}')
         if not lesson:raise ValueError('Missing lesson')
         seen.add(key)
         ipa,ru=pronounce(english)
-        words.append(dict(english=english,translation=translation,example=example,lesson=lesson,
+        words.append(dict(english=english,translation=translation,example=example,example_translation=example_translation,
+                          example_pronunciation=pronounce_example(example, PHONES),lesson=lesson,
                           transcription=ipa,pronunciation='≈ '+ru))
     if course=='conversation' and len(words)!=2000:raise ValueError('Conversation must contain 2000 entries')
     output=dict(version=1,course=course,pronunciation_note='US broad transcription from CMUdict plus authored additions; Russian hints are approximate.',words=words)

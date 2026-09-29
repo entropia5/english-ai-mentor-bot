@@ -13,7 +13,7 @@ bool render_preview_screens() {
     for (std::size_t i = 0; i < 5; ++i) {
         const auto& w = catalog[i];
         words.push_back({w.english, w.translation, false, w.pronunciation, w.transcription,
-                         w.lesson + "\nПример: " + w.example});
+                         format_course_word_definition(w)});
     }
     const std::vector<std::string> images = {
         render_main_menu_image("17"),
@@ -25,6 +25,8 @@ bool render_preview_screens() {
         render_stats_image(0, 42, 17, "Разговорный английский", "", 2000, 0),
         render_dictionary_words_image(0, words, 0, 1, 0, static_cast<int>(words.size())),
         render_learned_words_image(0, words, 0, 1, 0, static_cast<int>(words.size())),
+        render_daily_review_image(0, words, 0, 1, 0, static_cast<int>(words.size())),
+        render_evening_words_image(0, words, 0, 1, 0, static_cast<int>(words.size())),
     };
 
     bool success = true;

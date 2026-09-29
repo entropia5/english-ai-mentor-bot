@@ -124,12 +124,23 @@ void test_course_catalogs(TestRunner& runner) {
     runner.expect(conversation.size() == 2000, "conversation contains exactly 2000 entries");
     runner.expect(medicine.size() >= 300 && it.size() >= 250,
                   "professional catalogs contain substantial topic-specific material");
+    for (const auto* catalog : {&conversation, &medicine, &it}) {
+        bool translated = true;
+        for (const auto& word : *catalog)
+            translated = translated && !trim(word.example_translation).empty() &&
+                         word.example_translation != word.example &&
+                         !trim(word.example_pronunciation).empty();
+        runner.expect(translated, "every example in the course has a separate translation");
+    }
+    const auto definition = format_course_word_definition(conversation.front());
+    runner.expect(definition.find("Пример: I am ready. · ≈ ай эм рэ́ди.\nПеревод: Я готов.") != std::string::npos,
+                  "English example and stressed reading hint share one line");
     std::set<std::string> keys;
     bool complete = true;
     for (const auto& word : conversation) {
         keys.insert(to_lower_ascii(word.english));
         complete = complete && !word.translation.empty() && !word.example.empty() &&
-                   !word.lesson.empty() && !word.transcription.empty() &&
+                   !word.example_translation.empty() && !word.lesson.empty() && !word.transcription.empty() &&
                    !word.pronunciation.empty();
     }
     runner.expect(keys.size() == 2000 && complete, "unique complete conversation cards");

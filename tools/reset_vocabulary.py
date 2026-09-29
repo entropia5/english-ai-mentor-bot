@@ -76,6 +76,7 @@ if sql("SELECT count(*) FROM schema_migrations WHERE version='003_courses.sql';"
 sql('''BEGIN;
 SET LOCAL lock_timeout = '5s';
 LOCK TABLE words, users IN ACCESS EXCLUSIVE MODE;
+DELETE FROM evening_word_batches;
 DELETE FROM words;
 UPDATE users SET level=1, streak_days=0, last_daily_sent=0,
     new_words_page=0, learned_words_page=0, last_viewed_dict='new', active_course='conversation';

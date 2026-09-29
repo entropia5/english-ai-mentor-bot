@@ -12,7 +12,7 @@ void generate_words(long long chat_id, TelegramClient& bot, Database& database, 
     const auto course = canonical_course(topic_keyword);
     if (course.empty() || !database.set_active_course(chat_id, course)) {
         show_status_screen(chat_id, bot, "course_error", "Не удалось выбрать курс",
-                           "Попробуй ещё раз.", "Слова не добавлены.",
+                           "Попробуйте ещё раз.", "Слова не добавлены.",
                            column_keyboard({{"Направления", "menu_new_words"}}), message_id);
         return;
     }
@@ -23,14 +23,14 @@ void generate_words(long long chat_id, TelegramClient& bot, Database& database, 
             ? "Не удалось добавить слова"
             : (result.added == 0 ? "Все слова курса уже добавлены" : "Слова добавлены");
     std::string note = result.failed > 0
-                           ? "Не удалось прочитать каталог или сохранить слова. Попробуй позже."
+                           ? "Не удалось прочитать каталог или сохранить слова. Попробуйте позже."
                            : "Добавлено: " + std::to_string(result.added) +
-                                 ". Прочитай примеры вслух и составь свои предложения. Уже "
+                                 ". Прочитайте примеры вслух и составьте свои предложения. Уже "
                                  "знакомые слова можно сразу отметить выученными.";
     if (result.exhausted)
-        note += " Каталог исчерпан: продолжай повторение и разговорную практику.";
+        note += " Каталог исчерпан: продолжайте повторение и разговорную практику.";
     show_status_screen(chat_id, bot, "course_result_" + course, title, course_title(course), note,
-                       column_keyboard({{"Словарь для изучения", "menu_dictionary"},
+                       column_keyboard({{"Слова, которые я ещё учу", "menu_dictionary"},
                                         {"Практика с AI", "practice_course"},
                                         {"Ещё 5 слов", "add_" + course},
                                         {"Другие направления", "menu_new_words"},

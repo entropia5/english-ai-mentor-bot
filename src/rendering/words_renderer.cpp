@@ -121,8 +121,8 @@ std::string render_dictionary_words_image(long long chat_id, const std::vector<W
                                           int page, int total, int start, int end,
                                           const std::string& filter) {
     return render_words_card_image(
-        chat_id, words, page, total, start, end, "dictionary", "Словарь для изучения",
-        course_filter_title(filter) + " · Напиши слово или фразу, чтобы отметить выученными",
+        chat_id, words, page, total, start, end, "dictionary", "Слова, которые я ещё учу",
+        course_filter_title(filter) + " · Напишите слово или фразу, чтобы отметить выученными",
         "by entropia5", false);
 }
 
@@ -130,8 +130,8 @@ std::string render_learned_words_image(long long chat_id, const std::vector<Word
                                        int page, int total, int start, int end,
                                        const std::string& filter) {
     return render_words_card_image(
-        chat_id, words, page, total, start, end, "learned", "Выученные слова",
-        course_filter_title(filter) + " · Выученные слова", "by entropia5");
+        chat_id, words, page, total, start, end, "learned", "Словарь выученных слов",
+        course_filter_title(filter) + " · Словарь выученных слов", "by entropia5");
 }
 
 std::string render_daily_review_image(long long chat_id, const std::vector<WordView>& words,
@@ -147,7 +147,7 @@ std::string render_evening_words_image(long long chat_id, const std::vector<Word
                                        const std::string& filter) {
     return render_words_card_image(
         chat_id, words, page, total, start, end, "evening", "Вечернее занятие",
-        course_filter_title(filter) + " · Слова для изучения", "by entropia5");
+        course_filter_title(filter) + " · Слова для изучения", "by entropia5", false);
 }
 
 std::string format_word(const std::string& english, const std::string& translation,

@@ -71,7 +71,7 @@ std::string render_status_image(const std::string& key, const std::string& title
 std::string render_reminder_settings_image() {
     return render_status_image("reminders", "Напоминания",
                                "Утром — повторение выученных слов.\nВечером — неизученные слова.",
-                               "Выбери направление и включи удобные занятия кнопками ниже.");
+                               "Настройте утреннее повторение и вечерний режим кнопками ниже.");
 }
 
 std::string render_stats_image(long long chat_id, int total, int learned, const std::string& level,

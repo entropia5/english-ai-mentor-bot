@@ -13,7 +13,9 @@
 #include "services/vocabulary_service.h"
 #include "user_config.h"
 
-#include <set>
+#include "storage/broadcast_run_state.h"
+
+#include <ctime>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -67,42 +69,17 @@ ReminderContent prepare_evening_review(long long chat_id, Database& database) {
         result.filter = settings.evening_course;
         if (!result.enabled)
             return result;
+        result.new_words = settings.evening_add_new;
         if (settings.evening_add_new) {
-            const std::vector<std::string> courses =
-                result.filter == "all" ? std::vector<std::string>{"conversation", "medicine", "it"}
-                                       : std::vector<std::string>{result.filter};
-            std::vector<std::vector<CourseWord>> catalogs;
-            std::vector<int> available;
-            std::vector<int> allocations(courses.size(), 0);
-            for (const auto& course : courses) {
-                catalogs.push_back(load_course_catalog(course));
-                std::set<std::string> existing;
-                for (const auto& word : database.get_user_words_full(chat_id, false, course))
-                    existing.insert(to_lower_ascii(trim(word.english)));
-                available.push_back(
-                    static_cast<int>(select_course_words(catalogs.back(), existing, 5).size()));
-            }
-            // 'All' adds at most five words total, distributed across non-exhausted courses.
-            int remaining = 5;
-            while (remaining > 0) {
-                bool found = false;
-                for (std::size_t i = 0; i < courses.size() && remaining > 0; ++i) {
-                    if (allocations[i] >= available[i])
-                        continue;
-                    ++allocations[i];
-                    --remaining;
-                    found = true;
-                }
-                if (!found)
-                    break;
-            }
-            for (std::size_t i = 0; i < courses.size(); ++i) {
-                if (allocations[i] > 0 &&
-                    database.add_course_words(chat_id, courses[i], catalogs[i], allocations[i]) < 0)
-                    throw std::runtime_error("Could not add evening words");
-            }
+            const auto now = std::time(nullptr);
+            std::tm local{};
+            if (localtime_r(&now, &local) == nullptr)
+                throw std::runtime_error("Cannot read evening date");
+            result.words = database.prepare_evening_batch(chat_id, result.filter,
+                                                          local_date_key(local));
+        } else {
+            result.words = database.get_user_words_full(chat_id, true, result.filter);
         }
-        result.words = database.get_user_words_full(chat_id, true, result.filter);
     } catch (const std::exception& e) {
         LOG_ERROR("Evening reminder preparation failed: " + std::string(e.what()));
         result.failed = true;
@@ -133,7 +110,8 @@ BroadcastResult send_evening_new_words(long long chat_id, TelegramClient& bot, D
     if (content.words.empty())
         return BroadcastResult::NoContent;
     delete_tracked_broadcast_hint(chat_id, bot);
-    return show_evening_words_page(chat_id, bot, content.words, 0, 0, true, nullptr, content.filter)
+    return show_evening_words_page(chat_id, bot, content.words, 0, 0, true, nullptr, content.filter,
+                                   content.new_words)
                ? BroadcastResult::Delivered
                : BroadcastResult::Failed;
 }

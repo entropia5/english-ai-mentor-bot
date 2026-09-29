@@ -67,15 +67,15 @@ void handle_text_message(const nlohmann::json& update, TelegramClient& bot, Data
                 ", sender " + std::to_string(sender_user_id));
         }
         delete_incoming_after_handled = true;
-    } else if (text == "Словарь для изучения" || text == "словарь для изучения" ||
+    } else if (text == "Слова, которые я ещё учу" || normalized_text == "слова, которые я ещё учу" || text == "Словарь для изучения" || text == "словарь для изучения" ||
                text == "📚 Словарь" || text == "Словарь" || text == "словарь") {
         show_user_dictionary(chat_id, bot, database, false, 0, 0, true);
         delete_incoming_after_handled = true;
-    } else if (text == "Словарь для повторения" || text == "словарь для повторения" ||
+    } else if (text == "Словарь выученных слов" || normalized_text == "словарь выученных слов" || text == "Словарь для повторения" || text == "словарь для повторения" ||
                text == "✅ Выученные" || text == "Выученные" || text == "выученные") {
         show_user_dictionary(chat_id, bot, database, true, 0, 0, true);
         delete_incoming_after_handled = true;
-    } else if (text == "Добавить слова" || text == "добавить слова" || text == "➕ Новые слова" ||
+    } else if (text == "Добавить новые слова" || normalized_text == "добавить новые слова" || text == "Добавить слова" || text == "добавить слова" || text == "➕ Новые слова" ||
                text == "Новые слова" || text == "новые слова") {
         send_topic_menu(chat_id, bot);
         delete_incoming_after_handled = true;
@@ -106,7 +106,7 @@ void handle_text_message(const nlohmann::json& update, TelegramClient& bot, Data
                                     state.last_action[chat_id]);
         int confirmation_message_id = 0;
         bot.send_message(chat_id,
-                         "Готово.\n\n Новое слово внесено в Словарь для повторения "
+                         "Готово.\n\n Слово внесено в словарь выученных слов "
                          "и было отмечено, как выученное.",
                          "", &confirmation_message_id);
         remember_broadcast_hint(chat_id, confirmation_message_id);

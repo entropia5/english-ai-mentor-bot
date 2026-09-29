@@ -45,7 +45,7 @@ void handle_callback(const nlohmann::json& update, TelegramClient& bot, Database
         show_reminder_settings(chat_id, bot, database, message_id);
     } else if (data.rfind("rem_", 0) == 0) {
         for (const std::string key : {"morning_enabled", "evening_enabled", "morning_course",
-                                      "evening_course", "evening_add_new"}) {
+                                      "evening_add_new"}) {
             const std::string prefix = "rem_" + key + "_";
             if (data.rfind(prefix, 0) == 0 &&
                 database.set_reminder_setting(chat_id, key, data.substr(prefix.size()))) {
@@ -63,14 +63,12 @@ void handle_callback(const nlohmann::json& update, TelegramClient& bot, Database
         const auto course = canonical_course(data.substr(7));
         if (!course.empty() && database.set_active_course(chat_id, course)) {
             show_status_screen(chat_id, bot, "course_" + course, course_title(course),
-                               "Добавляй слова по порядку и используй их в своих предложениях.",
-                               "Произнеси пример вслух и составь свою фразу. Напоминания "
+                               "Добавляйте слова по порядку и используйте их в своих предложениях.",
+                               "Произнесите пример вслух и составьте свою фразу. Напоминания "
                                "настраиваются отдельно в главном меню.",
-                               column_keyboard({{"Добавить 5 слов", "add_" + course},
-                                                {"Словарь для изучения", "menu_dictionary"},
-                                                {"Выученные", "menu_learned"},
-                                                {"Практика с AI", "practice_course"},
-                                                {"Другие направления", "menu_new_words"}}),
+                               column_keyboard({{"Добавить 5 новых слов", "add_" + course},
+                                                {"Другие направления", "menu_new_words"},
+                                                {"Главное меню", "menu_main"}}),
                                message_id);
         }
     } else if (data.rfind("add_", 0) == 0) {
@@ -84,7 +82,7 @@ void handle_callback(const nlohmann::json& update, TelegramClient& bot, Database
             words = database.get_user_words_full(chat_id, false);
         std::string prompt =
             "Начни короткую тренировку английского. Направление: " + course_title(course) +
-            ". Задай один простой вопрос на английском, добавь перевод на русский. "
+            ". Задайте один простой вопрос на английском, добавьте перевод на русский. "
             "Используй несколько слов из списка: ";
         for (std::size_t i = 0; i < words.size() && i < 10; ++i)
             prompt += words[i].english + " (" + words[i].translation + "), ";

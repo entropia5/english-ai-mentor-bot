@@ -17,6 +17,7 @@ BroadcastResult send_evening_new_words(long long chat_id, TelegramClient& bot, D
 struct ReminderContent {
     bool enabled = false;
     bool failed = false;
+    bool new_words = false;
     std::string filter = "all";
     std::vector<Word> words;
 };

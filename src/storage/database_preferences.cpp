@@ -44,7 +44,7 @@ ReminderSettings Database::get_reminder_settings(long long user_id) {
         throw std::runtime_error("Database is not connected");
     pqxx::work tx(*conn);
     const auto rows = tx.exec_params("SELECT morning_enabled, evening_enabled, morning_course, "
-                                     "evening_course, evening_add_new FROM users WHERE user_id=$1",
+                                     "active_course, evening_add_new FROM users WHERE user_id=$1",
                                      user_id);
     tx.commit();
     if (rows.empty())
@@ -58,7 +58,7 @@ bool Database::set_reminder_setting(long long user_id, const std::string& key,
                                     const std::string& value) {
     const bool boolean =
         key == "morning_enabled" || key == "evening_enabled" || key == "evening_add_new";
-    const bool course = key == "morning_course" || key == "evening_course";
+    const bool course = key == "morning_course";
     if (!connected || (!boolean && !course) || (boolean && value != "0" && value != "1") ||
         (course && !valid_course_filter(value)))
         return false;

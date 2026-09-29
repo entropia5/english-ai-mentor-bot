@@ -51,6 +51,9 @@ std::string GroqClient::ask(const std::string& prompt, const std::string& system
               "русская передача приблизительна. "
               "Используй русский язык для объяснений, английский для примеров."
             : system_prompt;
+    sys_prompt += " В обращениях к пользователю используйте вежливое «Вы» с заглавной буквы "
+                  "и формы без указания пола: «Вы выбрали», «Вы выучили». Не обращайтесь на «ты» "
+                  "и не предполагайте пол пользователя. В учебных примерах сохраняйте смысл оригинала.";
 
     messages.push_back({{"role", "system"}, {"content", sys_prompt}});
     messages.push_back({{"role", "user"}, {"content", prompt}});

@@ -5,7 +5,8 @@ struct ReminderSettings {
     bool morning_enabled = true;
     bool evening_enabled = true;
     std::string morning_course = "all";
-    std::string evening_course = "all";
+    // Вечер следует за направлением ручного добавления слов.
+    std::string evening_course = "conversation";
     bool evening_add_new = true;
 };
 

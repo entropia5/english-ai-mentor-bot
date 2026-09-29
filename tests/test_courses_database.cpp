@@ -38,6 +38,10 @@ int main() {
         expect(db.set_active_course(user, "conversation"), "course selection persists");
         expect(db.add_course_words(user, "conversation", conversation, 10) == 10,
                "first batch added");
+        expect(db.get_user_words_full(user).front().definition.find("\nПеревод: ") != std::string::npos,
+               "new course words include Russian example translations");
+        expect(db.get_user_words_full(user).front().definition.find(" · ≈ ") != std::string::npos,
+               "new course words include inline example pronunciation");
         expect(db.mark_word_learned(user, "i"), "case-insensitive learned marking");
         expect(db.add_course_words(user, "conversation", conversation, 10) == 10,
                "second batch added");
@@ -109,9 +113,8 @@ int main() {
                    !db.set_dictionary_filter(user, "invalid"),
                "dictionary filter is validated");
         expect(db.set_reminder_setting(user, "morning_course", "conversation") &&
-                   db.set_reminder_setting(user, "evening_course", "medicine") &&
                    db.set_reminder_setting(user, "evening_add_new", "0"),
-               "morning and evening sources are independently configurable");
+               "morning source and evening mode are configurable");
         expect(!db.set_reminder_setting(user, "active_course", "it") &&
                    !db.set_reminder_setting(user, "morning_enabled", "yes") &&
                    !db.set_reminder_setting(user, "evening_course", "invalid"),
@@ -120,7 +123,7 @@ int main() {
         Database reopened;
         expect(reopened.connect() && reopened.get_dictionary_filter(user) == "medicine" &&
                    reopened.get_reminder_settings(user).morning_course == "conversation" &&
-                   reopened.get_reminder_settings(user).evening_course == "medicine" &&
+                   reopened.get_reminder_settings(user).evening_course == "it" &&
                    !reopened.get_reminder_settings(user).evening_add_new,
                "preferences survive reconnect and addition course changes");
         expect(db.get_dictionary_filter(1002) == "all", "preferences are isolated per user");
@@ -128,10 +131,11 @@ int main() {
         expect(morning.enabled && !morning.failed && morning.words.size() == 1 &&
                    morning.words.front().learned,
                "morning uses learned words from its own course");
+        expect(db.set_active_course(user, "medicine"), "manual selection changes evening source");
         const auto evening = prepare_evening_review(user, db);
         expect(evening.enabled && !evening.failed && evening.words.size() == 11 &&
                    db.get_user_words_full(user, false, "all").size() == 31,
-               "evening repeat mode uses its own course without adding words");
+               "evening repeat mode follows manual course without adding words");
         expect(db.set_reminder_setting(user, "morning_enabled", "0") &&
                    !prepare_morning_review(user, db).enabled &&
                    prepare_evening_review(user, db).enabled,
@@ -142,13 +146,25 @@ int main() {
                    db.get_user_words_full(user, false, "all").size() == 31,
                "disabled evening cannot add new words");
         expect(db.set_reminder_setting(user, "evening_enabled", "1") &&
-                   db.set_reminder_setting(user, "evening_course", "all"),
-               "evening can be enabled for all courses");
+                   db.set_active_course(user, "it"),
+               "evening follows the newly selected IT course");
         const auto mixed = prepare_evening_review(user, db);
-        expect(!mixed.failed && mixed.words.size() == 35 &&
+        expect(!mixed.failed && mixed.new_words && mixed.words.size() == 5 &&
                    db.get_user_words_full(user, false, "all").size() == 36 &&
-                   db.get_words_count(user, false, "it") == 1,
-               "all-course evening adds five total distributed words");
+                   db.get_words_count(user, false, "it") == 5,
+               "evening adds exactly five words from the manually selected course");
+        const auto retry = prepare_evening_review(user, reopened);
+        expect(!retry.failed && retry.words.size() == 5 &&
+                   retry.words.front().english == mixed.words.front().english &&
+                   db.get_user_words_full(user, false, "all").size() == 36,
+               "retry through another connection reuses today's batch without adding words");
+        const auto tomorrow = db.prepare_evening_batch(user, "medicine", "2099-01-01");
+        expect(tomorrow.size() == 5 &&
+                   db.get_user_words_full(user, false, "all").size() == 41,
+               "another day creates a fresh five-word batch");
+        expect(db.prepare_evening_batch(user, "medicine", "2099-01-01").size() == 5 &&
+                   db.get_user_words_full(user, false, "all").size() == 41,
+               "saved single-course batch is idempotent");
         expect(db.get_dictionary_filter(user) == "medicine" && db.get_active_course(user) == "it",
                "scheduled additions preserve browsing and manual addition preferences");
         Database disconnected;
@@ -156,15 +172,31 @@ int main() {
                    prepare_evening_review(user, disconnected).failed,
                "database failure prevents reminder delivery");
         const auto keyboard = reminder_settings_keyboard(db.get_reminder_settings(user));
-        bool morning_on = false, evening_off = false;
+        bool morning_on = false, evening_off = false, morning_all = false, daily_five = false;
         for (const auto& row : keyboard) {
             for (const auto& button : row) {
                 expect(button.second.size() <= 64, "reminder callback fits Telegram limit");
                 morning_on |= button.second == "rem_morning_enabled_1";
                 evening_off |= button.second == "rem_evening_enabled_0";
+                expect(button.second.rfind("rem_evening_course_", 0) != 0,
+                       "evening course buttons are absent");
+                morning_all |= button.second == "rem_morning_course_all" &&
+                               button.first.find("Повторять все слова") != std::string::npos;
+                daily_five |= button.second == "rem_evening_add_new_1" &&
+                              button.first.find("Добавлять ежедневно 5 новых слов") != std::string::npos;
             }
         }
         expect(morning_on && evening_off, "toggle buttons carry explicit target states");
+        expect(morning_all && daily_five, "reminder buttons explain their modes");
+        constexpr long long empty_user = 2001;
+        expect(prepare_morning_review(empty_user, db).words.empty(),
+               "morning has no content when there are no learned words");
+        expect(db.add_course_words(empty_user, "it", it, static_cast<int>(it.size()) - 2) > 0,
+               "prepare nearly exhausted course");
+        expect(db.prepare_evening_batch(empty_user, "it", "2099-01-01").size() == 2,
+               "nearly exhausted course returns only remaining new words");
+        expect(db.prepare_evening_batch(empty_user, "it", "2099-01-02").empty(),
+               "exhausted course produces no reminder content");
         return 0;
     } catch (const std::exception& e) {
         std::cerr << "[FAIL] " << e.what() << '\n';

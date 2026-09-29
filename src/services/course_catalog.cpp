@@ -54,10 +54,14 @@ std::vector<CourseWord> load_course_catalog(const std::string& course) {
                             item.at("example"),
                             item.at("lesson"),
                             item.value("transcription", ""),
-                            item.value("pronunciation", "")};
+                            item.value("pronunciation", ""),
+                            item.at("example_translation"),
+                            item.at("example_pronunciation")};
             const auto key = to_lower_ascii(trim(word.english));
             if (key.empty() || trim(word.translation).empty() || trim(word.example).empty() ||
-                trim(word.lesson).empty() || trim(word.transcription).empty() ||
+                trim(word.example_translation).empty() || trim(word.example_pronunciation).empty() ||
+                trim(word.lesson).empty() ||
+                trim(word.transcription).empty() ||
                 trim(word.pronunciation).empty() || !unique.insert(key).second) {
                 throw std::runtime_error("Incomplete or duplicate catalog entry: " + word.english);
             }
@@ -82,6 +86,16 @@ std::vector<CourseWord> select_course_words(const std::vector<CourseWord>& catal
         result.push_back(word);
         if (static_cast<int>(result.size()) == count)
             break;
+    }
+    return result;
+}
+
+std::string format_course_word_definition(const CourseWord& word) {
+    std::string result = word.lesson + "\nПример: " + word.example;
+    if (!word.example_pronunciation.empty())
+        result += " · ≈ " + word.example_pronunciation;
+    if (!word.example_translation.empty()) {
+        result += "\nПеревод: " + word.example_translation;
     }
     return result;
 }
