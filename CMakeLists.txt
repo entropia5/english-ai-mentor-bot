@@ -61,6 +61,7 @@ add_library(english_mentor_core
     src/storage/database_courses.cpp
     src/storage/database_preferences.cpp
     src/presentation/reminder_settings.cpp
+    src/services/dictionary_export.cpp
     src/services/dictionary_service.cpp
     src/services/documentation_service.cpp
     src/services/maintenance_service.cpp
@@ -191,6 +192,24 @@ if(ENGLISH_MENTOR_BUILD_TESTS)
     english_mentor_enable_warnings(english_mentor_reminder_transport_tests)
     english_mentor_enable_sanitizers(english_mentor_reminder_transport_tests)
     add_test(NAME english_mentor_reminder_transport_tests COMMAND english_mentor_reminder_transport_tests)
+    add_executable(english_mentor_export_cleanup_tests tests/test_export_cleanup.cpp
+        src/presentation/message_cleanup.cpp src/presentation/bot_state.cpp
+        src/presentation/bot_state_persistence.cpp src/utils/file_utils.cpp src/utils/logger.cpp)
+    target_include_directories(english_mentor_export_cleanup_tests PRIVATE include src/presentation)
+    target_link_libraries(english_mentor_export_cleanup_tests PRIVATE Threads::Threads)
+    english_mentor_enable_warnings(english_mentor_export_cleanup_tests)
+    english_mentor_enable_sanitizers(english_mentor_export_cleanup_tests)
+    add_test(NAME english_mentor_export_cleanup_tests COMMAND english_mentor_export_cleanup_tests)
+    find_program(WKHTMLTOPDF_EXECUTABLE wkhtmltopdf)
+    if(WKHTMLTOPDF_EXECUTABLE)
+        add_executable(english_mentor_export_tests tests/test_dictionary_export.cpp)
+        target_link_libraries(english_mentor_export_tests PRIVATE english_mentor_core)
+        english_mentor_enable_warnings(english_mentor_export_tests)
+        english_mentor_enable_sanitizers(english_mentor_export_tests)
+        add_test(NAME english_mentor_export_tests COMMAND english_mentor_export_tests)
+        set_tests_properties(english_mentor_export_tests PROPERTIES
+            WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
+    endif()
     find_program(WKHTMLTOIMAGE_EXECUTABLE wkhtmltoimage)
     if(WKHTMLTOIMAGE_EXECUTABLE)
         add_executable(english_mentor_render_tests tests/test_render_photo_size.cpp)

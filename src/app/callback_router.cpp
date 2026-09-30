@@ -9,6 +9,7 @@
 #include "services/broadcast_service.h"
 #include "services/course_catalog.h"
 #include "services/dictionary_service.h"
+#include "services/dictionary_export.h"
 #include "services/vocabulary_presentation.h"
 #include "telegram_client.h"
 
@@ -30,10 +31,17 @@ void handle_callback(const nlohmann::json& update, TelegramClient& bot, Database
     remember_active_screen_message(chat_id, message_id,
                                    screen_message_type_from_callback(callback["message"]));
     delete_tracked_broadcast_hint(chat_id, bot);
+    delete_tracked_exports(chat_id, bot);
     delete_tracked_ai_input(chat_id, bot);
 
     if (data == "menu_main") {
         send_main_menu(chat_id, bot, database, message_id);
+    } else if (data == "menu_export_pdf") {
+        show_dictionary_export_menu(chat_id, bot, message_id);
+    } else if (data == "export_conversation_pdf" || data == "export_learned_pdf") {
+        send_dictionary_pdf(chat_id, bot, database,
+            data == "export_conversation_pdf" ? DictionaryExportKind::Conversation
+                                               : DictionaryExportKind::Learned);
     } else if (data == "menu_dictionary" || data == "menu_learned") {
         show_user_dictionary(chat_id, bot, database, data == "menu_learned", 0, message_id);
     } else if (data.rfind("dict_filter_", 0) == 0 || data.rfind("learn_filter_", 0) == 0) {
@@ -62,6 +70,7 @@ void handle_callback(const nlohmann::json& update, TelegramClient& bot, Database
     } else if (data.rfind("course_", 0) == 0) {
         const auto course = canonical_course(data.substr(7));
         if (!course.empty() && database.set_active_course(chat_id, course)) {
+            remember_screen_context(chat_id, "topics");
             show_status_screen(chat_id, bot, "course_" + course, course_title(course),
                                "Добавляйте слова по порядку и используйте их в своих предложениях.",
                                "Произнесите пример вслух и составьте свою фразу. Напоминания "
@@ -76,25 +85,7 @@ void handle_callback(const nlohmann::json& update, TelegramClient& bot, Database
         if (!course.empty())
             generate_words(chat_id, bot, database, ai, course, course_title(course), message_id);
     } else if (data == "practice_course") {
-        const auto course = database.get_active_course(chat_id);
-        auto words = database.get_user_words_full(chat_id, true);
-        if (words.empty())
-            words = database.get_user_words_full(chat_id, false);
-        std::string prompt =
-            "Начни короткую тренировку английского. Направление: " + course_title(course) +
-            ". Задайте один простой вопрос на английском, добавьте перевод на русский. "
-            "Используй несколько слов из списка: ";
-        for (std::size_t i = 0; i < words.size() && i < 10; ++i)
-            prompt += words[i].english + " (" + words[i].translation + "), ";
-        if (course == "medicine")
-            prompt += "Разыграй вымышленного пациента; тренируем язык общения врача, без лечебных "
-                      "назначений.";
-        database.save_conversation(chat_id, "user", prompt);
-        const auto response = ai.ask(prompt);
-        database.save_conversation(chat_id, "assistant", response);
-        remember_screen_context(chat_id, "ai");
-        upsert_screen(chat_id, bot, format_ai_response_box(response),
-                      column_keyboard({{"Главное меню", "menu_main"}}), message_id);
+        send_main_menu(chat_id, bot, database, message_id);
     } else if (data.rfind("topic_", 0) == 0) {
         // Old Telegram messages may still contain the retired topic buttons.
         send_topic_menu(chat_id, bot, message_id);

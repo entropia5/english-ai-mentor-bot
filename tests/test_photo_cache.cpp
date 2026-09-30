@@ -12,6 +12,8 @@ namespace {
 int uploads = 0, references = 0;
 TelegramHttpResponse next;
 nlohmann::json last_payload;
+std::string multipart_url;
+std::vector<TelegramMultipartField> multipart_fields;
 void check(bool ok) { if (!ok) throw std::runtime_error("Photo cache regression"); }
 TelegramHttpResponse success() {
     return {true, 200, R"({"ok":true,"result":{"message_id":42,"photo":[{"width":100,"height":100,"file_id":"small"},{"width":1000,"height":1000,"file_id":"large"}]}})", {}};
@@ -24,8 +26,10 @@ TelegramHttpResponse telegram_post_json(const std::string&, const nlohmann::json
     if (next.http_status) { auto result = next; next = {}; return result; }
     return success();
 }
-TelegramHttpResponse telegram_post_multipart(const std::string&, const std::vector<TelegramMultipartField>&) {
+TelegramHttpResponse telegram_post_multipart(const std::string& url, const std::vector<TelegramMultipartField>& fields) {
     ++uploads;
+    multipart_url = url;
+    multipart_fields = fields;
     return success();
 }
 int main() {
@@ -35,6 +39,15 @@ int main() {
         const auto file = (dir / "card.jpg").string();
         std::ofstream(file) << "first";
         TelegramClient bot("bot-one");
+        int document_id = 0;
+        check(bot.send_document(123, "/tmp/learned-dictionary.pdf", "Словарь", &document_id));
+        check(document_id == 42);
+        check(multipart_url == "bot-one/sendDocument" && multipart_fields.size() == 3);
+        check(multipart_fields[0].name == "chat_id" && multipart_fields[0].value == "123");
+        check(multipart_fields[1].name == "document" && multipart_fields[1].file &&
+              multipart_fields[1].value == "/tmp/learned-dictionary.pdf");
+        check(multipart_fields[2].name == "caption" && multipart_fields[2].value == "Словарь");
+        uploads = 0;
         check(bot.send_photo(1, file, {}));
         check(uploads == 1 && references == 0);
         check(bot.edit_message_photo(1, 42, file, {{{"next", "next"}}}, "new caption"));

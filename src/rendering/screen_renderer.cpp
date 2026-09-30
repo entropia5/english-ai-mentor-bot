@@ -59,6 +59,11 @@ std::string render_topic_menu_image() {
     return rendering::detail::render_screen(base, "topic_menu.html", {}, "static", "topic menu");
 }
 
+std::string render_dictionary_export_image() {
+    const fs::path base = fs::path(project_data_dir()) / "rendered" / "export" / "dictionary_export";
+    return rendering::detail::render_screen(base, "dictionary_export.html", {}, "static", "dictionary export");
+}
+
 std::string render_status_image(const std::string& key, const std::string& title,
                                 const std::string& subtitle, const std::string& note) {
     const fs::path base =

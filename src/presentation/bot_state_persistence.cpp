@@ -33,6 +33,8 @@ void save_bot_state_locked() {
         chat_ids.insert(chat_id);
     for (const auto& [chat_id, _] : g_bot_state.broadcast_hint_messages)
         chat_ids.insert(chat_id);
+    for (const auto& [chat_id, _] : g_bot_state.export_messages)
+        chat_ids.insert(chat_id);
     for (const auto& [chat_id, _] : g_bot_state.chat_languages)
         chat_ids.insert(chat_id);
     for (const auto& [chat_id, _] : g_bot_state.screen_contexts)
@@ -52,6 +54,10 @@ void save_bot_state_locked() {
         if (alert_it != g_bot_state.broadcast_hint_messages.end() && alert_it->second > 0) {
             chat_state["last_alert_text_message_id"] = alert_it->second;
         }
+
+        const auto export_it = g_bot_state.export_messages.find(chat_id);
+        if (export_it != g_bot_state.export_messages.end() && !export_it->second.empty())
+            chat_state["export_message_ids"] = export_it->second;
 
         auto language_it = g_bot_state.chat_languages.find(chat_id);
         if (language_it != g_bot_state.chat_languages.end() && !language_it->second.empty()) {
@@ -86,6 +92,7 @@ void load_bot_state() {
         g_bot_state.active_screen_messages.clear();
         g_bot_state.broadcast_hint_messages.clear();
         g_bot_state.chat_languages.clear();
+        g_bot_state.export_messages.clear();
         g_bot_state.screen_contexts.clear();
 
         if (!state.contains("chats") || !state["chats"].is_object()) {
@@ -110,6 +117,12 @@ void load_bot_state() {
             std::string language = chat_state.value("language", "");
             std::string screen_context = chat_state.value("screen_context", "");
 
+            if (chat_state.contains("export_message_ids") && chat_state["export_message_ids"].is_array()) {
+                for (const auto& id : chat_state["export_message_ids"]) {
+                    if (id.is_number_integer() && id.get<int>() > 0)
+                        g_bot_state.export_messages[chat_id].push_back(id.get<int>());
+                }
+            }
             if (live_message_id > 0) {
                 g_bot_state.active_screen_messages[chat_id] = {
                     live_message_id, screen_message_type_from_string(live_message_type)};

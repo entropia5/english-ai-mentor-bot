@@ -10,6 +10,7 @@
 #include "services/broadcast_service.h"
 #include "services/course_catalog.h"
 #include "services/dictionary_service.h"
+#include "services/dictionary_export.h"
 #include "services/vocabulary_presentation.h"
 #include "telegram_client.h"
 #include "user_config.h"
@@ -42,6 +43,7 @@ void handle_text_message(const nlohmann::json& update, TelegramClient& bot, Data
     ensure_reply_keyboard_removed(chat_id, bot);
     delete_tracked_ai_input(chat_id, bot, incoming_message_id);
     delete_tracked_broadcast_hint(chat_id, bot);
+    delete_tracked_exports(chat_id, bot);
 
     bool delete_incoming_after_handled = false;
     const std::string normalized_text = to_lower_ascii(trim(text));
@@ -81,10 +83,13 @@ void handle_text_message(const nlohmann::json& update, TelegramClient& bot, Data
         delete_incoming_after_handled = true;
     } else if (text == "🤖 Спросить AI" || text == "Спросить AI" ||
                text == "спросить ai") {
-        show_ai_prompt(chat_id, bot);
+        send_main_menu(chat_id, bot, database);
         delete_incoming_after_handled = true;
     } else if (text == "📊 Статистика" || text == "Статистика" || text == "статистика") {
         show_stats(chat_id, bot, database);
+        delete_incoming_after_handled = true;
+    } else if (text == "Скачать словарь в PDF") {
+        show_dictionary_export_menu(chat_id, bot);
         delete_incoming_after_handled = true;
     } else if (text == "Напоминания" || text == "напоминания") {
         show_reminder_settings(chat_id, bot, database);
@@ -111,7 +116,7 @@ void handle_text_message(const nlohmann::json& update, TelegramClient& bot, Data
                                     state.dictionary_message_id[chat_id],
                                     state.learned_page[chat_id], state.learned_message_id[chat_id],
                                     state.last_action[chat_id]);
-    } else {
+    } else if (get_screen_context(chat_id) == "ai") {
         remember_ai_input(chat_id, incoming_message_id);
         upsert_screen(chat_id, bot, "*Думаю...*", column_keyboard({{"Главное меню", "menu_main"}}));
         std::string prompt = "Продолжи учебный диалог. Направление: " +
@@ -127,6 +132,13 @@ void handle_text_message(const nlohmann::json& update, TelegramClient& bot, Data
                       column_keyboard({{"Главное меню", "menu_main"}}));
         database.save_conversation(chat_id, "assistant", response);
         delete_tracked_ai_input(chat_id, bot);
+    } else {
+        int hint_id = 0;
+        bot.send_message(chat_id,
+                         "Не нашёл слова в выбранном словаре. Отправьте слова из него через "
+                         "пробел, запятую или с новой строки. Для вопроса помощнику нажмите «Спросить AI».",
+                         "", &hint_id);
+        remember_broadcast_hint(chat_id, hint_id);
     }
 
     if (delete_incoming_after_handled) {

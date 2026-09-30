@@ -100,6 +100,9 @@ class Database {
 
     int get_words_count(long long user_id, bool learned = false, const std::string& course = "");
 
+    // All learned words across courses; throws on database failure.
+    std::vector<Word> get_learned_words_for_export(long long user_id);
+
     // get full word info for all words of user
     std::vector<WordView> get_user_words_full(long long user_id, bool only_not_learned = false,
                                               const std::string& course = "");

@@ -13,6 +13,7 @@ InlineKeyboard column_keyboard(std::initializer_list<std::pair<std::string, std:
 InlineKeyboard main_menu_keyboard() {
     return column_keyboard({{"Слова, которые я ещё учу", "menu_dictionary"},
                             {"Словарь выученных слов", "menu_learned"},
+                            {"Скачать словарь в PDF", "menu_export_pdf"},
                             {"Добавить новые слова", "menu_new_words"},
                             {"Спросить AI", "menu_ai"},
                             {"Статистика", "menu_stats"},

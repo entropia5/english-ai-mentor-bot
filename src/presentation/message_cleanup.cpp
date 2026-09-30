@@ -1,6 +1,7 @@
 #include "bot_state_internal.h"
 #include "presentation/bot_state.h"
 
+#include <algorithm>
 #include <chrono>
 #include <mutex>
 #include <utility>
@@ -108,4 +109,35 @@ void ensure_reply_keyboard_removed(long long chat_id, TelegramClient& bot) {
         g_bot_state.removed_reply_keyboards[chat_id] = true;
     }
     bot.remove_reply_keyboard(chat_id);
+}
+
+// Export documents have an event-based lifetime, independent of short-lived hints.
+void remember_export_message(long long chat_id, int message_id) {
+    if (message_id <= 0) return;
+    std::lock_guard<std::mutex> lock(g_bot_state.mutex);
+    auto& messages = g_bot_state.export_messages[chat_id];
+    if (std::find(messages.begin(), messages.end(), message_id) == messages.end())
+        messages.push_back(message_id);
+    save_bot_state_locked();
+}
+
+void delete_tracked_exports(long long chat_id, TelegramClient& bot) {
+    std::vector<int> messages;
+    {
+        std::lock_guard<std::mutex> lock(g_bot_state.mutex);
+        const auto it = g_bot_state.export_messages.find(chat_id);
+        if (it == g_bot_state.export_messages.end()) return;
+        messages = it->second;
+    }
+    for (const int id : messages) {
+        // Retain unsuccessful deletions for the next action, including after a restart.
+        if (!bot.delete_message(chat_id, id)) continue;
+        std::lock_guard<std::mutex> lock(g_bot_state.mutex);
+        const auto it = g_bot_state.export_messages.find(chat_id);
+        if (it == g_bot_state.export_messages.end()) continue;
+        auto& tracked = it->second;
+        tracked.erase(std::remove(tracked.begin(), tracked.end(), id), tracked.end());
+        if (tracked.empty()) g_bot_state.export_messages.erase(it);
+        save_bot_state_locked();
+    }
 }

@@ -201,3 +201,15 @@ bool TelegramClient::edit_message_photo(
     }
     return ok;
 }
+
+bool TelegramClient::send_document(long long chat_id, const std::string& path,
+                                   const std::string& caption, int* message_id) {
+    const auto response = telegram_post_multipart(api_url + "/sendDocument", {
+        {"chat_id", std::to_string(chat_id), false}, {"document", path, true},
+        {"caption", caption, false}});
+    if (!response.transport_ok) {
+        log_media_transport_failure("sendDocument", response);
+        return false;
+    }
+    return telegram_ok(response.body, "sendDocument", message_id, response.http_status);
+}

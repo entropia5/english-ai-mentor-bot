@@ -76,6 +76,19 @@ void test_text_utilities(TestRunner& runner) {
     const auto words = split_words_input(" house, meeting , refund ");
     runner.expect(words.size() == 3 && words.front() == "house" && words.back() == "refund",
                   "comma-separated word input");
+    const std::vector<std::string> dictionary = {"apple", "book", "water", "check", "check in", "don't"};
+    runner.expect(match_words_input("Apple book\nwater", dictionary) ==
+                      std::vector<std::string>({"apple", "book", "water"}),
+                  "words separated by spaces and newlines");
+    runner.expect(match_words_input("check in, book; don't\twater! apple apple", dictionary) ==
+                      std::vector<std::string>({"check in", "book", "don't", "water", "apple"}),
+                  "longest dictionary phrase, punctuation and duplicate input");
+    runner.expect(match_words_input("unknown", dictionary).empty(), "unknown words ignored");
+    runner.expect(match_words_input("apple, unknown, water", dictionary) ==
+                      std::vector<std::string>({"apple", "water"}), "known words in mixed input");
+    runner.expect(match_words_input("check, in", dictionary) ==
+                      std::vector<std::string>({"check"}), "phrases do not cross list separators");
+    runner.expect(match_words_input("apple", {}).empty(), "empty dictionary");
     runner.expect(to_lower_ascii("Cpp-TEST") == "cpp-test", "ASCII normalization");
     runner.expect(trim(" \n value\t") == "value", "whitespace trimming");
     runner.expect(format_ai_response_box("`int value = 1;`") == "```cpp\n'int value = 1;'\n```",

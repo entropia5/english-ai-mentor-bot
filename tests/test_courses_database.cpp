@@ -31,6 +31,21 @@ int main() {
         Database db;
         expect(db.connect() && db.init_tables(), "migrations apply to isolated database");
         expect(db.init_tables(), "migrations can be run twice");
+        constexpr long long export_user = 910001;
+        expect(db.add_user(export_user, "Export test"), "export user created");
+        for (int i = 0; i < 61; ++i) {
+            const auto course = i % 2 == 0 ? "it" : "medicine";
+            const auto word = "export_word_" + std::to_string(i);
+            expect(db.add_word(export_user, word, "Перевод", "", "", course, "Пример"),
+                   "export fixture added");
+            expect(db.mark_word_learned(export_user, word, course), "export fixture learned");
+        }
+        expect(db.add_word(export_user, "unlearned", "Не выучено", "", "", "it"),
+               "unlearned fixture added");
+        expect(db.get_learned_words_for_export(export_user).size() == 61,
+               "export includes all courses beyond 50 rows and excludes unlearned words");
+        expect(db.get_learned_words_for_export(910002).empty(),
+               "export does not leak another user's words");
         const auto conversation = load_course_catalog("conversation");
         const auto medicine = load_course_catalog("medicine");
         const auto it = load_course_catalog("it");

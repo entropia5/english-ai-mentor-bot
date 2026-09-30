@@ -56,6 +56,9 @@ class TelegramClient {
         const std::vector<std::vector<std::pair<std::string, std::string>>>& buttons,
         int* message_id = nullptr);
 
+    bool send_document(long long chat_id, const std::string& path, const std::string& caption,
+                       int* message_id = nullptr);
+
     bool send_photo(long long chat_id, const std::string& photo_path,
                     const std::vector<std::vector<std::pair<std::string, std::string>>>& buttons,
                     const std::string& caption = "", int* message_id = nullptr,

@@ -11,27 +11,14 @@ bool try_mark_words_from_input(long long chat_id, const std::string& text, Datab
         filter = db.get_reminder_settings(chat_id).morning_course;
     if (context == "evening")
         filter = db.get_reminder_settings(chat_id).evening_course;
-    auto requested_words = split_words_input(text);
-    if (requested_words.empty())
-        return false;
-
-    std::vector<std::string> marked_words;
-    std::vector<std::string> not_found_words;
-
-    for (const auto& word : requested_words) {
-        if (db.word_exists(chat_id, word, filter)) {
-            if (db.mark_word_learned(chat_id, word, filter)) {
-                marked_words.push_back(word);
-            }
-        } else if (requested_words.size() > 1) {
-            not_found_words.push_back(word);
-        }
-    }
-
-    if (marked_words.empty())
-        return false;
-
-    return true;
+    std::vector<std::string> dictionary;
+    for (const auto& word : db.get_user_words_full(chat_id, false, filter))
+        dictionary.push_back(word.english);
+    const auto requested_words = match_words_input(text, dictionary);
+    bool marked = false;
+    for (const auto& word : requested_words)
+        if (db.mark_word_learned(chat_id, word, filter)) marked = true;
+    return marked;
 }
 
 std::vector<WordView> get_learned_words_for_review(long long chat_id, Database& db,

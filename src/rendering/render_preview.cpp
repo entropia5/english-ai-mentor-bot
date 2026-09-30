@@ -19,6 +19,7 @@ bool render_preview_screens() {
         render_main_menu_image("17"),
         render_ai_prompt_image(),
         render_topic_menu_image(),
+        render_dictionary_export_image(),
         render_reminder_settings_image(),
         render_status_image("preview", "Готово", "Дизайн загружен из runtime-шаблона",
                             "Измените CSS или HTML и запустите preview снова."),

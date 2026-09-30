@@ -116,3 +116,19 @@ std::vector<WordView> Database::get_user_words_full(long long user_id, bool only
     }
     return words;
 }
+
+std::vector<Word> Database::get_learned_words_for_export(long long user_id) {
+    if (!connected) throw std::runtime_error("Database is disconnected");
+    pqxx::work transaction(*conn);
+    const auto rows = transaction.exec_params(
+        "SELECT english, translation_ru, pronunciation_ru, transcription, definition_ru, topic "
+        "FROM words WHERE user_id = $1 AND is_learned = true ORDER BY lower(english), id", user_id);
+    std::vector<Word> words;
+    for (const auto& row : rows) {
+        words.push_back(Word{row[0].as<std::string>(), row[1].as<std::string>(), true,
+            row[2].as<std::string>(""), row[3].as<std::string>(""),
+            course_filter_title(row[5].as<std::string>()) + "\n" + row[4].as<std::string>("")});
+    }
+    transaction.commit();
+    return words;
+}
