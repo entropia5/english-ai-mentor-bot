@@ -49,9 +49,18 @@ void handle_text_message(const nlohmann::json& update, TelegramClient& bot, Data
     const std::string normalized_text = to_lower_ascii(trim(text));
 
     if (text == "/start" || text == "start") {
-        delete_active_screen_message(chat_id, bot);
+        // Clearing Telegram history can hide a message while edits still succeed.
+        // Start must send a fresh screen, preserving the old one if sending fails.
+        const int previous_id = get_active_screen_message(chat_id);
+        const auto previous_type = get_active_screen_message_type(chat_id);
+        remember_obsolete_screen(chat_id, previous_id);
+        clear_active_screen_message(chat_id);
         send_main_menu(chat_id, bot, database);
-        delete_incoming_after_handled = true;
+        if (get_active_screen_message(chat_id) > 0) {
+            delete_incoming_after_handled = true;
+        } else {
+            remember_active_screen_message(chat_id, previous_id, previous_type);
+        }
     } else if (normalized_text == "testing" || normalized_text == "/testing") {
         if (is_primary_user(chat_id, sender_user_id)) {
             send_daily_review(chat_id, bot, database);
@@ -112,7 +121,9 @@ void handle_text_message(const nlohmann::json& update, TelegramClient& bot, Data
                          "", &confirmation_message_id);
         remember_broadcast_hint(chat_id, confirmation_message_id);
         delete_messages_after_delay(bot, chat_id, {confirmation_message_id}, 1);
-        refresh_after_marking_words(chat_id, bot, database, state.dictionary_page[chat_id],
+        if (has_tracked_reminder(chat_id)) {
+            show_user_dictionary(chat_id, bot, database, false, 0);
+        } else refresh_after_marking_words(chat_id, bot, database, state.dictionary_page[chat_id],
                                     state.dictionary_message_id[chat_id],
                                     state.learned_page[chat_id], state.learned_message_id[chat_id],
                                     state.last_action[chat_id]);

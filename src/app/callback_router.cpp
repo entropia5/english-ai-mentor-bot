@@ -24,12 +24,18 @@ void handle_callback(const nlohmann::json& update, TelegramClient& bot, Database
     const auto& callback = update["callback_query"];
     const std::string callback_id = callback["id"];
     const long long chat_id = callback["message"]["chat"]["id"];
-    const int message_id = callback["message"]["message_id"];
+    const int clicked_message_id = callback["message"]["message_id"];
+    int message_id = get_active_screen_message(chat_id);
     const std::string data = callback["data"];
 
     bot.answer_callback_query(callback_id);
-    remember_active_screen_message(chat_id, message_id,
-                                   screen_message_type_from_callback(callback["message"]));
+    if (message_id <= 0) {
+        message_id = clicked_message_id;
+        remember_active_screen_message(chat_id, message_id,
+                                       screen_message_type_from_callback(callback["message"]));
+    } else if (clicked_message_id != message_id) {
+        remember_obsolete_screen(chat_id, clicked_message_id);
+    }
     delete_tracked_broadcast_hint(chat_id, bot);
     delete_tracked_exports(chat_id, bot);
     delete_tracked_ai_input(chat_id, bot);

@@ -141,3 +141,49 @@ void delete_tracked_exports(long long chat_id, TelegramClient& bot) {
         save_bot_state_locked();
     }
 }
+
+
+bool has_tracked_reminder(long long chat_id, int message_id) {
+    std::lock_guard<std::mutex> lock(g_bot_state.mutex);
+    const auto it = g_bot_state.reminder_messages.find(chat_id);
+    return it != g_bot_state.reminder_messages.end() && !it->second.empty() &&
+        (message_id == 0 || std::find(it->second.begin(), it->second.end(), message_id) != it->second.end());
+}
+
+void finish_reminder_transition(long long chat_id, TelegramClient& bot, int current_message_id,
+                                bool new_reminder) {
+    std::vector<int> messages;
+    {
+        std::lock_guard<std::mutex> lock(g_bot_state.mutex);
+        auto& tracked = g_bot_state.reminder_messages[chat_id];
+        const auto context = g_bot_state.screen_contexts.find(chat_id);
+        const bool in_lesson = context != g_bot_state.screen_contexts.end() &&
+            (context->second == "daily" || context->second == "evening");
+        if ((new_reminder || !tracked.empty()) && in_lesson && current_message_id > 0 &&
+            std::find(tracked.begin(), tracked.end(), current_message_id) == tracked.end())
+            tracked.push_back(current_message_id);
+        if (!in_lesson) {
+            // The same message has been successfully repurposed as a navigation screen.
+            tracked.erase(std::remove(tracked.begin(), tracked.end(), current_message_id), tracked.end());
+        }
+        messages = tracked;
+        save_bot_state_locked();
+    }
+    for (const int id : messages) {
+        if (id == current_message_id || !bot.delete_message(chat_id, id)) continue;
+        std::lock_guard<std::mutex> lock(g_bot_state.mutex);
+        auto& tracked = g_bot_state.reminder_messages[chat_id];
+        tracked.erase(std::remove(tracked.begin(), tracked.end(), id), tracked.end());
+        save_bot_state_locked();
+    }
+}
+
+// Also tracks replaced navigation screens so failed deletions survive restarts.
+void remember_obsolete_screen(long long chat_id, int message_id) {
+    if (message_id <= 0) return;
+    std::lock_guard<std::mutex> lock(g_bot_state.mutex);
+    auto& tracked = g_bot_state.reminder_messages[chat_id];
+    if (std::find(tracked.begin(), tracked.end(), message_id) == tracked.end())
+        tracked.push_back(message_id);
+    save_bot_state_locked();
+}

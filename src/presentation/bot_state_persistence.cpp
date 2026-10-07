@@ -33,6 +33,8 @@ void save_bot_state_locked() {
         chat_ids.insert(chat_id);
     for (const auto& [chat_id, _] : g_bot_state.broadcast_hint_messages)
         chat_ids.insert(chat_id);
+    for (const auto& [chat_id, _] : g_bot_state.reminder_messages)
+        chat_ids.insert(chat_id);
     for (const auto& [chat_id, _] : g_bot_state.export_messages)
         chat_ids.insert(chat_id);
     for (const auto& [chat_id, _] : g_bot_state.chat_languages)
@@ -58,6 +60,10 @@ void save_bot_state_locked() {
         const auto export_it = g_bot_state.export_messages.find(chat_id);
         if (export_it != g_bot_state.export_messages.end() && !export_it->second.empty())
             chat_state["export_message_ids"] = export_it->second;
+
+        const auto reminder_it = g_bot_state.reminder_messages.find(chat_id);
+        chat_state["reminder_message_ids"] = reminder_it != g_bot_state.reminder_messages.end()
+            ? json(reminder_it->second) : json::array();
 
         auto language_it = g_bot_state.chat_languages.find(chat_id);
         if (language_it != g_bot_state.chat_languages.end() && !language_it->second.empty()) {
@@ -93,6 +99,7 @@ void load_bot_state() {
         g_bot_state.broadcast_hint_messages.clear();
         g_bot_state.chat_languages.clear();
         g_bot_state.export_messages.clear();
+        g_bot_state.reminder_messages.clear();
         g_bot_state.screen_contexts.clear();
 
         if (!state.contains("chats") || !state["chats"].is_object()) {
@@ -122,6 +129,14 @@ void load_bot_state() {
                     if (id.is_number_integer() && id.get<int>() > 0)
                         g_bot_state.export_messages[chat_id].push_back(id.get<int>());
                 }
+            }
+            if (chat_state.contains("reminder_message_ids") && chat_state["reminder_message_ids"].is_array()) {
+                for (const auto& id : chat_state["reminder_message_ids"])
+                    if (id.is_number_integer() && id.get<int>() > 0)
+                        g_bot_state.reminder_messages[chat_id].push_back(id.get<int>());
+            } else if (live_message_id > 0 && (screen_context == "daily" || screen_context == "evening")) {
+                // Adopt the last reminder from state written by older bot versions.
+                g_bot_state.reminder_messages[chat_id].push_back(live_message_id);
             }
             if (live_message_id > 0) {
                 g_bot_state.active_screen_messages[chat_id] = {

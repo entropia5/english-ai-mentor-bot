@@ -6,6 +6,7 @@
 
 bool upsert_screen(long long chat_id, TelegramClient& bot, const std::string& text,
                    const InlineKeyboard& buttons, int preferred_message_id, bool force_new) {
+    const int previous_id = get_active_screen_message(chat_id);
     const int message_id =
         force_new ? 0 : (preferred_message_id > 0 ? preferred_message_id : get_active_screen_message(chat_id));
     if (message_id > 0) {
@@ -14,6 +15,7 @@ bool upsert_screen(long long chat_id, TelegramClient& bot, const std::string& te
             TelegramRequestResult edit_result;
             if (bot.edit_message(chat_id, message_id, text, buttons, &edit_result)) {
                 remember_active_screen_message(chat_id, message_id, ScreenMessageType::Text);
+                finish_reminder_transition(chat_id, bot, message_id, false);
                 return true;
             }
 
@@ -30,13 +32,15 @@ bool upsert_screen(long long chat_id, TelegramClient& bot, const std::string& te
 
         LOG_WARNING("Resetting stale live dashboard message " + std::to_string(message_id) +
                     " for chat " + std::to_string(chat_id));
-        bot.delete_message(chat_id, message_id);
-        clear_active_screen_message(chat_id);
+        // Keep the old screen until the replacement has actually been delivered.
     }
 
     int sent_message_id = 0;
     if (bot.send_inline_keyboard(chat_id, text, buttons, &sent_message_id)) {
         remember_active_screen_message(chat_id, sent_message_id, ScreenMessageType::Text);
+        remember_obsolete_screen(chat_id, previous_id);
+        if (message_id != previous_id) remember_obsolete_screen(chat_id, message_id);
+        finish_reminder_transition(chat_id, bot, sent_message_id, force_new);
         return true;
     }
     return false;
@@ -45,6 +49,7 @@ bool upsert_screen(long long chat_id, TelegramClient& bot, const std::string& te
 bool upsert_photo_screen(long long chat_id, TelegramClient& bot, const std::string& photo_path,
                          const InlineKeyboard& buttons, int preferred_message_id,
                          const std::string& caption, const std::string& parse_mode, bool force_new) {
+    const int previous_id = get_active_screen_message(chat_id);
     const int message_id =
         force_new ? 0 : (preferred_message_id > 0 ? preferred_message_id : get_active_screen_message(chat_id));
     if (message_id > 0) {
@@ -55,6 +60,7 @@ bool upsert_photo_screen(long long chat_id, TelegramClient& bot, const std::stri
             if (bot.edit_message_photo(chat_id, message_id, photo_path, buttons, caption,
                                        &edit_result, parse_mode)) {
                 remember_active_screen_message(chat_id, message_id, ScreenMessageType::Photo);
+                finish_reminder_transition(chat_id, bot, message_id, false);
                 return true;
             }
 
@@ -71,13 +77,15 @@ bool upsert_photo_screen(long long chat_id, TelegramClient& bot, const std::stri
 
         LOG_WARNING("Resetting stale live dashboard message " + std::to_string(message_id) +
                     " for chat " + std::to_string(chat_id));
-        bot.delete_message(chat_id, message_id);
-        clear_active_screen_message(chat_id);
+        // Keep the old screen until the replacement has actually been delivered.
     }
 
     int sent_message_id = 0;
     if (bot.send_photo(chat_id, photo_path, buttons, caption, &sent_message_id, parse_mode)) {
         remember_active_screen_message(chat_id, sent_message_id, ScreenMessageType::Photo);
+        remember_obsolete_screen(chat_id, previous_id);
+        if (message_id != previous_id) remember_obsolete_screen(chat_id, message_id);
+        finish_reminder_transition(chat_id, bot, sent_message_id, force_new);
         return true;
     }
     return false;

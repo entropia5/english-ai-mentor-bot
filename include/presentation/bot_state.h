@@ -30,3 +30,9 @@ void delete_messages_after_delay(TelegramClient& bot, long long chat_id,
                                  std::vector<int> message_ids, int delay_seconds);
 void process_deferred_message_deletions(TelegramClient& bot);
 void ensure_reply_keyboard_removed(long long chat_id, TelegramClient& bot);
+
+void finish_reminder_transition(long long chat_id, TelegramClient& bot, int current_message_id,
+                                bool new_reminder);
+bool has_tracked_reminder(long long chat_id, int message_id = 0);
+
+void remember_obsolete_screen(long long chat_id, int message_id);

@@ -97,7 +97,10 @@ BroadcastResult send_daily_review(long long chat_id, TelegramClient& bot, Databa
         return BroadcastResult::NoContent;
     delete_tracked_broadcast_hint(chat_id, bot);
     const bool delivered = show_daily_review_page(chat_id, bot, content.words, 0, 0, true, nullptr, content.filter);
-    if (delivered) delete_tracked_exports(chat_id, bot);
+    if (delivered) {
+        finish_reminder_transition(chat_id, bot, get_active_screen_message(chat_id), true);
+        delete_tracked_exports(chat_id, bot);
+    }
     return delivered ? BroadcastResult::Delivered : BroadcastResult::Failed;
 }
 
@@ -112,6 +115,9 @@ BroadcastResult send_evening_new_words(long long chat_id, TelegramClient& bot, D
     delete_tracked_broadcast_hint(chat_id, bot);
     const bool delivered = show_evening_words_page(chat_id, bot, content.words, 0, 0, true, nullptr, content.filter,
                                    content.new_words);
-    if (delivered) delete_tracked_exports(chat_id, bot);
+    if (delivered) {
+        finish_reminder_transition(chat_id, bot, get_active_screen_message(chat_id), true);
+        delete_tracked_exports(chat_id, bot);
+    }
     return delivered ? BroadcastResult::Delivered : BroadcastResult::Failed;
 }

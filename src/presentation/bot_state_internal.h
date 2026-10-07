@@ -26,6 +26,7 @@ struct BotStateStore {
     std::map<long long, int> last_ai_user_messages;
     std::map<long long, int> broadcast_hint_messages;
     std::map<long long, std::vector<int>> export_messages;
+    std::map<long long, std::vector<int>> reminder_messages;
     std::map<long long, std::string> chat_languages;
     std::map<long long, std::string> screen_contexts;
     std::vector<DeferredMessageDeletion> deferred_deletions;
